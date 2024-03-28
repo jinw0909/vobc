@@ -1,0 +1,55 @@
+.caroWrapper {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+.caroElem {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.5);
+    padding: 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .5s;
+}
+.caroElem:hover {
+    border: 1px solid white;
+}
+.caroModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-height: 90vh;
+    min-width: 70vw;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(50,50,50,0.7);
+    border: 1px solid rgba(255,255,255,.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    transition: 1s;
+    opacity: 0;
+}
+.modalBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 200;
+    /*background-color: white;*/
+}
+.imgStyle {
+    width: auto;
+    height: 100%;
+    padding: 2rem;
+}

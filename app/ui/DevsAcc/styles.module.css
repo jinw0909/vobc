@@ -1,0 +1,40 @@
+.devsAccWrapper {
+    margin-top: 4rem;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1s;
+}
+.accElem {
+    border-bottom: 1px solid #999;
+    padding: 1rem;
+    transition: 1s;
+}
+.accElem:last-child {
+    border-bottom: 0;
+}
+.elemTitle {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+.elemContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: 1s;
+    margin-top: .5rem;
+    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #999 100%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text;
+    color: transparent;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0 }
+    to {opacity: 1 }
+
+}

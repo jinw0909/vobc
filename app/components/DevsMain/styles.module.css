@@ -1,0 +1,30 @@
+.devsWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.checkoutBtn {
+    position: relative;
+    font-size: 1.2rem;
+}
+.checkoutBtn:hover::before {
+    width: 100%;
+}
+.checkoutBtn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    transition: .5s;
+}
+.textStyle {
+    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #999 100%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text;
+    color: transparent;
+}

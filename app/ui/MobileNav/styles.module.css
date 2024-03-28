@@ -1,0 +1,84 @@
+.mobileNav {
+    position: relative;
+    /*top: 100%;*/
+    /*left: 0;*/
+    width: 100%;
+    overflow: hidden;
+    transition: 1s;
+    max-height: 0;
+    opacity: 0;
+    z-index: 150;
+    /*background-color: rgba(0,0,0,0.4);*/
+    /*backdrop-filter: blur(8px);*/
+    /*border-bottom: 1px solid rgba(255,255,255,0.5);*/
+}
+.mobileNav.clicked {
+    max-height: 18rem;
+    opacity: 1;
+}
+.navWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.navElem {
+    width: 100%;
+    text-align: center;
+    padding: .5rem;
+    /*border-bottom: 1px solid rgba(255,255,255,.5);*/
+    overflow: hidden;
+    transition: .5s;
+    max-height: 3rem;
+    color: rgba(255,255,255,0.7);
+    transition: .5s;
+}
+.navElem:hover {
+    color: white;
+}
+.navElem.lang {
+    max-height: 0;
+    padding: 0;
+    border-bottom: 0;
+}
+.langElem {
+    overflow: hidden;
+    max-height: 0;
+    transition: .5s;
+    padding: 0;
+    border-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.langArrow {
+    opacity: 0.7;
+    transition: .5s;
+}
+.navElem:hover .langArrow {
+    opacity: 1;
+}
+.langElem.lang {
+    max-height: 3rem;
+    padding: .5rem;
+}
+.langChild {
+    font-size: .8rem;
+    color: rgba(255,255,255,0.75);
+    transition: .5s;
+    cursor: pointer;
+}
+.langChild:hover {
+    color: white;
+}
+.current {
+    color: white;
+}
+/*.navElem.current {*/
+/*    color: white;*/
+/*    opacity: 1;*/
+/*}*/
+/*.navElem.current .langArrow {*/
+/*    opacity: 1;*/
+/*}*/

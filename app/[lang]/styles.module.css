@@ -1,0 +1,75 @@
+.mainWrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.subWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    transition: .5s;
+}
+.mainText {
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.mainText > div {
+    text-align: center;
+    font-size: 2.5rem;
+}
+.mainText > div:nth-child(1) {
+    font-size: 2rem;
+}
+.subText {
+    margin: 0 auto;
+    margin-top: 20vh;
+    padding: 0 2rem;
+    background: linear-gradient(to right, #888 0%, #ddd 50%, #888 100%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text;
+    color: transparent;
+}
+.subText > div {
+    text-align: center;
+}
+
+.fadeInAnimation {
+    animation: fadeIn 1s ease-in-out forwards;
+}
+.delayedAnimation {
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1s;
+}
+.moreDelayedAnimation {
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 2s;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 1200px) {
+    .mainWrapper {
+        width: 80vw;
+        margin: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .subWrapper {
+        width: 80vw;
+        margin: auto;
+    }
+}

@@ -1,0 +1,26 @@
+.aboutWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    transition: .5s;
+}
+
+@media (min-width: 1200px) {
+    .aboutWrapper {
+        width: 80vw;
+        margin: auto;
+    }
+}
+@media (max-width: 768px) {
+    .aboutWrapper {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .aboutWrapper {
+        padding: 1rem;
+    }
+}

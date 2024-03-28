@@ -1,0 +1,67 @@
+.menuWrapper {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    width: 20px;
+    height: 10px;
+    background-color: transparent;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: .5s;
+}
+.menuWrapper.clicked:hover {
+    transform: translateY(-50%) rotate(90deg);
+}
+.menuWrapper.clicked:hover .firstLine.clicked {
+    background-color: white;
+}
+.menuWrapper.clicked:hover .thirdLine.clicked {
+    background-color: white;
+}
+.firstLine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: .5s;
+}
+.firstLine.clicked {
+    transform: rotate(45deg);
+    top: 50%;
+    background-color: #bbb;
+}
+.secondLine {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: .5s;
+    opacity: 1;
+}
+.secondLine.clicked {
+    opacity: 0;
+}
+.thirdLine {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: .5s;
+}
+.thirdLine.clicked {
+    transform: rotate(-45deg);
+    top: 50%;
+    background-color: #bbb;
+}
+
+@media (max-width: 576px) {
+    .menuWrapper {
+        left: 1rem;
+    }
+}

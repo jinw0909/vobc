@@ -1,0 +1,47 @@
+.devsWrapper {
+    margin-top: 10rem;
+}
+.devsTitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.devsDesc {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+.imageBox {
+    margin-right: 1rem;
+    float: left;
+}
+.imageStyle {
+    padding: .75rem;
+    border: 1px solid #999;
+    border-radius: 8px;
+}
+.devsSubtitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+}
+.textStyle {
+    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #ddd 100%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text;
+    color: transparent;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 1200px) {
+    .devsWrapper {
+        width: 80vw;
+    }
+}
