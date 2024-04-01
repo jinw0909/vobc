@@ -1,0 +1,12 @@
+.linkBtn.isActive {
+    font-weight: bold;
+    color: white;
+}
+.linkBtn {
+    transition: .5s;
+    color: rgba(255,255,255,0.7);
+}
+.linkBtn:hover {
+    color: white;
+}
+

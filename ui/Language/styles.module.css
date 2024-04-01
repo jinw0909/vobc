@@ -1,0 +1,48 @@
+.languageWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    height: 5rem;
+    z-index: 160;
+}
+.languageSelect {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255,255,255,0.7);
+    transition: .5s;
+}
+.languageSelect:hover {
+    color: white;
+}
+.languageModal {
+    position: relative;
+    padding: 0rem 2rem;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    transition: .5s;
+    max-height: 0;
+    overflow: hidden;
+}
+.languageModal.show {
+    max-height: 3rem;
+    padding: .5rem 2rem;
+    padding-bottom: 1rem;
+}
+.languageModal button {
+    color: #888;
+    transition: .5s;
+    font-size: .8rem;
+}
+.languageModal button:hover {
+    color: white;
+}
+.languageModal .current {
+    color: white;
+}

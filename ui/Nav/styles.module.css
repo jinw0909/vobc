@@ -1,0 +1,23 @@
+.navbarWrapper {
+    position: relative;
+    width: 100%;
+}
+.navbar {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 1.2rem;
+    color: #888;
+    height: 5rem;
+}
+/*.navbar li {*/
+/*    transition: .5s;*/
+/*}*/
+/*.navbar li:hover {*/
+/*    color: white;*/
+/*}*/
+/*.currentItem {*/
+/*    color: white;*/
+/*    transition: .5s;*/
+/*}*/

@@ -1,0 +1,51 @@
+.breadcrumb {
+    position: absolute;
+    top: 7rem;
+    left: 2rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.breadCrumbElem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    margin-left: .5rem;
+    transition: .5s;
+}
+.arrowImg {
+    opacity: 0.7;
+}
+.homeImg {
+    opacity: 0.7;
+    transition: .5s;
+}
+.homeImg:hover {
+    opacity: 1;
+}
+
+
+/*.current { opacity: 1; }*/
+/*.previous { opacity: .5; transition: .5s;}*/
+/*.previous:hover { opacity: 1; }*/
+
+@media (min-width: 1200px) {
+    .breadcrumb {
+        margin-left: 10vw;
+    }
+}
+@media (max-width : 768px) {
+    .breadcrumb {
+        top: 6rem;
+        left: 1.5rem;
+        transform-origin: top left;
+        transform: scale(0.8);
+    }
+}
+@media (max-width : 579px) {
+    .breadcrumb {
+        left: 1rem;
+    }
+}
