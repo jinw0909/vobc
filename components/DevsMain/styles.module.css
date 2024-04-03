@@ -4,6 +4,15 @@
     align-items: center;
     gap: 1rem;
 }
+.imgElem {
+    transition: .5s;
+}
+.textElem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
 .checkoutBtn {
     position: relative;
     font-size: 1.2rem;
@@ -27,4 +36,23 @@
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;
     color: transparent;
+}
+
+@media (max-width: 576px) {
+    .devsWrapper {
+        flex-direction: column;
+    }
+    .imgElem {
+        width: 50vw;
+    }
+    .textElem {
+        align-items: center;
+        margin-top: 1rem;
+    }
+    .textElem > div {
+        text-align: center;
+    }
+    .checkoutBtn {
+        font-size: 1rem;
+    }
 }

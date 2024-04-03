@@ -16,20 +16,10 @@ export const MobileNav = ({click, lang, onClick} : {click : any, lang: string, o
 
     const [language, setLanguage] = useState(false);
     const [selectedLang, setSelectedLang] = useState(lang?.toString());
-    const [currentPage, setCurrentPage] = useState('');
-
-    // const handleLinkClick = (page : any) => {
-    //     onClick();
-    //     setCurrentPage(page);
-    // }
 
     useEffect(() => {
         router.replace(pathName, {locale : selectedLang});
     }, [selectedLang]);
-
-    // useEffect(() => {
-    //     setCurrentPage(pathname.split('/')[2] || '');
-    // }, []);
 
     useEffect(() => {
         if (!click) {

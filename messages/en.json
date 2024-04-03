@@ -11,7 +11,10 @@
     "about" : "About",
     "devs" : "Devs",
     "team" : "Team",
-    "news" : "News"
+    "news" : "News",
+    "cookies" : "Cookies",
+    "privacy" : "Privacy",
+    "terms" : "terms"
   },
   "about" : {
     "main_title" : "Our Vision",
@@ -21,5 +24,32 @@
     "content_1" : "VOB's vision is to expand into a global trading solution, to enhance accuracy through accumulating data from cryptocurrency exchanges and markets utilzing distributed supercomputing system. Our GOYABOT platform efficiently delivers customized AI solutions and empowers clients to achieve the trading and investing objectives.",
     "title_2" : "The VOB Token Economy",
     "content_2" : "The VOB Token Economy is built upon its four major pillars. The payment economy, the global community, the NFT economy and the GOYABOT AI. The participants will be generating constant profits by leveraging the token economy’s unique features which is distinct from the rest. The VOB token will play a role as the economy’s major payment currency, providing a seamless experience which will eventually lead to the constant and rapid growth of the global community. Finally the VOB NFT takes place and augments the participant’s overall experience, providing intuitive and tangible indicators for each participant, updated and provided instantly upon every action carried out by the participant. The GOYA AI is structured to evolve and reflect each individual’s unique traits and needs to its algorithim and to the ecosystem, providing customized strategy and guidelines to every single participant."
+  },
+  "devs" : {
+    "devs_title" : "「GOYABOT AI」 and the Big Data",
+    "devs_content": "GOYABOT by VOB is an automated computer program designed to execute specific tasks with minimal human intervention. The number of users are increasing as we send out more efficient data. Meanwhile, VOB is building an ecosystem with technically advanced policies and the VOB token. Furthermore, we will ensure a more advanced platform by providing a stable Token Economy and opportunities to generate profits.",
+    "devs_acc": {
+      "0": {
+        "title": "Improved Decision Making",
+        "content": "AI can analyze massive data from various sources. This helps traders make more informed decisions and identify opportunities that may have been overlooked when traditional methods were taken."
+      },
+      "1": {
+        "title": "Improved Risk Management",
+        "content": "AI analyze data in real time and identifies potential risks, allowing traders to take appropriate action to mitigate risks"
+      },
+      "2": {
+        "title": "Improved Efficiency",
+        "content": "AI automates certain tasks and processes, allowing traders to focus on more complex tasks that require human expertise"
+      },
+      "3": {
+        "title": "Improved Accuracy",
+        "content": "AI algorithms help reduce the risk of errors or mistakes by analyzing data and making decisions based on logic without being swayed by personal emotions or prejudices"
+      },
+      "4": {
+        "title": "Improved Personalization",
+        "content": "By analyzing the past behaviors of each trader, AI provides personalized recommendations and adjust strategies to suit their specific needs and preferences"
+      }
+    },
+    "devs_subtitle": "Security Architecture"
   }
 }

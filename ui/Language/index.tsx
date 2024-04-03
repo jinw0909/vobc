@@ -4,6 +4,9 @@ import styles from './styles.module.css'
 // import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { useRouter, usePathname } from "@/navigation";
+import Image from 'next/image';
+import triangle from '@/public/icons/triangle-icon-white.png';
+import rvtriangle from '@/public/icons/triangle-icon-white-rv.png';
 
 export const Language = ({lang} : {lang : string}) => {
     const router = useRouter();
@@ -22,22 +25,22 @@ export const Language = ({lang} : {lang : string}) => {
         router.replace(pathname, {locale: selectedLang})
     }, [selectedLang]);
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-            if (wrapperRef.current &&
-                !wrapperRef.current!.contains(event.target as Node) &&
-                modalRef.current &&
-                !modalRef.current!.contains(event.target as Node)) {
-                setShowModal(false); // Clicked outside of languageWrapper
-            }
-        };
-        // Attach click event listener to document body
-        document.body.addEventListener('click', handleClickOutside);
-        // Cleanup function to remove event listener
-        return () => {
-            document.body.removeEventListener('click', handleClickOutside);
-        };
-    }, []); // Run effect only once on component mount
+    // useEffect(() => {
+    //     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+    //         if (wrapperRef.current &&
+    //             !wrapperRef.current!.contains(event.target as Node) &&
+    //             modalRef.current &&
+    //             !modalRef.current!.contains(event.target as Node)) {
+    //             setShowModal(false); // Clicked outside of languageWrapper
+    //         }
+    //     };
+    //     // Attach click event listener to document body
+    //     document.body.addEventListener('click', handleClickOutside);
+    //     // Cleanup function to remove event listener
+    //     return () => {
+    //         document.body.removeEventListener('click', handleClickOutside);
+    //     };
+    // }, []); // Run effect only once on component mount
 
     return (
         <>
@@ -47,7 +50,15 @@ export const Language = ({lang} : {lang : string}) => {
         >
             <div
                 onClick={() => { setShowModal(!showModal) }}
-                className={styles.languageSelect}>{selectedLang?.toUpperCase()}
+                className={styles.languageSelect}>
+                <span >
+                    {showModal ?
+                        <Image src={triangle} width={12} height={12} alt="trianle"
+                               className={styles.languageArrowUp}/>
+                        : <Image src={rvtriangle} width={12} height={12} alt="triangle"
+                                 className={styles.languageArrow}/>}
+                </span>
+                <span>{selectedLang?.toUpperCase()}</span>
             </div>
         </div>
         <div className={`${styles.languageModal} 

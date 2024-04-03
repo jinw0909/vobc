@@ -3,6 +3,7 @@ import {LogoSub} from "@/ui/LogoSub";
 import Image from 'next/image';
 import mediumLogo from '@/public/medium_logo_white.png';
 import xLogo from '@/public/x-logo-white.png';
+import { NavigationLink} from "@/ui/NavigationLink";
 
 
 export const MobileFooter  = async ({lang} : {lang: string}) => {
@@ -36,14 +37,20 @@ export const MobileFooter  = async ({lang} : {lang: string}) => {
             <div className={styles.footerLevel}>
                 <div className={styles.levelLeft}></div>
                 <div className={styles.levelRight}>
-                    <div className={styles.footerElem}>Terms of Use</div>
+                    <div className={styles.footerElem}>
+                        <NavigationLink href="/terms">Terms of Use</NavigationLink>
+                    </div>
                 </div>
             </div>
             <div className={styles.footerLevel}>
                 <div className={styles.levelLeft}></div>
                 <div className={styles.levelRight}>
-                    <div className={styles.footerElem}>Privacy Policy</div>
-                    <div className={styles.footerElem}>Cookies Policy</div>
+                    <div className={styles.footerElem}>
+                        <NavigationLink href="/privacy">Privacy Policy</NavigationLink>
+                    </div>
+                    <div className={styles.footerElem}>
+                        <NavigationLink href="/cookies">Cookies Policy</NavigationLink>
+                    </div>
                 </div>
             </div>
         </footer>

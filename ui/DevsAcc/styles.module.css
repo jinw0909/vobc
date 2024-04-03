@@ -31,10 +31,19 @@
     background-clip: text;
     color: transparent;
     opacity: 0;
+    cursor: pointer;
 }
 
 @keyframes fadeIn {
     from { opacity: 0 }
     to {opacity: 1 }
+}
 
+@media (max-width: 576px) {
+    .elemTitle {
+        justify-content: space-between;
+    }
+    .elemContent {
+        padding-right: 2rem;
+    }
 }

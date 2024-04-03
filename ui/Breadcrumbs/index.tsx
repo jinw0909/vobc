@@ -19,6 +19,7 @@ const notosansjp = Noto_Sans_JP({
 export const Breadcrumbs = () => {
 
     const segments = useSelectedLayoutSegments();
+    console.log("segments: ", segments);
     const t = useTranslations('nav');
 
     return (
@@ -28,12 +29,19 @@ export const Breadcrumbs = () => {
                         <NavigationLink href="/"><Image src={homePic} width={20} height={20} alt="home icon"/></NavigationLink>
                     </span>
                 {
-                    segments.map((segment, index) => (
-                        <div className={styles.breadCrumbElem} key={index}>
-                            <span className={styles.arrowImg}><Image src={arrowPic} width={12} height={12} alt="arrow icon"/></span>
-                            <NavigationLink href={`/${segment}`} >{t(segment)}</NavigationLink>
-                        </div>
-                    ))
+                    segments.map((segment, index) => {
+                        if (segment === '(policies)') {
+                            return null;
+                        }
+                        return (
+                            <div className={styles.breadCrumbElem} key={index}>
+                                <span className={styles.arrowImg}>
+                                    <Image src={arrowPic} width={12} height={12} alt="arrow icon"/>
+                                </span>
+                                <NavigationLink href={`/${segment}`}>{t(segment)}</NavigationLink>
+                            </div>
+                        )
+                    })
                 }
             </div>
         )

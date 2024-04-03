@@ -4,6 +4,7 @@ import mediumLogo from '@/public/medium_logo_white.png';
 import Image from 'next/image';
 import styles from './styles.module.css';
 import {LogoSub} from "@/ui/LogoSub";
+import {NavigationLink} from "@/ui/NavigationLink";
 
 export const Footer = async ({lang} : {lang : string}) => {
     return (
@@ -11,9 +12,15 @@ export const Footer = async ({lang} : {lang : string}) => {
             <div className={`${styles.footerWrapper}`}>
                 <div className={styles.footerLeft}>
                     <LogoSub />
-                    <div className={styles.footerElem}>Terms of Use</div>
-                    <div className={styles.footerElem}>Privacy Policy</div>
-                    <div className={styles.footerElem}>Cookies Policy</div>
+                    <div className={styles.footerElem}>
+                        <NavigationLink href="/terms">Terms of Use</NavigationLink>
+                    </div>
+                    <div className={styles.footerElem}>
+                        <NavigationLink href="/privacy">Privacy Policy</NavigationLink>
+                    </div>
+                    <div className={styles.footerElem}>
+                        <NavigationLink href="/cookies">Cookies Policy</NavigationLink>
+                    </div>
                 </div>
                 <div className="flex gap-4">
                     <div className={`${styles.snsLogo} ${styles.footerElem}`}>

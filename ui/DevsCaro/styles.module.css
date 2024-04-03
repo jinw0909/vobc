@@ -54,3 +54,11 @@
     height: 100%;
     padding: 2rem;
 }
+@media (max-width: 576px) {
+    .caroWrapper {
+        flex-direction: column;
+    }
+    .caroElem {
+        min-height: 464px;
+    }
+}

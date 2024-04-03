@@ -5,6 +5,7 @@ import { About } from "@/components/About";
 import {DevsMain} from "@/components/DevsMain";
 import {getTranslations} from "next-intl/server";
 import {useTranslations} from "next-intl";
+import {Whitepaper} from "@/components/Whitepaper";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
@@ -27,6 +28,9 @@ export default async function Page({params : { locale }} : {params : {locale : s
           </main>
           <div className={styles.subWrapper}>
               <About/>
+          </div>
+          <div className={styles.subWrapper}>
+              <Whitepaper/>
           </div>
           <div className={styles.subWrapper}>
               <DevsMain lang={locale}/>

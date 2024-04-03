@@ -3,7 +3,8 @@ import styles from './styles.module.css';
 import {useState, useEffect, useRef, RefObject} from "react";
 import Image from 'next/image';
 import plusPic from '@/public/icons/plus-icon.png';
-import minusPic from "@/public/icons/minus-icon.png"
+import minusPic from "@/public/icons/minus-icon.png";
+import {useTranslations} from "next-intl";
 const accData = [
     {title: "1. Improved Decision Making", content: "AI can analyze massive data from various sources. This helps traders make more informed decisions and identify opportunities that may have been overlooked when traditional methods were taken."},
     {title: "2. Improved Risk Management", content: "AI analyze data in real time and identifies potential risks, allowing traders to take appropriate action to mitigate risks"},
@@ -13,6 +14,7 @@ const accData = [
 ]
 export const DevsAcc = () => {
 
+    const t = useTranslations('devs.devs_acc');
     const [expandedItems, setExpandedItems ] = useState<{[key:number]:boolean}>({});
 
     //Function to toggle the content of an item
@@ -40,21 +42,7 @@ export const DevsAcc = () => {
         }
     }, [expandedItems])
 
-    // const [selectedIdx, setSelectedIdx] = useState(-1);
     const divRefs = useRef<Array<RefObject<HTMLDivElement | null>>>([])
-    // const handleClick = (idx) => {
-    //     setSelectedIdx(idx);
-    //     accData.map((a, i) => {
-    //        if (i == idx) {
-    //            divRefs.current[i].style.maxHeight = '100px';
-    //            divRefs.current[i].style.opacity = 1;
-    //        } else {
-    //            divRefs.current[i].style.maxHeight = 0;
-    //            divRefs.current[i].style.opacity = 0;
-    //        }
-    //    })
-    //
-    // }
 
     return (
         <div className={styles.devsAccWrapper}>
@@ -63,14 +51,18 @@ export const DevsAcc = () => {
                     return (
                         <div className={styles.accElem} key={idx}>
                             <div className={styles.elemTitle} onClick={() => {toggleItem(idx)}}>
-                                {elem.title}
+                                {t(`${idx}.title`)}
                                 {
                                     expandedItems[idx] ?
                                         <Image className="self-end" src={minusPic} width={20} height={20} alt="minus icon"/>
                                     : <Image className="self-end" src={plusPic} width={20} height={20} alt="plus icon"/>
                                 }
                             </div>
-                            <div className={styles.elemContent} ref={(element) => {divRefs.current[idx] = {current : element}}}>{elem.content}</div>
+                            <div
+                                className={styles.elemContent}
+                                ref={(element) => {divRefs.current[idx] = {current : element}}}
+                                onClick={() => {toggleItem(idx)}}
+                            >{t(`${idx}.content`)}</div>
                         </div>
                     )
                 })

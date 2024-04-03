@@ -10,13 +10,16 @@ export const MobileHeader = ({lang} : {lang : string}) => {
     const handleClick = () => {
         setClicked(!clicked);
     }
+    const closeNav = () => {
+        setClicked(false);
+    }
     return (
         <header className={`${styles.header} ${clicked ? styles.clicked : ''}`}>
             <div className={styles.navigation}>
                <MenuBtn click={clicked} onClick={handleClick}/>
-               <LogoMobile lang={lang}/>
+               <LogoMobile onClick={closeNav}/>
             </div>
-            <MobileNav lang={lang} click={clicked} onClick={handleClick}/>
+            <MobileNav lang={lang} click={clicked} onClick={closeNav}/>
         </header>
     )
 }
