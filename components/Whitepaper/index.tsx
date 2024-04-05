@@ -18,26 +18,17 @@ export const Whitepaper = () => {
                 <div className={`${styles.whitepaperImg}`}>
                     <Image
                         src={paperPic}
-                        // width={250}
-                        // height={250}
                         fill={true}
-                        objectFit="contain"
+                        style={{objectFit:"contain"}}
                         alt="whitepaper image"/>
                 </div>
-                {/*<div className={`${styles.whitepaperDetail}`}>*/}
-                {/*    <button className={styles.whitepaperBtn}>*/}
-                {/*        <Link href="/VOB_whitepaper.pdf" target="_blank" rel="noopener noreferrer" locale={false}>View</Link>*/}
-                {/*    </button>*/}
-                {/*</div>*/}
             </div>
             <div className={styles.hrLine}></div>
             <div className={styles.whitepaperInner}>
                 <div className={`${styles.whitepaperImg} ${styles.contractImg}`}>
                     <Image src={contractPic}
-                        // width={250}
-                        // height={250}
                            fill={true}
-                           objectFit="contain"
+                           style={{objectFit: "contain"}}
                            alt="whitepaper image"/>
                 </div>
                 <div className={`${styles.whitepaperText} ${styles.contractText}`}>

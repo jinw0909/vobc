@@ -26,7 +26,7 @@
 }
 .subText {
     margin: 0 auto;
-    margin-top: 33vh;
+    margin-top: 20vh;
     padding: 0 2rem;
     background: linear-gradient(to right, #888 0%, #ddd 50%, #888 100%);
     -webkit-background-clip: text; /* Apply gradient to text */

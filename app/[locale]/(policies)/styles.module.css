@@ -1,36 +1,40 @@
+.termsWrapper {
+    padding: 2rem;
+}
 .termsTitle {
     margin-top: 10rem;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    padding: 1rem 2rem;
     font-size: 2rem;
     text-align: center;
 }
 .termsContent {
     text-align: left;
-    padding: 2rem;
+    margin-top: 2rem;
 }
 .termsContent h2 {
     font-size: 1.5rem;
     margin-top: 1rem;
     margin-bottom: .5rem;
 }
-@media (max-width: 768px) {
-    .termsTitle {
-        padding: 1rem 1.5rem;
-        transition: .5s;
+@media (min-width: 1200px) {
+    .termsWrapper {
+        width: 80vw;
+        margin: auto;
     }
-    .termsContent {
+}
+@media (max-width: 768px) {
+    .termsWrapper {
         padding: 1.5rem;
+    }
+    .termsTitle {
+        transition: .5s;
     }
 }
 @media (max-width: 576px) {
-    .termsTitle {
-        padding: .5rem 1rem;
-        font-size: 1.5rem;
-    }
-    .termsContent {
+    .termsWrapper {
         padding: 1rem;
+    }
+    .termsTitle {
+        font-size: 1.5rem;
     }
     .termsContent h2 {
         font-size: 1.2rem;

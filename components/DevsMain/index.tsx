@@ -4,9 +4,9 @@ import styles from "./styles.module.css"
 // import Link from "next/link";
 import {NavigationLink} from "@/ui/NavigationLink";
 import {getTranslations} from "next-intl/server";
-export const DevsMain = async ({lang} : {lang :string}) => {
+export const DevsMain = async () => {
 
-    // const t = getTranslations('devsmain');
+    const t = await getTranslations('devs_main');
 
     return (
         <div className={styles.devsWrapper}>
@@ -21,13 +21,13 @@ export const DevsMain = async ({lang} : {lang :string}) => {
                 />
             </div>
             <div className={`${styles.textElem} flex-1`}>
-                <div className="text-4xl mb-4">Technology</div>
-                <div className="text-xl mb-4">Security Architecture</div>
+                <div className="text-4xl mb-4">{t('title')}</div>
+                <div className="text-xl mb-4">{t('subtitle')}</div>
                 <div className={`${styles.textStyle} mb-4`}>
-                    GOYABOT is an advanced automated computer program. It operates with minimal human intervention efficiently increasing user engagement. We are commited to leveraging technology and the VOB token to construct a resilient ecosystem ensuring stable token economy and profit-generative prospects.
+                    {t('content')}
                 </div>
                 <NavigationLink href="/devs">
-                    <button className={styles.checkoutBtn}>View More</button>
+                    <button className={styles.checkoutBtn}>{t('btn')}</button>
                 </NavigationLink>
             </div>
         </div>

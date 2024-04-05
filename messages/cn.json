@@ -49,5 +49,11 @@
       }
     },
     "devs_subtitle": "Security Architecture"
+  },
+  "devs_main": {
+    "title" : "Technology",
+    "subtitle" : "Security Architecture",
+    "content" : "GOYABOT is an advanced automated computer program. It operates with minimal human intervention efficiently increasing user engagement. We are commited to leveraging technology and the VOB token to construct a resilient ecosystem ensuring stable token economy and profit-generative prospects.",
+    "btn" : "view more"
   }
 }

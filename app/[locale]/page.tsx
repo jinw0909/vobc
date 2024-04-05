@@ -6,12 +6,15 @@ import {DevsMain} from "@/components/DevsMain";
 import {getTranslations} from "next-intl/server";
 import {useTranslations} from "next-intl";
 import {Whitepaper} from "@/components/Whitepaper";
+import {Roadmap} from "@/components/Roadmap";
+import {Distribution} from "@/components/Distribution";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
   // const intl = await getDictionary(lang) //en
   // const t = await getTranslations('main');
   const t = await getTranslations('main');
+
   return (
       <>
           <main className={styles.mainWrapper}>
@@ -33,7 +36,13 @@ export default async function Page({params : { locale }} : {params : {locale : s
               <Whitepaper/>
           </div>
           <div className={styles.subWrapper}>
-              <DevsMain lang={locale}/>
+              <DevsMain />
+          </div>
+          <div className={styles.subWrapper}>
+              <Roadmap />
+          </div>
+          <div className={styles.subWrapper}>
+              <Distribution />
           </div>
       </>
   );
