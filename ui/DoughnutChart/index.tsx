@@ -1,9 +1,8 @@
 "use client";
 import React, {useEffect, useRef, useState} from 'react';
-import {Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions, ChartData} from "chart.js";
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import {Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(ArcElement, Tooltip, Legend);
 import Image from 'next/image';
 import vobPic from '@/public/vob_logo_2.png';
 import styles from './styles.module.css';
@@ -24,9 +23,6 @@ export const DoughnutChart = () => {
             content: '24M',
             color: "rgba(255, 255, 255, 0)",
             cutout: "50%",
-            datalabels: {
-                color: 'yellow'
-            }
         },
         {
             label: "Management Team\n(Locked)",
@@ -111,27 +107,15 @@ export const DoughnutChart = () => {
         datasets: [{
             data: data.map((item) => Math.round(item.value)),
             backgroundColor: data.map((item) => item.color),
-            //borderColor: data.map((item) => item.color),
             borderColor: 'rgba(255,255,255,0.8)',
             borderWidth: 1,
             dataVisibility: new Array(data.length).fill(true),
             spacing: 16,
-            // hoverBackgroundColor: '#1DFCFF',
-            datalabels: {color: 'white', text: ""},
             offset : new Array(data.length).fill(0),
-
         }],
     };
     const defaultOptions: any = {
         plugins: {
-            datalabels: {
-                font: {
-                    weight: 'bold',
-                    size:10,
-                    family: 'poppins',
-                },
-                anchor: 'end'
-            },
             tooltip: {
                 backgroundColor: '#000',
                 borderColor: 'rgba(255,255,255,0.8)',
@@ -195,10 +179,6 @@ export const DoughnutChart = () => {
     const [chartjsData, setChartjsData] = useState<any>(finalData);
 
     useEffect(() => {
-        //console.log(data[currentIdx].label, data[currentIdx].value);
-        // console.log(data[currentIdx].value);
-        // console.log(data[currentIdx].label);
-        //textRef.current.style.opacity = 0;
         setShowImg(false);
         labelRef.current!.style.opacity = '0';
         contentRef.current!.style.opacity = '0';
@@ -211,7 +191,6 @@ export const DoughnutChart = () => {
             contentRef.current!.style.opacity = '1';
             valueRef.current!.style.opacity = '1';
         }, 500)
-
     }, [currentIdx])
 
     useEffect(() => {
