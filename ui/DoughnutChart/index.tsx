@@ -43,63 +43,65 @@ export const DoughnutChart = () => {
             value: 2,
             content: '6M',
             color: "rgba(255, 255, 255, 0.24)",
-            cutout: '30%',
+            cutout: '50%',
         },
         {
             label: "Community",
             value: 14,
             content: '42M',
             color: "rgba(255, 255, 255, 0.32)",
-            cutout: "30%",
+            cutout: "50%",
         },
         {
             label: "Ecosystem",
             value: 20,
             content: '60M',
             color: "rgba(255, 255, 255, 0.40)",
-            cutout: "30%",
+            cutout: "50%",
         },
         {
             label: "Marketing",
             value: 18,
             content: '54M',
             color: "rgba(255, 255, 255, 0.48)",
-            cutout: "30%",
+            cutout: "50%",
+            offset: 0
         },
         {
             label: "Partner",
             value: 6,
             content: '18M',
             color: "rgba(255, 255, 255, 0.56)",
-            cutout: "30%",
+            cutout: "50%",
+            offset: 0
         },
         {
             label: "Team/Advisor",
             value: 7,
             content: '21M',
             color: "rgba(255, 255, 255, 0.64)",
-            cutout: "30%",
+            cutout: "50%",
         },
         {
             label: "Development",
             value: 9,
             content: '27M',
             color: "rgba(255, 255, 255, 0.72)",
-            cutout: "30%",
+            cutout: "50%",
         },
         {
             label: "Auto-burn",
             value: 5,
             content: '15M',
             color: "rgba(255, 255, 255, 0.80)",
-            cutout: "30%",
+            cutout: "50%",
         },
         {
             label: "Pre-sale",
             value: 1,
             content: '3M',
             color: "rgba(255, 255, 255, 0.88)",
-            cutout: "30%",
+            cutout: "50%",
         },
     ]
     const finalData : any = {
@@ -109,7 +111,6 @@ export const DoughnutChart = () => {
             backgroundColor: data.map((item) => item.color),
             borderColor: 'rgba(255,255,255,0.8)',
             borderWidth: 1,
-            dataVisibility: new Array(data.length).fill(true),
             spacing: 16,
             offset : new Array(data.length).fill(0),
         }],
@@ -122,7 +123,6 @@ export const DoughnutChart = () => {
                 borderWidth: 1,
                 padding: 16,
                 displayColors: false,
-                zIndex: 300,
                 callbacks: {
                     label: (datapoint : any) => {return ` ${datapoint.raw}%`}
                 },
@@ -131,10 +131,10 @@ export const DoughnutChart = () => {
                 display: false,
             },
         },
-        events: ['click', 'mousemove'],
         onHover: (event : any, chartElement : any) => {
             if (chartElement.length > 0) {
                 let idx = chartElement[0].index;
+                setShowImg(false);
                 setCurrentIdx(idx);
                 const datasets = doughnutRef.current?.data.datasets;
                 if (datasets && datasets.length > 0) {
@@ -157,16 +157,6 @@ export const DoughnutChart = () => {
             }
 
         },
-        hover : {
-            delay : {
-                show: 500,
-                hide: 100
-            }
-        },
-        cutout: data.map((item) => item.cutout),
-        layout: {
-            padding: 16
-        },
         animation : {
             animateScale: true
         },
@@ -177,9 +167,9 @@ export const DoughnutChart = () => {
     const [showImg, setShowImg] = useState(true);
     const [options, setOptions] = useState<ChartOptions<any>>(defaultOptions);
     const [chartjsData, setChartjsData] = useState<any>(finalData);
+    const [isClicked, setIsClicked] = useState(false);
 
     useEffect(() => {
-        setShowImg(false);
         labelRef.current!.style.opacity = '0';
         contentRef.current!.style.opacity = '0';
         valueRef.current!.style.opacity = '0';
@@ -194,18 +184,20 @@ export const DoughnutChart = () => {
     }, [currentIdx])
 
     useEffect(() => {
-        if (showImg) {
-            imgRef.current!.style.opacity = '1';
-            textRef.current!.style.opacity = '0';
-        } else {
-            imgRef.current!.style.opacity = '0';
-            textRef.current!.style.opacity = '1';
-        }
-    }, [showImg])
+        setShowImg(true);
+    }, []);
 
-    const redrawChart = (a:any) => {
+    const redrawChart = () => {
         setChartjsData(finalData);
         setShowImg(true);
+    }
+
+    const handleClickDown = () => {
+        setIsClicked(true);
+    }
+    const handleClickUp = () => {
+        redrawChart();
+        setIsClicked(false);
     }
 
     return (
@@ -218,20 +210,30 @@ export const DoughnutChart = () => {
                     data={chartjsData}
                     options={options}
                 />
-                <div ref={textRef} className={styles.centerText}>
+                <div className={`${styles.centerDiv}`}
+                     onMouseDown={handleClickDown}
+                     onMouseUp={handleClickUp}
+                     onTouchStart={handleClickDown}
+                     onTouchEnd={handleClickUp}
+                ></div>
+                <div ref={textRef} className={`${styles.centerText} ${isClicked ? styles.isClicked : ''}
+                        ${showImg ? '' : styles.show}
+                    `}>
                     <div className={styles.labelText} ref={labelRef}></div>
                     <div className={styles.contentText} ref={contentRef}></div>
                     <div className={styles.valueText} ref={valueRef}></div>
                 </div>
-                <div ref={imgRef} className={styles.centerImg}>
+                <div ref={imgRef} className={`${styles.centerImg} ${isClicked ? styles.isClicked : ''}
+                    ${showImg ? styles.show : ''}
+                `}>
                     <Image
+                        className={styles.ml}
                         src={vobPic}
                         width={32}
                         height={49}
                         alt="vob image"
                     />
                 </div>
-                <div className={styles.centerDiv} onClick={redrawChart}></div>
             </div>
     )
 }

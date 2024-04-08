@@ -4,9 +4,12 @@ import Image from 'next/image';
 import mediumLogo from '@/public/medium_logo_white.png';
 import xLogo from '@/public/x-logo-white.png';
 import { NavigationLink} from "@/ui/NavigationLink";
+import {getTranslations} from "next-intl/server";
 
+export const MobileFooter  = async () => {
 
-export const MobileFooter  = async ({lang} : {lang: string}) => {
+    const t = await getTranslations('nav');
+
     return (
         <footer className={styles.footer}>
             <div className={styles.footerLevel}>
@@ -38,7 +41,7 @@ export const MobileFooter  = async ({lang} : {lang: string}) => {
                 <div className={styles.levelLeft}></div>
                 <div className={styles.levelRight}>
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/terms">Terms of Use</NavigationLink>
+                        <NavigationLink href="/terms">{t('terms')}</NavigationLink>
                     </div>
                 </div>
             </div>
@@ -46,10 +49,10 @@ export const MobileFooter  = async ({lang} : {lang: string}) => {
                 <div className={styles.levelLeft}></div>
                 <div className={styles.levelRight}>
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/privacy">Privacy Policy</NavigationLink>
+                        <NavigationLink href="/privacy">{t('privacy')}</NavigationLink>
                     </div>
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/cookies">Cookies Policy</NavigationLink>
+                        <NavigationLink href="/cookies">{t('cookies')}</NavigationLink>
                     </div>
                 </div>
             </div>

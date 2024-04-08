@@ -4,6 +4,8 @@
     position: relative;
     transition: .5s;
     margin: auto;
+    max-width: 575px;
+    max-height: 575px;
 }
 .doughnut {
     width: 100%;
@@ -14,10 +16,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50%;
-    height: 50%;
-    /*border: 1px solid white;*/
+    width: 33%;
+    height: 33%;
     transform: translate(-50%, -50%);
+    transform-origin: top left;
     transition: .5s;
     display: flex;
     align-items: center;
@@ -26,24 +28,32 @@
     flex-direction: column;
     opacity: 0;
     z-index: 50;
+
 }
 .centerImg {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform-origin: top left;
+    transform: translate(-50%, -50%);
     width: 33%;
     height: 33%;
-    /*border: rgba(29,252,255);*/
-    border: 1px solid white;
-    /*box-shadow: inset 0 0 2px 8px rgba(29,252,255,0.4);*/
+    border: 2px solid #999;
     border-radius: 50%;
-    background-color: rgba(29,252,255, 0.6);
-    transform: translate(-50%, -50%);
+    background-color: rgba(29,252,255, 0.4);
     transition: .5s;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 50;
+    opacity: 0;
+}
+.ml {
+    margin-left: 4px;
+}
+.centerText.show,
+.centerImg.show {
+    opacity: 1;
 }
 .centerDiv {
     position: absolute;
@@ -51,9 +61,10 @@
     left: 50%;
     width: 33%;
     height: 33%;
-    z-index: 100;
+    z-index: 80;
     transform: translate(-50%, -50%);
     cursor: pointer;
+    transition: .5s;
 }
 .labelText {
     transition: .5s;
@@ -72,6 +83,16 @@
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
+}
+.isClicked {
+    transform: scale(.8) translate(-50%, -50%);
+}
+.centerDiv:hover ~ .centerImg {
+    border: 2px solid rgba(29, 252, 255, 0.75);
+}
+.centerDiv:hover ~ .centerText .contentText,
+.centerDiv:hover ~ .centerText .valueText {
+    opacity: 0.75 !important;
 }
 @media (max-width: 768px) {
     .chart {

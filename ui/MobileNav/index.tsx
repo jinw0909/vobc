@@ -7,15 +7,19 @@ import triPic from '@/public/icons/triangle-icon-white.png';
 import rvtriPic from '@/public/icons/triangle-icon-white-rv.png';
 import Image from 'next/image';
 // import Link from 'next/link'
-import { NavigationLink} from "@/ui/NavigationLink";
+import { NavigationLink } from "@/ui/NavigationLink";
+import {useTranslations, useLocale} from "next-intl";
 
-export const MobileNav = ({click, lang, onClick} : {click : any, lang: string, onClick : any}) => {
+export const MobileNav = ({click, onClick} : {click : any, onClick : any}) => {
+
+    const t = useTranslations('nav');
+    const locale = useLocale();
 
     const router = useRouter();
     const pathName = usePathname();
 
     const [language, setLanguage] = useState(false);
-    const [selectedLang, setSelectedLang] = useState(lang?.toString());
+    const [selectedLang, setSelectedLang] = useState(locale);
 
     useEffect(() => {
         router.replace(pathName, {locale : selectedLang});
@@ -31,25 +35,25 @@ export const MobileNav = ({click, lang, onClick} : {click : any, lang: string, o
         <div className={`${click ? styles.clicked : ''} ${styles.mobileNav}`}>
             <ul className={styles.navWrapper}>
                 <li className={styles.navElem}>
-                    <NavigationLink href="/" onClick={onClick}>Home</NavigationLink>
+                    <NavigationLink href="/" onClick={onClick}>{t('home')}</NavigationLink>
                 </li>
                 <li className={styles.navElem}>
-                    <NavigationLink href="/about" onClick={onClick}>About</NavigationLink>
+                    <NavigationLink href="/about" onClick={onClick}>{t('about')}</NavigationLink>
                 </li>
                 <li className={styles.navElem}>
-                    <NavigationLink href="/devs" onClick={onClick}>Devs</NavigationLink>
+                    <NavigationLink href="/devs" onClick={onClick}>{t('devs')}</NavigationLink>
                 </li>
                 <li className={styles.navElem}>
-                    <NavigationLink href="/team" onClick={onClick}>Team</NavigationLink>
+                    <NavigationLink href="/team" onClick={onClick}>{t('team')}</NavigationLink>
                 </li>
                 <li className={styles.navElem}>
-                    <NavigationLink href="/news" onClick={onClick}>News</NavigationLink>
+                    <NavigationLink href="/news" onClick={onClick}>{t('news')}</NavigationLink>
                 </li>
                 <li className={`${styles.navElem} 
                     flex justify-center items-center gap-2 cursor-pointer`}
                     onClick={() => {setLanguage(!language)}}
                 >
-                    <span>Select Language</span>
+                    <span>{t('language')}</span>
                     {
                         language ?
                         <Image className={`${styles.langArrow}`}
@@ -62,17 +66,17 @@ export const MobileNav = ({click, lang, onClick} : {click : any, lang: string, o
                     ${styles.langElem} 
                     ${language ? styles.lang : ''}`}>
                     <span
-                        className={`${styles.langChild} ${lang == 'en' ? styles.current : ''}`}
+                        className={`${styles.langChild} ${locale == 'en' ? styles.current : ''}`}
                         onClick={() => {setSelectedLang('en')}}
                     >English</span>
                     <span
-                        className={`${styles.langChild} ${lang == 'jp' ? styles.current : ''}`}
+                        className={`${styles.langChild} ${locale == 'jp' ? styles.current : ''}`}
                         onClick={() => {setSelectedLang('jp')}}
-                    >Japanese</span>
+                    >日本語</span>
                     <span
-                        className={`${styles.langChild} ${lang == 'cn' ? styles.current : ''}`}
+                        className={`${styles.langChild} ${locale == 'cn' ? styles.current : ''}`}
                         onClick={() => {setSelectedLang('cn')}}
-                    >Chinese</span>
+                    >汉文</span>
                 </li>
             </ul>
         </div>

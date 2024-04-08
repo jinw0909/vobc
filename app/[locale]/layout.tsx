@@ -29,13 +29,13 @@ export default function RootLayout ({
       <html lang={locale}>
           <body className={`${notoserifjp.className}`}>
             <Header lang={locale}/>
-            <MobileHeader lang={locale}/>
             <NextIntlClientProvider messages={messages}>
+              <MobileHeader />
               <Breadcrumbs />
             </NextIntlClientProvider>
             {children}
-            <MobileFooter lang={locale} />
-            <Footer lang={locale} />
+            <MobileFooter />
+            <Footer />
           </body>
       </html>
   );

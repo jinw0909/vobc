@@ -5,7 +5,9 @@ import { MenuBtn} from "@/ui/MenuBtn";
 import {useState} from "react";
 import {MobileNav} from "@/ui/MobileNav";
 
-export const MobileHeader = ({lang} : {lang : string}) => {
+export const MobileHeader = () => {
+
+
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
         setClicked(!clicked);
@@ -19,7 +21,7 @@ export const MobileHeader = ({lang} : {lang : string}) => {
                <MenuBtn click={clicked} onClick={handleClick}/>
                <LogoMobile onClick={closeNav}/>
             </div>
-            <MobileNav lang={lang} click={clicked} onClick={closeNav}/>
+            <MobileNav click={clicked} onClick={closeNav}/>
         </header>
     )
 }

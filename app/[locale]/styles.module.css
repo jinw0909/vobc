@@ -4,18 +4,20 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 5rem;
+    padding: 2rem;
 }
 .subWrapper {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 2rem;
     transition: .5s;
 }
 .mainText {
     margin: 0 auto;
     padding: 0 2rem;
+    line-height: 1.2;
 }
 .mainText > div {
     text-align: center;
@@ -23,6 +25,9 @@
 }
 .mainText > div:nth-child(1) {
     font-size: 2rem;
+}
+.mainText > div:nth-child(2) {
+    margin-top: 1rem;
 }
 .subText {
     margin: 0 auto;
@@ -33,6 +38,7 @@
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;
     color: transparent;
+    line-height: 1.4;
 }
 .subText > div {
     text-align: center;
@@ -73,7 +79,19 @@
         margin: auto;
     }
 }
+
+@media (max-width: 768px) {
+    .mainWrapper { padding: 1.5rem; }
+    .subWrapper { padding: 1.5rem; }
+}
+
 @media (max-width: 575px) {
+    .mainWrapper {
+        padding: 1rem;
+    }
+    .subWrapper {
+        padding: 1rem;
+    }
     .mainText {
         margin: 0 auto;
         padding: 0 2rem;

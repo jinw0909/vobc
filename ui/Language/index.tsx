@@ -71,7 +71,7 @@ export const Language = ({lang} : {lang : string}) => {
                 onClick={()=>{setSelectedLang('jp')}}>日本語</button>
             <button
                 className={`${selectedLang == 'cn' ? styles.current : ''}`}
-                onClick={()=>{setSelectedLang('cn')}}>中文</button>
+                onClick={()=>{setSelectedLang('cn')}}>汉文</button>
         </div>
         </>
     )

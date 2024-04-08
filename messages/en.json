@@ -12,9 +12,10 @@
     "devs" : "Devs",
     "team" : "Team",
     "news" : "News",
-    "cookies" : "Cookies",
-    "privacy" : "Privacy",
-    "terms" : "terms"
+    "cookies" : "Cookies Policy",
+    "privacy" : "Privacy Policy",
+    "terms" : "Terms of Use",
+    "language": "Select Language"
   },
   "about" : {
     "main_title" : "Our Vision",

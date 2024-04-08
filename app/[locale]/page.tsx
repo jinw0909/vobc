@@ -8,6 +8,7 @@ import {useTranslations} from "next-intl";
 import {Whitepaper} from "@/components/Whitepaper";
 import {Roadmap} from "@/components/Roadmap";
 import {Distribution} from "@/components/Distribution";
+import {Partners} from "@/components/Partners";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
@@ -43,6 +44,9 @@ export default async function Page({params : { locale }} : {params : {locale : s
           </div>
           <div className={styles.subWrapper}>
               <Distribution />
+          </div>
+          <div className={styles.subWrapper}>
+              <Partners />
           </div>
       </>
   );

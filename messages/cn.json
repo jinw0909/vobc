@@ -11,7 +11,11 @@
     "about" : "About",
     "devs" : "Devs",
     "team" : "Team",
-    "news" : "News"
+    "news" : "News",
+    "cookies" : "Cookies",
+    "privacy" : "Privacy",
+    "terms" : "terms",
+    "language": "Select Language"
   },
   "about" : {
     "main_title" : "Our Vision",

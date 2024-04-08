@@ -5,7 +5,10 @@
     align-items: center;
     flex-direction: column;
 }
-
+.content {
+    margin-top: 8rem;
+    position: relative;
+}
 .title {
     position: absolute;
     text-align: center;
@@ -50,20 +53,19 @@
     z-index: 100;
 }
 .closeBtn:hover ~ .openBtn {
+    /*background-color: #00FCFF;*/
     background-color: white;
     color: black;
 }
 .closeBtn:hover {
+    /*background-color: #00FCFF;*/
     background-color: white;
     color: black;
 }
 .checkbox:checked ~ .title .closeBtn {
     opacity: 1;
 }
-.content {
-    margin-top: 6rem;
-    position: relative;
-}
+
 .tableWrapper {
     max-height: 1px;
     transition: 1s;
@@ -113,6 +115,9 @@ th.spanThree {
 .table tr:hover {
     background-color: rgba(255,255,255,0.2);
 }
+.table tr:last-child {
+    border-bottom: 0;
+}
 
 .reference {
     position: absolute;
@@ -123,7 +128,7 @@ th.spanThree {
     padding: .5rem;
     transition: .5s;
     opacity: 0;
-    z-index: 150;
+    z-index: 50;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -6,7 +6,7 @@ import {useState, useEffect} from "react";
 import { useTranslations } from "next-intl";
 import { NavigationLink } from "@/ui/NavigationLink";
 
-export const Nav = ({lang} : {lang : string}) => {
+export const Nav = () => {
     const t = useTranslations('nav');
 
     return (

@@ -39,8 +39,14 @@
     to {opacity: 1 }
 }
 
+
+
 @media (max-width: 576px) {
+    .accElem {
+        padding: 0.5rem;
+    }
     .elemTitle {
+        font-size: 1rem;
         justify-content: space-between;
     }
     .elemContent {

@@ -45,3 +45,11 @@
         width: 80vw;
     }
 }
+@media (max-width: 768px) {
+    .devsTitle { font-size: 1.5rem; margin-bottom: 1.5rem; }
+    .devsSubtitle { font-size: 1.5rem; margin-bottom: 1.5rem; }
+}
+@media (max-width: 576px) {
+    .devsTitle { margin-bottom: 1rem; }
+    .devsSubtitle { margin-bottom: 1rem; }
+}

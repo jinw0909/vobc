@@ -1,7 +1,7 @@
 import styles from '../styles.module.css'
 export default function Page() {
     return (
-        <div>
+        <div className={styles.termsWrapper}>
             <div className={styles.termsTitle}>Privacy Policy</div>
             <div className={styles.termsContent}>
                 <div>

@@ -4,6 +4,8 @@ import styles from './styles.module.css'
 import { Vollkorn } from 'next/font/google';
 import {Kaisei_HarunoUmi} from "next/font/google";
 import Link from 'next/link';
+import {NavigationLink} from "@/ui/NavigationLink";
+
 
 const vollkorn = Vollkorn({
     subsets: ["latin"],
@@ -16,7 +18,7 @@ const kaisei = Kaisei_HarunoUmi({
 
 export const LogoMain = async () => {
     return (
-        <Link href={'/'}>
+        <NavigationLink href="/">
             <div className={styles.logoWrapper}>
                    <Image
                        alt="logoImage"
@@ -27,6 +29,6 @@ export const LogoMain = async () => {
                    />
                     <div className={`${styles.logoText} ${vollkorn.className}`}>VOB</div>
             </div>
-        </Link>
+        </NavigationLink>
     )
 }

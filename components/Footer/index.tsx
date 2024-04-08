@@ -1,25 +1,28 @@
-import Link from 'next/link';
 import xLogo from '@/public/x-logo-white.png';
 import mediumLogo from '@/public/medium_logo_white.png';
 import Image from 'next/image';
 import styles from './styles.module.css';
 import {LogoSub} from "@/ui/LogoSub";
 import {NavigationLink} from "@/ui/NavigationLink";
+import {getTranslations} from "next-intl/server";
 
-export const Footer = async ({lang} : {lang : string}) => {
+export const Footer = async () => {
+
+    const t = await getTranslations('nav');
+
     return (
         <footer className={styles.footer}>
             <div className={`${styles.footerWrapper}`}>
                 <div className={styles.footerLeft}>
                     <LogoSub />
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/terms">Terms of Use</NavigationLink>
+                        <NavigationLink href="/terms">{t('terms')}</NavigationLink>
                     </div>
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/privacy">Privacy Policy</NavigationLink>
+                        <NavigationLink href="/privacy">{t('privacy')}</NavigationLink>
                     </div>
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/cookies">Cookies Policy</NavigationLink>
+                        <NavigationLink href="/cookies">{t('cookies')}</NavigationLink>
                     </div>
                 </div>
                 <div className="flex gap-4">

@@ -11,7 +11,11 @@
     "about" : "紹介",
     "devs" : "開発",
     "team" : "チーム",
-    "news" : "ニュース"
+    "news" : "ニュース",
+    "cookies" : "クッキーポリシー",
+    "privacy" : "プライバシーポリシー",
+    "terms" : "利用規約",
+    "language": "言語選択"
   },
   "about" : {
     "main_title": "私たちのVISION",
