@@ -1,0 +1,148 @@
+.detailWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    position: absolute;
+    text-align: center;
+    top: -5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10rem;
+    height: 3rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1px solid #999;
+    transition: .5s;
+}
+
+.openBtn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99;
+    transition: .5s;
+}
+.closeBtn {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: .5s;
+    cursor: pointer;
+    z-index: 100;
+}
+.closeBtn:hover ~ .openBtn {
+    background-color: white;
+    color: black;
+}
+.closeBtn:hover {
+    background-color: white;
+    color: black;
+}
+.checkbox:checked ~ .title .closeBtn {
+    opacity: 1;
+}
+.content {
+    margin-top: 6rem;
+    position: relative;
+}
+.tableWrapper {
+    max-height: 1px;
+    transition: 1s;
+    overflow: hidden;
+    width: 75vw;
+    margin: auto;
+    position: relative;
+}
+.checkbox:checked ~ .tableWrapper {
+    max-height: 150vh;
+}
+.table {
+    width: 100%;
+}
+.table td,
+.table th {
+    text-align: center;
+    padding: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+.table td {
+    cursor: pointer;
+}
+td.spanTwo,
+th.spanTwo {
+    width: 50%;
+}
+td.spanThree,
+th.spanThree {
+    width: 75%
+}
+.table tr {
+    border-bottom: 1px solid #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 4rem;
+    position: relative;
+    transition: .5s;
+}
+.table thead tr {
+    pointer-events: none;
+}
+.table tr:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.reference {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100%;
+    padding: .5rem;
+    transition: .5s;
+    opacity: 0;
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #555;
+}
+.table tr:hover .reference{
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .table {
+        font-size: .8rem;
+    }
+    .table tr { min-height: 3.5rem; }
+}
+
+@media (max-width: 576px) {
+    .tableWrapper { width: 90vw; }
+    .title { width: 8rem; height: 3rem; }
+    .table { font-size: .7rem}
+    .table tr { min-height: 3rem; }
+}

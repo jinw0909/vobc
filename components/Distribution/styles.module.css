@@ -1,0 +1,22 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 576px) {
+    .title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
