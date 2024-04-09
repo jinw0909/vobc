@@ -5,12 +5,17 @@
 /*    display: grid;*/
 /*    grid-template-columns: repeat(4, 1fr);*/
 /*    grid-template-rows: repeat(4, 1fr);*/
-/*    gap: 1rem;*/
+/*    gap: 1refm;*/
 /*}*/
 .title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
+}
+.desc {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 .wrapper {
     position: relative;
@@ -20,7 +25,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    max-width: 1200px;
+    max-width: 1024px;
     max-height: 600px;
 }
 .bg {
@@ -78,8 +83,7 @@
 }
 .startBtn {
     padding: 1.5rem 2.5rem;
-    border: 2px solid #999;
-    color: #1DFCFF;
+    color: white;
     border-radius: 3.5rem;
     transform: scale(0);
     opacity: 0;
@@ -89,16 +93,23 @@
     overflow: hidden;
     z-index: 90;
 }
+.excElem1 .startBtn { color: #FFD800; border: 2px solid #FFD800; }
+.excElem2 .startBtn { color: #03D56F; border: 2px solid #03D56F; }
 .startBtn::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #1DFCFF;
     width: 0;
     height: 100%;
     transition: 1s;
     z-index: 70;
+}
+.excElem1 .startBtn::before {
+    background-color: #FFD800;
+}
+.excElem2 .startBtn::before {
+    background-color: #03D56F;
 }
 .startBtn span {
     position: relative;
@@ -141,7 +152,6 @@
 .excElem:hover .startBtn {
     transform: scale(1);
     opacity: 1;
-    border-color: #1DFCFF;
 }
 
 .svgContainer {
@@ -150,11 +160,11 @@
 }
 
 .btnCircleProg {
-    transition: stroke-dasharray 1s ease, strok-dashoffset 1s ease;
+    transition: stroke-dasharray 1.5s, stroke-dashoffset 1.5s;
 }
 
 .svgContainer:hover .btnCircleProg {
-    stroke-dasharray: 351;
+    stroke-dasharray: 401;
     stroke-dashoffset: 0; /* Set stroke-dashoffset to 0 */
 }
 .btnCircle {}
@@ -171,7 +181,10 @@
 .wrapper:hover .crossElem {
     opacity: 0;
 }
-.startBtn:hover {
+.excElem2 .startBtn:hover {
+    color: white;
+}
+.excElem1 .startBtn:hover {
     color: black;
 }
 
@@ -179,27 +192,28 @@
     width: 100%;
 }
 .startElem:hover ~ .circleElem .svgContainer .btnCircleProg{
-    stroke-dasharray: 351;
+    stroke-dasharray: 401;
     stroke-dashoffset: 0; /* Set stroke-dashoffset to 0 */
 }
 
 @media (max-width: 768px) {
-    .title { font-size: 2rem; margin-bottom: 3rem;}
+    .title { font-size: 2rem; }
     .wrapper { width: 90vw; height: 45vw; }
     .startBtn {
         font-size: 1rem;
-        padding: 1rem 2rem;
+        padding: 1.5rem 2.5rem;
     }
     .excElem { gap: 1rem; width: 45vw; }
     .crossElem { }
 }
 
 @media (max-width: 576px) {
-    .title { font-size: 1.5rem; margin-bottom: 2rem; }
+    .title { font-size: 1.5rem;}
     .wrapper {
         flex-direction: column;
         width: 90vw;
         height: 180vw;
+        max-height: 1200px;
     }
     .excElem {
         width: 90vw;
