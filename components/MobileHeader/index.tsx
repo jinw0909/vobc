@@ -7,7 +7,6 @@ import {MobileNav} from "@/ui/MobileNav";
 
 export const MobileHeader = () => {
 
-
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
         setClicked(!clicked);
@@ -15,6 +14,7 @@ export const MobileHeader = () => {
     const closeNav = () => {
         setClicked(false);
     }
+
     return (
         <header className={`${styles.header} ${clicked ? styles.clicked : ''}`}>
             <div className={styles.navigation}>

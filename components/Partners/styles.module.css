@@ -1,15 +1,43 @@
+/*.wrapper {*/
+/*    position: relative;*/
+/*    width: 80vw;*/
+/*    height: 40vw;*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(4, 1fr);*/
+/*    grid-template-rows: repeat(4, 1fr);*/
+/*    gap: 1rem;*/
+/*}*/
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+}
 .wrapper {
     position: relative;
-    width: 100%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    width: 80vw;
+    height: 40vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
+    max-width: 1200px;
+    max-height: 600px;
 }
 .bg {
     filter: blur(4px);
     display: none;
+}
+.excElem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 1s;
+    gap: 2rem;
+    position: relative;
+    flex: 1;
+    width: 40vw;
+    height: 100%;
 }
 .excElem1 {
     position: relative;
@@ -17,11 +45,6 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: grid-column-end 1s;
 }
 
 .excElem2 {
@@ -30,32 +53,157 @@
     grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+
 }
-.excElem > div {
+.restElem {
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
 }
-.excElem > .btnElem {
+.centerElem {
+    position: relative;
+    flex: 0.5;
+    width: 100%;
+}
+.startElem {
     flex: 0;
     overflow: hidden;
-    transition: 1s;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+}
+.startBtn {
+    padding: 1.5rem 2.5rem;
+    border: 2px solid #999;
+    color: #1DFCFF;
+    border-radius: 3.5rem;
+    transform: scale(0);
     opacity: 0;
+    transition: 1s;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 90;
+}
+.startBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #1DFCFF;
+    width: 0;
+    height: 100%;
+    transition: 1s;
+    z-index: 70;
+}
+.startBtn span {
+    position: relative;
+    z-index: 75;
 }
 .crossElem {
-    overflow: hidden;
-    transition: 1s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: .5s;
+    opacity: .6;
 }
-.excElem:hover .btnElem {
+.vob {
     flex: 1;
-    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 50%;
+    pointer-events: none;
 }
-.excElem:hover .crossElem {
-    flex: 0;
-    opacity: 1;
+.exchange {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 50%;
+    pointer-events: none;
 }
+.excElem:hover {
+    flex: 2;
+}
+.excElem:active {
+    transform: scale(.9);
+}
+.excElem:hover .startElem {
+    flex: 1;
+}
+
+.excElem:hover .startBtn {
+    transform: scale(1);
+    opacity: 1;
+    border-color: #1DFCFF;
+}
+
+.svgContainer {
+    width: 100%; /* Adjust the width as needed */
+    height: 100%; /* Adjust the height as needed */
+}
+
+.btnCircleProg {
+    transition: stroke-dasharray 1s ease, strok-dashoffset 1s ease;
+}
+
+.svgContainer:hover .btnCircleProg {
+    stroke-dasharray: 351;
+    stroke-dashoffset: 0; /* Set stroke-dashoffset to 0 */
+}
+.btnCircle {}
+.circleElem {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.wrapper:hover .excElem {
+    gap: 0;
+}
+.wrapper:hover .crossElem {
+    opacity: 0;
+}
+.startBtn:hover {
+    color: black;
+}
+
+.startBtn:hover::before {
+    width: 100%;
+}
+.startElem:hover ~ .circleElem .svgContainer .btnCircleProg{
+    stroke-dasharray: 351;
+    stroke-dashoffset: 0; /* Set stroke-dashoffset to 0 */
+}
+
+@media (max-width: 768px) {
+    .title { font-size: 2rem; margin-bottom: 3rem;}
+    .wrapper { width: 90vw; height: 45vw; }
+    .startBtn {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+    }
+    .excElem { gap: 1rem; width: 45vw; }
+    .crossElem { }
+}
+
+@media (max-width: 576px) {
+    .title { font-size: 1.5rem; margin-bottom: 2rem; }
+    .wrapper {
+        flex-direction: column;
+        width: 90vw;
+        height: 180vw;
+    }
+    .excElem {
+        width: 90vw;
+    }
+}
+
+

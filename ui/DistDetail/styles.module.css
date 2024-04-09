@@ -35,6 +35,18 @@
     cursor: pointer;
     z-index: 99;
     transition: .5s;
+    overflow: hidden;
+}
+.openBtn::before {
+    content: '';
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    transition: .5s;
+    z-index: 50;
 }
 .closeBtn {
     width: 100%;
@@ -51,16 +63,34 @@
     transition: .5s;
     cursor: pointer;
     z-index: 100;
+    overflow: hidden;
 }
-.closeBtn:hover ~ .openBtn {
-    /*background-color: #00FCFF;*/
+.closeBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
     background-color: white;
-    color: black;
+    transition: .5s;
+    z-index: 50;
+}
+.btnSpan {
+    position: relative;
+    z-index: 120;
 }
 .closeBtn:hover {
-    /*background-color: #00FCFF;*/
-    background-color: white;
     color: black;
+}
+.closeBtn:hover::before {
+    width: 100%;
+}
+.closeBtn:hover ~ .openBtn {
+    color: black;
+}
+.closeBtn:hover ~ .openBtn::before {
+    width: 100%;
 }
 .checkbox:checked ~ .title .closeBtn {
     opacity: 1;

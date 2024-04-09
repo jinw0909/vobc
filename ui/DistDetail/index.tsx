@@ -6,8 +6,12 @@ export function DistDetail() {
             <div className={styles.content}>
                 <input className={styles.checkbox} type="checkbox" id="checkbox" hidden/>
                 <div className={styles.title}>
-                    <label htmlFor="checkbox" className={styles.closeBtn}>Close Detail</label>
-                    <label htmlFor="checkbox" className={styles.openBtn}>Open Detail</label>
+                    <label htmlFor="checkbox" className={styles.closeBtn}>
+                        <span className={styles.btnSpan}>Close Detail</span>
+                    </label>
+                    <label htmlFor="checkbox" className={styles.openBtn}>
+                        <span className={styles.btnSpan}>Open Detail</span>
+                    </label>
                 </div>
                 <div className={styles.tableWrapper}>
                     <table className={styles.table}>
