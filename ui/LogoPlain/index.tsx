@@ -9,7 +9,7 @@ const vollkorn = Vollkorn({
 export function LogoPlain() {
     return (
         <div className={styles.logoWrapper}>
-            <Image src={vobLogo} width={32} height={50} alt="v.o.b. logo"/>
+            <Image src={vobLogo} width={22} height={50} alt="v.o.b. logo"/>
             <div className={`${styles.logoText} ${vollkorn.className}`}>VOB</div>
         </div>
     )
