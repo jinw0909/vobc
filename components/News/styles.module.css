@@ -80,6 +80,18 @@
     justify-content: space-between;
     height: 0;
     font-size: 1rem;
+    position: relative;
+}
+.newsClick {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 45;
+}
+.newsClick.hide {
+    display: none;
 }
 .active .newsDetail {
     visibility: visible;
@@ -94,7 +106,6 @@
 .detailDate {
     font-size: .8rem;
     line-height: 1.2;
-
 }
 .detailDesc {
     margin-top: 1rem;
@@ -106,8 +117,14 @@
     min-width: 66vw;
     max-width: 66vw;
 }
-.newsBody {
+.closeBtn {
 
+}
+.closeBtn.hide {
+    display: none;
+}
+.newsBody {
+    position: relative;
 }
 .newsTitle {
     display: flex;
@@ -154,6 +171,8 @@
     width: 25%;
     visibility: hidden;
     cursor: pointer;
+    position: relative;
+    z-index: 50;
 }
 .active .learnDetail {
     visibility: visible;
@@ -192,6 +211,9 @@
 .middleContent {
     padding: 2rem 0;
     line-height: 1.5;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    animation-delay: 2s;
 }
 
 @keyframes fromUp {
@@ -211,6 +233,15 @@
     }
     100% {
         transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
         opacity: 1;
     }
 }

@@ -1,0 +1,25 @@
+.closeBtn {
+    position: relative;
+    transition: .5s;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+.closeBtn:hover {
+    transform: rotate(90deg);
+}
+.line {
+    position: absolute;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    transition: .5s;
+    background-color: #eee;
+}
+.lineOne { transform: translateY(-50%) rotate(45deg); }
+.lineTwo { transform: translateY(-50%) rotate(-45deg); }
+.closeBtn:hover .line {
+    background-color: #fff;
+}

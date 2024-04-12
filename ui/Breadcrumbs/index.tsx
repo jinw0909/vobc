@@ -33,6 +33,9 @@ export const Breadcrumbs = () => {
                         if (segment === '(policies)') {
                             return null;
                         }
+                        if (!isNaN(parseInt(segment))) {
+                            return null;
+                        }
                         return (
                             <div className={styles.breadCrumbElem} key={index}>
                                 <span className={styles.arrowImg}>

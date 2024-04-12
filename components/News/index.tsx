@@ -6,23 +6,28 @@ import image0 from '@/public/news/retriseminar.jpeg';
 import image1 from '@/public/news/herald.jpeg';
 import image2 from '@/public/news/herald2.jpeg';
 import image3 from '@/public/news/herald3.jpeg';
+import {CloseBtn} from "@/ui/CloseBtn";
+import {NavigationLink} from "@/ui/NavigationLink";
 
 import Image from 'next/image';
 export function News() {
 
     const arr = Array(4).fill(0);
     const imgSrc = [image0, image1, image2, image3];
-
     const [currentIdx, setCurrentIdx] = useState(-1);
     const [isHover, setIsHover] = useState(false);
-    const handleClick = (idx:any) => {
+    const openNews = (idx:any) => {
         setCurrentIdx(idx);
-        setIsHover(true);
+        setIsHover(true)
     }
 
     useEffect(() => {
-        console.log(currentIdx)
+        console.log("currentIdx: ", currentIdx);
     }, [currentIdx])
+
+    useEffect(() => {
+        console.log("isHover: ", isHover);
+    }, [isHover])
 
     return (
         <div className={styles.newsWrapper}>
@@ -31,7 +36,7 @@ export function News() {
                     arr.map((a, i) => {
                         return (
                             <div
-                                onClick={() => {handleClick(i)}} key={i}
+                                key={i}
                                 className={`${styles.newsElem} ${currentIdx !== i && isHover ? styles.hide : ''}
                                     ${currentIdx === i && isHover ? styles.active : ''}
                                 `}
@@ -43,7 +48,10 @@ export function News() {
                                                 <div className={styles.detailDate}>2023-11-29</div>
                                                 <div className={styles.detailDesc}>Iron Won, CEO of Youth Meta, poses for photos before an interview with The Korea Herald at the companys headquarters in Seoul, Monday.</div>
                                             </div>
-                                            <div className={styles.detailRight}></div>
+                                            <div className={styles.detailRight}>
+                                                <div onClick={() => {setIsHover(false)}}
+                                                     className={`${styles.closeBtn} ${!isHover ? styles.hide : ''}`}><CloseBtn/></div>
+                                            </div>
                                         </div>
                                         <div className={styles.newsBody}>
                                             <div className={styles.newsTitle}>
@@ -52,12 +60,13 @@ export function News() {
                                             </div>
                                             <div className={styles.newsSubtitle}>
                                                 <p className={styles.publisher}>The Korea Herald</p>
-                                                <div className={styles.learnDetail}>
+                                                <NavigationLink className={styles.learnDetail} href={`/news/${i}`}>
                                                     <span className={styles.learnDetailSpan}>Learn More</span>
                                                     <Image className={styles.rightArrow} src={arrowIcon} width={12} height={12} alt="right arrow"></Image>
-                                                </div>
+                                                </NavigationLink>
                                             </div>
                                         </div>
+                                        <div onClick={() => {openNews(i)}} className={`${styles.newsClick} ${isHover ? styles.hide : ''}`}></div>
                                     </div>
                                 </div>
                                 <Image src={imgSrc[i]} fill={true} style={{objectFit: 'cover'}} alt={`news image ${i}`}/>
