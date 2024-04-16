@@ -23,22 +23,23 @@
     overflow: hidden;
     transition: .5s;
     position: relative;
+    opacity: 0;
 }
 .newsContent > div:nth-child(1) {
     background-color: #666;
-    animation: 2s fromUp ease-in-out;
+    animation: 2s fromUp ease-in-out forwards;
 }
 .newsContent > div:nth-child(2) {
     background-color: #999;
-    animation: 2s fromDown ease-in-out;
+    animation: 2s fromDown ease-in-out forwards;
 }
 .newsContent > div:nth-child(3) {
     background-color: #aaa;
-    animation: 2s fromUp ease-in-out;
+    animation: 2s fromUp ease-in-out forwards;
 }
 .newsContent > div:nth-child(4) {
     background-color: #fff;
-    animation: 2s fromDown ease-in-out;
+    animation: 2s fromDown ease-in-out forwards;
 }
 .newsContent > div.hide {
     flex: 0;
@@ -69,6 +70,7 @@
     justify-content: flex-end;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 .active .overlayCenter {
     justify-content: space-between;
@@ -88,10 +90,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 45;
+    z-index: 150;
+    transition: .5s;
 }
 .newsClick.hide {
-    display: none;
+    z-index: 45;
+}
+.newsClick.showOpen {
+    background-color: rgba(0,0,0,0.5);
 }
 .active .newsDetail {
     visibility: visible;
@@ -102,6 +108,10 @@
 }
 .detailRight {
 
+}
+.publisherMobile {
+    display: none;
+    font-size: .8rem;
 }
 .detailDate {
     font-size: .8rem;
@@ -118,13 +128,22 @@
     max-width: 66vw;
 }
 .closeBtn {
-
+    position: relative;
+    z-index: 50;
+    transition: .5s;
 }
 .closeBtn.hide {
     display: none;
 }
+.closeBtn.showOpen {
+    transform: rotate(180deg);
+}
 .newsBody {
     position: relative;
+}
+.dateMobile {
+    display: none;
+    margin-bottom: 1rem;
 }
 .newsTitle {
     display: flex;
@@ -136,11 +155,11 @@
 .newsTitle h2 {
     font-size: 1.5rem;
     line-height: 1.2;
-    overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     margin-bottom: 1rem;
+    overflow: hidden;
 }
 .newsTitle p {
     width: 33.33%;
@@ -165,7 +184,6 @@
 .learnDetail {
     padding-top: 1px;
     padding-bottom: 1px;
-    display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 25%;
@@ -173,9 +191,11 @@
     cursor: pointer;
     position: relative;
     z-index: 50;
+    display: none;
 }
 .active .learnDetail {
     visibility: visible;
+    display: flex;
 }
 .learnDetailSpan {
     margin-right: .5rem;
@@ -193,18 +213,22 @@
     transition: .5s;
     background-color: white;
 }
-.learnDetail:hover .learnDetailSpan {
+.learnDetail:hover .learnDetailSpan,
+.learnDetail.showOpen .learnDetailSpan {
     transform: translateX(0);
 }
-.learnDetail:hover .learnDetailSpan::after {
+.learnDetail:hover .learnDetailSpan::after,
+.learnDetail.showOpen .learnDetailSpan::after {
     width: 100%;
 }
+
 .rightArrow {
     opacity: 0;
     margin-top: .25rem;
     transition: .5s;
 }
-.learnDetail:hover .rightArrow {
+.learnDetail:hover .rightArrow,
+.learnDetail.showOpen .rightArrow {
     opacity: 1;
 }
 
@@ -248,5 +272,55 @@
 
 @media (max-width: 768px) {
     .newsWrapper { margin-top: 8rem;}
-    /*.newsContent { flex-direction: column; }*/
+    .newsContent {
+        flex-direction: column;
+        height: 80vh;
+    }
+    .overlayCenter {
+        padding: 1.5rem 1rem;
+        justify-content: flex-start;
+    }
+    .active .overlayCenter {
+        padding: 4rem 1rem;
+        padding-bottom: 8rem;
+    }
+
+    .newsTitle h2 {
+        -webkit-line-clamp: 2;
+        font-size: 1.2rem;
+    }
+    .detailDesc { font-size: .8rem; -webkit-line-clamp: 10;}
+    .active .newsTitle h2 {
+        -webkit-line-clamp: 5;
+    }
+    .newsTitle p {
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+        text-align: left;
+        width: 50%;
+    }
+    .newsTitle {
+        border-bottom: 0;
+    }
+    .publisher {
+        margin-top: 0;
+        font-size: .8rem;
+    }
+    .active .publisher { display: none; }
+    .newsDetail { order: 2; position: static; }
+    .newsBody { order: 1; position: static; }
+    .active .closeBtn { position: absolute; top: 1rem; right: 1rem; }
+    .active .learnDetail {
+        font-size: 1rem;
+        position: absolute;
+        bottom: 4rem;
+        left: 1rem;
+        width: 50%;
+        justify-content: flex-start;
+    }
+    .active .learnDetailSpan { transform: none; }
+    .active .dateMobile { display: block; }
+    .active .detailDate { display: none; }
+    .active .publisherMobile { display: block; }
 }

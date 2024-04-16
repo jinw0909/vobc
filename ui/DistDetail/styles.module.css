@@ -19,7 +19,7 @@
     height: 3rem;
     border-radius: 2rem;
     overflow: hidden;
-    border: 1px solid #999;
+    border: 1px solid #1DFCFF;
     transition: .5s;
 }
 
@@ -44,7 +44,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: white;
+    background-color: #1DFCFF;
     transition: .5s;
     z-index: 50;
 }
@@ -72,7 +72,7 @@
     left: 0;
     width: 0;
     height: 100%;
-    background-color: white;
+    background-color: #1DFCFF;
     transition: .5s;
     z-index: 50;
 }
@@ -97,7 +97,7 @@
 }
 
 .tableWrapper {
-    max-height: 1px;
+    max-height: 0px;
     transition: 1s;
     overflow: hidden;
     width: 75vw;
@@ -138,12 +138,14 @@ th.spanThree {
     min-height: 4rem;
     position: relative;
     transition: .5s;
+    cursor: pointer;
 }
 .table thead tr {
     pointer-events: none;
+    font-size: .8rem;
 }
 .table tr:hover {
-    background-color: rgba(255,255,255,0.2);
+    /*background-color: rgba(255,255,255,0.2);*/
 }
 .table tr:last-child {
     border-bottom: 0;
@@ -162,12 +164,21 @@ th.spanThree {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #555;
+    /*background-color: #555;*/
+    background-color: black;
 }
 .table tr:hover .reference{
     opacity: 1;
 }
-
+.table tr.selected {
+    background-color: rgba(0,252,255);
+    color: black;
+}
+.table tr.selected:hover .reference {
+    opacity: 1;
+    background-color: #00FCFF;
+    color: black;
+}
 @media (max-width: 768px) {
     .table {
         font-size: .8rem;

@@ -1,0 +1,100 @@
+[
+  {
+    "label": "Management Team",
+    "value": 10,
+    "content": "24M",
+    "color": "rgba(255, 255, 255, 0)",
+    "cutout": "50%",
+    "desc" : ""
+  },
+  {
+    "label": "Management Team\n(Locked)",
+    "value": 2,
+    "content": "6M",
+    "color": "rgba(255, 255, 255, 0.08)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "Reserves",
+    "value": 8,
+    "content": "24M",
+    "color": "rgba(255, 255, 255, 0.16)",
+    "cutout": "30%",
+    "desc": ""
+  },
+  {
+    "label": "Reserves\n(Locked)",
+    "value": 2,
+    "content": "6M",
+    "color": "rgba(255, 255, 255, 0.24)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "Community",
+    "value": 14,
+    "content": "42M",
+    "color": "rgba(255, 255, 255, 0.32)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "Ecosystem",
+    "value": 20,
+    "content": "60M",
+    "color": "rgba(255, 255, 255, 0.40)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "Marketing",
+    "value": 18,
+    "content": "54M",
+    "color": "rgba(255, 255, 255, 0.48)",
+    "cutout": "50%",
+    "offset": 0,
+    "desc": ""
+  },
+  {
+    "label": "Partner\n(Locked)",
+    "value": 6,
+    "content": "18M",
+    "color": "rgba(255, 255, 255, 0.56)",
+    "cutout": "50%",
+    "offset": 0,
+    "desc": "Monthly linear vest with 4% unlock"
+  },
+  {
+    "label": "Team/Advisor",
+    "value": 7,
+    "content": "21M",
+    "color": "rgba(255, 255, 255, 0.64)",
+    "cutout": "50%",
+    "desc": "Monthly linear vest with 4% unlock"
+  },
+  {
+    "label": "Development",
+    "value": 9,
+    "content": "27M",
+    "color": "rgba(255, 255, 255, 0.72)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "Auto-burn",
+    "value": 5,
+    "content": "15M",
+    "color": "rgba(255, 255, 255, 0.80)",
+    "cutout": "50%",
+    "desc": "Auto-burn percentage based on liquidity pool"
+  },
+  {
+    "label": "Pre-sale",
+    "value": 1,
+    "content": "3M",
+    "color": "rgba(255, 255, 255, 0.88)",
+    "cutout": "50%",
+    "desc": "Pre-sale starting at $0.12"
+  }
+]

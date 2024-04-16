@@ -8,6 +8,7 @@ import image2 from '@/public/news/herald2.jpeg';
 import image3 from '@/public/news/herald3.jpeg';
 import {CloseBtn} from "@/ui/CloseBtn";
 import {NavigationLink} from "@/ui/NavigationLink";
+import data from "@/json/news.json";
 
 import Image from 'next/image';
 export function News() {
@@ -16,9 +17,16 @@ export function News() {
     const imgSrc = [image0, image1, image2, image3];
     const [currentIdx, setCurrentIdx] = useState(-1);
     const [isHover, setIsHover] = useState(false);
+    const [showOpen, setShowOpen] = useState(false);
     const openNews = (idx:any) => {
+        if (isHover) {
+            setShowOpen(true);
+            setTimeout(() => {
+                setShowOpen(false);
+            }, 1000)
+        }
         setCurrentIdx(idx);
-        setIsHover(true)
+        setIsHover(true);
     }
 
     useEffect(() => {
@@ -33,7 +41,7 @@ export function News() {
         <div className={styles.newsWrapper}>
             <div className={styles.newsContent}>
                 {
-                    arr.map((a, i) => {
+                    data.map((a, i) => {
                         return (
                             <div
                                 key={i}
@@ -45,28 +53,42 @@ export function News() {
                                     <div className={styles.overlayCenter}>
                                         <div className={styles.newsDetail}>
                                             <div className={styles.detailLeft}>
-                                                <div className={styles.detailDate}>2023-11-29</div>
-                                                <div className={styles.detailDesc}>Iron Won, CEO of Youth Meta, poses for photos before an interview with The Korea Herald at the companys headquarters in Seoul, Monday.</div>
+                                                <div className={styles.publisherMobile}>{a.press}</div>
+                                                <div className={styles.detailDate}>{a.date}</div>
+                                                <div className={styles.detailDesc}>{a.desc}</div>
                                             </div>
                                             <div className={styles.detailRight}>
                                                 <div onClick={() => {setIsHover(false)}}
-                                                     className={`${styles.closeBtn} ${!isHover ? styles.hide : ''}`}><CloseBtn/></div>
+                                                     className={`
+                                                        ${styles.closeBtn} 
+                                                        ${!isHover ? styles.hide : ''}
+                                                        ${showOpen ? styles.showOpen : ''}
+                                                    `}><CloseBtn/></div>
                                             </div>
                                         </div>
                                         <div className={styles.newsBody}>
+                                            <div className={styles.dateMobile}>{a.date}</div>
                                             <div className={styles.newsTitle}>
-                                                <h2>Blocksquare Seoul Reads Crypto Market Trends</h2>
-                                                <p>Reporter: Im Eun Byul</p>
+                                                <h2>{a.title}</h2>
+                                                <p>{`Reporter: ${a.author}`}</p>
                                             </div>
                                             <div className={styles.newsSubtitle}>
-                                                <p className={styles.publisher}>The Korea Herald</p>
-                                                <NavigationLink className={styles.learnDetail} href={`/news/${i}`}>
+                                                <p className={styles.publisher}>{a.press}</p>
+                                                <NavigationLink
+                                                    className={`${styles.learnDetail} ${showOpen ? styles.showOpen : ''}`}
+                                                    href={`/news/${i}`}>
                                                     <span className={styles.learnDetailSpan}>Learn More</span>
                                                     <Image className={styles.rightArrow} src={arrowIcon} width={12} height={12} alt="right arrow"></Image>
                                                 </NavigationLink>
                                             </div>
                                         </div>
-                                        <div onClick={() => {openNews(i)}} className={`${styles.newsClick} ${isHover ? styles.hide : ''}`}></div>
+                                        <div
+                                            onClick={() => {openNews(i)}}
+                                            className={`
+                                                ${styles.newsClick} 
+                                                ${isHover ? styles.hide : ''}
+                                                ${showOpen ? styles.showOpen : ''}
+                                            `}></div>
                                     </div>
                                 </div>
                                 <Image src={imgSrc[i]} fill={true} style={{objectFit: 'cover'}} alt={`news image ${i}`}/>

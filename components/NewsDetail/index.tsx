@@ -1,0 +1,90 @@
+import styles from './styles.module.css';
+import Image from 'next/image';
+import image0 from '@/public/news/retriseminar.jpeg';
+import image1 from '@/public/news/herald.jpeg';
+import image2 from '@/public/news/herald2.jpeg';
+import image3 from '@/public/news/herald3.jpeg';
+import arrowUp from '@/public/icons/arrow-up-white.png';
+import arrowRight from '@/public/icons/right-arrow-white.png';
+import {NavigationLink} from "@/ui/NavigationLink";
+import data from '@/json/news.json';
+import {NewsContent} from "@/ui/NewsContent";
+import Link from "next/link";
+export async function NewsDetail({idx} : {idx : any}) {
+
+    const contentArr = data[idx].content.split('\n');
+
+    return (
+        <div className={styles.detailWrapper}>
+            <div className={styles.detailUp}>
+                <div className={styles.left}>
+                    <div className={styles.leftContent}>
+                        <div className={styles.newsDate}>{data[idx].date}</div>
+                        <div className={styles.newsTitle}>
+                            {data[idx].title}
+                        </div>
+                        <div className={styles.newsAuthor}>{`By ${data[idx].author}`}</div>
+                    </div>
+                    <div className={styles.leftContentDown}>
+                        <NavigationLink href="/news">
+                            <div className={styles.backToMain}>
+                                <Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow"/>
+                                <span>back to main</span>
+                            </div>
+                        </NavigationLink>
+                    </div>
+                </div>
+                <div className={styles.right}>
+                    <div className={styles.imageWrapper}>
+                        <Image src={image0} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
+                    </div>
+                    <span className={styles.imageDesc}>
+                        {data[idx].desc}
+                    </span>
+                    <div className={styles.mainContent}>
+                        <p className={styles.subTitle}>
+                            {data[idx].subtitle}
+                        </p>
+                        <hr/>
+                        {/*<NewsContent content={data[idx].content}/>*/}
+                        {
+                            contentArr.map((a, i) => {
+                                return (
+                                    <p key={i}>{a}</p>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div className={styles.detailDown}>
+                <div className={styles.downLeft}>
+                    <div className={styles.downLeftContent}>
+                        <div className={styles.backToTop}>
+                            <a href="#">Back to top</a>
+                            <Image src={arrowUp} width={16} height={16} alt="arrow to top" />
+                        </div>
+                        <div className={styles.backToTop}>
+                            <Link href={data[idx].link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              locale={false}>
+                                To the original report
+                            </Link>
+                            {/*<a href="#">To the original report</a>*/}
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.downRight}>
+                    <div className={styles.downRightContent}>
+                        <hr/>
+                        <span>About the Press</span>
+                        <p>
+                            {data[idx].pressdesc}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

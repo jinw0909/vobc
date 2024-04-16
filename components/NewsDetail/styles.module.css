@@ -1,0 +1,249 @@
+.detailWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /*padding: 2rem;*/
+    margin-top: 9rem;
+    gap: 8rem;
+}
+.detailUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    position: relative;
+}
+.left {
+    width: 33%;
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+    padding-right: 2rem;
+}
+.right {
+    width: 66%;
+    align-self: stretch;
+}
+.leftContent {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 7rem;
+    background-color: black;
+    z-index: 50;
+    gap: 2rem;
+    padding-bottom: 1rem;
+}
+.newsTitle { font-size: 2rem; }
+.newsAuthor { font-size: 1.5rem; }
+.leftContentDown {
+    bottom: 2rem;
+    position: -webkit-sticky;
+    position: sticky;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 45;
+}
+.backToMain {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+}
+.backToMain::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #999;
+    height: 1px;
+    width: 0;
+    transition: .5s;
+}
+.leftArrow {
+    opacity: 0.75;
+    transform: rotate(180deg);
+    transition: .5s;
+    margin-top: 2px;
+}
+.backToMain:hover::after {
+    width: 100%;
+    color: white;
+}
+.backToMain:hover .leftArrow {
+    opacity: 1;
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+}
+.imageDesc {
+    display: block;
+    font-size: .8rem;
+    color: #999999;
+    padding-top: 1rem;
+}
+.mainContent {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+.contentEnd {
+
+}
+.subTitle {
+    padding-bottom: 4rem;
+}
+.mainContent hr {
+    align-self: stretch;
+    opacity: 0.75;
+}
+
+/* content below */
+.detailDown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    min-height: 66vh;
+}
+.downLeft {
+    width: 33%;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem;
+}
+.downLeftContent {
+    align-self: flex-end;
+    position: sticky;
+    position: -webkit-sticky;
+    text-align: right;
+    top: 7rem;
+}
+.downLeftContent > div {
+    margin-top: 1rem;
+    color: #999;
+    transition: .5s;
+    position: relative;
+    font-size: 1.2rem;
+}
+.downLeftContent > div:after {
+    content: '';
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    height: 1px;
+    background-color: #999;
+    width: 0;
+    transition: .5s;
+}
+.downLeftContent > div:hover {
+    color: white;
+}
+.downLeftContent > div:hover::after {
+    width: 100%;
+    color: white;
+}
+.backToTop {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/*.backToTop {*/
+/*    align-self: flex-end;*/
+/*    position: sticky;*/
+/*    position: -webkit-sticky;*/
+/*    top: 7rem;*/
+/*}*/
+/*.toOriginal {*/
+/*    align-self: flex-end;*/
+/*}*/
+.downRight {
+    width: 66%;
+    align-self: stretch;
+}
+.downRightContent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 8rem;
+    gap: 2rem;
+    padding-bottom: 8rem;
+}
+.downRightContent hr {
+    align-self: stretch;
+}
+
+@media (min-width: 1200px) {
+    .detailWrapper {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .detailWrapper {
+        /*padding: 1.5rem;*/
+        margin-top: 7rem;
+    }
+    .detailUp {
+        flex-direction: column;
+    }
+    .left { position: sticky; position: -webkit-sticky; top: 4rem;
+        z-index: 55; padding: 0; width: 100%;
+        background-color: black; padding-bottom: 1rem; border-bottom: 1px solid #999;}
+    .right { width: 100%; }
+    .leftContent {
+        top: 4rem;
+        gap: 1rem;
+        align-self: stretch;
+        padding: 1rem 0;
+        position: static;
+    }
+    .leftContentDown {
+        position: static;
+        align-self: flex-end;
+    }
+    .downLeft { justify-content: center; }
+    .newsDate { font-size: .8rem; }
+    .newsTitle { font-size: 1.5rem}
+    .newsAuthor { font-size: 1.2rem; }
+    /*.left { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%;*/
+    /*    padding-right: 0; }*/
+    /*.right { padding-top: 50vh; width: 100% }*/
+
+}
+
+@media (max-width: 576px) {
+    .detailWrapper {
+        /*padding: 1rem;*/
+    }
+    .detailDown {
+        flex-direction: column;
+    }
+    .downLeft { width: 100%; }
+    .downRight { width: 100%; }
+    .downRightContent { padding-top: 4rem; }
+    .downLeftContent > div { font-size: 1rem; margin-top: .5rem}
+    .leftArrow {
+        width: 8px;
+        height: 8px;
+    }
+}

@@ -1,5 +1,18 @@
-import styles from './styles.module.css'
-export function DistDetail() {
+'use client';
+import styles from './styles.module.css';
+import {useEffect, useState} from "react";
+import data from '@/json/distribution.json';
+export function DistDetail({handleIdx, index, isActive}: {handleIdx:any, index: any, isActive:any}) {
+    const [highLight, setHighLight] = useState(isActive);
+
+    useEffect(() => {
+        setHighLight(isActive);
+    }, [isActive])
+
+    const handleClick = (idx:any) => {
+        setHighLight(true);
+        handleIdx(idx);
+    }
 
     return (
         <div>
@@ -15,90 +28,43 @@ export function DistDetail() {
                 </div>
                 <div className={styles.tableWrapper}>
                     <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th className={styles.spanTwo} colSpan={2}>Distribution<br/>Model</th>
-                            <th>Allocation<br/>(%)</th>
-                            <th>Allocation<br/>(EA)</th>
-                        </tr>
-                    </thead>
+                    {/*<thead>*/}
+                    {/*    <tr>*/}
+                    {/*        <th className={styles.spanTwo} colSpan={2}>Distribution<br/>Model</th>*/}
+                    {/*        <th>Allocation<br/>(%)</th>*/}
+                    {/*        <th>Allocation<br/>(EA)</th>*/}
+                    {/*    </tr>*/}
+                    {/*</thead>*/}
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Management Team</td>
-                            <td>10%</td>
-                            <td>24M</td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Management Team<br/>(5 years lock)</td>
-                            <td>2%</td>
-                            <td>24M</td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>Reserves</td>
-                            <td>8%</td>
-                            <td>24M</td>
-                        </tr>
-                        <tr>
-                            <td>04</td>
-                            <td>Reserves <br/>(3 years lock)</td>
-                            <td>2%</td>
-                            <td>6M</td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Community</td>
-                            <td>14%</td>
-                            <td>42M</td>
-                        </tr>
-                        <tr>
-                            <td>06</td>
-                            <td>Ecosystem</td>
-                            <td>20%</td>
-                            <td>60M</td>
-                        </tr>
-                        <tr>
-                            <td>07</td>
-                            <td>Marketing</td>
-                            <td>18%</td>
-                            <td>54M</td>
-                        </tr>
-                        <tr>
-                            <td>08</td>
-                            <td>Partner<br/>(1 year lock)</td>
-                            <td>8%</td>
-                            <td>24M</td>
-                            <td className={styles.reference}>Monthly linear vest with 4% unlock</td>
-                        </tr>
-                        <tr>
-                            <td>09</td>
-                            <td>Team/Advisor<br/>3 year lock</td>
-                            <td>7%</td>
-                            <td>21M</td>
-                            <td className={styles.reference}>Monthly linear vest with 4% unlock</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Development</td>
-                            <td>9%</td>
-                            <td>27M</td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>Auto-burn</td>
-                            <td>5%</td>
-                            <td>15M</td>
-                            <td className={styles.reference}>Percentage dependant on the liquidity pool</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>Pre-sale</td>
-                            <td>1%</td>
-                            <td>3M</td>
-                            <td className={styles.reference}>Pre-sale at $0.12</td>
-                        </tr>
+                        {
+                            data.map((a, i) => {
+                                if (a.desc == '') {
+                                    return (
+                                        <tr key={i}
+                                            className={`${index == i && highLight ? styles.selected : ''}`}
+                                            onClick={() => {handleClick(i)}}>
+                                            <td>{i + 1}</td>
+                                            <td>{a.label}</td>
+                                            <td>{`${a.value}%`}</td>
+                                            <td>{`${a.content}`}</td>
+                                        </tr>
+                                    )
+                                } else {
+                                    return (
+                                        <tr key={i}
+                                            className={`${index == i ? styles.selected : ''}`}
+                                            onClick={() => {handleClick(i)}}>
+                                            <td>{i + 1}</td>
+                                            <td>{a.label}</td>
+                                            <td>{`${a.value}%`}</td>
+                                            <td>{`${a.content}`}</td>
+                                            <td className={styles.reference}>{`${a.desc}`}</td>
+                                        </tr>
+                                    )
+                                }
+
+                            })
+                        }
                         <tr>
                             <td className={styles.spanThree} colSpan={3}>Total</td>
                             <td>300M</td>

@@ -1,0 +1,14 @@
+.detailWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .detailWrapper { padding: 1.5rem; }
+}
+@media (max-width: 576px) {
+    .detailWrapper { padding: 1rem; }
+}
