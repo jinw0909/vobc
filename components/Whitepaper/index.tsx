@@ -7,7 +7,6 @@ export const Whitepaper = () => {
     return (
         <div className={styles.whitepaperWrapper}>
             <div className={styles.whitepaperInner}>
-
                 <div className={`${styles.whitepaperText}`}>
                     <div className={styles.whitepaperTitle}>White Paper</div>
                     <div className={styles.whitepaperDesc}>View the VOB white paper</div>
@@ -24,7 +23,7 @@ export const Whitepaper = () => {
                 </div>
             </div>
             <div className={styles.hrLine}></div>
-            <div className={styles.whitepaperInner}>
+            <div className={`${styles.whitepaperInner} ${styles.smartContract}`}>
                 <div className={`${styles.whitepaperImg} ${styles.contractImg}`}>
                     <Image src={contractPic}
                            fill={true}
