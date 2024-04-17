@@ -1,18 +1,24 @@
 import styles from './styles.module.css';
 import Image from 'next/image';
-import image0 from '@/public/news/retriseminar.jpeg';
-import image1 from '@/public/news/herald.jpeg';
-import image2 from '@/public/news/herald2.jpeg';
-import image3 from '@/public/news/herald3.jpeg';
+import image0 from '@/public/news/herald.jpeg';
+import image1 from '@/public/news/herald2.jpeg';
+import image2 from '@/public/news/herald3.jpeg';
+import image3 from '@/public/news/herald4.jpeg';
+import image4 from '@/public/news/cointelegraphimage.png';
+import image5 from '@/public/news/retriseminar.jpeg';
 import arrowUp from '@/public/icons/arrow-up-white.png';
 import arrowRight from '@/public/icons/right-arrow-white.png';
 import {NavigationLink} from "@/ui/NavigationLink";
 import data from '@/json/news.json';
-import {NewsContent} from "@/ui/NewsContent";
 import Link from "next/link";
 export async function NewsDetail({idx} : {idx : any}) {
 
-    const contentArr = data[idx].content.split('\n');
+    let contentArr: string[] = [];
+    const content = data[idx].content;
+    if (content) { contentArr = content.split('\n'); }
+    // let contentArr = data[idx].content.split(`\n`);
+
+    const imgSrc = [image0, image1, image2, image3, image4, image5];
 
     return (
         <div className={styles.detailWrapper}>
@@ -23,7 +29,9 @@ export async function NewsDetail({idx} : {idx : any}) {
                         <div className={styles.newsTitle}>
                             {data[idx].title}
                         </div>
-                        <div className={styles.newsAuthor}>{`By ${data[idx].author}`}</div>
+                        <div className={styles.newsAuthor}>
+                            {`${data[idx].author == '' ? data[idx].press : `By ${data[idx].author}, ${data[idx].press}`}`}
+                        </div>
                     </div>
                     <div className={styles.leftContentDown}>
                         <NavigationLink href="/news">
@@ -36,7 +44,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.imageWrapper}>
-                        <Image src={image0} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
+                        <Image src={imgSrc[idx]} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
                     </div>
                     <span className={styles.imageDesc}>
                         {data[idx].desc}
@@ -65,7 +73,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                             <Image src={arrowUp} width={16} height={16} alt="arrow to top" />
                         </div>
                         <div className={styles.backToTop}>
-                            <Link href={data[idx].link}
+                            <Link href={data[idx].link as string}
                               target="_blank"
                               rel="noopener noreferrer"
                               locale={false}>

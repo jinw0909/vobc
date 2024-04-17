@@ -3,7 +3,6 @@
     padding: 2rem;
     transition: .5s;
     border-radius: 1rem;
-    margin-top: 8rem;
 }
 .title {
     text-align: center;
@@ -269,7 +268,7 @@
     .wrapper:hover {
         min-height: 140vw;
     }
-    .excElem { width: 66vw; min-height: 40vw; }
+    .excElem { width: 100%; min-height: 40vw; }
     .elemWrapper:hover .descElem {
         /*width: 100%;*/
         opacity: 1;
@@ -291,7 +290,6 @@
         width: 100%;
     }
     .excElem {
-        width: 80vw;
         min-height: 50vw;
     }
     .elemWrapper:hover .descElem {

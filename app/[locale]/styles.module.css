@@ -7,7 +7,7 @@
     padding: 2rem;
 }
 .subWrapper {
-    min-height: 100vh;
+    min-height: 75vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +38,7 @@
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;
     color: transparent;
-    line-height: 1.4;
+    line-height: 2;
 }
 .subText > div {
     text-align: center;

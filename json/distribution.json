@@ -13,7 +13,7 @@
     "content": "6M",
     "color": "rgba(255, 255, 255, 0.08)",
     "cutout": "50%",
-    "desc": ""
+    "desc": "Locked for 5 years"
   },
   {
     "label": "Reserves",
@@ -29,7 +29,7 @@
     "content": "6M",
     "color": "rgba(255, 255, 255, 0.24)",
     "cutout": "50%",
-    "desc": ""
+    "desc": "Locked for 3 years"
   },
   {
     "label": "Community",
@@ -63,15 +63,15 @@
     "color": "rgba(255, 255, 255, 0.56)",
     "cutout": "50%",
     "offset": 0,
-    "desc": "Monthly linear vest with 4% unlock"
+    "desc": "Monthly linear vest with 4% unlock. \nLocked for 1 year"
   },
   {
-    "label": "Team/Advisor",
+    "label": "Team/Advisor\n(Locked)",
     "value": 7,
     "content": "21M",
     "color": "rgba(255, 255, 255, 0.64)",
     "cutout": "50%",
-    "desc": "Monthly linear vest with 4% unlock"
+    "desc": "Monthly linear vest with 4% unlock. \nLocked for 3 years"
   },
   {
     "label": "Development",

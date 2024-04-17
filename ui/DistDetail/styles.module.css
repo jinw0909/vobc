@@ -119,6 +119,14 @@
     align-items: center;
     width: 25%;
 }
+.table td:nth-child(1),
+.table th:nth-child(1) {
+    width: 15%;
+}
+.table td:nth-child(2),
+.table th:nth-child(2) {
+    width: 35%;
+}
 .table td {
     cursor: pointer;
 }
@@ -190,6 +198,7 @@ th.spanThree {
         font-size: .8rem;
     }
     .table tr { min-height: 3.5rem; }
+    .reference { font-size: .6rem; }
 }
 
 @media (max-width: 576px) {
