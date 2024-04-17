@@ -9,7 +9,7 @@ import crossWhite from '@/public/icons/cross-white.png';
 import Link from 'next/link'
 export function Partners() {
     return (
-        <div>
+        <div className={styles.partnersWrapper}>
         <div className={styles.title}>Get Started with VOB</div>
         <div className={styles.desc}>Start trading now with VOB&apos;s partner and globally verified CEX</div>
         <div className={styles.wrapper}>

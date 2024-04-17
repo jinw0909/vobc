@@ -1,16 +1,15 @@
-/*.wrapper {*/
-/*    position: relative;*/
-/*    width: 80vw;*/
-/*    height: 40vw;*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(4, 1fr);*/
-/*    grid-template-rows: repeat(4, 1fr);*/
-/*    gap: 1refm;*/
-/*}*/
+.partnersWrapper {
+    border: 1px solid #999;
+    padding: 2rem;
+    transition: .5s;
+    border-radius: 1rem;
+    margin-top: 8rem;
+}
 .title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    margin-top: 4rem;
 }
 .desc {
     font-size: 1rem;
@@ -29,6 +28,7 @@
     /*max-height: 600px;*/
     transition: .5s;
     gap: 0;
+    margin-top: 6rem;
 }
 .wrapper:hover .descElem {
     flex: 1;
@@ -212,7 +212,7 @@
 }
 
 .btnCircleProg {
-    transition: stroke-dasharray 2s, stroke-dashoffset 2s;
+    transition: stroke-dasharray 3s, stroke-dashoffset 3s;
 }
 
 .elemWrapper:hover .svgContainer .btnCircleProg {
@@ -261,7 +261,7 @@
 
 @media (max-width: 768px) {
     .title { font-size: 2rem; }
-    .wrapper { width: 90vw; flex-direction: column;}
+    .wrapper { width: 100%; flex-direction: column; margin-top: 2rem; }
     .startBtn {
         font-size: 1rem;
         padding: 1.5rem 2.5rem;
@@ -269,7 +269,7 @@
     .wrapper:hover {
         min-height: 140vw;
     }
-    .excElem { width: 66vw; min-height: 50vw; }
+    .excElem { width: 66vw; min-height: 40vw; }
     .elemWrapper:hover .descElem {
         /*width: 100%;*/
         opacity: 1;

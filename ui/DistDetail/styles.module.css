@@ -140,6 +140,9 @@ th.spanThree {
     transition: .5s;
     cursor: pointer;
 }
+.table tr:last-child {
+    pointer-events: none;
+}
 .table thead tr {
     pointer-events: none;
     font-size: .8rem;
@@ -154,8 +157,8 @@ th.spanThree {
 .reference {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100% !important;
+    right: 0;
+    width: 50% !important;
     height: 100%;
     padding: .5rem;
     transition: .5s;
@@ -167,14 +170,17 @@ th.spanThree {
     /*background-color: #555;*/
     background-color: black;
 }
-.table tr:hover .reference{
-    opacity: 1;
-}
+/*.table tr:hover .reference{*/
+/*    opacity: 1;*/
+/*}*/
+/*.table tr.selected .reference {*/
+/*    opacity: 1;*/
+/*}*/
 .table tr.selected {
     background-color: rgba(0,252,255);
     color: black;
 }
-.table tr.selected:hover .reference {
+.table tr.selected .reference {
     opacity: 1;
     background-color: #00FCFF;
     color: black;
