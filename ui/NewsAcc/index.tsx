@@ -11,7 +11,7 @@ import image4 from '@/public/news/cointelegraphimage.png';
 import image5 from '@/public/news/retriseminar.jpeg';
 import {CloseBtn} from "@/ui/CloseBtn";
 import {NavigationLink} from "@/ui/NavigationLink";
-export function NewsAcc({data, imgSrc}:{data:any, imgSrc:any}) {
+export function NewsAcc({data, imgSrc, index}:{data:any, imgSrc:any, index:number}) {
 
     const [currentIdx, setCurrentIdx] = useState(-1);
     const [isHover, setIsHover] = useState(false);
@@ -67,7 +67,7 @@ export function NewsAcc({data, imgSrc}:{data:any, imgSrc:any}) {
                                             <p className={styles.publisher}>{a.press}</p>
                                             <NavigationLink
                                                 className={`${styles.learnDetail} ${showOpen ? styles.showOpen : ''}`}
-                                                href={`/news/${i}`}>
+                                                href={`/news/${i + index}`}>
                                                 <span className={styles.learnDetailSpan}>Learn More</span>
                                                 <Image className={styles.rightArrow} src={arrowIcon} width={12} height={12} alt="right arrow"></Image>
                                             </NavigationLink>

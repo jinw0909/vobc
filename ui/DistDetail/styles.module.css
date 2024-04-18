@@ -151,6 +151,12 @@ th.spanThree {
 .table tr:last-child {
     pointer-events: none;
 }
+.table tr:last-child td:first-child {
+    width: 75%;
+}
+.table tr:last-child td:last-child {
+    width: 25%;
+}
 .table thead tr {
     pointer-events: none;
     font-size: .8rem;

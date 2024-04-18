@@ -3,18 +3,20 @@ import styles from './styles.module.css'
 import Link from 'next/link';
 import { About } from "@/components/About";
 import {DevsMain} from "@/components/DevsMain";
-import {getTranslations} from "next-intl/server";
+import {getMessages, getTranslations} from "next-intl/server";
 import {useTranslations} from "next-intl";
 import {Whitepaper} from "@/components/Whitepaper";
 import {Roadmap} from "@/components/Roadmap";
 import {Distribution} from "@/components/Distribution";
 import {Partners} from "@/components/Partners";
+import {NextIntlClientProvider} from "next-intl";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
   // const intl = await getDictionary(lang) //en
   // const t = await getTranslations('main');
   const t = await getTranslations('main');
+  const messages = await getMessages();
 
   return (
       <>
@@ -43,7 +45,9 @@ export default async function Page({params : { locale }} : {params : {locale : s
               <Roadmap />
           </div>
           <div className={styles.subWrapper}>
-              <Distribution />
+              <NextIntlClientProvider messages={messages}>
+                <Distribution />
+              </NextIntlClientProvider>
           </div>
           <div className={styles.subWrapper}>
               <Partners />

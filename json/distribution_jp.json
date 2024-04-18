@@ -1,0 +1,100 @@
+[
+  {
+    "label": "経営チーム",
+    "value": 10,
+    "content": "24M",
+    "color": "rgba(255, 255, 255, 0)",
+    "cutout": "50%",
+    "desc" : ""
+  },
+  {
+    "label": "経営チーム\n(ロック中)",
+    "value": 2,
+    "content": "6M",
+    "color": "rgba(255, 255, 255, 0.08)",
+    "cutout": "50%",
+    "desc": "5年間ロック"
+  },
+  {
+    "label": "予備資金",
+    "value": 8,
+    "content": "24M",
+    "color": "rgba(255, 255, 255, 0.16)",
+    "cutout": "30%",
+    "desc": ""
+  },
+  {
+    "label": "予備資金\n(ロック中)",
+    "value": 2,
+    "content": "6M",
+    "color": "rgba(255, 255, 255, 0.24)",
+    "cutout": "50%",
+    "desc": "3年間ロック"
+  },
+  {
+    "label": "コミュニティ",
+    "value": 14,
+    "content": "42M",
+    "color": "rgba(255, 255, 255, 0.32)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "エコシステム",
+    "value": 20,
+    "content": "60M",
+    "color": "rgba(255, 255, 255, 0.40)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "マーケティング",
+    "value": 18,
+    "content": "54M",
+    "color": "rgba(255, 255, 255, 0.48)",
+    "cutout": "50%",
+    "offset": 0,
+    "desc": ""
+  },
+  {
+    "label": "パートナー\n(ロック中)",
+    "value": 6,
+    "content": "18M",
+    "color": "rgba(255, 255, 255, 0.56)",
+    "cutout": "50%",
+    "offset": 0,
+    "desc": "毎月4%のロック解除。1年間ロック"
+  },
+  {
+    "label": "チーム/アドバイザー\n(ロック中)",
+    "value": 7,
+    "content": "21M",
+    "color": "rgba(255, 255, 255, 0.64)",
+    "cutout": "50%",
+    "desc": "毎月4%のロック解除。3年間ロック"
+  },
+  {
+    "label": "開発",
+    "value": 9,
+    "content": "27M",
+    "color": "rgba(255, 255, 255, 0.72)",
+    "cutout": "50%",
+    "desc": ""
+  },
+  {
+    "label": "自動焼却",
+    "value": 5,
+    "content": "15M",
+    "color": "rgba(255, 255, 255, 0.80)",
+    "cutout": "50%",
+    "desc": "流動性プールに基づく割合"
+  },
+  {
+    "label": "プレセール",
+    "value": 1,
+    "content": "3M",
+    "color": "rgba(255, 255, 255, 0.88)",
+    "cutout": "50%",
+    "desc": "0.12ドルからのプレセール"
+  }
+]

@@ -58,5 +58,26 @@
     "subtitle" : "Security Architecture",
     "content" : "GOYABOT is an advanced automated computer program. It operates with minimal human intervention efficiently increasing user engagement. We are commited to leveraging technology and the VOB token to construct a resilient ecosystem ensuring stable token economy and profit-generative prospects.",
     "btn" : "View More"
+  },
+  "whitepaper" : {
+    "whitepaper": "View the VOB white paper",
+    "smartcontract" : "View the VOB smart contract account",
+    "viewbtn": "View",
+    "checkbtn": "Check"
+  },
+  "distribution": {
+    "vobtoken": "VOB Token",
+    "model": "Distribution Model",
+    "EA" : "EA",
+    "opendetail": "Open Detail",
+    "closedetail": "Close Detail",
+    "total": "Total"
+  },
+  "partners": {
+    "title": "Get Started with VOB",
+    "subtitle": "Start trading now with VOB's partner and globally verified CEX",
+    "startbtn": "Get Started",
+    "lbank": "Founded in 2015, LBank Exchange is a top cryptocurrency trading platform with licenses of NFA, MSB, and Canada MSB. LBank Exchange provides global users with secure, professional, and convenient products and services, including Cryptocurrency Trading, Derivatives, Staking, NFT, and LBK Labs investment",
+    "cointrpro": "CoinTR.com is an integrated international Cryptocurrency platform founded in 2022. Powerful founders of traditional Turkish financial institutions and experienced team members from top crypto exchanges in London & Istanbul, Turkey make us more competitive and trustworthy."
   }
 }

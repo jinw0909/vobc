@@ -2,5 +2,62 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-top: 8rem;
+    padding: 2rem;
+    flex-direction: column;
+}
+.headbandWrapper {
+    align-self: stretch;
+}
+.container {
+    display: flex;
+    width: 100%;
+    align-items: center;
     justify-content: center;
+}
+.headband {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+.list {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin: 0 auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+.elem {
+    display: inline-block;
+    width: 8rem;
+    /*border: 1px solid white;*/
+    margin: 1rem 0;
+    text-align: center;
+}
+.elem > div {
+
+}
+.teamIcon {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    margin: 0 auto;
+}
+.iconDesc {
+    font-size: .8rem;
+}
+.itemBandWrapper {}
+.itemContainer {}
+.itemBand {}
+.itemList {}
+.item {}
+@media (max-width: 768px) {
+    .list { width: 100%;}
+    .teamWrapper { padding : 1.5rem; }
+}
+
+@media (max-width: 576px) {
+    .teamWrapper { padding: 1rem; }
 }

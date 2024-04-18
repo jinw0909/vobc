@@ -6,8 +6,14 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 import Image from 'next/image';
 import vobPic from '@/public/vob_logo_2.png';
 import styles from './styles.module.css';
-import data from '@/json/distribution.json';
+// import data from '@/json/distribution_en.json';
+import {useLocale} from "next-intl";
+import {useTranslations} from "next-intl";
 export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {handleIdx:any, index:any, handleActive:any, isActive:any}) => {
+
+    const locale = useLocale();
+    const data = require(`@/json/distribution_${locale}.json`);
+    const t = useTranslations('distribution');
 
     const chartRef = useRef<HTMLDivElement | null>(null);
     const imgRef = useRef<HTMLDivElement | null>(null);
@@ -18,10 +24,10 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
     const doughnutRef = useRef<any|null>(null);
 
     const finalData : any = {
-        labels: data.map((item) => item.label),
+        labels: data.map((item:any) => item.label),
         datasets: [{
-            data: data.map((item) => Math.round(item.value)),
-            backgroundColor: data.map((item) => item.color),
+            data: data.map((item:any) => Math.round(item.value)),
+            backgroundColor: data.map((item:any) => item.color),
             borderColor: 'rgba(255,255,255,0.8)',
             borderWidth: 1,
             spacing: 16,
@@ -52,7 +58,6 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
                 handleIdx(idx);
                 doughnutRef.current?.update();
             }
-
         },
         animation : {
             animateScale: true
@@ -68,17 +73,17 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
 
     useEffect(() => {
 
-        labelRef.current!.style.opacity = '0';
-        contentRef.current!.style.opacity = '0';
-        valueRef.current!.style.opacity = '0';
+        // labelRef.current!.style.opacity = '0';
+        // contentRef.current!.style.opacity = '0';
+        // valueRef.current!.style.opacity = '0';
         labelRef.current!.innerText = data[currentIdx].label;
-        contentRef.current!.innerText = data[currentIdx].content + ' EA';
+        contentRef.current!.innerText = data[currentIdx].content + ` ${t('EA')}`;
         valueRef.current!.innerText = '[ ' + data[currentIdx].value + '% ]';
-        setTimeout(() => {
-            labelRef.current!.style.opacity = '1';
-            contentRef.current!.style.opacity = '1';
-            valueRef.current!.style.opacity = '1';
-        }, 500)
+        // setTimeout(() => {
+        //     labelRef.current!.style.opacity = '1';
+        //     contentRef.current!.style.opacity = '1';
+        //     valueRef.current!.style.opacity = '1';
+        // }, 500)
 
         //redraw chart
         const datasets = doughnutRef.current?.data.datasets;
