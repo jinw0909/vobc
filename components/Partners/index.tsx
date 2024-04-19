@@ -41,8 +41,8 @@ export async function Partners() {
                                 width="101"
                                 height="101"
                                 fill="none"
-                                stroke="#fff"
-                                strokeWidth="0.5"
+                                stroke="#999"
+                                strokeWidth="0.25"
                                 rx="10" // Border radius for the rectangle's x-axis
                                 ry="10" // Border radius for the rectangle's y-axis
                             ></rect>
@@ -94,8 +94,8 @@ export async function Partners() {
                                 width="101"
                                 height="101"
                                 fill="none"
-                                stroke="#fff"
-                                strokeWidth="0.5"
+                                stroke="#999"
+                                strokeWidth="0.25"
                                 rx="10" // Border radius for the rectangle's x-axis
                                 ry="10" // Border radius for the rectangle's y-axis
                             ></rect>
