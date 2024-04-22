@@ -79,5 +79,42 @@
     "startbtn": "Get Started",
     "lbank": "Founded in 2015, LBank Exchange is a top cryptocurrency trading platform with licenses of NFA, MSB, and Canada MSB. LBank Exchange provides global users with secure, professional, and convenient products and services, including Cryptocurrency Trading, Derivatives, Staking, NFT, and LBK Labs investment",
     "cointrpro": "CoinTR.com is an integrated international Cryptocurrency platform founded in 2022. Powerful founders of traditional Turkish financial institutions and experienced team members from top crypto exchanges in London & Istanbul, Turkey make us more competitive and trustworthy."
+  },
+  "team": {
+    "0" : {
+      "first" : "Management",
+      "second" : "Team",
+      "title" : "Management Team"
+    },
+    "1" : {
+      "first" : "Engineering",
+      "second" : "Team",
+      "title" : "Engineering Team"
+    },
+    "2" : {
+      "first" : "Strategy",
+      "second" : "Team",
+      "title" : "Strategy Team"
+    },
+    "3" : {
+      "first" : "Business",
+      "second" : "Team",
+      "title" : "Business Team"
+    },
+    "4" : {
+      "first" : "Trading",
+      "second" : "Team",
+      "title" : "Trading Team"
+    },
+    "5" : {
+      "first" : "External",
+      "second" : "Advisors",
+      "title" : "External Advisors"
+    },
+    "6" : {
+      "first" : "Defense",
+      "second" : "Counsel",
+      "title" : "Defense Counsel"
+    }
   }
 }

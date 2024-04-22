@@ -50,6 +50,11 @@
     max-height: 0;
     overflow: hidden;
 }
+.langBar {
+    align-self: stretch;
+    width: 1px;
+    background-color: #999;
+}
 .languageModal.show {
     max-height: 3rem;
     padding: .5rem 2rem;

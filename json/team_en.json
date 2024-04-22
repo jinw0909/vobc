@@ -1,0 +1,225 @@
+[
+    [{
+      "status" : "CEO",
+      "name" : "IRON WON",
+      "desc" : [
+        "Participation in VC projects as follows : Hycon (HYC) / Cardano (ADA) / VERASITY (VRA) / ICON (ICX) / Electric Vehicle Zone (EVZ) / BlueWhale (BWX) / FuzeX (FXT)"
+      ]
+    },
+    {
+      "status" : "CFO",
+      "name" : "J.Y. LEE",
+      "desc" : [
+        "QingHua University",
+        "The founding member of the VOB",
+        "Participation in VRA/EVZ projects"
+      ]
+    },
+      {
+        "status" : "Director",
+        "name" : "J.S. KIM",
+        "desc" : [
+          "The founding member of the VOB"
+        ]
+      },
+    {
+      "status" : "Manager",
+      "name" : "H.A. KIM",
+      "desc" : [
+        "Expert of marketing"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "KUNDUZ",
+      "desc" : [
+        "Russian market development"
+      ]
+    }],
+  [{
+    "status" : "CTO",
+    "name" : "HYUK",
+    "desc" : [
+      "Developer of the Goya AI"
+    ]
+    },
+    {
+      "status" : "Manager",
+      "name" : "C.K. HONG",
+      "desc" : [
+        "Core developer",
+        "Database developer"
+      ]
+    },
+    {
+      "status" : "Team Leader",
+      "name" : "H.U. LEE",
+      "desc" : [
+        "Data analyst"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "E.M. KO",
+      "desc" : [
+        "System developer"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "I.S. KIM",
+      "desc" : [
+        "Data Aanalyst"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "C.Y. KIM",
+      "desc" : [
+        "System developer"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "D.Y. PARK",
+      "desc" : [
+        "Data analyst"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "H.J. SHIM",
+      "desc" : [
+        "System developer"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "S.U. IM",
+      "desc" : [
+        "Data analyst"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "J.W. CHANG",
+      "desc" : [
+        "System developer"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "H.J. GONG",
+      "desc" : [
+        "Data analyst"
+      ]
+    }],
+  [{
+      "status" : "COO",
+      "name" : "GEON",
+      "desc" : [
+        "Co-founder of Blocksquare"
+      ]
+    },
+    {
+      "status" : "Director",
+      "name" : "M.C. CHOI",
+      "desc" : [
+        "Pusan National Univ"
+      ]
+    },
+    {
+      "status" : "Manager",
+      "name" : "M.H. CHOI",
+      "desc" : [
+        "Japanese market development"
+      ]
+    },
+    {
+      "status" : "Director",
+      "name" : "S.Y. OH",
+      "desc" : [
+        "System developer"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "K.H PARK",
+      "desc" : [
+        "U.S. market development"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "TIQING",
+      "desc" : [
+        "Vietnamese market development"
+      ]
+    }],
+  [{
+    "status" : "Executive Director",
+    "name" : "LEONA",
+    "desc" : [
+      "Ehwa Univ"
+    ]
+  },
+    {
+      "status" : "Director",
+      "name" : "D. CHAN",
+      "desc" : [
+        "New business development",
+        "Sungkyunkwan Univ"
+      ]
+    },
+    {
+      "status" : "Director",
+      "name" : "B.C. YU",
+      "desc" : [
+        "Contents Maker"
+      ]
+    },
+    {
+      "status" : "Director",
+      "name" : "J.C. LEE",
+      "desc" : [
+        "Designer"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "S.T. OH",
+      "desc" : [
+        "Contents publisher"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "M.J. LEE",
+      "desc" : [
+        "Designer"
+      ]
+    }
+  ],
+  [{
+    "status" : "Executive Director",
+    "name" : "J.M. KOO",
+    "desc" : [
+      "Professional trade analyst"
+    ]
+  },
+    {
+      "status" : "Executive Director",
+      "name" : "U.J. OH",
+      "desc" : [
+        "Chart specialist"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "H.R. KANG",
+      "desc" : [
+        "Data analyst"
+      ]
+    }
+  ]
+]

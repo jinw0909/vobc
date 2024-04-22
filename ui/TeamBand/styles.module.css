@@ -1,0 +1,253 @@
+.teamWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8rem;
+    flex-direction: column;
+    /*padding: 2rem;*/
+}
+.headbandWrapper {
+    align-self: stretch;
+    position: sticky;
+    top: 5rem;
+    background-color: rgba(0,0,0,1);
+    z-index: 70;
+    border-bottom: 1px solid #999;
+}
+.headbandWrapper .rightArrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 75;
+}
+.container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.headband {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+.list {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin: 0 auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+.elem {
+    display: inline-block;
+    width: 8rem;
+    /*border: 1px solid white;*/
+    margin: 1rem 0;
+    text-align: center;
+    position: relative;
+    transition: .5s;
+}
+.elem:last-child {
+    z-index: 80;
+    background-color: black;
+}
+.elem {
+    opacity: 0.7;
+    cursor: pointer;
+}
+/*.elem:hover { opacity: 1; }*/
+.elem.selected {
+    opacity: 1;
+}
+/*.elem.selected:hover {*/
+/*    opacity: 0.7;*/
+/*}*/
+.elem:active {
+    transform: scale(0.9);
+}
+
+/*.elem::after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    right: 0;*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*    height: 33%;*/
+/*    width: 1px;*/
+/*    background-color: #999;*/
+/*}*/
+/*.elem:last-child::after {*/
+/*    display: none;*/
+/*}*/
+.elemInner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.teamIcon {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    margin: 0 auto;
+}
+.iconDesc {
+    font-size: .8rem;
+    transition: .5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.iconDesc span { position: relative; }
+.iconDesc span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: white;
+    transition: .5s;
+    width: 0;
+}
+/*.elem:hover .iconDesc span::before {*/
+/*    width: 100%;*/
+/*}*/
+/*.elem.selected:hover .iconDesc span::before {*/
+/*    width: 0;*/
+/*}*/
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.itemBandWrapper {
+
+}
+.itemBandWrapper h2 {
+    font-size: 1.5rem;
+    opacity: 0.5;
+    transition: .5s;
+    margin-bottom: 1rem;
+}
+.itemBandWrapper h2.selected {
+    opacity: 1;
+}
+.itemContainer {
+    width: 100%;
+}
+.itemBand {
+    flex: 1;
+    /*display: flex;*/
+    overflow: hidden;
+    position: relative;
+    max-height: 200vh;
+    overflow: hidden;
+    transition: .5s;
+    opacity: 1;
+}
+.itemBand.hide {
+    max-height: 0;
+    opacity: 0;
+}
+.itemBand .rightArrow {
+    top: 50%;
+    right: 0;
+    z-index: 50;
+    position: absolute;
+}
+.itemList {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    /*white-space: nowrap;*/
+    scrollbar-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding-bottom: 4rem;
+}
+.item {
+    display: inline-block;
+    /*margin: 1rem 0;*/
+    text-align: center;
+    flex-shrink: 0;
+    width: 12rem;
+    border: 1px solid #999;
+    border-radius: 1rem;
+    position: relative;
+    position: relative;
+}
+.item:last-child {
+    z-index: 55;
+    background-color: black;
+}
+
+.itemInner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+.profilePic {
+    padding: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+.profileName {
+
+}
+.profileDesc {
+    width: 100%;
+    border-top: 1px solid #999;
+    min-height: 128px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .5rem;
+    gap: .5rem;
+    height: 100%;
+}
+.profileDesc p {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .8rem;
+    flex-direction: column;
+}
+/*input[name="checkboxgroup"]:checked ~ .label {*/
+/*    opacity: 0.5;*/
+/*}*/
+.label:active { opacity: 0.5; }
+@media (max-width: 768px) {
+    /*.teamWrapper { padding : 1.5rem; }*/
+    .itemList { flex-wrap: nowrap; }
+    .headbandWrapper { top: 4rem; }
+}
+
+@media (max-width: 576px) {
+    /*.teamWrapper { padding: 1rem; }*/
+    .profileDesc p { font-size: .6rem; }
+    .iconDesc { font-size: .6rem; }
+    .elem { width: 6rem; margin: .5rem 0}
+    .teamIcon { width: 24px; height: 24px; }
+}
+
+/*.elem { overflow: hidden; }*/
+/*.elem:hover .teamIcon {*/
+/*    -webkit-filter: drop-shadow(0 1000px 0 blue);*/
+/*    filter: drop-shadow(0 1000px 0 blue);*/
+/*    transform: translateY(-1000px);*/
+/*}*/
