@@ -221,5 +221,50 @@
         "Data analyst"
       ]
     }
+  ],
+  [{
+    "status" : "External Consultant",
+    "name" : "MR. MIN",
+    "desc" : [
+      "Served CEO of HILIVING"
+    ]
+  },
+    {
+      "status" : "External Advisor",
+      "name" : "MR. LEE",
+      "desc" : [
+        "Served secret intelligence head of department"
+      ]
+    },
+    {
+      "status" : "External Spokesperson",
+      "name" : "MR. CHOI",
+      "desc" : [
+        "Served mayor in Korea's city",
+        "CEO of the major journal company"
+      ]
+    }
+  ],
+  [{
+    "status" : "Law Firm",
+    "name" : "Elliot (Law Firm)",
+    "desc" : [
+      "Consultation on comprehensive business structure of P2E corporation P2E issuing virtual assets",
+      "ICO, SAFT, Exchange Acquisition Contracts of Company B, a Virtual Asset Issuing Corporation",
+      "A number of white papers reviewed and consulted by virtual assets and NFT issuing corporations",
+      "Virtual Asset Algorithm Trading Company U Consulting Company B's Tax Audit Response",
+      "K Corporation's NFT Trading Platform Business Model Review and Advisory"
+    ]
+  },
+    {
+      "status" : "Law Firm",
+      "name" : "IAN (Law Firm)",
+      "desc" : [
+        "A fraud suit worth KRW 2 trillion by the top-level employee of Company V, a multi-level coin exchange",
+        "Algorithm Trading Company B Virtual Asset Contract Structure Advisory",
+        "NFT issuer C's comprehensive legal advice through in-house lawyer service",
+        "Bitcoin Transaction Broker's Response to Fraud Investigation Due to Transaction Accidents"
+      ]
+    }
   ]
 ]

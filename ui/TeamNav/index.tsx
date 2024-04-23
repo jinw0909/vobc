@@ -30,7 +30,8 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
                         {
                             selectedIdx.map((a:any, i:number) => {
                                 return (
-                                    <li key={i} className={`${styles.elem} ${selectedIdx[i] ? styles.selected : ''}`}
+                                    // <li key={i} className={`${styles.elem} ${selectedIdx[i] ? styles.selected : ''}`}
+                                    <li key={i} className={`${styles.elem}`}
                                         onClick={() => {handleIndex(i)}}>
                                         <div className={styles.elemInner}>
                                             <div className={styles.teamIcon}>

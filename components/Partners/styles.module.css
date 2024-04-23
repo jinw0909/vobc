@@ -34,6 +34,7 @@
     filter: blur(4px);
     display: none;
 }
+
 .elemWrapper {
     /*border:  1px solid #999;*/
     flex: 1;
@@ -46,6 +47,12 @@
 }
 .elemWrapper:hover {
     flex: 2;
+}
+.elemInput:checked + .elemWrapper .descElem {
+    opacity: 1;
+    padding: 2rem;
+    flex: 1;
+    max-height: 100vh;
 }
 .elemWrapper:hover .descElem {
     /*width: 100%;*/
@@ -88,7 +95,7 @@
     padding: 0;
     text-align: center;
     max-height: 0;
-    font-size: .8rem;
+    font-size: 1rem;
 }
 .centerElem {
     position: relative;
@@ -170,27 +177,27 @@
     pointer-events: none;
     transition: .5s;
 }
-/*.excElem:hover {*/
-/*    flex: 2;*/
-/*}*/
+.excElem:hover {
+    flex: 2;
+}
 .excElem:active {
     transform: scale(.9);
 }
-/*.excElem:hover .vob {*/
-/*    flex: 1;*/
-/*    opacity: 1;*/
-/*    transform: scale(1);*/
-/*}*/
-/*.excElem:hover .startElem {*/
-/*    flex: 1;*/
-/*}*/
-/*.excElem:hover .startBtn {*/
-/*    transform: scale(1);*/
-/*    opacity: 1;*/
-/*}*/
-/*.excElem:hover {*/
-/*    min-height: 40vw;*/
-/*}*/
+.excElem:hover .vob {
+    flex: 1;
+    opacity: 1;
+    transform: scale(1);
+}
+.excElem:hover .startElem {
+    flex: 1;
+}
+.excElem:hover .startBtn {
+    transform: scale(1);
+    opacity: 1;
+}
+.excElem:hover {
+    min-height: 40vw;
+}
 .elemWrapper:hover .excElem .vob {
     flex: 1;
     opacity: 1;
@@ -226,9 +233,9 @@
     height: 100%;
     z-index: 50;
 }
-/*.wrapper:hover {*/
-/*    gap: 2rem;*/
-/*}*/
+.wrapper:hover {
+    gap: 2rem;
+}
 .wrapper:hover .excElem {
     gap: 0;
 }
@@ -250,6 +257,7 @@
     stroke-dasharray: 401;
     stroke-dashoffset: 0; /* Set stroke-dashoffset to 0 */
 }
+
 .excElem:hover .startElem { z-index: 55;}
 .elemWrapper:hover .vob { align-items: flex-end; }
 .elemWrapper:hover .exchange { align-items: flex-start; }
@@ -275,13 +283,13 @@
         /*min-height: 140vw;*/
     }
     .excElem { width: 100%; min-height: 50vw; }
-    .elemWrapper:hover .descElem {
-        /*width: 100%;*/
-        opacity: 1;
-        padding: 1.5rem;
-        flex: 1;
-        max-height: 100vh;
-    }
+    /*.elemWrapper:hover .descElem {*/
+    /*    !*width: 100%;*!*/
+    /*    opacity: 1;*/
+    /*    padding: 1.5rem;*/
+    /*    flex: 1;*/
+    /*    max-height: 100vh;*/
+    /*}*/
 }
 
 @media (max-width: 576px) {
@@ -301,7 +309,7 @@
     .btnCircle {
         stroke-width: 0;
     }
-    .excElem:hover {
+    .elemWrapper:hover .excElem {
         min-height: 90vw;
     }
     .elemWrapper:hover .descElem {

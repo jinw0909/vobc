@@ -50,7 +50,7 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
                 display: false,
             },
         },
-        onHover: (event : any, chartElement : any) => {
+        onClick: (event : any, chartElement : any) => {
             if (chartElement.length > 0) {
                 let idx = chartElement[0].index;
                 setShowImg(false);

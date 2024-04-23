@@ -14,7 +14,19 @@
     background-color: rgba(0,0,0,1);
     z-index: 70;
     border-bottom: 1px solid #999;
+    opacity: 0;
+    animation: 1s ease-in-out fadeIn forwards;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .headbandWrapper .rightArrow {
     position: absolute;
     top: 50%;
@@ -49,14 +61,12 @@
     text-align: center;
     position: relative;
     transition: .5s;
+    cursor: pointer;
+    /*opacity: 0.7;*/
 }
 .elem:last-child {
     z-index: 80;
     background-color: black;
-}
-.elem {
-    opacity: 0.7;
-    cursor: pointer;
 }
 /*.elem:hover { opacity: 1; }*/
 .elem.selected {
@@ -132,7 +142,7 @@
 }
 .itemBandWrapper h2 {
     font-size: 1.5rem;
-    opacity: 0.5;
+    /*opacity: 0.5;*/
     transition: .5s;
 }
 .itemBandWrapper h2.selected {

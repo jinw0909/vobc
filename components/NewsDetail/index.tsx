@@ -69,6 +69,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                 <div className={styles.downLeft}>
                     <div className={styles.downLeftContent}>
                         <div className={styles.backToTop}>
+                            {/*<Link href='#'>Back to top</Link>*/}
                             <a href="#">Back to top</a>
                             <Image src={arrowUp} width={16} height={16} alt="arrow to top" />
                         </div>
