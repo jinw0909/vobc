@@ -199,6 +199,7 @@
 .profileDesc.wide p {
     margin-top: 1rem;
     gap: .5rem;
+    align-items: flex-start;
 }
 .itemInner {
     display: flex;
