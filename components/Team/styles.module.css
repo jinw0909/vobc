@@ -6,6 +6,7 @@
     margin-top: 8rem;
     flex-direction: column;
     /*padding: 2rem;*/
+    width: 100%;
 }
 
 .headbandWrapper {
@@ -241,6 +242,13 @@
 /*    opacity: 0.5;*/
 /*}*/
 .label:active { opacity: 0.5; }
+
+@media (min-width: 1200px) {
+    .teamWrapper {
+        width: 80vw;
+    }
+}
+
 @media (max-width: 768px) {
     /*.teamWrapper { padding : 1.5rem; }*/
     .itemList { flex-wrap: nowrap; }

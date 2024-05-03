@@ -11,6 +11,7 @@ export function DistDetail({handleIdx, index, isActive}: {handleIdx:any, index: 
     const t = useTranslations('distribution');
 
     const [highLight, setHighLight] = useState(isActive);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         setHighLight(isActive);
@@ -29,24 +30,21 @@ export function DistDetail({handleIdx, index, isActive}: {handleIdx:any, index: 
     //     console.log(data);
     // }, [data])
 
+
     const handleClick = (idx:any) => {
         setHighLight(true);
         handleIdx(idx);
     }
 
     return (
-        <div>
-            <div className={styles.content}>
-                <input className={styles.checkbox} type="checkbox" id="checkbox" hidden/>
-                <div className={styles.title}>
-                    <label htmlFor="checkbox" className={styles.closeBtn}>
-                        <span className={styles.btnSpan}>{t('closedetail')}</span>
-                    </label>
-                    <label htmlFor="checkbox" className={styles.openBtn}>
+        <div className={`${styles.content} ${isOpen ? styles.open : ''}`}>
+                {/*<input className={styles.checkbox} type="checkbox" id="checkbox" hidden/>*/}
+                <div className={`${styles.btnWrapper} ${isOpen ? styles.hide : ''}`}>
+                    <label className={styles.openBtn} onClick={() => {setIsOpen(true)}}>
                         <span className={styles.btnSpan}>{t('opendetail')}</span>
                     </label>
                 </div>
-                <div className={styles.tableWrapper}>
+                <div className={`${styles.tableWrapper} ${isOpen ? styles.isOpen : ''}`}>
                     <table className={styles.table}>
                     {/*<thead>*/}
                     {/*    <tr>*/}
@@ -90,9 +88,13 @@ export function DistDetail({handleIdx, index, isActive}: {handleIdx:any, index: 
                             <td>300M</td>
                         </tr>
                     </tbody>
-                </table>
+                    </table>
+                </div>
+                <div className={`${styles.btnWrapper} ${isOpen ? '' : styles.hide}`}>
+                    <label className={styles.closeBtn} onClick={() => {setIsOpen(false)}}>
+                        <span className={styles.btnSpan}>{t('closedetail')}</span>
+                    </label>
                 </div>
             </div>
-        </div>
     )
 }

@@ -6,8 +6,13 @@
     flex-direction: column;
 }
 .content {
-    margin-top: 8rem;
     position: relative;
+    /*height: 0;*/
+    transition: .5s;
+    margin-top: 2.5rem;
+}
+.content.open {
+    height: auto;
 }
 .title {
     position: absolute;
@@ -22,11 +27,22 @@
     border: 1px solid #1DFCFF;
     transition: .5s;
 }
+.btnWrapper {
+    transition: .5s;
+    opacity: 1;
+    position: relative;
+    max-height: 4rem;
+    overflow: hidden;
+}
+.btnWrapper.hide {
+    opacity: 0;
+    max-height: 0;
+}
 
 .openBtn {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     display: flex;
@@ -37,52 +53,59 @@
     transition: .5s;
     overflow: hidden;
 }
-.openBtn::before {
-    content: '';
-    width: 0;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #1DFCFF;
-    transition: .5s;
-    z-index: 50;
-}
+/*.openBtn::before {*/
+/*    content: '';*/
+/*    width: 0;*/
+/*    height: 100%;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    background-color: #1DFCFF;*/
+/*    transition: .5s;*/
+/*    z-index: 50;*/
+/*}*/
 .closeBtn {
     width: 100%;
     height: 100%;
     background-color: black;
     color: white;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
+    opacity: 1;
     transition: .5s;
     cursor: pointer;
     z-index: 100;
     overflow: hidden;
 }
-.closeBtn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: #1DFCFF;
-    transition: .5s;
-    z-index: 50;
-}
+/*.closeBtn::before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 0;*/
+/*    height: 100%;*/
+/*    background-color: #1DFCFF;*/
+/*    transition: .5s;*/
+/*    z-index: 50;*/
+/*}*/
 .btnSpan {
     position: relative;
     z-index: 120;
+    padding: 1rem 2rem;
+    border:  1px solid #1DFCFF;
+    border-radius: 3rem;
+    transition: .5s;
 }
-.closeBtn:hover {
-    color: black;
+.btnSpan:active {
+    transform: scale(.9);
 }
+/*.closeBtn:hover {*/
+/*    color: black;*/
+/*}*/
 .closeBtn:hover::before {
     width: 100%;
 }
@@ -101,8 +124,12 @@
     transition: 1s;
     overflow: hidden;
     width: 75vw;
-    margin: auto;
+    margin: 0 auto;
     position: relative;
+}
+.tableWrapper.isOpen {
+    max-height: 150vh;
+    margin: 2rem auto;
 }
 .checkbox:checked ~ .tableWrapper {
     max-height: 150vh;
