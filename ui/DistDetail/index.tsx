@@ -39,21 +39,16 @@ export function DistDetail({handleIdx, index, isActive}: {handleIdx:any, index: 
     return (
         <div className={`${styles.content} ${isOpen ? styles.open : ''}`}>
                 {/*<input className={styles.checkbox} type="checkbox" id="checkbox" hidden/>*/}
-                <div className={`${styles.btnWrapper} ${isOpen ? styles.hide : ''}`}>
-                    <label className={styles.openBtn} onClick={() => {setIsOpen(true)}}>
-                        <span className={styles.btnSpan}>{t('opendetail')}</span>
-                    </label>
-                </div>
                 <div className={`${styles.tableWrapper} ${isOpen ? styles.isOpen : ''}`}>
                     <table className={styles.table}>
-                    {/*<thead>*/}
-                    {/*    <tr>*/}
-                    {/*        <th className={styles.spanTwo} colSpan={2}>Distribution<br/>Model</th>*/}
-                    {/*        <th>Allocation<br/>(%)</th>*/}
-                    {/*        <th>Allocation<br/>(EA)</th>*/}
-                    {/*    </tr>*/}
-                    {/*</thead>*/}
-                    <tbody>
+                        {/*<thead>*/}
+                        {/*    <tr>*/}
+                        {/*        <th className={styles.spanTwo} colSpan={2}>Distribution<br/>Model</th>*/}
+                        {/*        <th>Allocation<br/>(%)</th>*/}
+                        {/*        <th>Allocation<br/>(EA)</th>*/}
+                        {/*    </tr>*/}
+                        {/*</thead>*/}
+                        <tbody>
                         {
                             data.map((a:any, i:any) => {
                                 if (a.desc == '') {
@@ -87,8 +82,13 @@ export function DistDetail({handleIdx, index, isActive}: {handleIdx:any, index: 
                             <td className={styles.spanThree} colSpan={3}>{t('total')}</td>
                             <td>300M</td>
                         </tr>
-                    </tbody>
+                        </tbody>
                     </table>
+                </div>
+                <div className={`${styles.btnWrapper} ${isOpen ? styles.hide : ''}`}>
+                    <label className={styles.openBtn} onClick={() => {setIsOpen(true)}}>
+                        <span className={styles.btnSpan}>{t('opendetail')}</span>
+                    </label>
                 </div>
                 <div className={`${styles.btnWrapper} ${isOpen ? '' : styles.hide}`}>
                     <label className={styles.closeBtn} onClick={() => {setIsOpen(false)}}>

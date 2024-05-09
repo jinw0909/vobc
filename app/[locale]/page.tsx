@@ -36,21 +36,25 @@ export default async function Page({params : { locale }} : {params : {locale : s
               <About/>
           </div>
           <div className={styles.subWrapper}>
-              <Whitepaper/>
+              <NextIntlClientProvider messages={messages}>
+               <Whitepaper/>
+              </NextIntlClientProvider>
           </div>
           <div className={styles.subWrapper}>
               <DevsMain />
           </div>
-          <div className={styles.subWrapper}>
-              <Roadmap />
-          </div>
+          {/*<div className={styles.subWrapper}>*/}
+          {/*    <Roadmap />*/}
+          {/*</div>*/}
           <div className={styles.subWrapper}>
               <NextIntlClientProvider messages={messages}>
                 <Distribution />
               </NextIntlClientProvider>
           </div>
           <div className={styles.subWrapper}>
-              <Partners />
+              <NextIntlClientProvider messages={messages}>
+                <Partners />
+              </NextIntlClientProvider>
           </div>
       </>
   );

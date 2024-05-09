@@ -1,3 +1,4 @@
+'use client';
 import styles from './styles.module.css';
 import Image from 'next/image';
 import lbankLogo from '@/public/lbank-logo-yellow.webp';
@@ -7,17 +8,30 @@ import vobLogo from '@/public/vob_logo_2.png';
 import {LogoPlain} from "@/ui/LogoPlain";
 import crossWhite from '@/public/icons/cross-white.png';
 import Link from 'next/link'
-import {getTranslations} from "next-intl/server";
-export async function Partners() {
+import { useTranslations} from "next-intl";
+import {useState} from "react";
+export function Partners() {
 
-    const t = await getTranslations('partners');
+    const [lbank, setLbank] = useState(false);
+    const [cointr, setCointr] = useState(false);
+    const t = useTranslations('partners');
+
+    const clickLbank = () => {
+        setLbank(!lbank);
+        setCointr(false);
+    }
+    const clickCointr = () => {
+        setCointr(!cointr);
+        setLbank(false);
+    }
 
     return (
         <div className={styles.partnersWrapper}>
         <div className={styles.title}>{t('title')}</div>
         <div className={styles.desc}>{t('subtitle')}</div>
         <div className={styles.wrapper}>
-            <div className={styles.elemWrapper}>
+            <div className={`${styles.elemWrapper} ${lbank ? styles.hover : ''}`}
+                onClick={clickLbank}>
                 <div className={`${styles.excElem} ${styles.excElem1}`}>
                     <div className={styles.vob}><LogoPlain/></div>
                     <div className={styles.startElem}>
@@ -70,7 +84,8 @@ export async function Partners() {
                     {t('lbank')}
                 </div>
             </div>
-            <div className={styles.elemWrapper}>
+            <div className={`${styles.elemWrapper} ${cointr ? styles.hover : ''}`}
+                onClick={clickCointr}>
                 <div className={`${styles.excElem} ${styles.excElem2}`}>
                     <div className={styles.vob}><LogoPlain/></div>
                     <div className={styles.startElem}>
