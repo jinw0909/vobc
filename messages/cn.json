@@ -4,7 +4,8 @@
     "title_1" : "Experience Emotion-Free Trading with AI",
     "subtitle_0" : "Discover secure and emotion-free trading with our advanced AI technology",
     "subtitle_1": "Join us for global revenue opportunities",
-    "subtitle_2":"Build a Thriving Ecosystem with Us"
+    "subtitle_2":"Build a Thriving Ecosystem with Us",
+    "description": "The VOB token and the VOB foundation expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities."
   },
   "nav" : {
     "home" : "Home",
@@ -21,15 +22,15 @@
     "main_title" : "Our Vision",
     "title_0" : "The Future Value of the VOB Token",
     "content_0" : "We constantly seek algorithms that would make our value a reality. The future value of our token will surpass what you could possibly imagine. We aim to provide economic freedom to everyone and lead the AI and the blockchain industries. On our platform, participants will democratically own and contribute to our values. People from various countries are anticipating our token. We are walking towards the dream of pioneering the global AI and blockchain markets, creating a future space where everyone can engage in fair and free economic activities.",
-    "title_1" : "GOYABOT and the VOB TOKEN'S Evolutionary Strategy and Future Prospects",
+    "title_1" : "GOYABOT and the VOB token's Evolutionary Strategy and Future Prospects",
     "content_1" : "VOB's vision is to expand into a global trading solution, to enhance accuracy through accumulating data from cryptocurrency exchanges and markets utilzing distributed supercomputing system. Our GOYABOT platform efficiently delivers customized AI solutions and empowers clients to achieve the trading and investing objectives.",
     "title_2" : "The VOB Token Economy",
     "content_2" : "The VOB Token Economy is built upon its four major pillars. The payment economy, the global community, the NFT economy and the GOYABOT AI. The participants will be generating constant profits by leveraging the token economy’s unique features which is distinct from the rest. The VOB token will play a role as the economy’s major payment currency, providing a seamless experience which will eventually lead to the constant and rapid growth of the global community. Finally the VOB NFT takes place and augments the participant’s overall experience, providing intuitive and tangible indicators for each participant, updated and provided instantly upon every action carried out by the participant. The GOYA AI is structured to evolve and reflect each individual’s unique traits and needs to its algorithim and to the ecosystem, providing customized strategy and guidelines to every single participant."
 
   },
   "devs" : {
-    "devs_title": "「GOYABOT AI」 and the Big Data",
-    "devs_content": "GOYABOT by VOB is an automated computer program designed to execute specific tasks with minimal human intervention. The number of users are increasing as we send out more efficient data. Meanwhile, VOB is building an ecosystem with technically advanced policies and the VOB token. Furthermore, we will ensure a more advanced platform by providing a stable Token Economy and opportunities to generate profits.",
+    "devs_title": "「GOYA AI」 and the Big Data",
+    "devs_content": "GOYA AI by VOB is an automated computer program designed to execute specific tasks with minimal human intervention. The number of users are increasing as we send out more efficient data. Meanwhile, VOB is building an ecosystem with technically advanced policies and the VOB token. Furthermore, we will ensure a more advanced platform by providing a stable Token Economy and opportunities to generate profits.",
     "devs_acc": {
       "0": {
         "title": "Improved Decision Making",
@@ -117,5 +118,9 @@
       "second" : "Counsel",
       "title" : "Defense Counsel"
     }
+  },
+  "news" : {
+    "0" : "For over a decade VOB foundation has deepend its partnerships with global cryptocurrency exchanges and buisness organizations, including L BANK, CoinTR pro, and multiple domestic exchanges. VOBs own token economy initiatives include the rising-X platform, a digital platfrom dedicated to crypto currency trading of the VOB community and the overall token ecosystem including the upcomming NFT project. Our collaborations and programs embrace the complexities of the crypto currency landscape by exploring new ideas and perspectives with individuals and organizations within and beyond the token ecosystem. The team steering these partnerships and initiatives is the VOB foundation. Our goal is to spark meaningful trading experience, cultivate the use of aritificial intelligence in trading, and facilitate NFT project that connects across boundaries by supporting the token economy that inspires us all.",
+    "1" : "We aspire to offer opportunities to reconsider the contemporary crypto currency landscape and envision its future by supporting the token economy and its communities. VOB foundation catalyzes its long-standing partnerships with exchanges and communities around the world. As an extension of this work, we endeavor to expand access to the crypto currency while fostering enriched connections amongst our community of traders, marketers, technologists, annalists, celebrities, and global audiences. With all that we do, our aim is to ignite conversation, cultivate empathy, and facilitate collaboration that transcends conventional boundaries. Our efforts extend beyond support for individual traders or marketers; we strive to engage the entire token ecosystem by building resilient networks that function like parts of a living organism."
   }
 }

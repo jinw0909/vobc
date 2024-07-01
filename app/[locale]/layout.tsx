@@ -8,6 +8,7 @@ import {MobileHeader} from "@/components/MobileHeader";
 import {MobileFooter} from "@/components/MobileFooter";
 import {Breadcrumbs} from "@/ui/Breadcrumbs";
 import {useMessages, NextIntlClientProvider} from "next-intl";
+import {getMessages, getTranslations} from "next-intl/server";
 
 const inter = Inter({ subsets: ["latin"] });
 const notoserifjp = Noto_Serif_JP({
@@ -15,7 +16,7 @@ const notoserifjp = Noto_Serif_JP({
   style : "normal",
   subsets: ['latin']
 });
-export default function RootLayout ({
+export default async function RootLayout ({
   children,
   params : { locale }
 } : {
@@ -23,10 +24,16 @@ export default function RootLayout ({
   params: { locale: string }
 }) {
 
-  const messages = useMessages();
+  const messages = await getMessages();
+  const t = await getTranslations();
 
   return (
       <html lang={locale}>
+          <head>
+            <link rel="icon" href="/vob_icon.ico"/>
+            <title>VOB | VISION OF BLOCKCHAIN</title>
+            <meta name="description" content={t('main.description')}/>
+          </head>
           <body className={`${notoserifjp.className}`}>
             <Header lang={locale}/>
             <NextIntlClientProvider messages={messages}>
