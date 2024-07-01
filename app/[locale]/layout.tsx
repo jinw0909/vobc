@@ -30,7 +30,7 @@ export default async function RootLayout ({
   return (
       <html lang={locale}>
           <head>
-            <link rel="icon" href="/vob_icon.ico"/>
+            <link rel="icon" href="/favicon.ico" sizes="any"/>
             <title>VOB | VISION OF BLOCKCHAIN</title>
             <meta name="description" content={t('main.description')}/>
           </head>
