@@ -103,6 +103,7 @@
     .mainText {
         margin: 0 auto;
         padding: 0 2rem;
+        padding-bottom: 4rem;
     }
     .mainText > div {
         text-align: center;
