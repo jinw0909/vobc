@@ -1,7 +1,7 @@
 .partnersWrapper {
     /*padding: 2rem;*/
     transition: .5s;
-    border-top: 1px solid #999;
+    /*border-top: 1px solid #999;*/
     align-self: flex-start;
     margin-bottom: 8rem;
 }
@@ -375,6 +375,9 @@
         opacity: 1;
         padding: 1rem;
         flex: 1;
+    }
+    .partnersWrapper {
+        border-top: 1px solid #999;
     }
 }
 

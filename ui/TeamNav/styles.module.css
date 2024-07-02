@@ -14,6 +14,7 @@
     background-color: rgba(0,0,0,1);
     z-index: 70;
     border-bottom: 1px solid #999;
+    border-top: 1px solid #999;
     opacity: 0;
     animation: 1s ease-in-out fadeIn forwards;
 }

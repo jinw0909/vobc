@@ -18,6 +18,12 @@
     "terms" : "terms",
     "language": "Select Language"
   },
+  "vision": {
+    "vision" : "At the VOB foundation, we are dedicated to fostering connections between global communities and new ideas. Guided by this vision, the Vision of Blockchain project seeks to expand our community through creative collaboration. Our team invites experts from diverse backgrounds and practices to participate, encouraging them to explore and interpret the essence of our community and the token economy. Through each participant’s unique perspective, we aim to enrich the ongoing global conversation about cryptocurrency in the present and the potential landscape of the future.",
+    "blockchain" : "Blockchain is a idea brought by Satoshi Nakamoto in part of the the Bitcoin project, a peer-to-peer electronic cash system, where the value of the currency is assured by the decentralized participants and their interactions. The VOB foundation responded to the necessity for community collaboration rooted in the philosophy of the blockchain technology by encouraging its participants to foster the blockchain’s growth. The Vision of Blockchain uses data and artificial intelligence to create the assets that bridges the online and offline worlds. This work often involve real-time information and social interactions to explore contemporary cryptocurrency structures.",
+    "vob": " Our dedication to the blockchain takes shape through long-term partnerships with exchanges and cryptocurrency communities across the globe. In a collaborative spirit with each partner, we create unique initiatives aimed at fostering our shared passion to explore new ways for supporting blockchain, developers, and cryptocurrency communities worldwide. As a continuously evolving network, VOB’s hybrid structure allows ideas and support to flow between regions and interests, fully embracing diversity and multiplicity.",
+    "about" : "About VOB"
+  },
   "about" : {
     "main_title" : "Our Vision",
     "title_0" : "The Future Value of the VOB Token",

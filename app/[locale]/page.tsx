@@ -10,6 +10,7 @@ import {Roadmap} from "@/components/Roadmap";
 import {Distribution} from "@/components/Distribution";
 import {Partners} from "@/components/Partners";
 import {NextIntlClientProvider} from "next-intl";
+import {Vision} from "@/components/Vision";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
@@ -28,13 +29,18 @@ export default async function Page({params : { locale }} : {params : {locale : s
                   <div className={`${styles.delayedAnimation} opacity-0`}>{t('title_1')}</div>
               </div>
               <div className={`${styles.subText} ${styles.moreDelayedAnimation} opacity-0`}>
-                  <div>{t('subtitle_0')}<br/>{t('subtitle_1')}</div>
+                  <div>{t('subtitle_0')}</div>
+                  <div>{t('subtitle_1')}</div>
                   <div>{t('subtitle_2')}</div>
               </div>
           </main>
-          <div className={styles.subWrapper}>
-              <About/>
+
+          <div className={`${styles.subWrapper} ${styles.visionWrapper}`}>
+              <Vision/>
           </div>
+          {/*<div className={styles.subWrapper}>*/}
+          {/*    <About/>*/}
+          {/*</div>*/}
           <div className={styles.subWrapper}>
               <NextIntlClientProvider messages={messages}>
                <Whitepaper/>

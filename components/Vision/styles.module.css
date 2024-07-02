@@ -1,0 +1,103 @@
+.visionWrapper {
+    margin-top: 4rem;
+}
+.visionWrapper > div {
+    position: relative;
+    margin-top: 4rem;
+}
+.visionHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+}
+.visionHeader::after {
+    content : '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 66%;
+    height: 1px;
+    background-color: #999;
+}
+.blockHeader {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+}
+.blockHeader::after {
+    content : '';
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 66%;
+    height: 1px;
+    background-color: #999;
+}
+.vobHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+}
+.vobHeader::after {
+    content : '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 66%;
+    height: 1px;
+    background-color: #999;
+}
+.headerText { font-size: 1.5rem; }
+.visionPic {
+    float: left;
+    margin: 0 1rem;
+    border: 1px solid #999;
+}
+.visionImg {
+}
+.visionText {
+    margin-top: 1rem;
+    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #999 100%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text;
+    color: transparent;
+}
+.blockText {
+    text-align: right;
+}
+.btnContainer {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+}
+.about {
+    font-size: 1.5rem;
+    position: relative;
+}
+.about::before {
+    transition: .5s;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #999;
+}
+.about::after {
+    transition: .5s;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: white;
+}
+.about:hover::after {
+    width: 100%;
+}

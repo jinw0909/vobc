@@ -4,7 +4,7 @@ import {Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from "char
 import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 import Image from 'next/image';
-import vobPic from '@/public/vob-white.png';
+import vobPic from '@/public/vob_white.png';
 import styles from './styles.module.css';
 // import data from '@/json/distribution_en.json';
 import {useLocale} from "next-intl";
