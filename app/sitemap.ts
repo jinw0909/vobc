@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
-            url: 'https://www.vobc.io/favicon.ico',
+            url: 'https://www.vobc.io/icon.ico',
             lastModified,
             changeFrequency: 'monthly',
             priority: 1,
