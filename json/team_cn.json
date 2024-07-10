@@ -1,27 +1,24 @@
 [
-    [{
-      "status" : "CEO",
-      "name" : "IRON WON",
+  [{
+    "status" : "CEO",
+    "name" : "IRON WON",
+    "desc" : [
+      "Participation in VC Projects as Follows : Hycon (HYC) / Cardano (ADA) / VERASITY (VRA) / ICON (ICX) / Electric Vehicle Zone (EVZ) / BlueWhale (BWX) / FuzeX (FXT)"
+    ]
+  },
+    {
+      "status" : "COO",
+      "name" : "GEON",
       "desc" : [
-        "Business Advisor",
-        "Participation in VC Projects as Follows : Hycon (HYC) / Cardano (ADA) / VERASITY (VRA) / ICON (ICX) / Electric Vehicle Zone (EVZ) / BlueWhale (BWX) / FuzeX (FXT)"
+        "Co-Founder of Blocksquare",
+        "Founding Member of VOB"
       ]
     },
-      {
-        "status" : "COO",
-        "name" : "GEON",
-        "desc" : [
-          "Over 6 years of Experience in Arbitrage Trading and Market Data Analysis",
-          "Head of Marketing for VOB Expansion in Over 20 Countries",
-          "Co-Founder of Blocksquare",
-          "Graduate of POSTECH Blockchain Expert Program"
-        ]
-      },
     {
       "status" : "CFO",
       "name" : "J.Y. LEE",
       "desc" : [
-        "Tsinghua University",
+        "QingHua University",
         "Founding Member of VOB",
         "Participation in VRA/EVZ Projects"
       ]
@@ -37,26 +34,22 @@
     "status" : "CTO",
     "name" : "HYUK",
     "desc" : [
-      "Collaboration with Bithumb CEX Technician on Numerous Cryptocurrency Projects",
-      "Established Partnership with Amazon Korea",
-      "Numerous Cryptocurrency Trading Automation Platforms",
       "Developer of the GOYA AI"
     ]
+  },
+    {
+      "status" : "Director",
+      "name" : "S.Y. OH",
+      "desc" : [
+        "System Developer"
+      ]
     },
     {
       "status" : "Manager",
       "name" : "C.K. HONG",
       "desc" : [
-        "Database Specialist",
-        "The National System for COVID-19 Relief Fund",
-        "Numerous Cryptocurrency Platforms"
-      ]
-    },
-    {
-      "status" : "Director",
-      "name" : "S.Y. OH",
-      "desc" : [
-        "Page Design & Publishing"
+        "Core Developer",
+        "Database Developer"
       ]
     },
     {
@@ -72,96 +65,85 @@
       "status" : "Team Leader",
       "name" : "H.U. LEE",
       "desc" : [
-        "Data Analysis General Manager"
+        "Data Analyst"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "E.M. KO",
       "desc" : [
-        "System Development",
-        "Android Development"
+        "System Developer"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "C.Y. KIM",
       "desc" : [
-        "System Development",
-        "IOS Development"
+        "System Developer"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "D.Y. PARK",
       "desc" : [
-        "Data Analysis",
-        "AI Development"
+        "Data Analyst"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "H.J. SHIM",
       "desc" : [
-        "System Development",
-        "BE & FE Development",
-        "Chart Development"
+        "System Developer"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "S.U. IM",
       "desc" : [
-        "Data Analysis"
+        "Data Analyst"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "J.W. CHANG",
       "desc" : [
-        "System Development",
-        "AI Development"
+        "System Developer"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "H.J. GONG",
       "desc" : [
-        "Data Analysis",
-        "Backend & Frontend Development"
+        "Data Analyst"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "Y.J. CHO",
       "desc" : [
-        "System Developer",
-        "Backend & Frontend Development"
+        "System Developer"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "S.A. LEE",
       "desc" : [
-        "System Developer",
-        "Backend & Frontend Development"
+        "System Developer"
       ]
     }
   ],
   [{
-      "status" : "Director",
-      "name" : "M.C. CHOI",
-      "desc" : [
-        "Pusan National University",
-        "Planning General Manager",
-        "Alibaba Global Challenge World Finalist"
-      ]
-    },
+    "status" : "Director",
+    "name" : "M.C. CHOI",
+    "desc" : [
+      "Pusan National Univ"
+    ]
+  },
     {
       "status" : "Manager",
       "name" : "J.W. JEON",
       "desc" : [
-        "Sales Planning"
+        "Planning Manager"
       ]
     },
     {
@@ -211,8 +193,7 @@
     "status" : "Executive Director",
     "name" : "J.M. KOO",
     "desc" : [
-      "Network Security & Data Analysis Specialist at HP",
-      "8 Years of Experience as a Full-Time Cryptocurrency Trader"
+      "Professional Trade Analyst"
     ]
   },
     {
@@ -220,30 +201,28 @@
       "name" : "D. CHAN",
       "desc" : [
         "New Business Development",
-        "Sungkyunkwan University"
+        "Sungkyunkwan Univ"
       ]
     },
     {
       "status" : "P.D.",
       "name" : "B.C. YU",
       "desc" : [
-        "Contents P.D."
+        "Contents Maker"
       ]
     },
     {
       "status" : "Director",
       "name" : "J.C. LEE",
       "desc" : [
-        "Graphic Design",
-        "Web & Application Design"
+        "Designer"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "M.J. LEE",
       "desc" : [
-        "Graphic Design",
-        "Web & Application Design"
+        "Designer"
       ]
     },
     {
@@ -255,35 +234,31 @@
     }
   ],
   [{
-      "status" : "Executive Director",
-      "name" : "U.J. OH",
-      "desc" : [
-        "Full-time Trader Professional Training Instructor (with over 1,000 members)",
-        "Investment Expert at the Cryptocurrency Academy"
-      ]
-    },
+    "status" : "Executive Director",
+    "name" : "U.J. OH",
+    "desc" : [
+      "Chart Specialist"
+    ]
+  },
     {
-      "status" : "Team Manager",
+      "status" : "Team Member",
       "name" : "S.H. KIM",
       "desc" : [
-        "Algorithm Planning",
-        "World Semi-Finalist at Major International Trading Cup"
+        "Trading Specialist"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "I.S. KIM",
       "desc" : [
-        "Data Analysis",
-        "Algorithm & Autobot Review"
+        "Data Analyst"
       ]
     },
     {
       "status" : "Team Member",
       "name" : "H.R. KANG",
       "desc" : [
-        "System Developer",
-        "Backtesting & Autobot Development"
+        "System Developer"
       ]
     }
   ],
@@ -328,19 +303,20 @@
     }
   ],
   [{
-    "status" : "Law Firm Decent",
-    "name" : "Elliot (Law Firm Decent)",
+    "status" : "Law Firm",
+    "name" : "Elliot (Law Firm DECENT)",
     "desc" : [
       "Consultation on comprehensive business structure of P2E corporation P2E issuing virtual assets",
       "ICO, SAFT, exchange acquisition contracts of company B, a virtual asset Issuer",
       "Number of white papers reviewed and consulted on virtual asset and NFT issuers",
-      "Consult on Algorithmic virtual asset trading company U. Response to tax audit held on Company B",
+      "Consult on Algorithmic virtual asset trading company U.",
+      "Response to tax audit held on Company B",
       "Review and advisory on company K's NFT platform business model"
     ]
   },
     {
-      "status" : "Law Firm Decent",
-      "name" : "IAN (Law Firm Decent)",
+      "status" : "Law Firm",
+      "name" : "IAN (Law Firm DECENT)",
       "desc" : [
         "A fraud suit worth KRW 2 trillion by the top-level employee of company V, a multi-level coin exchange",
         "Virtual asset contract structure advisory on algorithmic trading company B",

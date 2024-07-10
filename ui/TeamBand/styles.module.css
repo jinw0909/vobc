@@ -148,7 +148,7 @@
     /*display: flex;*/
     overflow: hidden;
     position: relative;
-    max-height: 200vh;
+    max-height: 250vh;
     overflow: hidden;
     transition: .5s;
     opacity: 1;
@@ -239,6 +239,7 @@
     align-items: center;
     font-size: .8rem;
     flex-direction: column;
+    gap: .5rem
 }
 /*input[name="checkboxgroup"]:checked ~ .label {*/
 /*    opacity: 0.5;*/
@@ -248,6 +249,7 @@
     /*.teamWrapper { padding : 1.5rem; }*/
     .itemList { flex-wrap: nowrap; }
     .headbandWrapper { top: 4rem; }
+    .item.wide { width: 90%; }
 }
 
 @media (max-width: 576px) {
@@ -256,6 +258,7 @@
     .iconDesc { font-size: .6rem; }
     .elem { width: 6rem; margin: .5rem 0}
     .teamIcon { width: 24px; height: 24px; }
+    .itemBand h2 { font-size: 1.25rem; }
 }
 
 /*.elem { overflow: hidden; }*/

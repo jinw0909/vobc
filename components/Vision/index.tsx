@@ -24,21 +24,21 @@ export const Vision = async () => {
     return (
         <div className={styles.visionWrapper}>
             <div className={styles.visionHeader}>
-                <Image src={visionPic} height={32} alt="vision icon"></Image>
+                <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>
                 <p className={styles.headerText}>The Vision</p>
             </div>
             <p className={styles.visionText}>
                 {t('vision')}
             </p>
             <div className={styles.blockHeader}>
-                <Image src={blockPic} height={32} alt="blockchain icon"></Image>
+                <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
                 <p className={styles.headerText}>The Blockchain</p>
             </div>
             <p className={`${styles.visionText} ${styles.blockText}`}>
                 {t('blockchain')}
             </p>
             <div className={styles.vobHeader}>
-                <Image src={vobPic} height={32} alt="vob icon"></Image>
+                <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
                 <p className={styles.headerText}>The Vision of Blockchain</p>
             </div>
             <p className={styles.visionText}>

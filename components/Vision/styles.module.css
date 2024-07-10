@@ -101,3 +101,16 @@
 .about:hover::after {
     width: 100%;
 }
+
+@media (max-width: 576px) {
+
+    .headerText { font-size: 1.2rem }
+
+    .visionImg { width: 24px; }
+    .blockImg { width: 24px; }
+    .vobImg { width: 16px; height: 24px; }
+
+    .vobHeader::after {
+        width: 99%;
+    }
+}
