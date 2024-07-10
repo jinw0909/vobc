@@ -40,7 +40,7 @@
     height: 33%;
     border: 2px solid #bbb;
     border-radius: 50%;
-    background-color: rgba(29,252,255, 0.5);
+    /*background-color: rgba(29,252,255, 0.5);*/
     transition: .5s;
     display: flex;
     align-items: center;
