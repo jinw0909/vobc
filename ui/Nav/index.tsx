@@ -12,11 +12,11 @@ export const Nav = () => {
     return (
         <div className={styles.navbarWrapper}>
             <ul className={styles.navbar}>
-                <li><NavigationLink href="/">{t('home')}</NavigationLink></li>
-                <li><NavigationLink href="/about">{t('about')}</NavigationLink></li>
-                <li><NavigationLink href="/devs">{t('devs')}</NavigationLink></li>
-                <li><NavigationLink href="/team">{t('team')}</NavigationLink></li>
-                <li><NavigationLink href="/news">{t('news')}</NavigationLink></li>
+                <NavigationLink href="/" showPseudo={true}>{t('home')}</NavigationLink>
+                <NavigationLink href="/about" showPseudo={true}>{t('about')}</NavigationLink>
+                <NavigationLink href="/devs" showPseudo={true}>{t('devs')}</NavigationLink>
+                <NavigationLink href="/team" showPseudo={true}>{t('team')}</NavigationLink>
+                <NavigationLink href="/news" showPseudo={true}>{t('news')}</NavigationLink>
             </ul>
         </div>
 

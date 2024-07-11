@@ -1,0 +1,39 @@
+.mediaWrapper {
+    margin-top: 10rem;
+    width: 100%;
+    align-self: flex-start;
+}
+.main {}
+.yearWrapper {
+    margin-top: 2rem;
+}
+.year { font-size: 2rem; }
+.itemWrapper {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+.mediaItem {
+    width: 200px;
+    height: 200px;
+    border: 1px solid white;
+}
+.about {
+    margin-top: 4rem;
+}
+.mediaAbout {
+    color: #bbb;
+}
+.mediaHeader {
+    font-size: 1.5rem;
+}
+.mediaDesc {
+    margin-top: 1.5rem;
+}
+.textGradient {
+    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #999 100%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text;
+    color: transparent;
+}
