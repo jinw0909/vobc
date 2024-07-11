@@ -37,3 +37,10 @@
     background-clip: text;
     color: transparent;
 }
+
+@media (min-width: 1200px) {
+    .mediaWrapper { width: 80vw; }
+}
+@media (max-width: 768px) {
+    .mediaWrapper { margin-top: 8rem; }
+}

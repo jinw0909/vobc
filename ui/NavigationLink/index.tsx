@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import {LinkProps} from "next/link";
 
 interface NavigationLinkProps extends ComponentProps<typeof Link> {
-    showPseudo ? : boolean
+    pseudo ? : boolean
 }
 
 export const NavigationLink = ({
@@ -17,12 +17,12 @@ export const NavigationLink = ({
     const selectedLayoutSegment = useSelectedLayoutSegments().pop();
     const pathName = selectedLayoutSegment ? `/${selectedLayoutSegment}` : '/';
     const isActive = pathName === href;
-    const { showPseudo = false, ...remains } = rest;
+    const { pseudo = false, ...remains } = rest;
     return (
         <Link
             aria-current = { isActive ? 'page' : undefined }
             href={href}
-            className={`${isActive ? styles.isActive : ''} ${showPseudo ? styles.pseudo : ''} ${styles.linkBtn}`}
+            className={`${isActive ? styles.isActive : ''} ${pseudo ? styles.pseudo : ''} ${styles.linkBtn}`}
             {...rest}
         />
     )
