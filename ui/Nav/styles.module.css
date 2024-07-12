@@ -10,6 +10,7 @@
     font-size: 1.2rem;
     color: #888;
     height: 5rem;
+    border-bottom: 1px solid #444;
 }
 .navbar a {
     display: flex;
@@ -37,6 +38,11 @@
     background-color: white;
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .navbar { border-bottom: 0; }
+}
+
 /*.navbar li {*/
 /*    transition: .5s;*/
 /*}*/

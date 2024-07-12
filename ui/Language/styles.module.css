@@ -58,7 +58,6 @@
 .languageModal.show {
     max-height: 3rem;
     padding: .5rem 2rem;
-    padding-bottom: 1rem;
 }
 .languageModal button {
     color: #888;
