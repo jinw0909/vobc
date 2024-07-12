@@ -63,17 +63,23 @@ export const Language = ({lang} : {lang : string}) => {
         </div>
         <div className={`${styles.languageModal} 
             ${showModal ? styles.show : ""}`} ref={modalRef}>
-            <button
-                className={`${selectedLang == 'en' ? styles.current : ''}`}
-                onClick={()=>{setSelectedLang('en')}}>English</button>
-            <span className={styles.langBar}></span>
-            <button
-                className={`${selectedLang == 'jp' ? styles.current : ''}`}
-                onClick={()=>{setSelectedLang('jp')}}>日本語</button>
-            <span className={styles.langBar}></span>
-            <button
-                className={`${selectedLang == 'cn' ? styles.current : ''}`}
-                onClick={()=>{setSelectedLang('cn')}}>汉文</button>
+                <button
+                    className={`${selectedLang == 'en' ? styles.current : ''}`}
+                    onClick={()=>{setSelectedLang('en')}}>
+                    English
+                </button>
+                <span className={styles.langBar}></span>
+                <button
+                    className={`${selectedLang == 'jp' ? styles.current : ''}`}
+                    onClick={()=>{setSelectedLang('jp')}}>
+                    日本語
+                </button>
+                <span className={styles.langBar}></span>
+                <button
+                    className={`${selectedLang == 'cn' ? styles.current : ''}`}
+                    onClick={()=>{setSelectedLang('cn')}}>
+                    汉文
+                </button>
         </div>
         </>
     )

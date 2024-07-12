@@ -17,9 +17,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
-            url: 'https://www.vobc.io/icon.ico',
+            url: 'https://www.vobc.io/icon.svg',
             lastModified,
-            changeFrequency: 'monthly',
+            changeFrequency: 'yearly',
             priority: 1,
         },
         {

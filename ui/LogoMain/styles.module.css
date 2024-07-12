@@ -16,4 +16,11 @@
     font-size: 1.5rem;
 }
 
+@media (min-width: 1200px) {
+    .logoWrapper {
+        transition: .5s;
+        left: calc(10vw + 2rem);
+    }
+}
+
 
