@@ -43,7 +43,10 @@
     gap: 2rem;
     padding-bottom: 1rem;
 }
-.newsTitle { font-size: 2rem; }
+.newsTitle {
+    font-size: 2rem;
+    line-height: 1.25;
+}
 .newsAuthor { font-size: 1.5rem; }
 .leftContentDown {
     bottom: 2rem;

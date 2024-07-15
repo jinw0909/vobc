@@ -1,11 +1,11 @@
 import styles from './styles.module.css'
 import {NewsAcc} from "@/ui/NewsAcc";
-import image0 from '@/public/news/herald.jpeg';
-import image1 from '@/public/news/herald2.jpeg';
-import image2 from '@/public/news/herald3.jpeg';
-import image3 from '@/public/news/herald4.jpeg';
-import image4 from '@/public/news/cointelegraphimage.png';
-import image5 from '@/public/news/retriseminar.jpeg';
+import image0 from '@/public/news/koreatimes0.jpg';
+import image1 from '@/public/news/herald6.jpg';
+import image2 from '@/public/news/herald.jpeg'
+import image3 from '@/public/news/herald2.jpeg';
+import image4 from '@/public/news/herald3.jpeg';
+import image5 from '@/public/news/herald4.jpeg';
 import data from '@/json/news.json';
 import {getTranslations} from "next-intl/server";
 

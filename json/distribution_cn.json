@@ -1,6 +1,6 @@
 [
   {
-    "label": "Management Team",
+    "label": "管理团队",
     "value": 10,
     "content": "24M",
     "color": "rgba(255, 255, 255, 0)",
@@ -8,15 +8,15 @@
     "desc" : ""
   },
   {
-    "label": "Management Team\n(Locked)",
+    "label": "管理团队\n(锁定)",
     "value": 2,
     "content": "6M",
     "color": "rgba(255, 255, 255, 0.08)",
     "cutout": "50%",
-    "desc": "Locked for 5 years"
+    "desc": "锁定5年"
   },
   {
-    "label": "Reserves",
+    "label": "储备金",
     "value": 8,
     "content": "24M",
     "color": "rgba(255, 255, 255, 0.16)",
@@ -24,15 +24,15 @@
     "desc": ""
   },
   {
-    "label": "Reserves\n(Locked)",
+    "label": "储备金\n(锁定)",
     "value": 2,
     "content": "6M",
     "color": "rgba(255, 255, 255, 0.24)",
     "cutout": "50%",
-    "desc": "Locked for 3 years"
+    "desc": "锁定3年"
   },
   {
-    "label": "Community",
+    "label": "社区",
     "value": 14,
     "content": "42M",
     "color": "rgba(255, 255, 255, 0.32)",
@@ -40,7 +40,7 @@
     "desc": ""
   },
   {
-    "label": "Ecosystem",
+    "label": "生态系统",
     "value": 20,
     "content": "60M",
     "color": "rgba(255, 255, 255, 0.40)",
@@ -48,7 +48,7 @@
     "desc": ""
   },
   {
-    "label": "Marketing",
+    "label": "市场营销",
     "value": 18,
     "content": "54M",
     "color": "rgba(255, 255, 255, 0.48)",
@@ -57,24 +57,24 @@
     "desc": ""
   },
   {
-    "label": "Partner\n(Locked)",
+    "label": "合作伙伴\n(锁定)",
     "value": 6,
     "content": "18M",
     "color": "rgba(255, 255, 255, 0.56)",
     "cutout": "50%",
     "offset": 0,
-    "desc": "Monthly linear vest with 4% unlock. \nLocked for 1 year"
+    "desc": "每月线性解锁4%。\n锁定1年"
   },
   {
-    "label": "Team/Advisor\n(Locked)",
+    "label": "团队/顾问\n(锁定)",
     "value": 7,
     "content": "21M",
     "color": "rgba(255, 255, 255, 0.64)",
     "cutout": "50%",
-    "desc": "Monthly linear vest with 4% unlock. \nLocked for 3 years"
+    "desc": "每月线性解锁4%。\n锁定3年"
   },
   {
-    "label": "Development",
+    "label": "开发",
     "value": 9,
     "content": "27M",
     "color": "rgba(255, 255, 255, 0.72)",
@@ -82,19 +82,19 @@
     "desc": ""
   },
   {
-    "label": "Auto-burn",
+    "label": "自动销毁",
     "value": 5,
     "content": "15M",
     "color": "rgba(255, 255, 255, 0.80)",
     "cutout": "50%",
-    "desc": "Percentage based on liquidity pool"
+    "desc": "基于流动性池的百分比"
   },
   {
-    "label": "Pre-sale",
+    "label": "预售",
     "value": 1,
     "content": "3M",
     "color": "rgba(255, 255, 255, 0.88)",
     "cutout": "50%",
-    "desc": "Pre-sale starting at $0.12"
+    "desc": "预售起价$0.12"
   }
 ]

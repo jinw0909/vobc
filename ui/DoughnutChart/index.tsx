@@ -12,6 +12,7 @@ import {useTranslations} from "next-intl";
 export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {handleIdx:any, index:any, handleActive:any, isActive:any}) => {
 
     const locale = useLocale();
+    console.log("doughut chart locale: ", locale);
     const data = require(`@/json/distribution_${locale}.json`);
     const t = useTranslations('distribution');
 

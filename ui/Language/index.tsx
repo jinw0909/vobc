@@ -25,23 +25,6 @@ export const Language = ({lang} : {lang : string}) => {
         router.replace(pathname, {locale: selectedLang})
     }, [selectedLang]);
 
-    // useEffect(() => {
-    //     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-    //         if (wrapperRef.current &&
-    //             !wrapperRef.current!.contains(event.target as Node) &&
-    //             modalRef.current &&
-    //             !modalRef.current!.contains(event.target as Node)) {
-    //             setShowModal(false); // Clicked outside of languageWrapper
-    //         }
-    //     };
-    //     // Attach click event listener to document body
-    //     document.body.addEventListener('click', handleClickOutside);
-    //     // Cleanup function to remove event listener
-    //     return () => {
-    //         document.body.removeEventListener('click', handleClickOutside);
-    //     };
-    // }, []); // Run effect only once on component mount
-
     return (
         <>
         <div
