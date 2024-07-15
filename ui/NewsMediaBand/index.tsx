@@ -2,8 +2,11 @@ import styles from './styles.module.css';
 import Image from "next/image";
 import rightArrow from "@/public/icons/right-arrow-white.png";
 import {NavigationLink} from "@/ui/NavigationLink";
-
+import {getTranslations} from "next-intl/server";
 export async function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSrc: any, index: number}) {
+
+    const t = await getTranslations('media');
+
     return (
         <ul className={styles.mediaElementWrapper}>
             {
@@ -24,7 +27,7 @@ export async function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSr
                             <div className={styles.mediaElemViewWrapper}>
                             <NavigationLink href={`/news/${i + index}`}>
                                 <div className={styles.mediaElemView}>
-                                    <span className={styles.viewBtn}>Read Now</span>
+                                    <span className={styles.viewBtn}>{t('read')}</span>
                                     <span className={styles.arrowPic}><Image src={rightArrow} width={10} alt="right arrow"></Image></span>
                                 </div>
                             </NavigationLink>

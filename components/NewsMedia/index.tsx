@@ -18,11 +18,14 @@ const imgSrc1 = [image0, image1];
 const imgSrc2 = [image2, image3, image4, image5, image6, image7]
 
 export async function NewsMedia() {
+
+    const t = await getTranslations('media');
+
     return (
         <div className={styles.mediaWrapper}>
             <div className={styles.header}>
                 <div className={styles.headerTitle}>
-                    <div>The Vision of Blockchain Media</div>
+                    <div>{t('title')}</div>
                     <div className={styles.logoPlain}>
                         <LogoPlain></LogoPlain>
                     </div>
@@ -34,7 +37,7 @@ export async function NewsMedia() {
                 </div>
             </div>
             <p className={`${styles.headerDesc} ${styles.textGradient}`}>
-                The VOB foundation engaged with the theme of Public Relations as well as larger questions about the intersection of communities and the VOB foundation through the launch of Vision of Blockchain Media. The series of public materials bring together a variety of publics to engage with inspiring and impactful experiences. The media is based on the idea of exploring and examining the vast potentials of idea-technology convergence and offers a sequence of materials including conversations and talks, editorial articles, interviews, VOB related promotions and events.
+                {t('description')}
             </p>
             <div className={styles.main}>
                 <div className={styles.yearWrapper}>
@@ -53,10 +56,12 @@ export async function NewsMedia() {
                 </div>
             </div>
             <div className={styles.about}>
-                <div className={styles.mediaAbout}>About the Media</div>
-                <div className={styles.mediaHeader}>The Vision of Blockchain Media</div>
+                <div className={styles.mediaAbout}>{t('about')}</div>
+                <div className={styles.mediaHeader}>
+                    {t('title')}
+                </div>
                 <p className={`${styles.mediaDesc} ${styles.textGradient}`}>
-                Launched in 2022, the Vision of Blockchain Media is a series of original medium that interpret the hybridity of VOB token ecosystem, each created in collaboration with contemporary cryptocurrency participants with diverse practices from around the world.
+                    {t('aboutDesc')}
                 </p>
             </div>
         </div>
