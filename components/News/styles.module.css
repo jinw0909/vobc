@@ -13,6 +13,25 @@
     animation-delay: 2s;
     margin: 4rem 0;
 }
+.viewMore {
+    align-self: flex-end;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+.viewMoreBtn { position: relative; font-size: 1.2rem; }
+.viewMoreBtn::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    background-color: white;
+    height: 1px;
+    width: 0;
+    transition: .5s;
+}
+.viewMoreBtn:hover::after {
+    width: 100%;
+}
 
 @keyframes fadeIn {
     from {
@@ -28,4 +47,5 @@
 }
 @media (max-width: 768px) {
     .newsWrapper { margin-top: 8rem;}
+    .viewMoreBtn { font-size: 1rem; }
 }

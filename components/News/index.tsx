@@ -8,6 +8,7 @@ import image4 from '@/public/news/herald3.jpeg';
 import image5 from '@/public/news/herald4.jpeg';
 import data from '@/json/news.json';
 import {getTranslations} from "next-intl/server";
+import {NavigationLink} from "@/ui/NavigationLink";
 
 const data1 = data.slice(0, 3);
 const data2 = data.slice(3, 6);
@@ -26,6 +27,11 @@ export async function News() {
             <NewsAcc data={data2} imgSrc={imgSrc2} index={3}/>
             <div className={styles.middleContent}>
                 {t('news.1')}
+            </div>
+            <div className={styles.viewMore}>
+                <NavigationLink href={'/news/media'}>
+                    <span className={styles.viewMoreBtn}>View More</span>
+                </NavigationLink>
             </div>
         </div>
     )

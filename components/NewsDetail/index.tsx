@@ -7,6 +7,8 @@ import image2 from '@/public/news/herald.jpeg';
 import image3 from '@/public/news/herald2.jpeg';
 import image4 from '@/public/news/herald3.jpeg';
 import image5 from '@/public/news/herald4.jpeg';
+import image6 from '@/public/news/cointelegraphimage.png';
+import image7 from '@/public/news/retriseminar.jpeg';
 import arrowUp from '@/public/icons/arrow-up-white.png';
 import arrowRight from '@/public/icons/right-arrow-white.png';
 import {NavigationLink} from "@/ui/NavigationLink";
@@ -19,7 +21,7 @@ export async function NewsDetail({idx} : {idx : any}) {
     if (content) { contentArr = content.split('\n'); }
     // let contentArr = data[idx].content.split(`\n`);
 
-    const imgSrc = [image0, image1, image2, image3, image4, image5];
+    const imgSrc = [image0, image1, image2, image3, image4, image5, image6, image7];
 
     return (
         <div className={styles.detailWrapper}>
@@ -35,10 +37,10 @@ export async function NewsDetail({idx} : {idx : any}) {
                         </div>
                     </div>
                     <div className={styles.leftContentDown}>
-                        <NavigationLink href="/news">
+                        <NavigationLink href="/news/media">
                             <div className={styles.backToMain}>
                                 <Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow"/>
-                                <span>back to main</span>
+                                <span>back to list</span>
                             </div>
                         </NavigationLink>
                     </div>

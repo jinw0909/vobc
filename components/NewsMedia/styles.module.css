@@ -3,6 +3,27 @@
     width: 100%;
     align-self: flex-start;
 }
+.header {
+    padding: 1rem 0;
+    border-bottom: 1px solid #999;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 5rem;
+    background-color: black;
+    z-index: 80;
+}
+.headerTitle {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.logoPlain { transform-origin: left center; transform: scale(.8); }
+.hashTags { display: none; gap: .5rem; }
+.hashTags span { font-size: .8rem; }
+.headerDesc {
+    margin-top: 1rem;
+    font-size: .8rem;
+}
 .main {}
 .yearWrapper {
     margin-top: 2rem;
@@ -18,17 +39,22 @@
     height: 200px;
     border: 1px solid white;
 }
+.horizontal {
+    border-color: #999;
+}
 .about {
     margin-top: 4rem;
 }
 .mediaAbout {
     color: #bbb;
+    font-size: .8rem;
 }
 .mediaHeader {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 .mediaDesc {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+    font-size: .8rem;
 }
 .textGradient {
     background: linear-gradient(to right, #ddd 0%, #bbb 50%, #999 100%);
@@ -43,4 +69,15 @@
 }
 @media (max-width: 768px) {
     .mediaWrapper { margin-top: 8rem; }
+    .year { font-size: 1.5rem; }
+    .mediaAbout { font-size: .8rem;}
+    .mediaHeader { font-size: 1.2rem; }
+    .headerTitle { flex-direction: column; align-items: flex-start; }
+    .logoPlain { transform-origin: bottom left; transform: scale(.6); }
+    .hashTags { display: flex; }
+    .header { position: static; }
+}
+@media (max-width: 576px) {
+    .mediaHeader { font-size: 1rem; }
+    .headerTitle { font-size: 1.2rem; }
 }

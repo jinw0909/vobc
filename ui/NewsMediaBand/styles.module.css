@@ -1,0 +1,91 @@
+.mediaElementWrapper {
+    display:  flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    justify-content: flex-start;
+}
+
+.mediaElement {
+    /*border: 1px solid white;*/
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: .5rem 0;
+}
+
+.mediaElemType {
+    font-size: .6rem;
+    opacity: 0.8;
+}
+.mediaElemTitle { display: inline; position: relative; cursor: pointer; }
+.mediaElemTitle::after {
+    position: absolute;
+    content: '';
+    bottom: -.25rem;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    background-color: white;
+    transition: 1s;
+}
+.mediaElemTitle:hover::after {
+    width: 100%;
+}
+
+.mediaElemImg {
+    flex: 1;
+    position: relative;
+    margin-top: .5rem;
+    cursor: pointer;
+}
+.imgCss {
+    object-fit: cover;
+}
+.mediaElemViewWrapper {
+    text-align: right;
+}
+.mediaElemView {
+    font-size: .8rem;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .5rem;
+    position: relative;
+    cursor: pointer;
+}
+.mediaElemView::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: white;
+    width: 0;
+    transition: .5s;
+}
+.viewBtn { transition: .5s; transform: translateX(.5rem); }
+.arrowPic { margin-top: 2px; opacity: 0; transition: .5s; }
+.mediaElemView:hover .arrowPic { opacity: 1; }
+.mediaElemView:hover .viewBtn { transform: translateX(0); }
+.mediaElemView:hover::after { width: 95%; }
+
+.white { color: white; }
+
+@media (min-width: 768px) {
+    .mediaElement { width: 30%;}
+}
+
+@media (max-width: 768px) {
+    .mediaElementWrapper { flex-wrap: nowrap; gap: 1rem; }
+    .mediaElement { flex-shrink: 0;}
+}
+
+/*@media (min-width: 1200px) {*/
+/*    .mediaElement { width: 20%; }*/
+/*}*/
