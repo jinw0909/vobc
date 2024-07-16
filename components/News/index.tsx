@@ -16,21 +16,21 @@ const imgSrc1 = [image0, image1, image2, ];
 const imgSrc2 = [image3, image4, image5]
 export async function News() {
 
-    const t = await getTranslations();
+    const t = await getTranslations('news');
 
     return (
         <div className={styles.newsWrapper}>
             <NewsAcc data={data1} imgSrc={imgSrc1} index={0}/>
             <div className={styles.middleContent}>
-                {t('news.0')}
+                {t('0')}
             </div>
             <NewsAcc data={data2} imgSrc={imgSrc2} index={3}/>
             <div className={styles.middleContent}>
-                {t('news.1')}
+                {t('1')}
             </div>
             <div className={styles.viewMore}>
                 <NavigationLink href={'/news/media'}>
-                    <span className={styles.viewMoreBtn}>View More</span>
+                    <span className={styles.viewMoreBtn}>{t('more')}</span>
                 </NavigationLink>
             </div>
         </div>

@@ -11,9 +11,26 @@ export async function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSr
         <ul className={styles.mediaElementWrapper}>
             {
                 data.map((a:any, i:number) => {
+
+                    let typeText = "";
+                    console.log("type: ", a.type);
+                    switch (a.type) {
+                        case 'editorial':
+                            typeText = t('type.editorial');
+                            break;
+                        case 'interview':
+                            typeText = t('type.interview');
+                            break;
+                        case 'event':
+                            typeText = t('type.event');
+                            break;
+                        default:
+                            typeText = a.type;
+                    }
+
                     return (
                         <li key={i} className={styles.mediaElement}>
-                            <p className={styles.mediaElemType}>{a.type}</p>
+                            <p className={styles.mediaElemType}>{typeText}</p>
                             <div>
                                 <NavigationLink className={styles.white} href={`/news/${i + index}`}>
                                     <p className={styles.mediaElemTitle}>{a.title}</p>

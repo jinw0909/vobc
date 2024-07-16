@@ -18,9 +18,6 @@ export const MobileHeader = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            // if (headerRef.current && !headerRef.current?.contains(event.target as Node)) {
-            //     setClicked(false);
-            // }
             const node = headerRef.current;
             if (node && !node.contains(event.target as Node)) {
                 setClicked(false);

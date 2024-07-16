@@ -18,23 +18,33 @@ export const Language = ({lang} : {lang : string}) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-    //     const segments = pathname.split('/');
-    //     segments[1] = selectedLang;
-    //     const newPathname = segments.join('/');
-    //     // router.replace(newPathname);
         router.replace(pathname, {locale: selectedLang})
     }, [selectedLang]);
 
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+
+            const wrapperNode = wrapperRef.current;
+            const modalNode = modalRef.current;
+
+            if (wrapperNode && !wrapperNode.contains(event.target as Node) &&
+            modalNode && !modalNode.contains(event.target as Node)) {
+                setShowModal(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+    }, [wrapperRef, modalRef]);
+
     return (
         <>
-        <div
-            className={styles.languageWrapper}
-            ref={wrapperRef}
-        >
+        <div className={styles.languageWrapper} ref={wrapperRef}>
             <div
                 onClick={() => { setShowModal(!showModal) }}
                 className={styles.languageSelect}>
-                <span >
+                <span>
                     {showModal ?
                         <Image src={triangle} width={12} height={12} alt="trianle"
                                className={styles.languageArrowUp}/>

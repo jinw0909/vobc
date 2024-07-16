@@ -1,144 +1,145 @@
 {
-  "main" : {
-    "title_0" : "VOB 1.0 Smart Trading",
-    "title_1" : "Experience Emotion-Free Trading with AI",
-    "subtitle_0" : "Discover secure and emotion-free trading with our advanced AI technology",
-    "subtitle_1": "Join us for global revenue opportunities",
-    "subtitle_2":"Build a Thriving Ecosystem with Us",
-    "description": "The VOB token and the VOB foundation expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities."
+  "main": {
+    "title_0": "VOB 1.0 智能交易",
+    "title_1": "体验无情绪干扰的AI交易",
+    "subtitle_0": "通过我们的先进AI技术，发现安全且无情绪干扰的交易",
+    "subtitle_1": "加入我们，获取全球收入机会",
+    "subtitle_2": "与我们一起建立繁荣的生态系统",
+    "description": "VOB代币和VOB基金会扩大了所有人访问区块链的机会，并加深了交易所、开发人员和社区之间的互动。"
   },
-  "nav" : {
-    "home" : "Home",
-    "about" : "About",
-    "devs" : "Devs",
-    "team" : "Team",
-    "news" : "News",
-    "media" : "Media",
-    "cookies" : "Cookies Policy",
-    "privacy" : "Privacy Policy",
-    "terms" : "Terms of Use",
-    "language": "Select Language"
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "devs": "开发者",
+    "team": "团队",
+    "news": "新闻",
+    "media": "媒体",
+    "cookies": "Cookie 政策",
+    "privacy": "隐私政策",
+    "terms": "使用条款",
+    "language": "选择语言"
   },
-  "about" : {
-    "main_title" : "About VOB",
-    "title_0" : "The Future Value of the VOB Token",
-    "content_0" : "We constantly seek algorithms that would make our value a reality. The future value of our token will surpass what you could possibly imagine. We aim to provide economic freedom to everyone and lead the AI and the blockchain industries. On our platform, participants will democratically own and contribute to our values. People from various countries are anticipating our token. We are walking towards the dream of pioneering the global AI and blockchain markets, creating a future space where everyone can engage in fair and free economic activities.",
-    "title_1" : "GOYABOT and the VOB Token's Evolutionary Strategy and Future Prospects",
-    "content_1" : "VOB's vision is to expand into a global trading solution, to enhance accuracy through accumulating data from cryptocurrency exchanges and markets utilzing distributed supercomputing system. Our GOYABOT platform efficiently delivers customized AI solutions and empowers clients to achieve the trading and investing objectives.",
-    "title_2" : "The VOB Token Economy",
-    "content_2" : "The VOB Token Economy is built upon its four major pillars. The payment economy, the global community, the NFT economy and the GOYABOT AI. The participants will be generating constant profits by leveraging the token economy’s unique features which is distinct from the rest. The VOB token will play a role as the economy’s major payment currency, providing a seamless experience which will eventually lead to the constant and rapid growth of the global community. Finally the VOB NFT takes place and augments the participant’s overall experience, providing intuitive and tangible indicators for each participant, updated and provided instantly upon every action carried out by the participant. The GOYA AI is structured to evolve and reflect each individual’s unique traits and needs to its algorithim and to the ecosystem, providing customized strategy and guidelines to every single participant."
+  "about": {
+    "main_title": "关于VOB",
+    "title_0": "VOB代币的未来价值",
+    "content_0": "我们不断寻找能够实现我们价值的算法。我们代币的未来价值将超出您的想象。我们旨在为所有人提供经济自由，并引领AI和区块链行业。在我们的平台上，参与者将民主地拥有和贡献我们的价值。来自各国的人们都在期待我们的代币。我们正朝着开创全球AI和区块链市场的梦想迈进，创造一个人人都能参与公平和自由经济活动的未来空间。",
+    "title_1": "GOYABOT和VOB代币的进化策略和未来前景",
+    "content_1": "VOB的愿景是扩展为全球交易解决方案，通过利用分布式超级计算系统积累来自加密货币交易所和市场的数据来提高准确性。我们的GOYABOT平台高效地提供定制AI解决方案，帮助客户实现交易和投资目标。",
+    "title_2": "VOB代币经济",
+    "content_2": "VOB代币经济建立在其四大支柱之上。支付经济、全球社区、NFT经济和GOYABOT AI。参与者将通过利用代币经济的独特特性，持续产生利润，这些特性不同于其他经济体。VOB代币将作为经济体的主要支付货币，提供无缝体验，最终带来全球社区的持续和快速增长。最后，VOB NFT增强了参与者的整体体验，提供直观和有形的指标，每个参与者的每次行动都会立即更新和提供。GOYA AI结构将每个个体的独特特征和需求反映到其算法和生态系统中，为每个参与者提供定制的策略和指导。"
   },
   "vision": {
-    "vision" : "At the VOB foundation, we are dedicated to fostering connections between global communities and new ideas. Guided by this vision, the Vision of Blockchain project seeks to expand our community through creative collaboration. Our team invites experts from diverse backgrounds and practices to participate, encouraging them to explore and interpret the essence of our community and the token economy. Through each participant’s unique perspective, we aim to enrich the ongoing global conversation about cryptocurrency in the present and the potential landscape of the future.",
-    "blockchain" : "Blockchain is an idea brought by Satoshi Nakamoto in part of the the Bitcoin project, a peer-to-peer electronic cash system, where the value of the currency is assured by the decentralized participants and their interactions. The VOB foundation responded to the necessity for community collaboration rooted in the philosophy of the blockchain technology by encouraging its participants to foster the blockchain’s growth. The Vision of Blockchain uses data and artificial intelligence to create the assets that bridges the online and offline worlds. This work often involve real-time information and social interactions to explore contemporary cryptocurrency structures.",
-    "vob": " Our dedication to the blockchain takes shape through long-term partnerships with exchanges and cryptocurrency communities across the globe. In a collaborative spirit with each partner, we create unique initiatives aimed at fostering our shared passion to explore new ways for supporting blockchain, developers, and cryptocurrency communities worldwide. As a continuously evolving network, VOB’s hybrid structure allows ideas and support to flow between regions and interests, fully embracing diversity and multiplicity.",
-    "about" : "About VOB"
+    "vision": "在VOB基金会，我们致力于促进全球社区和新思想之间的联系。在这一愿景的指导下，区块链愿景项目旨在通过创造性合作扩展我们的社区。我们的团队邀请来自不同背景和实践的专家参与，鼓励他们探索和解释我们社区和代币经济的本质。通过每位参与者的独特视角，我们旨在丰富关于当前加密货币的全球对话，以及未来的潜在景观。",
+    "blockchain": "区块链是中本聪在比特币项目中提出的一个概念，一个点对点的电子现金系统，其中货币的价值由分散的参与者及其互动保证。VOB基金会响应了基于区块链技术哲学的社区合作的必要性，鼓励其参与者促进区块链的增长。区块链愿景使用数据和人工智能创建连接线上和线下世界的资产。这项工作通常涉及实时信息和社交互动，以探索当代加密货币结构。",
+    "vob": "我们对区块链的承诺通过与全球各地交易所和加密货币社区的长期合作伙伴关系得以体现。与每个合作伙伴合作，我们创造了旨在促进我们共同热情的独特举措，探索支持全球区块链、开发者和加密货币社区的新方法。作为一个不断发展的网络，VOB的混合结构允许思想和支持在不同地区和兴趣之间流动，充分拥抱多样性和多元化。",
+    "about": "关于VOB"
   },
-  "devs" : {
-    "devs_title" : "GOYA AI and the Big Data",
-    "devs_content": "GOYA AI by VOB is an automated computer program designed to execute specific tasks with minimal human intervention. The number of users are increasing as we send out more efficient data. Meanwhile, VOB is building an ecosystem with technically advanced policies and the VOB token. Furthermore, we will ensure a more advanced platform by providing a stable Token Economy and opportunities to generate profits.",
+  "devs": {
+    "devs_title": "GOYA AI和大数据",
+    "devs_content": "VOB的GOYA AI是一个设计用于执行特定任务的自动化计算机程序，几乎无需人工干预。随着我们发送更高效的数据，用户数量在不断增加。同时，VOB正在构建一个技术先进的政策和VOB代币生态系统。此外，我们将通过提供稳定的代币经济和盈利机会，确保更先进的平台。",
     "devs_acc": {
       "0": {
-        "title": "Improved Decision Making",
-        "content": "AI can analyze massive data from various sources. This helps traders make more informed decisions and identify opportunities that may have been overlooked when traditional methods were taken."
+        "title": "改善决策",
+        "content": "AI可以分析来自各种来源的大量数据。这有助于交易者做出更明智的决策，并发现传统方法可能被忽略的机会。"
       },
       "1": {
-        "title": "Improved Risk Management",
-        "content": "AI analyze data in real time and identifies potential risks, allowing traders to take appropriate action to mitigate risks"
+        "title": "改善风险管理",
+        "content": "AI实时分析数据并识别潜在风险，使交易者能够采取适当行动来降低风险。"
       },
       "2": {
-        "title": "Improved Efficiency",
-        "content": "AI automates certain tasks and processes, allowing traders to focus on more complex tasks that require human expertise"
+        "title": "提高效率",
+        "content": "AI自动化某些任务和流程，使交易者能够专注于需要人类专业知识的更复杂任务。"
       },
       "3": {
-        "title": "Improved Accuracy",
-        "content": "AI algorithms help reduce the risk of errors or mistakes by analyzing data and making decisions based on logic without being swayed by personal emotions or prejudices"
+        "title": "提高准确性",
+        "content": "AI算法通过分析数据并基于逻辑做出决策，有助于减少错误或失误的风险，不受个人情绪或偏见的影响。"
       },
       "4": {
-        "title": "Improved Personalization",
-        "content": "By analyzing the past behaviors of each trader, AI provides personalized recommendations and adjust strategies to suit their specific needs and preferences"
+        "title": "提高个性化",
+        "content": "通过分析每个交易者的过去行为，AI提供个性化建议并调整策略以满足他们的具体需求和偏好。"
       }
     },
-    "devs_subtitle": "Security Architecture"
+    "devs_subtitle": "安全架构"
   },
   "devs_main": {
-    "title" : "Technology",
-    "subtitle" : "Security Architecture",
-    "content" : "GOYABOT is an advanced automated computer program. It operates with minimal human intervention efficiently increasing user engagement. We are commited to leveraging technology and the VOB token to construct a resilient ecosystem ensuring stable token economy and profit-generative prospects.",
-    "btn" : "View More"
+    "title": "技术",
+    "subtitle": "安全架构",
+    "content": "GOYABOT是一个先进的自动化计算机程序。它几乎无需人工干预高效地增加用户参与度。我们致力于利用技术和VOB代币构建一个强大的生态系统，确保稳定的代币经济和盈利前景。",
+    "btn": "查看更多"
   },
-  "whitepaper" : {
-    "whitepaper": "View the VOB white paper",
-    "smartcontract" : "View the VOB smart contract account",
-    "viewbtn": "View",
-    "checkbtn": "Check"
+  "whitepaper": {
+    "whitepaper": "查看VOB白皮书",
+    "smartcontract": "查看VOB智能合约账户",
+    "viewbtn": "查看",
+    "checkbtn": "检查"
   },
   "distribution": {
-    "vobtoken": "VOB Token",
-    "model": "Distribution Model",
-    "EA" : "EA",
-    "opendetail": "Open Detail",
-    "closedetail": "Close Detail",
-    "total": "Total"
+    "vobtoken": "VOB代币",
+    "model": "分配模型",
+    "EA": "EA",
+    "opendetail": "打开详情",
+    "closedetail": "关闭详情",
+    "total": "总计"
   },
   "partners": {
-    "title": "Get Started with VOB",
-    "subtitle": "Start trading now with VOB's partner and globally verified CEX",
-    "startbtn": "Get Started",
-    "lbank": "Founded in 2015, LBank Exchange is a top cryptocurrency trading platform with licenses of NFA, MSB, and Canada MSB. LBank Exchange provides global users with secure, professional, and convenient products and services, including Cryptocurrency Trading, Derivatives, Staking, NFT, and LBK Labs investment",
-    "cointrpro": "CoinTR.com is an integrated international Cryptocurrency platform founded in 2022. Powerful founders of traditional Turkish financial institutions and experienced team members from top crypto exchanges in London & Istanbul, Turkey make us more competitive and trustworthy."
+    "title": "开始使用VOB",
+    "subtitle": "立即开始与VOB的合作伙伴和全球认证的CEX进行交易",
+    "startbtn": "立即开始",
+    "lbank": "LBank Exchange成立于2015年，是一个顶级加密货币交易平台，拥有NFA、MSB和加拿大MSB许可证。LBank Exchange为全球用户提供安全、专业和便捷的产品和服务，包括加密货币交易、衍生品、质押、NFT和LBK Labs投资。",
+    "cointrpro": "CoinTR.com是一个于2022年成立的综合国际加密货币平台。强大的传统土耳其金融机构创始人和来自伦敦和伊斯坦布尔顶级加密交易所的经验丰富的团队成员使我们更具竞争力和可信赖性。"
   },
   "team": {
-    "0" : {
-      "first" : "Management",
-      "second" : "& Support",
-      "title" : "Management & Support"
+    "0": {
+      "first": "管理",
+      "second": "& 支持",
+      "title": "管理&支持"
     },
-    "1" : {
-      "first" : "Engineering",
-      "second" : "& System",
-      "title" : "Engineering & System"
+    "1": {
+      "first": "工程",
+      "second": "& 系统",
+      "title": "工程&系统"
     },
-    "2" : {
-      "first" : "Strategy",
-      "second" : "& Global",
-      "title" : "Strategy & Global"
+    "2": {
+      "first": "战略",
+      "second": "& 全球",
+      "title": "战略&全球"
     },
-    "3" : {
-      "first" : "Business",
-      "second" : "& Platform",
-      "title" : "Business & Platform"
+    "3": {
+      "first": "商业",
+      "second": "& 平台",
+      "title": "商业&平台"
     },
-    "4" : {
-      "first" : "Trading",
-      "second" : "& Algorithm",
-      "title" : "Trading & Algorithm"
+    "4": {
+      "first": "交易",
+      "second": "& 算法",
+      "title": "交易&算法"
     },
-    "5" : {
-      "first" : "Advisors",
-      "second" : "& Consultants",
-      "title" : "Advisors & Consultants"
+    "5": {
+      "first": "顾问",
+      "second": "& 咨询",
+      "title": "顾问&咨询"
     },
-    "6" : {
-      "first" : "Defense",
-      "second" : "& Counsel",
-      "title" : "Defense & Counsel"
+    "6": {
+      "first": "防御",
+      "second": "& 法务",
+      "title": "防御&法务"
     }
   },
-  "news" : {
-    "0" : "For over a decade VOB foundation has deepend its partnerships with global cryptocurrency exchanges and buisness organizations, including L BANK, CoinTR pro, and multiple domestic exchanges. VOBs own token economy initiatives include the rising-X platform, a digital platfrom dedicated to crypto currency trading of the VOB community and the overall token ecosystem including the upcomming NFT project. Our collaborations and programs embrace the complexities of the crypto currency landscape by exploring new ideas and perspectives with individuals and organizations within and beyond the token ecosystem. The team steering these partnerships and initiatives is the VOB foundation. Our goal is to spark meaningful trading experience, cultivate the use of aritificial intelligence in trading, and facilitate NFT project that connects across boundaries by supporting the token economy that inspires us all.",
-    "1" : "We aspire to offer opportunities to reconsider the contemporary crypto currency landscape and envision its future by supporting the token economy and its communities. VOB foundation catalyzes its long-standing partnerships with exchanges and communities around the world. As an extension of this work, we endeavor to expand access to the crypto currency while fostering enriched connections amongst our community of traders, marketers, technologists, annalists, celebrities, and global audiences. With all that we do, our aim is to ignite conversation, cultivate empathy, and facilitate collaboration that transcends conventional boundaries. Our efforts extend beyond support for individual traders or marketers; we strive to engage the entire token ecosystem by building resilient networks that function like parts of a living organism."
+  "news": {
+    "0": "十多年来，VOB基金会深化了与全球加密货币交易所和商业组织的合作伙伴关系，包括L BANK、CoinTR pro和多家国内交易所。VOB自身的代币经济举措包括rising-X平台，这是一个致力于VOB社区加密货币交易的数字平台以及即将推出的NFT项目。我们的合作和计划通过探索新想法和观点，拥抱加密货币景观的复杂性，与代币生态系统内外的个人和组织合作。领导这些合作伙伴关系和举措的团队是VOB基金会。我们的目标是激发有意义的交易体验，培养人工智能在交易中的应用，并推动跨越边界的NFT项目，支持激励我们的代币经济。",
+    "1": "我们希望通过支持代币经济及其社区，提供重新审视当代加密货币景观和设想其未来的机会。VOB基金会催化了其与全球交易所和社区的长期合作伙伴关系。作为这项工作的延伸，我们努力扩大对加密货币的访问，同时促进交易者、营销人员、技术专家、分析师、名人和全球观众社区之间的丰富联系。我们所做的一切，旨在激发对话，培养同理心，并促进超越传统界限的合作。我们的努力不仅支持个别交易者或营销人员；我们还通过建立像活的有机体一样运作的强大网络，努力吸引整个代币生态系统。",
+    "more": "查看更多"
   },
-  "media" : {
-    "title" : "The Vision of Blockchain Media",
-    "description": "The VOB foundation engaged with the theme of Public Relations as well as larger questions about the intersection of communities and the VOB foundation through the launch of Vision of Blockchain Media. The series of public materials bring together a variety of publics to engage with inspiring and impactful experiences. The media is based on the idea of exploring and examining the vast potentials of idea-technology convergence and offers a sequence of materials including conversations and talks, editorial articles, interviews, VOB related promotions and events.",
-    "type" : {
-      "editorial": "Editorial Article",
-      "interview": "Editorial Interview",
-      "event": "Event"
+  "media": {
+    "title": "区块链媒体的愿景",
+    "description": "VOB基金会通过推出区块链媒体愿景，探讨了公共关系的主题以及社区与VOB基金会交汇的更大问题。这系列公共材料汇集了各种公众，以参与鼓舞人心和有影响力的体验。媒体基于探索和审视思想与技术融合的巨大潜力的理念，提供了一系列材料，包括对话和讨论、社论文章、采访、VOB相关推广和活动。",
+    "type": {
+      "editorial": "社论文章",
+      "interview": "采访",
+      "event": "活动"
     },
-    "read": "Read Now",
-    "about": "About the Media",
-    "aboutDesc": "Launched in 2022, the Vision of Blockchain Media is a series of original medium that interpret the hybridity of VOB token ecosystem, each created in collaboration with contemporary cryptocurrency participants with diverse practices from around the world."
+    "read": "立即阅读",
+    "about": "关于媒体",
+    "aboutDesc": "区块链媒体愿景于2022年启动，是一系列原创媒介，解释VOB代币生态系统的混合性，每一个都是与来自世界各地的当代加密货币参与者合作创建的，实践多样。"
   }
 }
