@@ -13,7 +13,6 @@ export async function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSr
                 data.map((a:any, i:number) => {
 
                     let typeText = "";
-                    console.log("type: ", a.type);
                     switch (a.type) {
                         case 'editorial':
                             typeText = t('type.editorial');
