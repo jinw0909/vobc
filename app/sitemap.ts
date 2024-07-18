@@ -11,6 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
+            url: 'https://www.vobc.io/icon.svg',
+            lastModified,
+            changeFrequency: 'yearly',
+            priority: 1,
+        },
+        {
             url: 'https://www.vobc.io/favicons/favicon-96x96.png',
             lastModified,
             changeFrequency: 'yearly',
@@ -112,5 +118,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.6,
         },
+        {
+            url: 'https://www.vobc.io/en/news/media',
+            lastModified,
+            changeFrequency: 'weekly',
+            priority: 0.5,
+        },
+        {
+            url: 'https://www.vobc.io/jp/news/media',
+            lastModified,
+            changeFrequency: 'weekly',
+            priority: 0.5,
+        },
+        {
+            url: 'https://www.vobc.io/cn/news/media',
+            lastModified,
+            changeFrequency: 'weekly',
+            priority: 0.5,
+        }
     ];
 }
