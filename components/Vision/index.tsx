@@ -23,9 +23,11 @@ export const Vision = async () => {
 
     return (
         <div className={styles.visionWrapper}>
+            <div>
             <div className={styles.visionHeader}>
                 <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>
                 <p className={styles.headerText}>The Vision</p>
+            </div>
             </div>
             <p className={styles.visionText}>
                 {t('vision')}

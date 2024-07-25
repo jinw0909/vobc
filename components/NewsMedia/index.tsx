@@ -11,6 +11,13 @@ import image7 from '@/public/news/retriseminar.jpeg';
 import data from '@/json/news.json';
 import {getTranslations} from "next-intl/server";
 import {LogoPlain} from "@/ui/LogoPlain";
+import { Noto_Sans_JP} from "next/font/google";
+
+const notosansjp = Noto_Sans_JP({
+    weight: ['200', '300', '400', '500', '600', '700', '900'],
+    style : "normal",
+    subsets: ['latin']
+});
 
 const data1 = data.slice(0, 2);
 const data2 = data.slice(2, 8);
@@ -24,22 +31,22 @@ export async function NewsMedia() {
     return (
         <div className={styles.mediaWrapper}>
             <div className={styles.header}>
-                <div className={styles.headerTitle}>
+                <div className={`${styles.headerTitle} ${styles.fadeInAnimation}`}>
                     <div>{t('title')}</div>
-                    <div className={styles.logoPlain}>
+                    <div className={`${styles.logoPlain} ${styles.delayedAnimation}`}>
                         <LogoPlain></LogoPlain>
                     </div>
-                    <div className={styles.hashTags}>
+                    <div className={`${notosansjp.className} ${styles.hashTags} ${styles.delayedAnimation}`}>
                         <span>#Event</span>
                         <span>#Interview</span>
                         <span>#Article</span>
                     </div>
                 </div>
             </div>
-            <p className={`${styles.headerDesc} ${styles.textGradient}`}>
+            <p className={`${styles.headerDesc} ${styles.textGradient} ${styles.moreDelayedAnimation}`}>
                 {t('description')}
             </p>
-            <div className={styles.main}>
+            <div className={`${styles.main} ${styles.moreDelayedAnimation}`}>
                 <div className={styles.yearWrapper}>
                     <h2 className={styles.year}>2024</h2>
                     <hr className={styles.horizontal} />

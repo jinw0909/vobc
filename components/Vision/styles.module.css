@@ -50,7 +50,22 @@
     height: 1px;
     background-color: #999;
 }
-.headerText { font-size: 1.5rem; }
+.headerText {
+    font-size: 1.5rem;
+    position: relative;
+}
+.headerText::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    animation:
+        typing 7s steps(40, end) infinite;
+
+}
 .visionPic {
     float: left;
     margin: 0 1rem;
@@ -65,6 +80,7 @@
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;
     color: transparent;
+    overflow: hidden;
 }
 .blockText {
     text-align: right;
@@ -113,4 +129,17 @@
     .vobHeader::after {
         width: 99%;
     }
+}
+
+
+
+@keyframes typing {
+    0% { width: 100% }
+    25% { width: 0 }
+    100% { width: 0; }
+}
+
+@keyframes blinking {
+    from, to { border-color: transparent }
+    50% { border-color: white; }
 }

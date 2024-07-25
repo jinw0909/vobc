@@ -40,7 +40,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                         <NavigationLink href="/news/media">
                             <div className={styles.backToMain}>
                                 <Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow"/>
-                                <span>back to list</span>
+                                <span>To List</span>
                             </div>
                         </NavigationLink>
                     </div>
