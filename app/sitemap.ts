@@ -11,23 +11,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
-            url: 'https://www.vobc.io/icon.svg',
+            url: 'https://www.vobc.io/favicon.svg',
             lastModified,
             changeFrequency: 'yearly',
             priority: 1,
         },
-        {
-            url: 'https://www.vobc.io/favicons/favicon-96x96.png',
-            lastModified,
-            changeFrequency: 'yearly',
-            priority: 1,
-        },
-        {
-            url: 'https://www.vobc.io/icon.svg',
-            lastModified,
-            changeFrequency: 'yearly',
-            priority: 1,
-        },
+        // {
+        //     url: 'https://www.vobc.io/favicons/favicon-96x96.png',
+        //     lastModified,
+        //     changeFrequency: 'yearly',
+        //     priority: 1,
+        // },
+        // {
+        //     url: 'https://www.vobc.io/icon.svg',
+        //     lastModified,
+        //     changeFrequency: 'yearly',
+        //     priority: 1,
+        // },
         {
             url: 'https://www.vobc.io/en',
             lastModified,

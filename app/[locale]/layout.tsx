@@ -27,6 +27,8 @@ export default async function RootLayout ({
   const messages = await getMessages();
   const t = await getTranslations();
 
+  // @ts-ignore
+  // @ts-ignore
   return (
       <html lang={locale}>
           <head>
@@ -46,9 +48,10 @@ export default async function RootLayout ({
             {/*<link rel="manifest" href="/favicons/manifest.json"/>*/}
             {/*<meta name="msapplication-TileColor" content="#ffffff"/>*/}
             {/*<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png"/>*/}
-            <meta name="theme-color" content="#ffffff"/>
-            <title>VOB | VISION OF BLOCKCHAIN</title>
+            {/*<meta name="theme-color" content="#ffffff"/>*/}
+            <title>VOB | VISION OF BLOCKCHAIN</title>ß
             <meta name="description" content={t('main.description')}/>
+            <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
           </head>
           <body className={`${notoserifjp.className}`}>
             <Header lang={locale}/>
