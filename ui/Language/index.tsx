@@ -57,19 +57,19 @@ export const Language = ({lang} : {lang : string}) => {
         <div className={`${styles.languageModal} 
             ${showModal ? styles.show : ""}`} ref={modalRef}>
                 <button
-                    className={`${selectedLang == 'en' ? styles.current : ''}`}
+                    className={`${selectedLang == 'en' ? styles.current : ''} ${styles.langElem}`}
                     onClick={()=>{setSelectedLang('en')}}>
                     English
                 </button>
                 <span className={styles.langBar}></span>
                 <button
-                    className={`${selectedLang == 'jp' ? styles.current : ''}`}
+                    className={`${selectedLang == 'jp' ? styles.current : ''} ${styles.langElem}`}
                     onClick={()=>{setSelectedLang('jp')}}>
                     日本語
                 </button>
                 <span className={styles.langBar}></span>
                 <button
-                    className={`${selectedLang == 'cn' ? styles.current : ''}`}
+                    className={`${selectedLang == 'cn' ? styles.current : ''} ${styles.langElem}`}
                     onClick={()=>{setSelectedLang('cn')}}>
                     汉文
                 </button>

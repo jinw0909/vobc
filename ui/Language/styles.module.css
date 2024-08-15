@@ -49,6 +49,9 @@
     overflow: hidden;
     padding-right: 2rem;
 }
+.langElem {
+    min-width: 3rem;
+}
 .langBar {
     align-self: stretch;
     width: 1px;
