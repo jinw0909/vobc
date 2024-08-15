@@ -16,13 +16,14 @@ const notoserifjp = Noto_Serif_JP({
   style : "normal",
   subsets: ['latin']
 });
+
 export default async function RootLayout ({
-  children,
-  params : { locale }
-} : {
-  children: React.ReactNode;
-  params: { locale: string }
-}) {
+      children,
+      params : { locale }
+    } : {
+      children: React.ReactNode;
+      params: { locale: string }
+    }) {
 
   const messages = await getMessages();
   const t = await getTranslations();
@@ -44,15 +45,6 @@ export default async function RootLayout ({
         auto trading,자동매매,自動取引,自动交易,Giao dịch tự động,AI,인공지능,人工知能,人工智能,Trí tuệ nhân tạo,white paper,백서,白書,白皮书,Sách trắng,smart contract,스마트 컨트랙트,スマートコントラクト,智能合约,Hợp đồng thông minh"
           />
           <meta name="format-detection" content="telephone=no"/>
-          <meta property="og:title" content="VOB | VISION OF BLOCKCHAIN"/>
-          <meta property="og:description" content={t('main.description')}/>
-          <meta property="og:site_name" content="VOB | VISION OF BLOCKCHAIN"/>
-          <meta property="og:image" content="/logo_sns.jpg"/>
-          <meta property="og:type" content="website"/>
-          <meta name="twitter:card" content="summary_large_image"/>
-          <meta name="twitter:title" content="VOB | VISION OF BLOCKCHAIN"/>
-          <meta name="twitter:description" content={t('main.description')}/>
-          <meta name="twitter:image" content="/logo_sns.jpg"/>
           <meta name="google-site-verification" content="ru0B7RK4jUkPTr8qhdl2N6KsC1gQ1VEU1_Y6K46lC74"/>
       </head>
       <body className={`${notoserifjp.className}`}>
