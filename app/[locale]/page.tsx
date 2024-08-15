@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import Link from 'next/link';
 import { About } from "@/components/About";
 import {DevsMain} from "@/components/DevsMain";
-import {getMessages, getTranslations} from "next-intl/server";
+import {getMessages, getTranslations, unstable_setRequestLocale} from "next-intl/server";
 import {useTranslations} from "next-intl";
 import {Whitepaper} from "@/components/Whitepaper";
 import {Roadmap} from "@/components/Roadmap";
@@ -14,8 +14,8 @@ import {Vision} from "@/components/Vision";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
-  // const intl = await getDictionary(lang) //en
-  // const t = await getTranslations('main');
+  unstable_setRequestLocale(locale);
+
   const t = await getTranslations('main');
   const messages = await getMessages();
 

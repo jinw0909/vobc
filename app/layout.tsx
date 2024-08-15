@@ -23,6 +23,9 @@ export const metadata = {
         url: 'https://vobc.io',
         siteName: 'The VOB Foundation'
     },
+    icons: {
+        icon: '/icon.ico'
+    }
 }
 
 // export async function generateMetadata({params: {locale}}) {

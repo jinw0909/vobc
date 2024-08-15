@@ -1,6 +1,9 @@
 import { News } from '@/components/News';
 import styles from './styles.module.css'
-export default function news() {
+import {unstable_setRequestLocale} from "next-intl/server";
+export default function news({params : { locale }} : {params : {locale : string}}) {
+    unstable_setRequestLocale(locale);
+
     return (
         <div className={styles.newsWrapper}>
             <News/>

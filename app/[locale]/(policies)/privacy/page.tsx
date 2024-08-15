@@ -1,5 +1,9 @@
 import styles from '../styles.module.css'
-export default function Page() {
+import {unstable_setRequestLocale} from "next-intl/server";
+export default function Page({params : { locale }} : {params : {locale : string}}) {
+
+    unstable_setRequestLocale(locale);
+
     return (
         <div className={styles.termsWrapper}>
             <div className={styles.termsTitle}>Privacy Policy</div>

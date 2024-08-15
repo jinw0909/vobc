@@ -17,6 +17,11 @@ const notoserifjp = Noto_Serif_JP({
   subsets: ['latin']
 });
 
+const locales = ['en', 'jp', 'cn'];
+export function generateStaticParams() {
+    return locales.map((locale) => ({locale}));
+}
+
 export default async function RootLayout ({
       children,
       params : { locale }
