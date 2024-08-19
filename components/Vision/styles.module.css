@@ -5,6 +5,9 @@
     position: relative;
     margin-top: 4rem;
 }
+.visionWrapper > div:nth-child(1) {
+    margin-top: 0;
+}
 .visionHeader {
     display: flex;
     justify-content: flex-start;
