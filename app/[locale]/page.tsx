@@ -33,9 +33,7 @@ export default async function Page({params : { locale }} : {params : {locale : s
                       <div>{t('subtitle_2')}</div>
                   </div>
               </div>
-
           </main>
-
           <div className={`${styles.subWrapper} ${styles.visionWrapper}`}>
               <Vision/>
           </div>
@@ -44,23 +42,23 @@ export default async function Page({params : { locale }} : {params : {locale : s
           {/*</div>*/}
           <div className={styles.subWrapper}>
               <NextIntlClientProvider messages={messages}>
-               <Whitepaper/>
+                  <Whitepaper/>
               </NextIntlClientProvider>
           </div>
           <div className={styles.subWrapper}>
-              <DevsMain />
+              <DevsMain/>
           </div>
           {/*<div className={styles.subWrapper}>*/}
           {/*    <Roadmap />*/}
           {/*</div>*/}
           <div className={styles.subWrapper}>
               <NextIntlClientProvider messages={messages}>
-                <Distribution />
+                  <Distribution/>
               </NextIntlClientProvider>
           </div>
           <div className={styles.subWrapper}>
               <NextIntlClientProvider messages={messages}>
-                <Partners />
+                  <Partners/>
               </NextIntlClientProvider>
           </div>
       </>

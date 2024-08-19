@@ -37,12 +37,12 @@
 .subText {
     font-size: 1rem;
     position: absolute;
-    bottom: -100%;
+    top: 100%;
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 2rem;
     background: linear-gradient(to right, #888 0%, #ddd 50%, #888 100%);
     -webkit-background-clip: text; /* Apply gradient to text */
     -webkit-text-fill-color: transparent; /* Make text transparent */
