@@ -8,6 +8,7 @@ import Image from 'next/image';
 import triangle from '@/public/icons/triangle-icon-white.png';
 import rvtriangle from '@/public/icons/triangle-icon-white-rv.png';
 
+
 export const Language = ({lang} : {lang : string}) => {
     const router = useRouter();
     const pathname = usePathname();
@@ -18,8 +19,16 @@ export const Language = ({lang} : {lang : string}) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        router.replace(pathname, {locale: selectedLang})
-    }, [selectedLang]);
+        router.replace(pathname, {locale: selectedLang as "en" | "jp" | "cn" | undefined})
+    }, [pathname, router, selectedLang]);
+
+    // const validLocales: Array<"en" | "jp" | "cn"> = ["en", "jp", "cn"];
+    //
+    // useEffect(() => {
+    //     if (validLocales.includes(selectedLang as "en" | "jp" | "cn")) {
+    //         router.replace(pathname, { locale: selectedLang as "en" | "jp" | "cn" });
+    //     }
+    // }, [selectedLang]);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {

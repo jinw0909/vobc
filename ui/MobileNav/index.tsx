@@ -22,8 +22,8 @@ export const MobileNav = ({click, onClick} : {click : any, onClick : any}) => {
     const [selectedLang, setSelectedLang] = useState(locale);
 
     useEffect(() => {
-        router.replace(pathName, {locale : selectedLang});
-    }, [selectedLang]);
+        router.replace(pathName, {locale : selectedLang as "en" | "jp" | "cn" | undefined});
+    }, [pathName, router, selectedLang]);
 
     useEffect(() => {
         if (!click) {

@@ -11,6 +11,7 @@ import {Distribution} from "@/components/Distribution";
 import {Partners} from "@/components/Partners";
 import {NextIntlClientProvider} from "next-intl";
 import {Vision} from "@/components/Vision";
+import {Wrapup} from "@/components/Wrapup";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
@@ -61,6 +62,9 @@ export default async function Page({params : { locale }} : {params : {locale : s
                   <Partners/>
               </NextIntlClientProvider>
           </div>
+          {/*<div className={styles.subWrapper}>*/}
+          {/*    <Wrapup/>*/}
+          {/*</div>*/}
       </>
   );
 }
