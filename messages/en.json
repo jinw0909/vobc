@@ -17,7 +17,8 @@
     "cookies" : "Cookies Policy",
     "privacy" : "Privacy Policy",
     "terms" : "Terms of Use",
-    "language": "Select Language"
+    "language": "Select Language",
+    "detail" : "Detail"
   },
   "about" : {
     "main_title" : "About VOB",
