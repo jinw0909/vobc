@@ -12,6 +12,7 @@ import {Partners} from "@/components/Partners";
 import {NextIntlClientProvider} from "next-intl";
 import {Vision} from "@/components/Vision";
 import {Wrapup} from "@/components/Wrapup";
+import {PartnersNew} from "@/components/PartnersNew";
 
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
@@ -59,7 +60,7 @@ export default async function Page({params : { locale }} : {params : {locale : s
           </div>
           <div className={styles.subWrapper}>
               <NextIntlClientProvider messages={messages}>
-                  <Partners/>
+                  <PartnersNew/>
               </NextIntlClientProvider>
           </div>
           {/*<div className={styles.subWrapper}>*/}

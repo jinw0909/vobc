@@ -22,7 +22,7 @@ export const Vision = async () => {
     const t = await getTranslations('vision');
 
     return (
-        <div className={styles.visionWrapper}>
+        <div className={`${styles.visionWrapper} ${styles.muchMoreDelayedAnimation}`}>
             <div>
             <div className={styles.visionHeader}>
                 <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>

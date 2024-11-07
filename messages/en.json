@@ -84,10 +84,11 @@
   },
   "partners": {
     "title": "Get Started with VOB",
-    "subtitle": "Start trading now with VOB's partner and globally verified CEX",
+    "subtitle": "Start trading now with VOB's partners that include globally verified CEX",
     "startbtn": "Get Started",
     "lbank": "Founded in 2015, LBank Exchange is a top cryptocurrency trading platform with licenses of NFA, MSB, and Canada MSB. LBank Exchange provides global users with secure, professional, and convenient products and services, including Cryptocurrency Trading, Derivatives, Staking, NFT, and LBK Labs investment",
-    "cointrpro": "CoinTR.com is an integrated international Cryptocurrency platform founded in 2022. Powerful founders of traditional Turkish financial institutions and experienced team members from top crypto exchanges in London & Istanbul, Turkey make us more competitive and trustworthy."
+    "cointrpro": "CoinTR.com is an integrated international Cryptocurrency platform founded in 2022. Powerful founders of traditional Turkish financial institutions and experienced team members from top crypto exchanges in London & Istanbul, Turkey make us more competitive and trustworthy.",
+    "deepcoin": "Deepcoin is a global cryptocurrency derivative trading platform that supports leveraged trading through Perpetual and CFD contracts. It offers diverse investment opportunities, including spot trading, staking, and DeFi services, designed to cater to both beginner and advanced traders. With a focus on security and innovative trading tools, Deepcoin aims to provide a seamless and robust experience for cryptocurrency enthusiasts worldwid"
   },
   "team": {
     "0" : {

@@ -1,5 +1,6 @@
 .visionWrapper {
     /*margin-top: 4rem;*/
+    opacity: 0;
 }
 .visionWrapper > div {
     position: relative;
@@ -121,8 +122,12 @@
     width: 100%;
 }
 
-@media (max-width: 576px) {
+.muchMoreDelayedAnimation {
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 3s;
+}
 
+@media (max-width: 576px) {
     .headerText { font-size: 1.2rem }
 
     .visionImg { width: 24px; }
@@ -134,8 +139,6 @@
     }
 }
 
-
-
 @keyframes typing {
     0% { width: 100% }
     25% { width: 0 }
@@ -146,3 +149,13 @@
     from, to { border-color: transparent }
     50% { border-color: white; }
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+

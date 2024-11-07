@@ -1,0 +1,190 @@
+.partnersNew {
+    overflow: hidden;
+    width: 100%;
+}
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+}
+.desc {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.partnersWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin: 0 auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    margin-top: 1rem;
+}
+.partnersWrapper.noGap {
+    gap: 0; /* Removes gap when a partner element is clicked */
+}
+.partnersDetail {
+    width: 400px;
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.partnersElem {
+    width: 30%;
+    transition: .5s;
+    flex-shrink: 0;
+    position: relative;
+}
+.partnersElem .btnCircle {
+    transition: .75s;
+}
+.partnersElem:hover .btnCircle {
+    stroke: #fff;
+}
+.partnersElem.clicked {
+    width: 40%;
+}
+.partnersElem.hidden {
+    width: 0;
+}
+.btnCircleProg {
+    transition: stroke-dasharray 2s, stroke-dashoffset 2s;
+}
+.partnersElem.clicked .btnCircleProg {
+    stroke-dasharray: 401;
+    stroke-dashoffset: 0;
+}
+.btnCircle {}
+
+.exchange {
+    /*background-color: white;*/
+}
+.partner {
+    background-color: green;
+}
+
+/*******partners elem content********/
+
+.elemContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.vobElem {
+    flex: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    transition: .5s;
+    transform: scale(0);
+    max-height: 0;
+}
+.crossElem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: .5s;
+    opacity: .6;
+    display: none;
+}
+.startElem {
+    flex: 0;
+    overflow: hidden;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /*height: 200px;*/
+    max-height: 0;
+    z-index: 100;
+}
+.startBtn {
+    padding: 1rem 2rem;
+    color: white;
+    border-radius: 3.5rem;
+    transform: scale(0);
+    opacity: 0;
+    transition: .5s;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 45;
+    cursor: pointer;
+}
+/*.startBtn::before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 0;*/
+/*    height: 100%;*/
+/*    transition: 1s;*/
+/*    z-index: 70;*/
+/*    background-color: white;*/
+/*}*/
+.partnersElem.clicked .startBtn:hover {
+    transform: scale(1.2);
+}
+/*.startBtn span {*/
+/*    position: relative;*/
+/*    z-index: 80;*/
+/*    transition: .5s;*/
+/*}*/
+/*.startBtn:hover span {*/
+/*    color: black;*/
+/*}*/
+.logoElem {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    pointer-events: none;
+    transition: .5s;
+}
+.logoElem img { width: 75%; }
+.partnersElem.clicked .elemContent {
+    align-items: center;
+}
+.partnersElem.clicked .vobElem {
+    max-height: 200px;
+    flex: 1;
+    opacity: 1;
+    transform: scale(1);
+}
+.partnersElem.clicked .startElem {
+    flex: 1;
+    max-height: 200px;
+}
+.partnersElem.clicked .startBtn {
+    transform: scale(1);
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .title {font-size: 2rem; }
+    .partnersElem { width: 45%; }
+    .partnersElem.clicked { width: 55%; }
+}
+
+@media (max-width: 576px) {
+    .partnersElem.clicked { width: 80%; }
+    .title { font-size: 1.5rem;}
+}

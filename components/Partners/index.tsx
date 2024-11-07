@@ -1,8 +1,8 @@
 'use client';
 import styles from './styles.module.css';
 import Image from 'next/image';
-import lbankLogo from '@/public/lbank-logo-yellow.webp';
-import cointrLogo from '@/public/cointrwhite-logo.png';
+import lbankLogo from '@/public/exchange/lbank-logo-yellow.webp';
+import cointrLogo from '@/public/exchange/cointrwhite-logo.png';
 import chartBg from '@/public/chart-bg-white.png';
 import vobLogo from '@/public/vob_logo_2.png';
 import {LogoPlain} from "@/ui/LogoPlain";
@@ -90,7 +90,7 @@ export function Partners() {
                     <div className={styles.vob}><LogoPlain/></div>
                     <div className={styles.startElem}>
                         <Link href="https://www.cointr.pro/en-us/spot/VOBUSDT" target="_blank" rel="noopener noreferrer" locale={false}>
-                        <button className={styles.startBtn}><span>{t('startbtn')}</span></button>
+                            <button className={styles.startBtn}><span>{t('startbtn')}</span></button>
                         </Link>
                     </div>
                     <div className={styles.exchange}><Image className="p-2" src={cointrLogo} width={200} height={100} alt="coin t r logo"></Image></div>

@@ -44,7 +44,7 @@
     ]
     },
     {
-      "status" : "Manager",
+      "status" : "Director",
       "name" : "C.K. HONG",
       "desc" : [
         "Database Specialist",
@@ -57,15 +57,6 @@
       "name" : "S.Y. OH",
       "desc" : [
         "Page Design & Publishing"
-      ]
-    },
-    {
-      "status" : "Advisor",
-      "name" : "M. JANG",
-      "desc" : [
-        "Best-selling Author in AI",
-        "Executive of POSTECH Blockchain Executive Program",
-        "POSTECH Ph.D. in Machine Learning & AI"
       ]
     },
     {
@@ -158,7 +149,7 @@
       ]
     },
     {
-      "status" : "Manager",
+      "status" : "Director",
       "name" : "J.W. JEON",
       "desc" : [
         "Sales Planning"
@@ -194,7 +185,7 @@
     },
     {
       "status" : "Team Member",
-      "name" : "BAYARAA",
+      "name" : "Bayaraa",
       "desc" : [
         "Asia Market Development"
       ]
@@ -204,6 +195,13 @@
       "name" : "J.E. LEE",
       "desc" : [
         "U.S. Market Development"
+      ]
+    },
+    {
+      "status" : "Manager",
+      "name" : "Oumaima",
+      "desc" : [
+        "Head of Dubai Branch"
       ]
     }
   ],
@@ -217,25 +215,10 @@
   },
     {
       "status" : "Director",
-      "name" : "D. CHAN",
+      "name" : "C. DOO",
       "desc" : [
         "New Business Development",
         "Sungkyunkwan University"
-      ]
-    },
-    {
-      "status" : "P.D.",
-      "name" : "B.C. YU",
-      "desc" : [
-        "Contents P.D."
-      ]
-    },
-    {
-      "status" : "Director",
-      "name" : "J.C. LEE",
-      "desc" : [
-        "Graphic Design",
-        "Web & Application Design"
       ]
     },
     {
@@ -284,6 +267,14 @@
       "desc" : [
         "System Developer",
         "Backtesting & Autobot Development"
+      ]
+    },
+    {
+      "status" : "Team Member",
+      "name" : "Y.S. KIM",
+      "desc" : [
+        "System Developer",
+        "UI Development"
       ]
     }
   ],

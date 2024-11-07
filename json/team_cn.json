@@ -1,351 +1,342 @@
 [
   [{
-    "status" : "CEO",
-    "name" : "IRON WON",
-    "desc" : [
-      "Business Advisor",
-      "Participation in VC Projects as Follows : Hycon (HYC) / Cardano (ADA) / VERASITY (VRA) / ICON (ICX) / Electric Vehicle Zone (EVZ) / BlueWhale (BWX) / FuzeX (FXT)"
+    "status": "首席执行官",
+    "name": "IRON WON",
+    "desc": [
+      "业务顾问",
+      "参与的风险投资项目如下：Hycon (HYC) / Cardano (ADA) / VERASITY (VRA) / ICON (ICX) / Electric Vehicle Zone (EVZ) / BlueWhale (BWX) / FuzeX (FXT)"
     ]
   },
     {
-      "status" : "COO",
-      "name" : "GEON",
-      "desc" : [
-        "Over 6 years of Experience in Arbitrage Trading and Market Data Analysis",
-        "Head of Marketing for VOB Expansion in Over 20 Countries",
-        "Co-Founder of Blocksquare",
-        "Graduate of POSTECH Blockchain Expert Program"
+      "status": "首席运营官",
+      "name": "GEON",
+      "desc": [
+        "拥有超过6年的套利交易和市场数据分析经验",
+        "VOB在20多个国家的市场推广负责人",
+        "Blocksquare联合创始人",
+        "POSTECH区块链专家项目毕业生"
       ]
     },
     {
-      "status" : "CFO",
-      "name" : "J.Y. LEE",
-      "desc" : [
-        "Tsinghua University",
-        "Founding Member of VOB",
-        "Participation in VRA/EVZ Projects"
+      "status": "首席财务官",
+      "name": "J.Y. LEE",
+      "desc": [
+        "清华大学",
+        "VOB创始成员",
+        "参与VRA/EVZ项目"
       ]
     },
     {
-      "status" : "Manager",
-      "name" : "H.A. KIM",
-      "desc" : [
-        "Expert in Marketing"
+      "status": "经理",
+      "name": "H.A. KIM",
+      "desc": [
+        "营销专家"
       ]
     }],
   [{
-    "status" : "CTO",
-    "name" : "HYUK",
-    "desc" : [
-      "Collaboration with Bithumb CEX Technician on Numerous Cryptocurrency Projects",
-      "Established Partnership with Amazon Korea",
-      "Numerous Cryptocurrency Trading Automation Platforms",
-      "Developer of the GOYA AI"
+    "status": "首席技术官",
+    "name": "HYUK",
+    "desc": [
+      "与Bithumb CEX技术人员合作进行多个加密货币项目",
+      "与亚马逊韩国建立合作伙伴关系",
+      "多个加密货币交易自动化平台",
+      "GOYA AI的开发者"
     ]
   },
     {
-      "status" : "Manager",
-      "name" : "C.K. HONG",
-      "desc" : [
-        "Database Specialist",
-        "The National System for COVID-19 Relief Fund",
-        "Numerous Cryptocurrency Platforms"
+      "status": "经理",
+      "name": "C.K. HONG",
+      "desc": [
+        "数据库专家",
+        "COVID-19救济基金国家系统",
+        "多个加密货币平台"
       ]
     },
     {
-      "status" : "Director",
-      "name" : "S.Y. OH",
-      "desc" : [
-        "Page Design & Publishing"
+      "status": "主管",
+      "name": "S.Y. OH",
+      "desc": [
+        "页面设计与发布"
       ]
     },
     {
-      "status" : "Advisor",
-      "name" : "M. JANG",
-      "desc" : [
-        "Best-selling Author in AI",
-        "Executive of POSTECH Blockchain Executive Program",
-        "POSTECH Ph.D. in Machine Learning & AI"
+      "status": "团队领导",
+      "name": "H.U. LEE",
+      "desc": [
+        "数据分析总经理"
       ]
     },
     {
-      "status" : "Team Leader",
-      "name" : "H.U. LEE",
-      "desc" : [
-        "Data Analysis General Manager"
+      "status": "团队成员",
+      "name": "E.M. KO",
+      "desc": [
+        "系统开发",
+        "Android开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "E.M. KO",
-      "desc" : [
-        "System Development",
-        "Android Development"
+      "status": "团队成员",
+      "name": "C.Y. KIM",
+      "desc": [
+        "系统开发",
+        "IOS开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "C.Y. KIM",
-      "desc" : [
-        "System Development",
-        "IOS Development"
+      "status": "团队成员",
+      "name": "D.Y. PARK",
+      "desc": [
+        "数据分析",
+        "AI开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "D.Y. PARK",
-      "desc" : [
-        "Data Analysis",
-        "AI Development"
+      "status": "团队成员",
+      "name": "H.J. SHIM",
+      "desc": [
+        "系统开发",
+        "前后端开发",
+        "图表开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "H.J. SHIM",
-      "desc" : [
-        "System Development",
-        "BE & FE Development",
-        "Chart Development"
+      "status": "团队成员",
+      "name": "S.U. IM",
+      "desc": [
+        "数据分析"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "S.U. IM",
-      "desc" : [
-        "Data Analysis"
+      "status": "团队成员",
+      "name": "J.W. CHANG",
+      "desc": [
+        "系统开发",
+        "AI开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "J.W. CHANG",
-      "desc" : [
-        "System Development",
-        "AI Development"
+      "status": "团队成员",
+      "name": "H.J. GONG",
+      "desc": [
+        "数据分析",
+        "前后端开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "H.J. GONG",
-      "desc" : [
-        "Data Analysis",
-        "Backend & Frontend Development"
+      "status": "团队成员",
+      "name": "Y.J. CHO",
+      "desc": [
+        "系统开发者",
+        "前后端开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "Y.J. CHO",
-      "desc" : [
-        "System Developer",
-        "Backend & Frontend Development"
-      ]
-    },
-    {
-      "status" : "Team Member",
-      "name" : "S.A. LEE",
-      "desc" : [
-        "System Developer",
-        "Backend & Frontend Development"
+      "status": "团队成员",
+      "name": "S.A. LEE",
+      "desc": [
+        "系统开发者",
+        "前后端开发"
       ]
     }
   ],
   [{
-    "status" : "Director",
-    "name" : "M.C. CHOI",
-    "desc" : [
-      "Pusan National University",
-      "Planning General Manager",
-      "Alibaba Global Challenge World Finalist"
+    "status": "主管",
+    "name": "M.C. CHOI",
+    "desc": [
+      "釜山大学",
+      "策划总经理",
+      "阿里巴巴全球挑战赛世界决赛选手"
     ]
   },
     {
-      "status" : "Manager",
-      "name" : "J.W. JEON",
-      "desc" : [
-        "Sales Planning"
+      "status": "经理",
+      "name": "J.W. JEON",
+      "desc": [
+        "销售策划"
       ]
     },
     {
-      "status" : "Manager",
-      "name" : "M.H. CHOI",
-      "desc" : [
-        "Japanese Market Development"
+      "status": "经理",
+      "name": "M.H. CHOI",
+      "desc": [
+        "日本市场开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "T.C. LA",
-      "desc" : [
-        "Vietnamese Market Development"
+      "status": "团队成员",
+      "name": "T.C. LA",
+      "desc": [
+        "越南市场开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "U.Y. LEE",
-      "desc" : [
-        "Chinese Market Development"
+      "status": "团队成员",
+      "name": "U.Y. LEE",
+      "desc": [
+        "中国市场开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "H. YANG",
-      "desc" : [
-        "Chinese Market Development"
+      "status": "团队成员",
+      "name": "H. YANG",
+      "desc": [
+        "中国市场开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "BAYARAA",
-      "desc" : [
-        "Asia Market Development"
+      "status": "团队成员",
+      "name": "Bayaraa",
+      "desc": [
+        "亚洲市场开发"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "J.E. LEE",
-      "desc" : [
-        "U.S. Market Development"
+      "status": "团队成员",
+      "name": "J.E. LEE",
+      "desc": [
+        "美国市场开发"
+      ]
+    },
+    {
+      "status": "经理",
+      "name": "Oumaima",
+      "desc": [
+        "迪拜分公司负责人"
       ]
     }
   ],
   [{
-    "status" : "Executive Director",
-    "name" : "J.M. KOO",
-    "desc" : [
-      "Network Security & Data Analysis Specialist at HP",
-      "8 Years of Experience as a Full-Time Cryptocurrency Trader"
+    "status": "执行董事",
+    "name": "J.M. KOO",
+    "desc": [
+      "惠普网络安全和数据分析专家",
+      "8年全职加密货币交易员经验"
     ]
   },
     {
-      "status" : "Director",
-      "name" : "D. CHAN",
-      "desc" : [
-        "New Business Development",
-        "Sungkyunkwan University"
+      "status": "主管",
+      "name": "C. DOO",
+      "desc": [
+        "新业务开发",
+        "成均馆大学"
       ]
     },
     {
-      "status" : "P.D.",
-      "name" : "B.C. YU",
-      "desc" : [
-        "Contents P.D."
+      "status": "团队成员",
+      "name": "M.J. LEE",
+      "desc": [
+        "平面设计",
+        "网页与应用程序设计"
       ]
     },
     {
-      "status" : "Director",
-      "name" : "J.C. LEE",
-      "desc" : [
-        "Graphic Design",
-        "Web & Application Design"
-      ]
-    },
-    {
-      "status" : "Team Member",
-      "name" : "M.J. LEE",
-      "desc" : [
-        "Graphic Design",
-        "Web & Application Design"
-      ]
-    },
-    {
-      "status" : "Team Member",
-      "name" : "Y.H. CHO",
-      "desc" : [
-        "Visual Arts"
+      "status": "团队成员",
+      "name": "Y.H. CHO",
+      "desc": [
+        "视觉艺术"
       ]
     }
   ],
   [{
-    "status" : "Executive Director",
-    "name" : "U.J. OH",
-    "desc" : [
-      "Full-time Trader Professional Training Instructor (with over 1,000 members)",
-      "Investment Expert at the Cryptocurrency Academy"
+    "status": "执行董事",
+    "name": "U.J. OH",
+    "desc": [
+      "全职交易员培训讲师（拥有1000多名会员）",
+      "加密货币学院投资专家"
     ]
   },
     {
-      "status" : "Team Manager",
-      "name" : "S.H. KIM",
-      "desc" : [
-        "Algorithm Planning",
-        "World Semi-Finalist at Major International Trading Cup"
+      "status": "团队经理",
+      "name": "S.H. KIM",
+      "desc": [
+        "算法策划",
+        "国际交易大赛半决赛选手"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "I.S. KIM",
-      "desc" : [
-        "Data Analysis",
-        "Algorithm & Autobot Review"
+      "status": "团队成员",
+      "name": "I.S. KIM",
+      "desc": [
+        "数据分析",
+        "算法和自动交易程序审核"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "H.R. KANG",
-      "desc" : [
-        "System Developer",
-        "Backtesting & Autobot Development"
+      "status": "团队成员",
+      "name": "H.R. KANG",
+      "desc": [
+        "系统开发",
+        "回测与自动交易程序开发"
+      ]
+    },
+    {
+      "status": "团队成员",
+      "name": "Y.S. KIM",
+      "desc": [
+        "系统开发",
+        "UI开发"
       ]
     }
   ],
   [{
-    "status" : "External Consultant",
-    "name" : "MR. MIN",
-    "desc" : [
-      "Served CEO of HILIVING"
+    "status": "外部顾问",
+    "name": "MR. MIN",
+    "desc": [
+      "曾任HILIVING首席执行官"
     ]
   },
     {
-      "status" : "External Advisor",
-      "name" : "MR. LEE",
-      "desc" : [
-        "Served National Intelligence Head of Department"
+      "status": "外部顾问",
+      "name": "MR. LEE",
+      "desc": [
+        "曾任国家情报部门负责人"
       ]
     },
     {
-      "status" : "External Spokesperson",
-      "name" : "MR. CHOI",
-      "desc" : [
-        "Served Mayor in Korea",
-        "CEO of the Major Journal"
+      "status": "外部发言人",
+      "name": "MR. CHOI",
+      "desc": [
+        "曾任韩国市长",
+        "主要报刊首席执行官"
       ]
     },
     {
-      "status" : "External Advisor",
-      "name" : "MR. JANG",
-      "desc" : [
-        "CEO, NewPromise LAB (AI, Blockchain, WEB3.0)",
-        "POSTECH Adjunct Prof. Ph.D."
+      "status": "外部顾问",
+      "name": "MR. JANG",
+      "desc": [
+        "新承诺实验室（AI，区块链，WEB3.0）首席执行官",
+        "POSTECH客座教授，博士"
       ]
     },
     {
-      "status" : "External Spokesperson",
-      "name" : "MR. KIM",
-      "desc" : [
-        "The Korea Times Industry Columnist",
-        "The Blue House Director General",
-        "Korea Communications Commission (KCC)"
+      "status": "外部发言人",
+      "name": "MR. KIM",
+      "desc": [
+        "《韩国时报》产业专栏作家",
+        "青瓦台局长",
+        "韩国通信委员会（KCC）"
       ]
     }
   ],
   [{
-    "status" : "Law Firm Decent",
-    "name" : "Elliot (Law Firm Decent)",
-    "desc" : [
-      "Consultation on comprehensive business structure of P2E corporation P2E issuing virtual assets",
-      "ICO, SAFT, exchange acquisition contracts of company B, a virtual asset Issuer",
-      "Number of white papers reviewed and consulted on virtual asset and NFT issuers",
-      "Consult on Algorithmic virtual asset trading company U. Response to tax audit held on Company B",
-      "Review and advisory on company K's NFT platform business model"
+    "status": "德森律师事务所",
+    "name": "Elliot (Law Firm Decent)",
+    "desc": [
+      "咨询P2E公司虚拟资产发行的综合业务结构",
+      "公司B的ICO、SAFT、交易所收购合同（虚拟资产发行方）",
+      "多项白皮书审查与虚拟资产和NFT发行方咨询",
+      "为算法虚拟资产交易公司U提供咨询。应对公司B的税务审计",
+      "为公司K的NFT平台业务模型提供审查和咨询"
     ]
   },
     {
-      "status" : "Law Firm Decent",
-      "name" : "IAN (Law Firm Decent)",
-      "desc" : [
-        "A fraud suit worth KRW 2 trillion by the top-level employee of company V, a multi-level coin exchange",
-        "Virtual asset contract structure advisory on algorithmic trading company B",
-        "Comprehensive legal advice on NFT issuer C company through in-house lawyer service",
-        "Response to the Bitcoin transaction broker D's fraud investigation incurred from accidental transaction"
+      "status": "德森律师事务所",
+      "name": "IAN (Law Firm Decent)",
+      "desc": [
+        "公司V（多层级加密货币交易所）高级员工涉嫌20亿韩元的欺诈案",
+        "算法交易公司B的虚拟资产合同结构顾问",
+        "通过公司内部律师服务对NFT发行方C公司提供全面法律咨询",
+        "应对比特币交易经纪人D因意外交易引发的欺诈调查"
       ]
     }
   ]
