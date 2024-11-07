@@ -23,7 +23,7 @@ export default function Page({params : { locale }} : {params : {locale : string}
                 <div>
                     <h2>Description of Services</h2>
                     <p>
-                        vobc.io provides an online platform for [describe services provided]. These services are provided &quot;as is&quot; and are subject to change without notice.
+                        vobc.io provides an online platform for the VOB foundation. These services are provided &quot;as is&quot; and are subject to change without notice.
                     </p>
                 </div>
                 <div>
@@ -83,7 +83,7 @@ export default function Page({params : { locale }} : {params : {locale : string}
                 <div>
                     <h2>Governing Law</h2>
                     <p>
-                        These Terms of Service are governed by the laws of [jurisdiction], without regard to its conflict of laws principles. Any disputes arising out of or relating to these terms shall be resolved exclusively in the courts of [jurisdiction].
+                        These Terms of Service are governed by the laws of jurisdiction, without regard to its conflict of laws principles. Any disputes arising out of or relating to these terms shall be resolved exclusively in the courts of jurisdiction.
                     </p>
                 </div>
 
@@ -93,17 +93,10 @@ export default function Page({params : { locale }} : {params : {locale : string}
                         We reserve the right to modify or update these Terms of Service at any time. Any changes will be effective immediately upon posting. You are responsible for reviewing the terms periodically for changes.
                     </p>
                 </div>
-
-                <div>
-                    <h2>Contact Information</h2>
-                    <p>
-                        If you have any questions or concerns about these Terms of Service, please contact us at [contact email or address].
-                    </p>
-                </div>
                 <div>
                     <h2>Effective Date</h2>
                     <p>
-                        These Terms of Service were last updated on [date].
+                        These Terms of Service were last updated on 11.07.2024.
                     </p>
                 </div>
 

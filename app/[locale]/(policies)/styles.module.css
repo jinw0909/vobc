@@ -3,7 +3,7 @@
 }
 .termsTitle {
     margin-top: 10rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
 }
 .termsContent {
@@ -11,7 +11,7 @@
     margin-top: 2rem;
 }
 .termsContent h2 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-top: 1rem;
     margin-bottom: .5rem;
 }
@@ -22,6 +22,7 @@
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;
     color: transparent;
+    font-size: .8rem;
 }
 @media (min-width: 1200px) {
     .termsWrapper {

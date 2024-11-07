@@ -30,16 +30,12 @@ export default function Page({params : { locale }} : {params : {locale : string}
                     <p>You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but you can usually modify your browser settings to decline cookies if you prefer. However, this may prevent you from taking full advantage of the website.</p>
                 </div>
                 <div>
-                    <h2>More Information</h2>
-                    <p>If you have any questions or concerns about our use of cookies, please contact us at [contact email or address].</p>
-                </div>
-                <div>
                     <h2>Changes to This Policy</h2>
                     <p>We reserve the right to update or modify this Cookies Policy at any time. Any changes will be effective immediately upon posting on this page. We encourage you to review this Cookies Policy periodically for any updates.</p>
                 </div>
                 <div>
                     <h2>Effective Date</h2>
-                    <p>This Cookies Policy was last updated on [date].</p>
+                    <p>This Cookies Policy was last updated on 11.07.2024</p>
                 </div>
             </div>
         </div>
