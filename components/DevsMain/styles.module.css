@@ -51,6 +51,7 @@
 @media (max-width: 576px) {
     .devsWrapper {
         flex-direction: column;
+        margin-top: 8rem;
     }
     .imgElem {
         width: 50vw;

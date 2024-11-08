@@ -1,13 +1,15 @@
 import styles from './styles.module.css';
 import {NewsMediaBand} from "@/ui/NewsMediaBand";
-import image0 from '@/public/news/koreatimes0.jpg';
-import image1 from '@/public/news/herald6.jpg';
-import image2 from '@/public/news/herald.jpeg'
-import image3 from '@/public/news/herald2.jpeg';
-import image4 from '@/public/news/herald3.jpeg';
-import image5 from '@/public/news/herald4.jpeg';
-import image6 from '@/public/news/cointelegraphimage.png';
-import image7 from '@/public/news/retriseminar.jpeg';
+import image0 from '@/public/news/deepcoin.png';
+import image1 from '@/public/news/blockchaintoday.jpg';
+import image2 from '@/public/news/koreatimes0.jpg';
+import image3 from '@/public/news/herald6.jpg';
+import image4 from '@/public/news/herald.jpeg'
+import image5 from '@/public/news/herald2.jpeg';
+import image6 from '@/public/news/herald3.jpeg';
+import image7 from '@/public/news/herald4.jpeg';
+import image8 from '@/public/news/cointelegraphimage.png';
+import image9 from '@/public/news/retriseminar.jpeg';
 import data from '@/json/news.json';
 import {getTranslations} from "next-intl/server";
 import {LogoPlain} from "@/ui/LogoPlain";
@@ -19,10 +21,10 @@ const notosansjp = Noto_Sans_JP({
     subsets: ['latin']
 });
 
-const data1 = data.slice(0, 2);
-const data2 = data.slice(2, 8);
-const imgSrc1 = [image0, image1];
-const imgSrc2 = [image2, image3, image4, image5, image6, image7]
+const data1 = data.slice(0, 4);
+const data2 = data.slice(4, 10);
+const imgSrc1 = [image0, image1, image2, image3];
+const imgSrc2 = [image4, image5, image6, image7, image8, image9]
 
 export async function NewsMedia() {
 

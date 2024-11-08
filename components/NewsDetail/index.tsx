@@ -1,14 +1,15 @@
 import styles from './styles.module.css';
 import Image from 'next/image';
-
-import image0 from "@/public/news/koreatimes0.jpg";
-import image1 from "@/public/news/herald6.jpg";
-import image2 from '@/public/news/herald.jpeg';
-import image3 from '@/public/news/herald2.jpeg';
-import image4 from '@/public/news/herald3.jpeg';
-import image5 from '@/public/news/herald4.jpeg';
-import image6 from '@/public/news/cointelegraphimage.png';
-import image7 from '@/public/news/retriseminar.jpeg';
+import image0 from "@/public/news/deepcoin.png";
+import image1 from "@/public/news/blockchaintoday.jpg";
+import image2 from "@/public/news/koreatimes0.jpg";
+import image3 from "@/public/news/herald6.jpg";
+import image4 from '@/public/news/herald.jpeg';
+import image5 from '@/public/news/herald2.jpeg';
+import image6 from '@/public/news/herald3.jpeg';
+import image7 from '@/public/news/herald4.jpeg';
+import image8 from '@/public/news/cointelegraphimage.png';
+import image9 from '@/public/news/retriseminar.jpeg';
 import arrowUp from '@/public/icons/arrow-up-white.png';
 import arrowRight from '@/public/icons/right-arrow-white.png';
 import {NavigationLink} from "@/ui/NavigationLink";
@@ -21,7 +22,7 @@ export async function NewsDetail({idx} : {idx : any}) {
     if (content) { contentArr = content.split('\n'); }
     // let contentArr = data[idx].content.split(`\n`);
 
-    const imgSrc = [image0, image1, image2, image3, image4, image5, image6, image7];
+    const imgSrc = [image0, image1, image2, image3, image4, image5, image6, image7, image8, image9];
 
     return (
         <div className={styles.detailWrapper}>

@@ -1,0 +1,123 @@
+.roadmap { width: 100%; padding-left: 100px; transition: .5s;
+    margin-top: 8rem;}
+.roadmapTitle { font-size: 1.75rem;}
+.roadmapContainer {
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    height: 450px;
+    display: flex;
+    align-items: center;
+}
+.roadmapWrapper {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin: 0 auto;
+    scrollbar-width: none;
+    align-items: center;
+}
+
+.roadmapElem {
+    width: 30%;
+    height: 300px;
+    border: 1px solid #999;
+    flex-shrink: 0;
+    min-width: 200px;
+    transition: .5s;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.roadmapElem.clicked {
+    width: 40%;
+    height: 400px;
+    border: 1px solid white;
+    color: black;
+    border: 0;
+}
+.backgroundWhite {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.5);
+    z-index: 55;
+    opacity: 0;
+    transition: .5s;
+}
+.roadmapElem.clicked .backgroundWhite { opacity: 1; }
+.roadmapBackground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 50;
+    opacity: 0;
+    transition: .5s;
+}
+.roadmapElem.clicked .roadmapBackground {
+    opacity: 1;
+}
+.roadmapElemHead {
+    text-align: center;
+    margin-top: .5rem;
+    position: relative;
+    z-index: 75;
+}
+.roadmapElemBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+}
+.roadmapBodyTitle {
+    font-size: 1rem;
+    position: relative;
+    z-index: 75;
+}
+.roadmapBodyContent {
+    overflow: hidden;
+    max-height: 0;
+    transition: .5s;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 75;
+    font-size: .8rem;
+    color: black;
+}
+.roadmapElem.clicked .roadmapBodyContent {
+    max-height: 100%;
+}
+.roadmapElem.clicked .roadmapBodyTitle {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .roadmap {
+        padding-left: 0;
+    }
+    .roadmapElem.clicked {
+        width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .roadmapElem { height: 250px; }
+    .roadmapElem.clicked {
+        width: 66%;
+        height: 300px;
+    }
+
+}

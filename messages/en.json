@@ -74,6 +74,49 @@
     "viewbtn": "View",
     "checkbtn": "Check"
   },
+  "roadmap" : {
+    "title" : "VOB Project Roadmap",
+    "0" : {
+      "date" : "February 2017",
+      "title" : "Crypto Price Prediction",
+      "content" : "Visualized projections of crypto prices based on GoyaBot's AI-driven analysis, forecasting future trends with the Goya score."
+    },
+    "1" : {
+      "date" : "June 2017",
+      "title" : "Arbitrage Trading Data Collection and Analysis",
+      "content" : "Research and compilation of six years of data on arbitrage trading and historical crypto market patterns for deeper market insights."
+    },
+    "2" : {
+      "date" : "December 2022",
+      "title" : "Listing on LBank CEX Exchange",
+      "content" : "Successfully listed on LBank, a leading centralized exchange."
+    },
+    "3" : {
+      "date" : "May 2023",
+      "title" : "GoyaBot 5.0 Launch & Global Expansion",
+      "content" : "Release of a complete automated trading bot and expanded global reach through online channels."
+    },
+    "4" : {
+      "date" : "October 2023",
+      "title" : "System Enhancements",
+      "content" : "Launch of ReTri's advanced computing system and GOYABOT's premium chart feature."
+    },
+    "5" : {
+      "date" : "October 2023",
+      "title" : "Rising X Beta Platform Launch",
+      "content" : "Initiation of the Rising X platform in beta, paving the way for future releases."
+    },
+    "6" : {
+      "date" : "Q3 2024",
+      "title" : "Full Launch of Rising X Platform",
+      "content" : "The VOB token will act as the primary payment currency, enabling global growth on the Rising X platform."
+    },
+    "7" : {
+      "date" : "Q1 2025",
+      "title" : "Launch of VOB NFT Project",
+      "content" : "Introducing the VOB NFT project to further enhance the platform's ecosystem and user engagement."
+    }
+  },
   "distribution": {
     "vobtoken": "VOB Token",
     "model": "Distribution Model",

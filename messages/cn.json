@@ -74,6 +74,49 @@
     "viewbtn": "查看",
     "checkbtn": "检查"
   },
+  "roadmap": {
+    "title": "VOB项目路线图",
+    "0": {
+      "date": "2017年2月",
+      "title": "加密货币价格预测",
+      "content": "基于GoyaBot的AI驱动分析，预测加密货币价格的可视化投影，预测未来趋势。"
+    },
+    "1": {
+      "date": "2017年6月",
+      "title": "套利交易数据收集和分析",
+      "content": "对套利交易和加密货币市场历史模式进行六年数据的研究和汇编，以获得更深入的市场洞察。"
+    },
+    "2": {
+      "date": "2022年12月",
+      "title": "在LBank CEX交易所上市",
+      "content": "成功在领先的集中式交易所LBank上市。"
+    },
+    "3": {
+      "date": "2023年5月",
+      "title": "GoyaBot 5.0发布与全球扩展",
+      "content": "发布全自动交易机器人，并通过在线渠道扩大全球影响力。"
+    },
+    "4": {
+      "date": "2023年10月",
+      "title": "系统增强",
+      "content": "推出ReTri的高级计算系统和GOYABOT的高级图表功能。"
+    },
+    "5": {
+      "date": "2023年10月",
+      "title": "Rising X Beta平台发布",
+      "content": "Rising X平台的测试版启动，为未来版本铺平道路。"
+    },
+    "6": {
+      "date": "2024年第三季度",
+      "title": "Rising X平台全面发布",
+      "content": "VOB代币将成为主要支付货币，促进Rising X平台的全球增长。"
+    },
+    "7": {
+      "date": "2025年第一季度",
+      "title": "VOB NFT项目发布",
+      "content": "推出VOB NFT项目，以进一步增强平台生态系统和用户参与。"
+    }
+  },
   "distribution": {
     "vobtoken": "VOB代币",
     "model": "分配模型",

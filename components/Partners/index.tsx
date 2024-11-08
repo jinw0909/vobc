@@ -8,7 +8,7 @@ import vobLogo from '@/public/vob_logo_2.png';
 import {LogoPlain} from "@/ui/LogoPlain";
 import crossWhite from '@/public/icons/cross-white.png';
 import Link from 'next/link'
-import { useTranslations} from "next-intl";
+import { useTranslations } from "next-intl";
 import {useState} from "react";
 export function Partners() {
 

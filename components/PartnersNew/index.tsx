@@ -20,7 +20,7 @@ export function PartnersNew() {
 
     const partnersElems = [
         { id: 1, name: 'lbank', type: 'exchange', logo: 'lbankLogo', url: 'https://www.lbank.com/trade/vob_usdt', color: '#FFD800'},
-        { id: 2, name: 'deepcoin', type: 'exchange', logo: 'deepcoinLogo', url: 'https://www.deepcoin.com', color: '#FE7701'},
+        { id: 2, name: 'deepcoin', type: 'exchange', logo: 'deepcoinLogo', url: 'https://www.deepcoin.com/en/Spot?currentId=VOB%2FUSDT', color: '#FE7701'},
         // { id: 3, name: 'cointrpro', type: 'exchange', logo: 'cointrLogo', url: '/', color: '#03D56F', desc: 'CoinTR.com is an integrated international Cryptocurrency platform founded in 2022. Powerful founders of traditional Turkish financial institutions and experienced team members from top crypto exchanges in London &amp; Istanbul, Turkey make us more competitive and trustworthy.', },
         // { id: 4, name: 'Partner 4', type: 'exchange', logo: 'lbankLogo', url: '/', color: '#FFD800', desc: 'jkl',  },
         // { id: 5, name: 'Partner 5', type: 'partner', logo: 'lbankLogo', url: '/', color: '#FE7701', desc: 'mno',  },

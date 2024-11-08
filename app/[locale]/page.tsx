@@ -50,9 +50,11 @@ export default async function Page({params : { locale }} : {params : {locale : s
           <div className={styles.subWrapper}>
               <DevsMain/>
           </div>
-          {/*<div className={styles.subWrapper}>*/}
-          {/*    <Roadmap />*/}
-          {/*</div>*/}
+          <div className={styles.subWrapper}>
+              <NextIntlClientProvider messages={messages}>
+                <Roadmap />
+              </NextIntlClientProvider>
+          </div>
           <div className={styles.subWrapper}>
               <NextIntlClientProvider messages={messages}>
                   <Distribution/>

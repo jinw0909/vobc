@@ -58,10 +58,10 @@ export default async function RootLayout ({
         <MobileHeader/>
         <Breadcrumbs/>
       </NextIntlClientProvider>
-      {children}
-            <MobileFooter />
-            <Footer />
-          </body>
+        {children}
+        <MobileFooter />
+        <Footer />
+      </body>
       </html>
   );
 }
