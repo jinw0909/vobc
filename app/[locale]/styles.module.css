@@ -99,9 +99,11 @@
 @media (max-width: 575px) {
     .mainWrapper {
         padding: 1rem;
+        min-height: 75vh;
     }
     .subWrapper {
         padding: 1rem;
+        min-height: 50vh;
     }
     .mainText {
         margin: 0 auto;
