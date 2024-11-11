@@ -79,7 +79,7 @@ export function Roadmap() {
     return (
         <div className={styles.roadmap}>
             <div className={styles.roadmapTitle}>{t('title')}</div>
-            <div className={styles.roadmapContainer}>
+            {/*<div className={styles.roadmapContainer}>*/}
                 <div ref={wrapperRef} className={styles.roadmapWrapper}>
                 {roadmapData.map((item, index) => (
                     <div
@@ -104,7 +104,7 @@ export function Roadmap() {
                     </div>
                 ))}
             </div>
-            </div>
+            {/*</div>*/}
         </div>
     );
 }
