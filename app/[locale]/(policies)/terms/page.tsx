@@ -1,9 +1,9 @@
 import styles from '../styles.module.css';
 import data from '@/json/policy.json';
-import {unstable_setRequestLocale} from "next-intl/server";
+import {setRequestLocale, unstable_setRequestLocale} from "next-intl/server";
 
 export default function Page({params : { locale }} : {params : {locale : string}}) {
-    unstable_setRequestLocale(locale);
+    setRequestLocale(locale);
 
     const term = 'terms';
     return (

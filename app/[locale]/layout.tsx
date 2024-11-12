@@ -8,7 +8,9 @@ import {MobileHeader} from "@/components/MobileHeader";
 import {MobileFooter} from "@/components/MobileFooter";
 import {Breadcrumbs} from "@/ui/Breadcrumbs";
 import {useMessages, NextIntlClientProvider} from "next-intl";
-import {getMessages, getTranslations} from "next-intl/server";
+import {getMessages, getTranslations, setRequestLocale} from "next-intl/server";
+import {routing} from "@/i18n/routing";
+import {notFound} from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 const notoserifjp = Noto_Serif_JP({
@@ -17,12 +19,11 @@ const notoserifjp = Noto_Serif_JP({
   subsets: ['latin']
 });
 
-const locales = ['en', 'jp', 'cn'];
 export function generateStaticParams() {
-    return locales.map((locale) => ({locale}));
+    return routing.locales.map((locale) => ({locale}));
 }
 
-export default async function RootLayout ({
+export default async function LocaleLayout ({
       children,
       params : { locale }
     } : {
@@ -30,9 +31,17 @@ export default async function RootLayout ({
       params: { locale: string }
     }) {
 
+//Ensure that the incoming `locale` is valid
+    if (!routing.locales.includes(locale as any)) {
+        notFound();
+    }
+    //Enable static rendering
+    setRequestLocale(locale);
+
+ //Providing all messges to the client
+ //side is the easiest way to get started
   const messages = await getMessages();
   const t = await getTranslations();
-
 
   // @ts-ignore
   // @ts-ignore
@@ -54,14 +63,14 @@ export default async function RootLayout ({
           <meta name="google-site-verification" content="ru0B7RK4jUkPTr8qhdl2N6KsC1gQ1VEU1_Y6K46lC74"/>
       </head>
       <body className={`${notoserifjp.className}`}>
-      <Header lang={locale}/>
-      <NextIntlClientProvider messages={messages}>
-        <MobileHeader/>
-        <Breadcrumbs/>
-      </NextIntlClientProvider>
-        {children}
-        <MobileFooter />
-        <Footer />
+          <Header lang={locale}/>
+              <NextIntlClientProvider messages={messages}>
+                <MobileHeader/>
+                <Breadcrumbs/>
+                {children}
+              </NextIntlClientProvider>
+          <MobileFooter />
+          <Footer />
       </body>
       </html>
   );

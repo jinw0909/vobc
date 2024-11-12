@@ -80,6 +80,15 @@
         transition: .5s;
     }
     .languageModal {
-        padding-right: calc(10vw + 2rem);
+        padding-right: 10vw;
+    }
+}
+
+@media (min-width: 1500px) {
+    .languageWrapper {
+        right: calc((100vw - 1200px) / 2);
+    }
+    .languageModal {
+        padding-right: calc((100vw - 1200px) / 2);
     }
 }

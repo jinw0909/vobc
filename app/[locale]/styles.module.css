@@ -84,10 +84,12 @@
     .mainWrapper {
         width: 80vw;
         margin: auto;
+        max-width: 1200px;
     }
     .subWrapper {
         width: 80vw;
         margin: auto;
+        max-width: 1200px;
     }
 }
 

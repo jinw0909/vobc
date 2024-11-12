@@ -24,6 +24,12 @@
     .logoWrapper {
         transition: .5s;
         left: calc(10vw + 2rem);
+
+    }
+}
+@media (min-width: 1500px) {
+    .logoWrapper {
+        left: calc((100vw - 1200px) / 2 + 2rem);
     }
 }
 

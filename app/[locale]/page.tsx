@@ -15,12 +15,13 @@ import {Wrapup} from "@/components/Wrapup";
 import {PartnersNew} from "@/components/PartnersNew";
 
 
-export default async function Page({params : { locale }} : {params : {locale : string}}) {
+export default function Page({params : { locale }} : {params : {locale : string}}) {
   // unstable_setRequestLocale(locale);
   setRequestLocale(locale);
 
-  const t = await getTranslations('main');
-  const messages = await getMessages();
+  // const t = await getTranslations('main');
+  const t = useTranslations('main');
+  // const messages = await getMessages();
 
   return (
       <>
@@ -44,27 +45,27 @@ export default async function Page({params : { locale }} : {params : {locale : s
           {/*    <About/>*/}
           {/*</div>*/}
           <div className={styles.subWrapper}>
-              <NextIntlClientProvider messages={messages}>
+              {/*<NextIntlClientProvider messages={messages}>*/}
                   <Whitepaper/>
-              </NextIntlClientProvider>
+              {/*</NextIntlClientProvider>*/}
           </div>
           <div className={styles.subWrapper}>
               <DevsMain/>
           </div>
           <div className={styles.subWrapper}>
-              <NextIntlClientProvider messages={messages}>
+              {/*<NextIntlClientProvider messages={messages}>*/}
                 <Roadmap />
-              </NextIntlClientProvider>
+              {/*</NextIntlClientProvider>*/}
           </div>
           <div className={styles.subWrapper}>
-              <NextIntlClientProvider messages={messages}>
+              {/*<NextIntlClientProvider messages={messages}>*/}
                   <Distribution/>
-              </NextIntlClientProvider>
+              {/*</NextIntlClientProvider>*/}
           </div>
           <div className={styles.subWrapper}>
-              <NextIntlClientProvider messages={messages}>
+              {/*<NextIntlClientProvider messages={messages}>*/}
                   <PartnersNew/>
-              </NextIntlClientProvider>
+              {/*</NextIntlClientProvider>*/}
           </div>
           {/*<div className={styles.subWrapper}>*/}
           {/*    <Wrapup/>*/}

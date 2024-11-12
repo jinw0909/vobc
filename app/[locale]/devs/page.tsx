@@ -1,9 +1,9 @@
 import styles from './styles.module.css'
 import {Devs} from "@/components/Devs";
-import {unstable_setRequestLocale} from "next-intl/server";
+import {setRequestLocale, unstable_setRequestLocale} from "next-intl/server";
 
 export default async function Page({params : { locale }} : {params : {locale : string}}) {
-    unstable_setRequestLocale(locale);
+    setRequestLocale(locale);
 
     console.log("devlocale: ");
     return (
