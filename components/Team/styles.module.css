@@ -250,6 +250,13 @@
     }
 }
 
+/*@media (min-width: 1400px) {*/
+/*    .itemBand h2 {*/
+/*        font-size: 2rem;*/
+/*        margin-bottom: 1rem;*/
+/*    }*/
+/*}*/
+
 @media (max-width: 768px) {
     /*.teamWrapper { padding : 1.5rem; }*/
     .itemList { flex-wrap: nowrap; }

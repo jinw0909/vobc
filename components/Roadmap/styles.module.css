@@ -21,7 +21,7 @@
 }
 
 .roadmapElem {
-    width: 40%;
+    width: 30%;
     height: 350px;
     flex-shrink: 0;
     border: 0;
@@ -38,7 +38,7 @@
 }
 
 .roadmapElem.clicked {
-    width: 50%;
+    width: 40%;
     /*height: 400px;*/
     border: 1px solid #999;
     color: white;
@@ -104,6 +104,25 @@
 .roadmapElem.clicked .roadmapBodyTitle {
     font-size: 1.25rem;
 }
+@media (min-width: 1200px) {
+    .roadmapElem { width: 30%;}
+}
+
+@media (min-width: 1400px) {
+    .roadmapElem {
+        width: 30%;
+        height: 450px
+    }
+    .roadmapElem.clicked {
+        width: 40%;
+    }
+    .roadmapBodyTitle { font-size: 1.5rem; }
+    .roadmapElem.clicked .roadmapBodyTitle { font-size: 1.5rem; }
+    .roadmapElem.clicked .roadmapBodyContent { font-size: 1rem; }
+}
+@media (min-width: 1400px) {
+    .roadmapTitle { font-size: 2.5rem; }
+}
 
 @media (max-width: 768px) {
     .roadmapTitle { font-size: 1.5rem; }
@@ -118,7 +137,7 @@
 
 @media (max-width: 576px) {
     .roadmapTitle { font-size: 1.25rem;}
-    .roadmapElem { height: 250px; width: 66%;}
+    .roadmapElem { width: 66%;}
     .roadmapElem.clicked {
         width: 75%;
         /*height: 300px;*/

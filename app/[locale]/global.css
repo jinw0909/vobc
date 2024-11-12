@@ -26,6 +26,12 @@ body::-webkit-scrollbar-thumb:hover {
 /*body::-webkit-scrollbar-thumb:active {*/
 /*    background-color: #fff; !* color of the thumb when active *!*/
 /*}*/
+@media (min-width: 1400px) {
+    body {
+        font-size: 1.2rem;
+    }
+}
+
 @media (max-width: 576px) {
     body {
         font-size: .8rem;

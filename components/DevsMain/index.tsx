@@ -21,8 +21,8 @@ export const DevsMain = async () => {
                 />
             </div>
             <div className={`${styles.textElem} flex-1`}>
-                <div className="text-4xl mb-4">{t('title')}</div>
-                <div className="text-xl mb-4">{t('subtitle')}</div>
+                <div className={`text-4xl mb-4 ${styles.devsMainTitle}`}>{t('title')}</div>
+                <div className={`text-xl mb-4 ${styles.devsMainSubTitle}`}>{t('subtitle')}</div>
                 <div className={`${styles.textStyle} mb-4`}>
                     {t('content')}
                 </div>

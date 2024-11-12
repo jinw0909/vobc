@@ -78,9 +78,15 @@
 
 .white { color: white; }
 
+
 @media (min-width: 1200px) {
     .mediaElement { height: 300px; width: 350px; }
 }
+
+@media (min-width : 1400px) {
+    .mediaElement { width: 400px; height: 350px; }
+}
+
 
 @media (max-width: 768px) {
     .mediaElementWrapper { flex-wrap: nowrap; gap: 1rem; }

@@ -16,6 +16,10 @@
     font-size: 1.5rem;
 }
 
+@media (min-width : 1400px) {
+    .logoText { font-size: 2rem; }
+}
+
 @media (min-width: 1200px) {
     .logoWrapper {
         transition: .5s;

@@ -13,6 +13,8 @@
         margin: auto;
     }
 }
+
+
 @media (max-width: 768px) {
     .aboutWrapper {
         padding: 1.5rem;

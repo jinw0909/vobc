@@ -48,6 +48,14 @@
     color: transparent;
 }
 
+@media (min-width: 1400px) {
+    .devsMainTitle { font-size: 3rem;}
+    .devsMainSubTitle  {font-size: 1.5rem; }
+    .checkoutBtn { font-size: 1.5rem; }
+    .imgElem { width: 66%; }
+}
+
+
 @media (max-width: 576px) {
     .devsWrapper {
         flex-direction: column;

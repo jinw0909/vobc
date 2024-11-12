@@ -245,6 +245,20 @@
 /*    opacity: 0.5;*/
 /*}*/
 .label:active { opacity: 0.5; }
+
+@media (min-width: 1200px) {
+    .item {
+        width: 14rem;
+    }
+}
+@media (min-width: 1400px) {
+    .item { width: 16rem; }
+    .itemBandWrapper h2 {
+        font-size: 2rem;
+        transition: .5s;
+        margin-bottom: 1.5rem;
+    }
+}
 @media (max-width: 768px) {
     /*.teamWrapper { padding : 1.5rem; }*/
     .itemList { flex-wrap: nowrap; }

@@ -31,7 +31,7 @@ export const Whitepaper = () => {
     return (
         <div className={styles.whitepaperWrapper}>
             <div className={styles.vtLine}></div>
-            <div className={`${styles.whitepaperInner} ${showPaper ? styles.show : ''}`}
+            <div className={`${styles.whitepaperInner} ${styles.whitePaper} ${showPaper ? styles.show : ''}`}
                 onClick={()=>{ handleShowPaper()} }>
                 <div className={`${styles.whitepaperText}`}>
                     <div className={styles.whitepaperTitle}>White Paper</div>

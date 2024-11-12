@@ -39,7 +39,11 @@
     to {opacity: 1 }
 }
 
-
+@media (min-width: 1400px) {
+    .elemTitle {
+        font-size: 1.5rem;
+    }
+}
 
 @media (max-width: 576px) {
     .accElem {

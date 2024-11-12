@@ -65,6 +65,12 @@
         opacity: 1;
     }
 }
+
+@media (min-width: 1400px) {
+    .mainTitle { font-size: 2.5rem; }
+    .elementTitle { font-size: 2rem; }
+}
+
 @media (max-width: 576px) {
     .mainTitle {
         font-size: 2rem;

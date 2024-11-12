@@ -127,18 +127,6 @@
     animation-delay: 3s;
 }
 
-@media (max-width: 576px) {
-    .headerText { font-size: 1.2rem }
-
-    .visionImg { width: 24px; }
-    .blockImg { width: 24px; }
-    .vobImg { width: 16px; height: 24px; }
-
-    .vobHeader::after {
-        width: 99%;
-    }
-}
-
 @keyframes typing {
     0% { width: 100% }
     25% { width: 0 }
@@ -156,6 +144,29 @@
     }
     to {
         opacity: 1;
+    }
+}
+
+@media (min-width: 1400px) {
+    .visionHeader,
+    .blockHeader,
+    .vobHeader {
+        font-size: 2rem;
+    }
+    .headerText { font-size: 2rem; }
+    .about {font-size: 2rem;}
+
+}
+
+@media (max-width: 576px) {
+    .headerText { font-size: 1.2rem }
+
+    .visionImg { width: 24px; }
+    .blockImg { width: 24px; }
+    .vobImg { width: 16px; height: 24px; }
+
+    .vobHeader::after {
+        width: 99%;
     }
 }
 

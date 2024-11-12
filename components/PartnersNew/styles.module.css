@@ -178,6 +178,11 @@
     opacity: 1;
 }
 
+@media (min-width: 1400px) {
+    .desc { font-size: 1.2rem; }
+    .vobElem > div { transform: scale(1.5); }
+}
+
 @media (max-width: 768px) {
     .title {font-size: 1.5rem; }
     .desc {font-size: 1rem; }
