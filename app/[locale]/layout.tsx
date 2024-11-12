@@ -33,6 +33,7 @@ export default async function RootLayout ({
   const messages = await getMessages();
   const t = await getTranslations();
 
+
   // @ts-ignore
   // @ts-ignore
   return (
