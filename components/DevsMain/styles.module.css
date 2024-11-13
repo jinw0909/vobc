@@ -6,6 +6,7 @@
 }
 .imgElem {
     transition: .5s;
+    width: 66%;
 }
 .textElem {
     display: flex;
@@ -52,14 +53,13 @@
     .devsMainTitle { font-size: 3rem;}
     .devsMainSubTitle  {font-size: 1.5rem; }
     .checkoutBtn { font-size: 1.5rem; }
-    .imgElem { width: 66%; }
 }
 
 
 @media (max-width: 576px) {
     .devsWrapper {
         flex-direction: column;
-        margin-top: 8rem;
+        margin: 4rem 0;
     }
     .imgElem {
         width: 50vw;

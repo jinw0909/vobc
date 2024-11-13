@@ -6,6 +6,7 @@ import {DevsMain} from "@/components/DevsMain";
 import {getMessages, getTranslations, setRequestLocale, unstable_setRequestLocale} from "next-intl/server";
 import {useTranslations} from "next-intl";
 import {Whitepaper} from "@/components/Whitepaper";
+import {SmartContract} from "@/components/SmartContract";
 import {Roadmap} from "@/components/Roadmap";
 import {Distribution} from "@/components/Distribution";
 import {Partners} from "@/components/Partners";
@@ -46,25 +47,29 @@ export default function Page({params : { locale }} : {params : {locale : string}
           {/*</div>*/}
           <div className={styles.subWrapper}>
               {/*<NextIntlClientProvider messages={messages}>*/}
-                  <Whitepaper/>
+              <Whitepaper/>
               {/*</NextIntlClientProvider>*/}
           </div>
           <div className={styles.subWrapper}>
               <DevsMain/>
           </div>
           <div className={styles.subWrapper}>
+              <SmartContract/>
+          </div>
+          <div className={styles.subWrapper}>
               {/*<NextIntlClientProvider messages={messages}>*/}
-                <Roadmap />
+              <Roadmap/>
               {/*</NextIntlClientProvider>*/}
           </div>
           <div className={styles.subWrapper}>
               {/*<NextIntlClientProvider messages={messages}>*/}
-                  <Distribution/>
+              <Distribution/>
               {/*</NextIntlClientProvider>*/}
           </div>
+
           <div className={styles.subWrapper}>
               {/*<NextIntlClientProvider messages={messages}>*/}
-                  <PartnersNew/>
+              <PartnersNew/>
               {/*</NextIntlClientProvider>*/}
           </div>
           {/*<div className={styles.subWrapper}>*/}

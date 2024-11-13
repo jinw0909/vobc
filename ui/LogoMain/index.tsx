@@ -15,7 +15,6 @@ const kaisei = Kaisei_HarunoUmi({
     subsets: ["latin-ext"]
 });
 
-
 export const LogoMain = async () => {
     return (
         <NavigationLink href="/">
