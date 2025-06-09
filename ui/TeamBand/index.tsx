@@ -21,7 +21,7 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
                         <ul className={styles.itemList}>
                             {
                                 profile.map((a:any, i:any) => {
-                                    if (order != 6) {
+                                    if (order != 7) {
                                         return (
                                             <li className={styles.item} key={i}>
                                                 <div className={styles.itemInner}>

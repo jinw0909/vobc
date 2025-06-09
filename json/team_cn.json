@@ -1,73 +1,96 @@
 [
-  [{
-    "status": "首席执行官",
-    "name": "IRON WON",
-    "desc": [
-      "业务顾问",
-      "参与的风险投资项目如下：Hycon (HYC) / Cardano (ADA) / VERASITY (VRA) / ICON (ICX) / Electric Vehicle Zone (EVZ) / BlueWhale (BWX) / FuzeX (FXT)"
-    ]
-  },
+  [
     {
-      "status": "首席运营官",
-      "name": "GEON",
+      "status": "CEO",
+      "name": "IRON WON",
       "desc": [
-        "拥有超过6年的套利交易和市场数据分析经验",
-        "VOB在20多个国家的市场推广负责人",
-        "Blocksquare联合创始人",
-        "POSTECH区块链专家项目毕业生"
+        "商务顾问",
+        "参与以下风险投资项目：Hycon (HYC) / Cardano (ADA) / VERASITY (VRA) / ICON (ICX) / Electric Vehicle Zone (EVZ) / BlueWhale (BWX) / FuzeX (FXT)"
       ]
     },
     {
-      "status": "首席财务官",
+      "status": "COO",
+      "name": "GEON",
+      "desc": [
+        "拥有超过6年套利交易和市场数据分析经验",
+        "负责VOB在20多个国家的市场拓展",
+        "Blocksquare联合创始人",
+        "POSTECH区块链专家项目毕业"
+      ]
+    }
+  ],
+  [
+    {
+      "status": "CFO",
       "name": "J.Y. LEE",
       "desc": [
         "清华大学",
         "VOB创始成员",
-        "参与VRA/EVZ项目"
+        "参与VRA/EVZ项目",
+        "财务管理"
       ]
     },
     {
-      "status": "经理",
+      "status": "Manager",
       "name": "H.A. KIM",
       "desc": [
-        "营销专家"
+        "行政经理"
       ]
-    }],
-  [{
-    "status": "首席技术官",
-    "name": "HYUK",
-    "desc": [
-      "与Bithumb CEX技术人员合作进行多个加密货币项目",
-      "与亚马逊韩国建立合作伙伴关系",
-      "多个加密货币交易自动化平台",
-      "GOYA AI的开发者"
-    ]
-  },
+    },
     {
-      "status": "经理",
+      "status": "Associate",
+      "name": "S.Y. LEE",
+      "desc": [
+        "行政助理"
+      ]
+    }
+  ],
+  [
+    {
+      "status": "CTO",
+      "name": "HYUK",
+      "desc": [
+        "与Bithumb CEX在加密货币项目上的合作",
+        "与韩国亚马逊建立合作关系",
+        "多个加密货币自动化平台",
+        "参与GOYA人工智能开发"
+      ]
+    },
+    {
+      "status": "General Manager",
       "name": "C.K. HONG",
       "desc": [
         "数据库专家",
-        "COVID-19救济基金国家系统",
+        "国家COVID-19救济基金系统",
         "多个加密货币平台"
       ]
     },
     {
-      "status": "主管",
+      "status": "Deputy Manager",
       "name": "S.Y. OH",
       "desc": [
-        "页面设计与发布"
+        "页面设计与发布",
+        "平台管理"
       ]
     },
     {
-      "status": "团队领导",
+      "status": "Team Manager",
       "name": "H.U. LEE",
       "desc": [
-        "数据分析总经理"
+        "数据分析管理",
+        "开发管理"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Assistant Manager",
+      "name": "I.S. KIM",
+      "desc": [
+        "数据分析",
+        "算法与审核"
+      ]
+    },
+    {
+      "status": "Associate",
       "name": "E.M. KO",
       "desc": [
         "系统开发",
@@ -75,268 +98,296 @@
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "C.Y. KIM",
       "desc": [
         "系统开发",
-        "IOS开发"
+        "iOS开发"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "D.Y. PARK",
       "desc": [
         "数据分析",
-        "AI开发"
+        "人工智能开发"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "H.J. SHIM",
       "desc": [
         "系统开发",
-        "前后端开发",
+        "后端和前端开发",
         "图表开发"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "S.U. IM",
       "desc": [
-        "数据分析"
+        "数据分析",
+        "后端和前端开发"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "J.W. CHANG",
       "desc": [
         "系统开发",
-        "AI开发"
+        "人工智能开发"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "H.J. GONG",
       "desc": [
         "数据分析",
-        "前后端开发"
+        "后端和前端开发"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "Y.J. CHO",
       "desc": [
-        "系统开发者",
-        "前后端开发"
+        "系统开发",
+        "后端和前端开发"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "S.A. LEE",
       "desc": [
-        "系统开发者",
-        "前后端开发"
+        "系统开发",
+        "后端和前端开发"
       ]
     }
   ],
-  [{
-    "status": "主管",
-    "name": "M.C. CHOI",
-    "desc": [
-      "釜山大学",
-      "策划总经理",
-      "阿里巴巴全球挑战赛世界决赛选手"
-    ]
-  },
+  [
     {
-      "status": "经理",
-      "name": "J.W. JEON",
+      "status": "Director",
+      "name": "M.C. CHOI",
       "desc": [
-        "销售策划"
+        "整体市场规划",
+        "阿里巴巴全球挑战赛世界总决赛入围者",
+        "釜山国立大学"
       ]
     },
     {
-      "status": "经理",
+      "status": "General Manager",
+      "name": "J.W. JEON",
+      "desc": [
+        "整体市场管理"
+      ]
+    },
+    {
+      "status": "Manager",
       "name": "M.H. CHOI",
       "desc": [
         "日本市场开发"
       ]
     },
     {
-      "status": "团队成员",
-      "name": "T.C. LA",
-      "desc": [
-        "越南市场开发"
-      ]
-    },
-    {
-      "status": "团队成员",
-      "name": "U.Y. LEE",
-      "desc": [
-        "中国市场开发"
-      ]
-    },
-    {
-      "status": "团队成员",
-      "name": "H. YANG",
-      "desc": [
-        "中国市场开发"
-      ]
-    },
-    {
-      "status": "团队成员",
-      "name": "Bayaraa",
-      "desc": [
-        "亚洲市场开发"
-      ]
-    },
-    {
-      "status": "团队成员",
+      "status": "Assistant Manager",
       "name": "J.E. LEE",
       "desc": [
         "美国市场开发"
       ]
     },
     {
-      "status": "经理",
+      "status": "Associate",
+      "name": "T.C. LA",
+      "desc": [
+        "越南市场开发"
+      ]
+    },
+    {
+      "status": "Associate",
+      "name": "U.Y. LEE",
+      "desc": [
+        "中国市场开发"
+      ]
+    },
+    {
+      "status": "Associate",
+      "name": "H. YANG",
+      "desc": [
+        "中国市场开发"
+      ]
+    },
+    {
+      "status": "Associate",
+      "name": "J.W. HEO",
+      "desc": [
+        "韩国市场开发"
+      ]
+    },
+    {
+      "status": "Associate",
+      "name": "B.J. HOO",
+      "desc": [
+        "中国市场开发"
+      ]
+    },
+    {
+      "status": "Associate",
+      "name": "H.R. JUNG",
+      "desc": [
+        "泰国市场开发"
+      ]
+    },
+    {
+      "status": "Branch Manager",
       "name": "Oumaima",
       "desc": [
         "迪拜分公司负责人"
       ]
+    },
+    {
+      "status": "Branch Manager",
+      "name": "U.H. SUN",
+      "desc": [
+        "美国分公司负责人"
+      ]
     }
   ],
-  [{
-    "status": "执行董事",
-    "name": "J.M. KOO",
-    "desc": [
-      "惠普网络安全和数据分析专家",
-      "8年全职加密货币交易员经验"
-    ]
-  },
+  [
     {
-      "status": "主管",
+      "status": "Managing Director",
+      "name": "J.M. KOO",
+      "desc": [
+        "曾任惠普网络安全与数据分析专家",
+        "拥有超过8年全职加密货币交易员经验"
+      ]
+    },
+    {
+      "status": "General Manager",
       "name": "C. DOO",
       "desc": [
+        "对外沟通",
         "新业务开发",
         "成均馆大学"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "M.J. LEE",
       "desc": [
         "平面设计",
-        "网页与应用程序设计"
+        "网页与应用设计"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "Y.H. CHO",
       "desc": [
         "视觉艺术"
       ]
     }
   ],
-  [{
-    "status": "执行董事",
-    "name": "U.J. OH",
-    "desc": [
-      "全职交易员培训讲师（拥有1000多名会员）",
-      "加密货币学院投资专家"
-    ]
-  },
+  [
     {
-      "status": "团队经理",
+      "status": "Director",
+      "name": "U.J. OH",
+      "desc": [
+        "专业交易导师（拥有超过1000名学员）",
+        "曾任加密货币学院投资导师"
+      ]
+    },
+    {
+      "status": "Manager",
       "name": "S.H. KIM",
       "desc": [
         "算法策划",
-        "国际交易大赛半决赛选手"
+        "国际交易大赛世界半决赛入围者"
       ]
     },
     {
-      "status": "团队成员",
-      "name": "I.S. KIM",
-      "desc": [
-        "数据分析",
-        "算法和自动交易程序审核"
-      ]
-    },
-    {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "H.R. KANG",
       "desc": [
         "系统开发",
-        "回测与自动交易程序开发"
+        "算法与自动化"
       ]
     },
     {
-      "status": "团队成员",
+      "status": "Associate",
       "name": "Y.S. KIM",
       "desc": [
         "系统开发",
-        "UI开发"
+        "算法与自动化"
+      ]
+    },
+    {
+      "status": "Associate",
+      "name": "S.J. LEE",
+      "desc": [
+        "系统开发",
+        "算法与自动化"
       ]
     }
   ],
-  [{
-    "status": "外部顾问",
-    "name": "MR. MIN",
-    "desc": [
-      "曾任HILIVING首席执行官"
-    ]
-  },
+  [
     {
-      "status": "外部顾问",
-      "name": "MR. LEE",
+      "status": "External Consultant",
+      "name": "MR. MIN",
       "desc": [
-        "曾任国家情报部门负责人"
+        "曾任HILIVING首席执行官"
       ]
     },
     {
-      "status": "外部发言人",
+      "status": "External Advisor",
+      "name": "MR. LEE",
+      "desc": [
+        "曾任国家情报局局长"
+      ]
+    },
+    {
+      "status": "External Spokesperson",
       "name": "MR. CHOI",
       "desc": [
         "曾任韩国市长",
-        "主要报刊首席执行官"
+        "Major Journal首席执行官"
       ]
     },
     {
-      "status": "外部顾问",
+      "status": "External Advisor",
       "name": "MR. JANG",
       "desc": [
-        "新承诺实验室（AI，区块链，WEB3.0）首席执行官",
-        "POSTECH客座教授，博士"
+        "NewPromise LAB（AI、区块链、WEB3.0）首席执行官",
+        "POSTECH兼职教授，博士"
       ]
     },
     {
-      "status": "外部发言人",
+      "status": "External Spokesperson",
       "name": "MR. KIM",
       "desc": [
         "《韩国时报》产业专栏作家",
-        "青瓦台局长",
+        "青瓦台总监",
         "韩国通信委员会（KCC）"
       ]
     }
   ],
-  [{
-    "status": "德森律师事务所",
-    "name": "Elliot (Law Firm Decent)",
-    "desc": [
-      "咨询P2E公司虚拟资产发行的综合业务结构",
-      "公司B的ICO、SAFT、交易所收购合同（虚拟资产发行方）",
-      "多项白皮书审查与虚拟资产和NFT发行方咨询",
-      "为算法虚拟资产交易公司U提供咨询。应对公司B的税务审计",
-      "为公司K的NFT平台业务模型提供审查和咨询"
-    ]
-  },
+  [
     {
-      "status": "德森律师事务所",
+      "status": "Legal Advisor",
+      "name": "Elliot (Law Firm Decent)",
+      "desc": [
+        "就P2E公司发行虚拟资产的全面业务结构提供咨询",
+        "为虚拟资产发行方B公司起草ICO、SAFT及交易所收购合同",
+        "审阅并咨询过多家虚拟资产及NFT发行方的白皮书",
+        "为算法化虚拟资产交易公司U提供咨询；并应对针对B公司的税务审计",
+        "审查并提供K公司NFT平台商业模式的咨询"
+      ]
+    },
+    {
+      "status": "Legal Advisor",
       "name": "IAN (Law Firm Decent)",
       "desc": [
-        "公司V（多层级加密货币交易所）高级员工涉嫌20亿韩元的欺诈案",
-        "算法交易公司B的虚拟资产合同结构顾问",
-        "通过公司内部律师服务对NFT发行方C公司提供全面法律咨询",
-        "应对比特币交易经纪人D因意外交易引发的欺诈调查"
+        "就多级币交易所V公司的高级员工发起的2万亿韩元欺诈诉讼提供法律服务",
+        "为算法化交易公司B提供虚拟资产合同结构咨询",
+        "通过公司内律师团队为NFT发行方C公司提供全面法律建议",
+        "应对比特币交易经纪商D因误操作产生的欺诈调查"
       ]
     }
   ]

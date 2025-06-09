@@ -16,35 +16,47 @@
           "Co-Founder of Blocksquare",
           "Graduate of POSTECH Blockchain Expert Program"
         ]
-      },
+      }
+    ],
+  [
     {
       "status" : "CFO",
       "name" : "J.Y. LEE",
       "desc" : [
         "Tsinghua University",
         "Founding Member of VOB",
-        "Participation in VRA/EVZ Projects"
+        "Participation in VRA/EVZ Projects",
+        "Financial Manager"
       ]
     },
     {
       "status" : "Manager",
       "name" : "H.A. KIM",
       "desc" : [
-        "Expert in Marketing"
+        "Administrative Manger"
       ]
-    }],
-  [{
-    "status" : "CTO",
-    "name" : "HYUK",
-    "desc" : [
-      "Collaboration with Bithumb CEX Technician on Numerous Cryptocurrency Projects",
-      "Established Partnership with Amazon Korea",
-      "Numerous Cryptocurrency Trading Automation Platforms",
-      "Developer of the GOYA AI"
-    ]
     },
     {
-      "status" : "Director",
+      "status" : "Associate",
+      "name" : "S.Y. LEE",
+      "desc" : [
+        "Administrative Assistant"
+      ]
+    }
+  ],
+  [
+    {
+      "status" : "CTO",
+      "name" : "HYUK",
+      "desc" : [
+        "Collaboration with Bithumb CEX on Cryptocurrency Projects",
+        "Established Partnership with Amazon Korea",
+        "Numerous Cryptocurrency Automation Platforms",
+        "Participated in the GOYA AI Development"
+      ]
+    },
+    {
+      "status" : "General Manager",
       "name" : "C.K. HONG",
       "desc" : [
         "Database Specialist",
@@ -53,21 +65,31 @@
       ]
     },
     {
-      "status" : "Director",
+      "status" : "Deputy Manager",
       "name" : "S.Y. OH",
       "desc" : [
-        "Page Design & Publishing"
+        "Page Design & Publishing",
+        "Platform Management"
       ]
     },
     {
-      "status" : "Team Leader",
+      "status" : "Team Manager",
       "name" : "H.U. LEE",
       "desc" : [
-        "Data Analysis General Manager"
+        "Data Analysis Management",
+        "Development Management"
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Assistant Manager",
+      "name" : "I.S. KIM",
+      "desc" : [
+        "Data Analysis",
+        "Algorithm & Review"
+      ]
+    },
+    {
+      "status" : "Associate",
       "name" : "E.M. KO",
       "desc" : [
         "System Development",
@@ -75,7 +97,7 @@
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "C.Y. KIM",
       "desc" : [
         "System Development",
@@ -83,7 +105,7 @@
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "D.Y. PARK",
       "desc" : [
         "Data Analysis",
@@ -91,7 +113,7 @@
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "H.J. SHIM",
       "desc" : [
         "System Development",
@@ -100,14 +122,15 @@
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "S.U. IM",
       "desc" : [
-        "Data Analysis"
+        "Data Analysis",
+        "BE & FE Development"
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "J.W. CHANG",
       "desc" : [
         "System Development",
@@ -115,27 +138,27 @@
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "H.J. GONG",
       "desc" : [
         "Data Analysis",
-        "Backend & Frontend Development"
+        "BE & FE Development"
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "Y.J. CHO",
       "desc" : [
-        "System Developer",
-        "Backend & Frontend Development"
+        "System Development",
+        "BE & FE Development"
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "S.A. LEE",
       "desc" : [
-        "System Developer",
-        "Backend & Frontend Development"
+        "System Development",
+        "BE & FE Development"
       ]
     }
   ],
@@ -143,86 +166,108 @@
       "status" : "Director",
       "name" : "M.C. CHOI",
       "desc" : [
-        "Pusan National University",
-        "Planning General Manager",
-        "Alibaba Global Challenge World Finalist"
+        "General Market Planning",
+        "Alibaba Global Challenge World Finalist",
+        "Busan National University"
       ]
     },
     {
-      "status" : "Director",
+      "status" : "General Manager",
       "name" : "J.W. JEON",
       "desc" : [
-        "Sales Planning"
+        "General Market Management"
       ]
     },
     {
       "status" : "Manager",
       "name" : "M.H. CHOI",
       "desc" : [
-        "Japanese Market Development"
+        "Japan Market Development"
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "T.C. LA",
-      "desc" : [
-        "Vietnamese Market Development"
-      ]
-    },
-    {
-      "status" : "Team Member",
-      "name" : "U.Y. LEE",
-      "desc" : [
-        "Chinese Market Development"
-      ]
-    },
-    {
-      "status" : "Team Member",
-      "name" : "H. YANG",
-      "desc" : [
-        "Chinese Market Development"
-      ]
-    },
-    {
-      "status" : "Team Member",
-      "name" : "Bayaraa",
-      "desc" : [
-        "Asia Market Development"
-      ]
-    },
-    {
-      "status" : "Team Member",
+      "status" : "Assistant Manager",
       "name" : "J.E. LEE",
       "desc" : [
         "U.S. Market Development"
       ]
     },
     {
-      "status" : "Manager",
+      "status" : "Associate",
+      "name" : "T.C. LA",
+      "desc" : [
+        "Vietnam Market Development"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "U.Y. LEE",
+      "desc" : [
+        "China Market Development"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "H. YANG",
+      "desc" : [
+        "China Market Development"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "J.W. HEO",
+      "desc" : [
+        "Korea Market Development"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "B.J. HOO",
+      "desc" : [
+        "China Market Development"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "H.R. JUNG",
+      "desc" : [
+        "Thailand Market Development"
+      ]
+    },
+    {
+      "status" : "Branch Manager",
       "name" : "Oumaima",
       "desc" : [
         "Head of Dubai Branch"
       ]
+    },
+    {
+      "status" : "Branch Manager",
+      "name" : "U.H. SUN",
+      "desc" : [
+        "Head of U.S. Branch"
+      ]
     }
   ],
   [{
-    "status" : "Executive Director",
+    "status" : "Managing Director",
     "name" : "J.M. KOO",
     "desc" : [
-      "Network Security & Data Analysis Specialist at HP",
-      "8 Years of Experience as a Full-Time Cryptocurrency Trader"
+      "Served Network Security & Data Analysis Specialist at HP",
+      "Over 8 Years of Experience as a Full-Time Cryptocurrency Trader"
     ]
   },
     {
-      "status" : "Director",
+      "status" : "General Manager",
       "name" : "C. DOO",
       "desc" : [
+        "External Communications",
         "New Business Development",
         "Sungkyunkwan University"
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "M.J. LEE",
       "desc" : [
         "Graphic Design",
@@ -230,7 +275,7 @@
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "Y.H. CHO",
       "desc" : [
         "Visual Arts"
@@ -238,15 +283,15 @@
     }
   ],
   [{
-      "status" : "Executive Director",
+      "status" : "Director",
       "name" : "U.J. OH",
       "desc" : [
-        "Full-time Trader Professional Training Instructor (with over 1,000 members)",
-        "Investment Expert at the Cryptocurrency Academy"
+        "Professional Trading Instructor (with over 1,000 members)",
+        "Served Investment Instructor at the Cryptocurrency Academy"
       ]
     },
     {
-      "status" : "Team Manager",
+      "status" : "Manager",
       "name" : "S.H. KIM",
       "desc" : [
         "Algorithm Planning",
@@ -254,27 +299,27 @@
       ]
     },
     {
-      "status" : "Team Member",
-      "name" : "I.S. KIM",
-      "desc" : [
-        "Data Analysis",
-        "Algorithm & Autobot Review"
-      ]
-    },
-    {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "H.R. KANG",
       "desc" : [
-        "System Developer",
-        "Backtesting & Autobot Development"
+        "System Development",
+        "Algorithm & Automation"
       ]
     },
     {
-      "status" : "Team Member",
+      "status" : "Associate",
       "name" : "Y.S. KIM",
       "desc" : [
-        "System Developer",
-        "UI Development"
+        "System Development",
+        "Algorithm & Automation"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "S.J. LEE",
+      "desc" : [
+        "System Development",
+        "Algorithm & Automation"
       ]
     }
   ],
@@ -319,7 +364,7 @@
     }
   ],
   [{
-    "status" : "Law Firm Decent",
+    "status" : "Legal Advisor",
     "name" : "Elliot (Law Firm Decent)",
     "desc" : [
       "Consultation on comprehensive business structure of P2E corporation P2E issuing virtual assets",
@@ -330,7 +375,7 @@
     ]
   },
     {
-      "status" : "Law Firm Decent",
+      "status" : "Legal Advisor",
       "name" : "IAN (Law Firm Decent)",
       "desc" : [
         "A fraud suit worth KRW 2 trillion by the top-level employee of company V, a multi-level coin exchange",

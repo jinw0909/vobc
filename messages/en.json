@@ -136,38 +136,43 @@
   "team": {
     "0" : {
       "first" : "Management",
-      "second" : "& Support",
-      "title" : "Management & Support"
+      "second" : "& Executives",
+      "title" : "Management & Executives"
     },
     "1" : {
-      "first" : "Engineering",
-      "second" : "& System",
-      "title" : "Engineering & System"
+      "first": "Business",
+      "second": "& Support",
+      "title": "Business & Support"
     },
     "2" : {
-      "first" : "Strategy",
-      "second" : "& Global",
-      "title" : "Strategy & Global"
+      "first" : "Engineering",
+      "second" : "& Development",
+      "title" : "Engineering & Development"
     },
     "3" : {
-      "first" : "Business",
-      "second" : "& Platform",
-      "title" : "Business & Platform"
+      "first" : "Global",
+      "second" : "& Strategy",
+      "title" : "Global & Strategy"
     },
     "4" : {
-      "first" : "Trading",
-      "second" : "& Algorithm",
-      "title" : "Trading & Algorithm"
+      "first" : "Communications",
+      "second" : "& Platform",
+      "title" : "Communications & Platform"
     },
     "5" : {
+      "first" : "Algorithm",
+      "second" : "& Trading",
+      "title" : "Algorithm & Trading"
+    },
+    "6" : {
       "first" : "Advisors",
       "second" : "& Consultants",
       "title" : "Advisors & Consultants"
     },
-    "6" : {
+    "7" : {
       "first" : "Defense",
-      "second" : "& Counsel",
-      "title" : "Defense & Counsel"
+      "second" : "& Law",
+      "title" : "Defense & Law"
     }
   },
   "news" : {

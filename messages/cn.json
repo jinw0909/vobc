@@ -135,39 +135,44 @@
   },
   "team": {
     "0": {
-      "first": "管理",
-      "second": "& 支持",
-      "title": "管理&支持"
+      "first": "管理层",
+      "second": "& 高管",
+      "title": "管理层 & 高管"
     },
     "1": {
-      "first": "工程",
-      "second": "& 系统",
-      "title": "工程&系统"
+      "first": "业务",
+      "second": "& 支持",
+      "title": "业务 & 支持"
     },
     "2": {
-      "first": "战略",
-      "second": "& 全球",
-      "title": "战略&全球"
+      "first": "工程",
+      "second": "& 开发",
+      "title": "工程 & 开发"
     },
     "3": {
-      "first": "商业",
-      "second": "& 平台",
-      "title": "商业&平台"
+      "first": "全球",
+      "second": "& 战略",
+      "title": "全球 & 战略"
     },
     "4": {
-      "first": "交易",
-      "second": "& 算法",
-      "title": "交易&算法"
+      "first": "传播",
+      "second": "& 平台",
+      "title": "传播 & 平台"
     },
     "5": {
-      "first": "顾问",
-      "second": "& 咨询",
-      "title": "顾问&咨询"
+      "first": "算法",
+      "second": "& 交易",
+      "title": "算法 & 交易"
     },
     "6": {
+      "first": "顾问",
+      "second": "& 咨询顾问",
+      "title": "顾问 & 咨询顾问"
+    },
+    "7": {
       "first": "防御",
       "second": "& 法务",
-      "title": "防御&法务"
+      "title": "防御 & 法务"
     }
   },
   "news": {
