@@ -129,7 +129,7 @@
     .roadmap {
         padding-left: 0;
     }
-    .roadmapElem { width: 45%; }
+    .roadmapElem { width: 35%; }
     .roadmapElem.clicked {
         width: 55%;
     }

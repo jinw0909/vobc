@@ -7,7 +7,7 @@ import iconStrategy from '@/public/teams/teams_strategy.png';
 import iconTrading from '@/public/teams/teams_trading.png';
 import iconAdvisor from '@/public/teams/teams_advisors.png';
 import iconLaw from '@/public/teams/teams_law.png';
-import iconSupport from '@/public/teams/teams_management.png'
+import iconSupport from '@/public/teams/teams_finance.png'
 
 import management0 from '@/public/teams/profile/ceo.png';
 import management1 from '@/public/teams/profile/coo.png';

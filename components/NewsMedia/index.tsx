@@ -12,6 +12,7 @@ import image8 from '@/public/news/cointelegraphimage.png';
 import image9 from '@/public/news/retriseminar.jpeg';
 import herald250401 from '@/public/news/herald250401.jpg';
 import herald250103 from '@/public/news/herald250103.jpg';
+import heraldbiz250610 from '@/public/news/heraldbiz250610.jpg';
 import data from '@/json/news.json';
 import {getTranslations} from "next-intl/server";
 import {LogoPlain} from "@/ui/LogoPlain";
@@ -23,10 +24,10 @@ const notosansjp = Noto_Sans_JP({
     subsets: ['latin']
 });
 
-const data0 = data.slice(0, 2);
-const data1 = data.slice(2, 6);
-const data2 = data.slice(6, 12);
-const imgSrc25 = [herald250401, herald250103]
+const data0 = data.slice(0, 3);
+const data1 = data.slice(3, 7);
+const data2 = data.slice(7, 13);
+const imgSrc25 = [heraldbiz250610, herald250401, herald250103]
 const imgSrc1 = [image0, image1, image2, image3];
 const imgSrc2 = [image4, image5, image6, image7, image8, image9]
 

@@ -14,6 +14,8 @@ import {NextIntlClientProvider} from "next-intl";
 import {Vision} from "@/components/Vision";
 import {Wrapup} from "@/components/Wrapup";
 import {PartnersNew} from "@/components/PartnersNew";
+import AnimatedDiv from "@/components/Whitepaper/AnimatedDiv";
+import {Devs} from "@/components/Devs";
 
 
 export default function Page({params : { locale }} : {params : {locale : string}}) {
@@ -45,17 +47,19 @@ export default function Page({params : { locale }} : {params : {locale : string}
           {/*<div className={styles.subWrapper}>*/}
           {/*    <About/>*/}
           {/*</div>*/}
-          <div className={styles.subWrapper}>
-              {/*<NextIntlClientProvider messages={messages}>*/}
+          {/*<div className={styles.subWrapper}>*/}
+          {/*    /!*<NextIntlClientProvider messages={messages}>*!/*/}
+          {/*    <Whitepaper/>*/}
+          {/*    /!*</NextIntlClientProvider>*!/*/}
+          {/*</div>*/}
+          <div className={styles.subWrapperPlus}>
               <Whitepaper/>
-              {/*</NextIntlClientProvider>*/}
-          </div>
-          <div className={styles.subWrapper}>
+              <SmartContract/>
               <DevsMain/>
           </div>
-          <div className={styles.subWrapper}>
-              <SmartContract/>
-          </div>
+          {/*<div className={styles.subWrapper}>*/}
+          {/*    <SmartContract/>*/}
+          {/*</div>*/}
           <div className={styles.subWrapper}>
               {/*<NextIntlClientProvider messages={messages}>*/}
               <Roadmap/>

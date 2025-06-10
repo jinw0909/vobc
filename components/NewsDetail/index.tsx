@@ -12,6 +12,7 @@ import image8 from '@/public/news/cointelegraphimage.png';
 import image9 from '@/public/news/retriseminar.jpeg';
 import herald250401 from '@/public/news/herald250401.jpg';
 import herald250103 from '@/public/news/herald250103.jpg';
+import heraldbiz250610 from '@/public/news/heraldbiz250610.jpg'
 import arrowUp from '@/public/icons/arrow-up-white.png';
 import arrowRight from '@/public/icons/right-arrow-white.png';
 import {NavigationLink} from "@/ui/NavigationLink";
@@ -24,7 +25,8 @@ export async function NewsDetail({idx} : {idx : any}) {
     if (content) { contentArr = content.split('\n'); }
     // let contentArr = data[idx].content.split(`\n`);
 
-    const imgSrc = [herald250401, herald250103, image0, image1, image2, image3, image4, image5, image6, image7, image8, image9];
+    const imgSrc = [heraldbiz250610, herald250401, herald250103,
+        image0, image1, image2, image3, image4, image5, image6, image7, image8, image9];
 
     return (
         <div className={styles.detailWrapper}>
