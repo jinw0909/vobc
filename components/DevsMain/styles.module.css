@@ -21,7 +21,7 @@
     position: relative;
 }
 .imgElem {
-    padding: 20%
+    padding: 10%
 }
 .devsInner.show > .imgWrapper {
     flex: 0;
@@ -107,6 +107,7 @@
     .devsInner {
         background:
                 linear-gradient(180deg, rgba(125,125,125,0.4), rgba(255,255,255,0));
+        border: 1px solid #555;
     }
     .descWrapper {
         height: 100%;
@@ -114,7 +115,9 @@
         width: 0;
     }
     .devsInner.show > .descWrapper {
-        width: 100%;
+        width: 90%;
+        text-align: center;
+        flex: 1.5;
     }
     .imgElem {
        padding: 5%;
