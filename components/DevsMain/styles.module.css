@@ -92,6 +92,9 @@
 
 
 @media (max-width: 576px) {
+    .devsWrapper {
+        padding-bottom: 150% !important;
+    }
     .devsInner {
         flex-direction: column;
         position: absolute;
@@ -117,7 +120,8 @@
     .devsInner.show > .descWrapper {
         width: 90%;
         text-align: center;
-        flex: 1.5;
+        flex: 1;
+        justify-content: flex-start;
     }
     .imgElem {
        padding: 5%;
