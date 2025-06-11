@@ -8,7 +8,7 @@ export const Distribution = () => {
 
     const t = useTranslations('distribution');
 
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(null);
     const [isActive, setIsActive] = useState(true);
     const handleIdx = (idx:any) => {
         setIsActive(true);
@@ -17,9 +17,6 @@ export const Distribution = () => {
     const handleActive = (state:any) => {
         setIsActive(state);
     }
-
-    useEffect(() => {
-    }, [index]);
 
     return (
         <div className={styles.distMain}>

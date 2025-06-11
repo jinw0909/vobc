@@ -12,7 +12,6 @@ import {useTranslations} from "next-intl";
 export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {handleIdx:any, index:any, handleActive:any, isActive:any}) => {
 
     const locale = useLocale();
-    console.log("doughut chart locale: ", locale);
     const data = require(`@/json/distribution_${locale}.json`);
     const t = useTranslations('distribution');
 
@@ -35,56 +34,56 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
             offset : new Array(data.length).fill(0),
         }],
     };
+
     const defaultOptions: any = {
         plugins: {
+            // tooltip: {
+            //     backgroundColor: '#000',
+            //     borderColor: 'rgba(255,255,255,0.8)',
+            //     borderWidth: 1,
+            //     padding: 16,
+            //     displayColors: false,
+            //     callbacks: {
+            //         label: (datapoint : any) => {return ` ${datapoint.raw}%`}
+            //     },
+            // },
             tooltip: {
-                backgroundColor: '#000',
-                borderColor: 'rgba(255,255,255,0.8)',
-                borderWidth: 1,
-                padding: 16,
-                displayColors: false,
-                callbacks: {
-                    label: (datapoint : any) => {return ` ${datapoint.raw}%`}
-                },
+                enabled : false
             },
             legend: {
                 display: false,
             },
         },
-        onClick: (event : any, chartElement : any) => {
-            if (chartElement.length > 0) {
-                let idx = chartElement[0].index;
-                setShowImg(false);
+        onClick: (event : any, elements : any[]) => {
+            if (elements.length > 0) {
+                //console.log('🔔 Chart clicked!', { event, elements });
+                const idx = elements[0].index;
+                // setShowImg(false);
                 setCurrentIdx(idx);
                 handleIdx(idx);
                 doughnutRef.current?.update();
+            } else {
+                setCurrentIdx(null);
             }
         },
+
         animation : {
             animateScale: true
         },
     };
 
 
-    const [currentIdx, setCurrentIdx] = useState(index);
-    const [showImg, setShowImg] = useState(true);
+    const [currentIdx, setCurrentIdx] = useState<number|null>(index ?? null);
+    //const [showImg, setShowImg] = useState(true);
     const [options, setOptions] = useState<ChartOptions<any>>(defaultOptions);
     const [chartjsData, setChartjsData] = useState<any>(finalData);
     const [isClicked, setIsClicked] = useState(false);
 
     useEffect(() => {
-
-        // labelRef.current!.style.opacity = '0';
-        // contentRef.current!.style.opacity = '0';
-        // valueRef.current!.style.opacity = '0';
+        if (currentIdx == null) return;
         labelRef.current!.innerText = data[currentIdx].label;
         contentRef.current!.innerText = data[currentIdx].content + ` ${t('EA')}`;
         valueRef.current!.innerText = '[ ' + data[currentIdx].value + '% ]';
-        // setTimeout(() => {
-        //     labelRef.current!.style.opacity = '1';
-        //     contentRef.current!.style.opacity = '1';
-        //     valueRef.current!.style.opacity = '1';
-        // }, 500)
 
         //redraw chart
         const datasets = doughnutRef.current?.data.datasets;
@@ -104,24 +103,26 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
             console.error("Datasets are undefined or empty.");
         }
         doughnutRef.current.update();
-    }, [currentIdx])
+    }, [currentIdx, data, t])
 
-    useEffect(() => {
-        setShowImg(false);
-    }, []);
+    // useEffect(() => {
+    //     setShowImg(false);
+    // }, []);
 
     useEffect(() => {
         setCurrentIdx(index);
     }, [index]);
 
-    useEffect(() => {
-        setShowImg(false);
-    }, [isActive]);
+    // useEffect(() => {
+    //     if (isActive) {
+    //         setShowImg(false);
+    //     }
+    // }, [isActive]);
 
     const redrawChart = () => {
         handleActive(false);
+        setCurrentIdx(null);
         setChartjsData(finalData);
-        setShowImg(true);
     }
 
     const handleClickDown = () => {
@@ -132,31 +133,41 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
         setIsClicked(false);
     }
 
+    const centerVisible = currentIdx === null;
     return (
-            <div ref={chartRef} className={styles.chart}>
-                <Doughnut
-                    redraw={true}
-                    ref={doughnutRef}
-                    className={styles.doughnut}
-                    data={chartjsData}
-                    options={options}
-                />
-                <div className={`${styles.centerDiv}`}
-                     onMouseDown={handleClickDown}
-                     onMouseUp={handleClickUp}
-                     onTouchStart={handleClickDown}
-                     onTouchEnd={handleClickUp}
-                ></div>
-                <div ref={textRef} className={`${styles.centerText} ${isClicked ? styles.isClicked : ''}
-                        ${showImg ? '' : styles.show}
-                    `}>
-                    <div className={styles.labelText} ref={labelRef}></div>
-                    <div className={styles.contentText} ref={contentRef}></div>
-                    <div className={styles.valueText} ref={valueRef}></div>
-                </div>
-                <div ref={imgRef} className={`${styles.centerImg} ${isClicked ? styles.isClicked : ''}
-                    ${showImg ? styles.show : ''}
-                `}>
+        <div ref={chartRef} className={styles.chart}>
+            <Doughnut
+                redraw={true}
+                ref={doughnutRef}
+                className={styles.doughnut}
+                data={chartjsData}
+                options={options}
+            />
+            <div className={`${styles.centerDiv}`}
+                 onMouseDown={handleClickDown}
+                 onMouseUp={handleClickUp}
+                // onTouchStart={handleClickDown}
+                // onTouchEnd={handleClickUp}
+            ></div>
+            <div
+               ref={textRef}
+               className={[
+                   styles.centerText,
+                   isClicked && styles.isClicked,
+                   !centerVisible && styles.show,
+               ].filter(Boolean).join(' ')}
+            >
+            <div className={styles.labelText} ref={labelRef}></div>
+            <div className={styles.contentText} ref={contentRef}></div>
+            <div className={styles.valueText} ref={valueRef}></div>
+        </div>
+    <div
+        ref={imgRef}
+        className={[
+            styles.centerImg,
+            isClicked && styles.isClicked,
+                     centerVisible && styles.show].filter(Boolean).join(' ')}
+                 >
                     <Image
                         className={styles.ml}
                         src={vobPic}

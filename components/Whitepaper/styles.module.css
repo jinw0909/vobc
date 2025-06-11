@@ -191,6 +191,9 @@
     opacity: 0;
     flex: 0;
 }
+.whitepaperInner:active .whitepaperImg {
+    transform: scale(0.92);
+}
 .whitepaperInner.show .whitepaperDetail {
     flex: 1;
     padding: 1rem;

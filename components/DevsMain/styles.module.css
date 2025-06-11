@@ -26,6 +26,9 @@
 .devsInner.show > .imgWrapper {
     flex: 0;
 }
+.devsInner:active > .imgWrapper {
+    transform: scale(0.92);
+}
 .textWrapper {
     display: flex;
     flex-direction: column;

@@ -1,7 +1,7 @@
-import Image from "next/image";
+// import Image from "next/image";
 import styles from './styles.module.css'
-import Link from 'next/link';
-import { About } from "@/components/About";
+// import Link from 'next/link';
+// import { About } from "@/components/About";
 import {DevsMain} from "@/components/DevsMain";
 import {getMessages, getTranslations, setRequestLocale, unstable_setRequestLocale} from "next-intl/server";
 import {useTranslations} from "next-intl";
@@ -9,13 +9,12 @@ import {Whitepaper} from "@/components/Whitepaper";
 import {SmartContract} from "@/components/SmartContract";
 import {Roadmap} from "@/components/Roadmap";
 import {Distribution} from "@/components/Distribution";
-import {Partners} from "@/components/Partners";
-import {NextIntlClientProvider} from "next-intl";
+// import {Partners} from "@/components/Partners";
+// import {NextIntlClientProvider} from "next-intl";
 import {Vision} from "@/components/Vision";
-import {Wrapup} from "@/components/Wrapup";
+// import {Wrapup} from "@/components/Wrapup";
 import {PartnersNew} from "@/components/PartnersNew";
-import AnimatedDiv from "@/components/Whitepaper/AnimatedDiv";
-import {Devs} from "@/components/Devs";
+// import {Devs} from "@/components/Devs";
 
 
 export default function Page({params : { locale }} : {params : {locale : string}}) {
