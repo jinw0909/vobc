@@ -34,6 +34,7 @@ import strategy3 from '@/public/teams/profile/jieun.png';
 import strategy4 from '@/public/teams/profile/thichinh.png';
 import strategy5 from '@/public/teams/profile/ukyoon.png';
 import strategy6 from '@/public/teams/profile/he.png';
+import strategy7 from '@/public/teams/profile/jiwoong.png';
 
 import business0 from '@/public/teams/profile/koo.png';
 import business1 from '@/public/teams/profile/doo.png';
@@ -56,7 +57,7 @@ import { useLocale } from "next-intl";
 const managementPic = [management0, management1];
 const supportPic = [support0, support1, fallbackImg]
 const engineeringPic = [engineering0, engineering1, engineering2, engineering3, engineering4, engineering5, engineering6, engineering7, engineering8, engineering9, engineering10, engineering11, engineering12, engineering13]
-const strategyPic = [strategy0, strategy1, strategy2, strategy3, strategy4, strategy5, strategy6, fallbackImg, fallbackImg, fallbackImg, fallbackImg, fallbackImg];
+const strategyPic = [strategy0, strategy1, strategy2, strategy3, strategy4, strategy5, strategy6, strategy7, fallbackImg, fallbackImg, fallbackImg, fallbackImg];
 const businessPic = [business0, business1, business2, business3];
 const tradingPic = [trading0, trading1, trading2, trading3, fallbackImg];
 const advisorPic = [advisor0, fallbackImg, fallbackImg, fallbackImg, fallbackImg];
