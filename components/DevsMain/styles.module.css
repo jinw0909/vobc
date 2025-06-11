@@ -108,8 +108,8 @@
         padding: 1rem;
     }
     .devsInner {
-        background:
-                linear-gradient(180deg, rgba(125,125,125,0.4), rgba(255,255,255,0));
+        background: none
+                /*linear-gradient(180deg, rgba(125,125,125,0.4), rgba(255,255,255,0));*/
     }
     .descWrapper {
         height: 100%;
