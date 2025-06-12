@@ -41,7 +41,7 @@
     right: 0;
     bottom: 0;
     /*background: linear-gradient(135deg, #f9f9f9, lightskyblue);*/
-    background: linear-gradient(135deg, #f9f9f9, lightskyblue);
+    background: linear-gradient(135deg, #f9f9f9, rgba(0, 252, 255));
     /*filter: brightness(1.1) contrast(0.9) saturate(1.1) blur(0.5px);*/
     transition: 1s;
     opacity: 0;

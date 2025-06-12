@@ -58,13 +58,13 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
             if (elements.length > 0) {
                 //console.log('🔔 Chart clicked!', { event, elements });
                 const idx = elements[0].index;
-                // setShowImg(false);
                 setCurrentIdx(idx);
                 handleIdx(idx);
                 doughnutRef.current?.update();
-            } else {
-                setCurrentIdx(null);
             }
+            // else {
+            //     setCurrentIdx(null);
+            // }
         },
 
         animation : {
@@ -144,10 +144,12 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
                 options={options}
             />
             <div className={`${styles.centerDiv}`}
-                 onMouseDown={handleClickDown}
-                 onMouseUp={handleClickUp}
-                // onTouchStart={handleClickDown}
-                // onTouchEnd={handleClickUp}
+                 onPointerDown={handleClickDown}
+                 onPointerUp={handleClickUp}
+                 // onMouseDown={handleClickDown}
+                 // onMouseUp={handleClickUp}
+                 // onTouchStart={handleClickDown}
+                 // onTouchEnd={handleClickUp}
             ></div>
             <div
                ref={textRef}

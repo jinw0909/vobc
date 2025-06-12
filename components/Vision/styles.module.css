@@ -22,7 +22,7 @@
     left: 0;
     width: 66%;
     height: 1px;
-    background-color: #999;
+    background-color: rgba(0, 252, 255, 0.8);
 }
 .blockHeader {
     display: flex;
@@ -37,7 +37,7 @@
     right: 0;
     width: 66%;
     height: 1px;
-    background-color: #999;
+    background-color: rgba(0, 252, 255, 0.8);
 }
 .vobHeader {
     display: flex;
@@ -52,7 +52,7 @@
     left: 0;
     width: 66%;
     height: 1px;
-    background-color: #999;
+    background-color: rgba(0, 252, 255, 0.8);
 }
 .headerText {
     font-size: 1.5rem;

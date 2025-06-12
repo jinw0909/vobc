@@ -38,7 +38,8 @@
     transform: translate(-50%, -50%);
     width: 33%;
     height: 33%;
-    border: 2px solid #bbb;
+    /*border: 2px solid #bbb;*/
+    border: 2px solid rgba(0, 252, 255, 0.8);
     border-radius: 50%;
     /*background-color: rgba(29,252,255, 0.5);*/
     transition: .5s;
@@ -87,9 +88,9 @@
 .isClicked {
     transform: scale(.8) translate(-50%, -50%);
 }
-.centerDiv:hover ~ .centerImg {
-    border: 2px solid rgba(255, 255, 255, 0.75);
-}
+/*.centerDiv:hover ~ .centerImg {*/
+/*    border: 2px solid rgba(255, 255, 255, 0.75);*/
+/*}*/
 .centerDiv:hover ~ .centerText .contentText,
 .centerDiv:hover ~ .centerText .valueText {
     opacity: 0.75 !important;
