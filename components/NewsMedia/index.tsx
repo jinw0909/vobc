@@ -65,14 +65,14 @@ export async function NewsMedia() {
                     <h2 className={styles.year}>2024</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data1} imgSrc={imgSrc1} index={1}></NewsMediaBand>
+                        <NewsMediaBand data={data1} imgSrc={imgSrc1} index={3}></NewsMediaBand>
                     </div>
                 </div>
                 <div className={styles.yearWrapper}>
                     <h2 className={styles.year}>2023</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data2} imgSrc={imgSrc2} index={5}></NewsMediaBand>
+                        <NewsMediaBand data={data2} imgSrc={imgSrc2} index={7}></NewsMediaBand>
                     </div>
                 </div>
             </div>
