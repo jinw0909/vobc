@@ -78,7 +78,7 @@
     opacity: 1;
     transition: .5s;
     cursor: pointer;
-    z-index: 100;
+    z-index: 99;
     overflow: hidden;
 }
 /*.closeBtn::before {*/

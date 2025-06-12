@@ -17,20 +17,6 @@ export function DistDetail({handleIdx, index, isActive}: {handleIdx:any, index: 
         setHighLight(isActive);
     }, [isActive])
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await fetch('/distribution_jp.json');
-    //         const jsonData = await response.json();
-    //         setData(jsonData);
-    //     };
-    //
-    //     fetchData();
-    // }, []);
-    // useEffect(() => {
-    //     console.log(data);
-    // }, [data])
-
-
     const handleClick = (idx:any) => {
         setHighLight(true);
         handleIdx(idx);
