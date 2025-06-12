@@ -1,13 +1,13 @@
 .linkBtn.isActive {
     /*font-weight: bold;*/
-    color: white;
+    color: rgba(0, 252, 255);
 }
 .linkBtn {
     transition: .5s;
     color: rgba(255,255,255,0.7);
 }
 .linkBtn:hover {
-    color: white;
+    color: rgba(0, 252, 255);
 }
 
 .pseudo::after {
@@ -18,7 +18,7 @@
     left: 50%;
     bottom: -1px;
     transform: translateX(-50%);
-    background-color: white;
+    background-color: rgba(0, 252, 255, 0.8);
     transition: .5s;
 }
 .pseudo.isActive::after {
