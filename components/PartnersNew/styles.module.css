@@ -27,6 +27,10 @@
     white-space: nowrap;
     scrollbar-width: none;
     margin-top: 1rem;
+    -ms-overflow-style: none;
+}
+.partnersWrapper::-webkit-scrollbar {
+    display: none;
 }
 .partnersWrapper.noGap {
     gap: 0; /* Removes gap when a partner element is clicked */

@@ -39,7 +39,7 @@ export const Whitepaper = () => {
                     <div className={styles.whitepaperTitle}>White Paper</div>
                     <div className={styles.whitepaperDesc}>{t('whitepaper')}</div>
                     <button className={styles.whitepaperBtn}>
-                        <Link href="/VOB_whitepaper.pdf" target="_blank" rel="noopener noreferrer" locale={false}
+                        <Link href="/VOB_whitepaper.pdf" target="_blank" rel="noopener noreferrer" locale={undefined}
                         >{t('viewbtn')}</Link>
                     </button>
                 </div>

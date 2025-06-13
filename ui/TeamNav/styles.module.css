@@ -53,6 +53,10 @@
     margin: 0 auto;
     white-space: nowrap;
     scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.list::-webkit-scrollbar {
+    display: none;
 }
 .elem {
     display: inline-block;

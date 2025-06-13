@@ -7,6 +7,10 @@
     overflow-y: hidden;
     scrollbar-width: none;
     justify-content: flex-start;
+    -ms-overflow-style: none;
+}
+.mediaElementWrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .mediaElement {

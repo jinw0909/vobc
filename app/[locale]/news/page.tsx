@@ -1,7 +1,8 @@
 import { News } from '@/components/News';
 import styles from './styles.module.css'
-import {setRequestLocale, unstable_setRequestLocale} from "next-intl/server";
-export default function news({params : { locale }} : {params : {locale : string}}) {
+import {setRequestLocale} from "next-intl/server";
+export default async function news({params} : any) {
+    const { locale } = await params;
     setRequestLocale(locale);
 
     return (

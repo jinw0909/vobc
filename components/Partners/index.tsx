@@ -35,7 +35,7 @@ export function Partners() {
                 <div className={`${styles.excElem} ${styles.excElem1}`}>
                     <div className={styles.vob}><LogoPlain/></div>
                     <div className={styles.startElem}>
-                        <Link href="https://www.lbank.com/trade/vob_usdt" target="_blank" rel="noopener noreferrer" locale={false} >
+                        <Link href="https://www.lbank.com/trade/vob_usdt" target="_blank" rel="noopener noreferrer" locale={undefined} >
                         <button className={styles.startBtn}><span>{t('startbtn')}</span></button>
                         </Link>
                     </div>

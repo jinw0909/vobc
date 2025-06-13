@@ -1,7 +1,7 @@
 'use client';
 
 import {ComponentProps} from "react";
-import { Link } from "@/navigation";
+import { Link } from "@/i18n/navigation";
 import { useSelectedLayoutSegments} from "next/navigation";
 import styles from './styles.module.css';
 import {LinkProps} from "next/link";
@@ -18,7 +18,7 @@ export const NavigationLink = ({
     const pathName = selectedLayoutSegment ? `/${selectedLayoutSegment}` : '/';
     const isActive = pathName === href;
     const {pseudo, ...remaining} = rest;
-    const isPseudo = pseudo == "true" ? true : false;
+    const isPseudo = pseudo == "true";
     return (
         <Link
             aria-current = { isActive ? 'page' : undefined }

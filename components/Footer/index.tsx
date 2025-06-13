@@ -28,7 +28,7 @@ export const Footer = async () => {
                 </div>
                 <div className="flex gap-4">
                     <Link href="https://x.com/VOBCOIN" target="_blank"
-                          rel="noopener noreferrer" locale={false}
+                          rel="noopener noreferrer" locale={undefined}
                     >
                         <div className={`${styles.snsLogo} ${styles.footerElem}`}>
                             <Image className={styles.snsImg}
@@ -41,7 +41,7 @@ export const Footer = async () => {
                         </div>
                     </Link>
                     <Link href="https://medium.com/@risingxofficial" target="_blank"
-                          rel="noopener noreferrer" locale={false}
+                          rel="noopener noreferrer" locale={undefined}
                     >
                         <div className={`${styles.snsLogo} ${styles.footerElem}`}>
                             <Image className={styles.snsImg}

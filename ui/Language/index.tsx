@@ -1,88 +1,204 @@
 'use client'
 
 import styles from './styles.module.css'
-// import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
-import { useRouter, usePathname } from "@/navigation";
-import Image from 'next/image';
-import triangle from '@/public/icons/triangle-icon-white.png';
-import rvtriangle from '@/public/icons/triangle-icon-white-rv.png';
+import { usePathname, useRouter, Link } from '@/i18n/navigation'
+// import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
+import triangle   from '@/public/icons/triangle-icon-white.png'
+import rvtriangle from '@/public/icons/triangle-icon-white-rv.png'
 
-
-export const Language = ({lang} : {lang : string}) => {
-    const router = useRouter();
+export const Language = ({ lang }: { lang: string }) => {
     const pathname = usePathname();
-    // const currentLang = pathname.split('/')[1];
-    const [selectedLang, setSelectedLang] = useState(lang?.toString());
+    const searchParams = useSearchParams();
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
     const [showModal, setShowModal] = useState(false);
-    const wrapperRef = useRef<HTMLDivElement | null>(null); // Reference to languageWrapper div
-    const modalRef = useRef<HTMLDivElement | null>(null);
 
-    useEffect(() => {
-        router.replace(pathname, {locale: selectedLang as "en" | "jp" | "cn" | undefined})
-    }, [pathname, router, selectedLang]);
-
-    // const validLocales: Array<"en" | "jp" | "cn"> = ["en", "jp", "cn"];
-    //
-    // useEffect(() => {
-    //     if (validLocales.includes(selectedLang as "en" | "jp" | "cn")) {
-    //         router.replace(pathname, { locale: selectedLang as "en" | "jp" | "cn" });
-    //     }
-    // }, [selectedLang]);
-
+    // close on outside click
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-
-            const wrapperNode = wrapperRef.current;
-            const modalNode = modalRef.current;
-
-            if (wrapperNode && !wrapperNode.contains(event.target as Node) &&
-            modalNode && !modalNode.contains(event.target as Node)) {
-                setShowModal(false);
-            }
+            if (
+                wrapperRef.current?.contains(event.target as Node) ||
+                modalRef.current?.contains(event.target as Node)
+            ) return
+            setShowModal(false)
         }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-    }, [wrapperRef, modalRef]);
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
+    // rebuild the “base” href (no locale prefix) + any search params
+    const baseHref = searchParams.toString()
+        ? `${pathname}?${searchParams.toString()}`
+        : pathname
+
 
     return (
         <>
-        <div className={styles.languageWrapper} ref={wrapperRef}>
-            <div
-                onClick={() => { setShowModal(!showModal) }}
-                className={styles.languageSelect}>
-                <span>
-                    {showModal ?
-                        <Image src={triangle} width={12} height={12} alt="trianle"
-                               className={styles.languageArrowUp}/>
-                        : <Image src={rvtriangle} width={12} height={12} alt="triangle"
-                                 className={styles.languageArrow}/>}
-                </span>
-                <span>{selectedLang?.toUpperCase()}</span>
+            <div className={styles.languageWrapper} ref={wrapperRef}>
+                <div
+                    onClick={() => setShowModal((v) => !v)}
+                    className={styles.languageSelect}
+                >
+          <span>
+            {showModal ? (
+                <Image
+                    src={triangle}
+                    width={12}
+                    height={12}
+                    alt="▲"
+                    className={styles.languageArrowUp}
+                />
+            ) : (
+                <Image
+                    src={rvtriangle}
+                    width={12}
+                    height={12}
+                    alt="▼"
+                    className={styles.languageArrow}
+                />
+            )}
+          </span>
+                    <span>{lang.toUpperCase()}</span>
+                </div>
             </div>
-        </div>
-        <div className={`${styles.languageModal} 
-            ${showModal ? styles.show : ""}`} ref={modalRef}>
-                <button
-                    className={`${selectedLang == 'en' ? styles.current : ''} ${styles.langElem}`}
-                    onClick={()=>{setSelectedLang('en')}}>
-                    English
-                </button>
-                <span className={styles.langBar}></span>
-                <button
-                    className={`${selectedLang == 'jp' ? styles.current : ''} ${styles.langElem}`}
-                    onClick={()=>{setSelectedLang('jp')}}>
-                    日本語
-                </button>
-                <span className={styles.langBar}></span>
-                <button
-                    className={`${selectedLang == 'cn' ? styles.current : ''} ${styles.langElem}`}
-                    onClick={()=>{setSelectedLang('cn')}}>
-                    汉文
-                </button>
-        </div>
+
+            <div
+                className={`${styles.languageModal} ${
+                    showModal ? styles.show : ''
+                }`}
+                ref={modalRef}
+            >
+                {(['en', 'jp', 'cn'] as const).map((locale) => (
+                    <Link
+                        key={locale}
+                        href={baseHref}
+                        locale={locale}
+                        replace
+                        onClick={() => setShowModal(false)}
+                    >
+                        <button
+                            className={`${styles.langElem} ${
+                                lang === locale ? styles.current : ''
+                            }`}
+                        >
+                            {locale === 'en'
+                                ? 'English'
+                                : locale === 'jp'
+                                    ? '日本語'
+                                    : '汉文'}
+                        </button>
+                    </Link>
+                ))}
+            </div>
         </>
     )
 }
+//
+// 'use client';
+//
+// import { useState, useRef, useEffect } from 'react';
+// import Link from 'next/link';
+// import { usePathname, getPathname } from '@/i18n/navigation';
+// import { useSearchParams } from 'next/navigation'
+// import Image from 'next/image';
+// import styles from './styles.module.css';
+// import triangle from '@/public/icons/triangle-icon-white.png';
+// import rvtriangle from '@/public/icons/triangle-icon-white-rv.png';
+//
+// export const Language = ({ lang }: { lang: string }) => {
+//     const pathname = usePathname();
+//     const searchParams = useSearchParams();
+//     const [showModal, setShowModal] = useState(false);
+//     const wrapperRef = useRef<HTMLDivElement>(null);
+//     const modalRef = useRef<HTMLDivElement>(null);
+//
+//     // Close the modal on outside clicks
+//     useEffect(() => {
+//         function handleClickOutside(event: MouseEvent) {
+//             if (
+//                 wrapperRef.current?.contains(event.target as Node) ||
+//                 modalRef.current?.contains(event.target as Node)
+//             ) {
+//                 return;
+//             }
+//             setShowModal(false);
+//         }
+//         document.addEventListener('mousedown', handleClickOutside);
+//         return () => document.removeEventListener('mousedown', handleClickOutside);
+//     }, []);
+//
+//     // Build the base href (no locale prefix) plus any query params
+//     const queryString = searchParams.toString();
+//     const hrefObject = queryString
+//         ? { pathname, query: Object.fromEntries(searchParams.entries()) }
+//         : pathname;
+//
+//     return (
+//         <>
+//             <div className={styles.languageWrapper} ref={wrapperRef}>
+//                 <div
+//                     onClick={() => setShowModal((v) => !v)}
+//                     className={styles.languageSelect}
+//                 >
+//           <span>
+//             {showModal ? (
+//                 <Image
+//                     src={triangle}
+//                     width={12}
+//                     height={12}
+//                     alt="▲"
+//                     className={styles.languageArrowUp}
+//                 />
+//             ) : (
+//                 <Image
+//                     src={rvtriangle}
+//                     width={12}
+//                     height={12}
+//                     alt="▼"
+//                     className={styles.languageArrow}
+//                 />
+//             )}
+//           </span>
+//                     <span>{lang.toUpperCase()}</span>
+//                 </div>
+//             </div>
+//
+//             <div
+//                 className={`${styles.languageModal} ${
+//                     showModal ? styles.show : ''
+//                 }`}
+//                 ref={modalRef}
+//             >
+//                 {(['en', 'jp', 'cn'] as const).map((locale) => {
+//                     // Inject the locale prefix into the URL
+//                     const localeHref = getPathname({ locale, href: hrefObject });
+//
+//                     return (
+//                         <Link
+//                             key={locale}
+//                             href={localeHref}
+//                             replace       // swap the current history entry
+//                             scroll={false} // suppress scroll-to-top on forward nav
+//                             onClick={() => setShowModal(false)}
+//                         >
+//                             <button
+//                                 className={`${styles.langElem} ${
+//                                 lang === locale ? styles.current : ''
+//                                 }`}
+//                             >
+//                             {locale === 'en'
+//                                 ? 'English'
+//                                 : locale === 'jp'
+//                                 ? '日本語'
+//                                 : '汉文'}
+//                             </button>
+//                         </Link>
+//                         );
+//                     })}
+//             </div>
+//         </>
+//     );
+// };

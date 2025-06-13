@@ -173,6 +173,10 @@
     justify-content: flex-start;
     gap: 1rem;
     padding-bottom: 4rem;
+    -ms-overflow-style: none;
+}
+.itemList::-webkit-scrollbar {
+    display: none;
 }
 .item {
     display: inline-block;

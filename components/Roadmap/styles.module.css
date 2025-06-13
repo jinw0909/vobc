@@ -16,8 +16,12 @@
     overflow-y: hidden;
     margin: 0 auto;
     scrollbar-width: none;
+    -ms-overflow-style: none;
     align-items: center;
     padding: 1rem 0;
+}
+.roadmapWrapper::-webkit-scrollbar {
+    display: none
 }
 
 .roadmapElem {

@@ -85,7 +85,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                             <Link href={data[idx].link as string}
                               target="_blank"
                               rel="noopener noreferrer"
-                              locale={false}>
+                              locale={undefined}>
                                 To the original report
                             </Link>
                             {/*<a href="#">To the original report</a>*/}

@@ -1,12 +1,12 @@
 import styles from './styles.module.css';
-import {setRequestLocale, unstable_setRequestLocale} from "next-intl/server";
-export default function Layout({
+import {setRequestLocale} from "next-intl/server";
+export default async function Layout({
     children,
-    params: { locale }
-} : {
-    children: React.ReactNode;
-    params: { locale: string }
-}) {
+    params
+} :
+   any
+) {
+    const { locale } = await params;
     setRequestLocale(locale)
 
     return (

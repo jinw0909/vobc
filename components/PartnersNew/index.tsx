@@ -111,7 +111,7 @@ export function PartnersNew() {
                                     <div className={styles.vobElem}><LogoPlain/></div>
                                     <div className={styles.startElem}>
                                         <Link href={partner.url} target="_blank" rel="noopener noreferrer"
-                                              locale={false}>
+                                              locale={undefined}>
                                             <button
                                                 className={styles.startBtn}
                                                 style={{border: `2px solid ${partner.color}`}} // Apply dynamic border color

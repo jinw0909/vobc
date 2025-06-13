@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 // import Link from 'next/link';
 // import { About } from "@/components/About";
 import {DevsMain} from "@/components/DevsMain";
-import {getMessages, getTranslations, setRequestLocale, unstable_setRequestLocale} from "next-intl/server";
+import {getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import {useTranslations} from "next-intl";
 import {Whitepaper} from "@/components/Whitepaper";
 import {SmartContract} from "@/components/SmartContract";
@@ -17,12 +17,12 @@ import {PartnersNew} from "@/components/PartnersNew";
 // import {Devs} from "@/components/Devs";
 
 
-export default function Page({params : { locale }} : {params : {locale : string}}) {
+export default async function Page({params} : any) {
   // unstable_setRequestLocale(locale);
+  const {locale} = await params;
   setRequestLocale(locale);
-
   // const t = await getTranslations('main');
-  const t = useTranslations('main');
+  const t = await getTranslations('main');
   // const messages = await getMessages();
 
   return (
