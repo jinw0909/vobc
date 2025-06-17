@@ -15,6 +15,9 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
     const data = require(`@/json/distribution_${locale}.json`);
     const t = useTranslations('distribution');
 
+    // const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    // const spacingValue = isMobile ? 16 : 20
+
     const chartRef = useRef<HTMLDivElement | null>(null);
     const imgRef = useRef<HTMLDivElement | null>(null);
     const textRef = useRef<HTMLDivElement | null>(null);
@@ -31,11 +34,19 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
             borderColor: 'rgba(255,255,255,0.8)',
             borderWidth: 1,
             spacing: 24,
-            offset : new Array(data.length).fill(0),
+            offset : new Array(data.length).fill(-8),
         }],
     };
 
     const defaultOptions: any = {
+        // layout: {
+        //     padding: {
+        //         top: 20,
+        //         bottom: 20,
+        //         left: 20,
+        //         right: 20,
+        //     }
+        // },
         plugins: {
             // tooltip: {
             //     backgroundColor: '#000',
@@ -92,11 +103,11 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
             const offsets = (datasets[0] as any)?.offset;
             backgroundColors[currentIdx] = '#1DFCFF';
 
-            offsets[currentIdx] = 32;
+            offsets[currentIdx] = 24;
             for (let i = 0; i < backgroundColors.length; i++) {
                 if (i !== currentIdx) {
                     backgroundColors[i] = data[i].color;
-                    offsets[i] = 0;
+                    offsets[i] = -8;
                 }
             }
         } else {
