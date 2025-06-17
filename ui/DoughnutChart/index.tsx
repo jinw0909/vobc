@@ -30,7 +30,7 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
             backgroundColor: data.map((item:any) => item.color),
             borderColor: 'rgba(255,255,255,0.8)',
             borderWidth: 1,
-            spacing: 16,
+            spacing: 24,
             offset : new Array(data.length).fill(0),
         }],
     };
