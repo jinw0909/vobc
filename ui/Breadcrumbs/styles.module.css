@@ -1,6 +1,6 @@
 .breadcrumb {
     position: absolute;
-    top: 7rem;
+    top: 8rem;
     left: 2rem;
     font-size: 1rem;
     display: flex;
@@ -44,7 +44,7 @@
         transform: scale(0.8);
     }
 }
-@media (max-width : 579px) {
+@media (max-width : 578px) {
     .breadcrumb {
         left: 1rem;
     }

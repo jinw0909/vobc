@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 8rem;
+    margin-top: 8.5rem;
     flex-direction: column;
     /*padding: 2rem;*/
     width: 100%;
@@ -261,6 +261,7 @@
     /*.teamWrapper { padding : 1.5rem; }*/
     .itemList { flex-wrap: nowrap; }
     .headbandWrapper { top: 4rem; }
+    .teamWrapper { margin-top: 8rem; }
 }
 
 @media (max-width: 576px) {

@@ -8,7 +8,7 @@
     border-bottom: 1px solid #999;
     position: sticky;
     position: -webkit-sticky;
-    top: 5rem;
+    top: 7rem;
     background-color: black;
     z-index: 80;
 }

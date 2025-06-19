@@ -37,7 +37,7 @@
     flex-direction: column;
     position: -webkit-sticky;
     position: sticky;
-    top: 7rem;
+    top: 8rem;
     background-color: black;
     z-index: 50;
     gap: 2rem;

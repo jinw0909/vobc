@@ -10,7 +10,7 @@
 .headbandWrapper {
     align-self: stretch;
     position: sticky;
-    top: 5rem;
+    top: 7rem;
     background-color: rgba(0,0,0,1);
     z-index: 70;
     border-bottom: 1px solid #999;
@@ -60,9 +60,9 @@
 }
 .elem {
     display: inline-block;
-    width: 8rem;
+    width: 6rem;
     /*border: 1px solid white;*/
-    margin: 1rem 0;
+    margin: .5rem 0;
     text-align: center;
     position: relative;
     transition: .5s;
@@ -104,13 +104,13 @@
     align-items: center;
 }
 .teamIcon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     position: relative;
     margin: 0 auto;
 }
 .iconDesc {
-    font-size: .8rem;
+    font-size: .6rem;
     transition: .5s;
     display: flex;
     flex-direction: column;
