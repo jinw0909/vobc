@@ -71,7 +71,8 @@ export const Language = ({ lang }: { lang: string }) => {
                 }`}
                 ref={modalRef}
             >
-                {(['en', 'jp', 'cn'] as const).map((locale) => (
+                {(['en', 'jp', 'cn'] as const).map((locale, index, array) => (
+                    <>
                     <Link
                         key={locale}
                         href={baseHref}
@@ -91,6 +92,7 @@ export const Language = ({ lang }: { lang: string }) => {
                                     : '汉文'}
                         </button>
                     </Link>
+                    </>
                 ))}
             </div>
         </>

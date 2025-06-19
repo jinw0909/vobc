@@ -50,7 +50,7 @@
     padding-right: 2rem;
 }
 .langElem {
-    min-width: 3rem;
+    /*min-width: 3rem;*/
 }
 .langBar {
     align-self: stretch;
@@ -66,6 +66,9 @@
     color: #888;
     transition: .5s;
     font-size: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .languageModal button:hover {
     color: white;
