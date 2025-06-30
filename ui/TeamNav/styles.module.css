@@ -16,7 +16,7 @@
     border-bottom: 1px solid #999;
     border-top: 1px solid #999;
     opacity: 0;
-    animation: 1s ease-in-out fadeIn forwards;
+    animation: .5s ease-in-out fadeIn forwards;
 }
 
 @keyframes fadeIn {
@@ -60,9 +60,9 @@
 }
 .elem {
     display: inline-block;
-    width: 6rem;
+    /*width: 6rem;*/
     /*border: 1px solid white;*/
-    margin: .5rem 0;
+    margin: .5rem 1rem;
     text-align: center;
     position: relative;
     transition: .5s;
@@ -254,7 +254,9 @@
     .teamWrapper { padding: 1rem; }
     .profileDesc p { font-size: .6rem; }
     .iconDesc { font-size: .6rem; }
-    .elem { width: 6rem; margin: .5rem 0}
+    .elem {
+        /*width: 6rem; */
+        margin: .5rem 1rem}
     .teamIcon { width: 24px; height: 24px; }
 }
 

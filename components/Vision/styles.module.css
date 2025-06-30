@@ -1,6 +1,6 @@
 .visionWrapper {
     /*margin-top: 4rem;*/
-    opacity: 0;
+    /*opacity: 0;*/
 }
 .visionWrapper > div {
     position: relative;
@@ -122,9 +122,9 @@
     width: 100%;
 }
 
-.muchMoreDelayedAnimation {
-    animation: fadeIn 1s ease-in-out forwards;
-    animation-delay: 3s;
+.delayedAnimation {
+    animation: fadeIn .5s ease-in-out forwards;
+    animation-delay: 1s;
 }
 
 @keyframes typing {

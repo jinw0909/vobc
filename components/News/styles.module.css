@@ -9,8 +9,8 @@
 }
 .middleContent {
     opacity: 0;
-    animation: 1s fadeIn ease-in-out forwards;
-    animation-delay: 2s;
+    animation: .5s fadeIn ease-in-out forwards;
+    animation-delay: 1s;
     margin: 4rem 0;
 }
 .viewMore {

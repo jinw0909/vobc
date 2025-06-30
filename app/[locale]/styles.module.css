@@ -69,15 +69,15 @@
 }
 
 .fadeInAnimation {
-    animation: fadeIn 1s ease-in-out forwards;
+    animation: fadeIn .5s ease-in-out forwards;
 }
 .delayedAnimation {
-    animation: fadeIn 1s ease-in-out forwards;
-    animation-delay: 1s;
+    animation: fadeIn .5s ease-in-out forwards;
+    animation-delay: .5s;
 }
 .moreDelayedAnimation {
-    animation: fadeIn 1s ease-in-out forwards;
-    animation-delay: 2s;
+    animation: fadeIn .5s ease-in-out forwards;
+    animation-delay: 1s;
 }
 
 

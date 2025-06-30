@@ -17,7 +17,7 @@ export const metadata = {
     },
     openGraph: {
         title: 'VOB | VISION OF BLOCKCHAIN',
-        description: 'The VOB token and the VOB foundation expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities.',
+        description: 'The Vision of Blockchain foundation and the VOB token expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities.',
         type: 'website',
         // locale: 'en-US',
         url: 'https://vobc.io',

@@ -31,9 +31,9 @@ export default async function Page({params} : any) {
               <div className={styles.mainText}>
                   {/*<div className={`${styles.fadeInAnimation}`}>{intl.main.title_0}</div>*/}
                   {/*<div className={`${styles.delayedAnimation} opacity-0`}>{intl.main.title_1}</div>*/}
-                  <div className={`${styles.fadeInAnimation}`}>{t('title_0')}</div>
-                  <div className={`${styles.delayedAnimation} opacity-0`}>{t('title_1')}</div>
-                  <div className={`${styles.subText} ${styles.moreDelayedAnimation} opacity-0`}>
+                  <div>{t('title_0')}</div>
+                  <div className={`${styles.fadeInAnimation} opacity-0`}>{t('title_1')}</div>
+                  <div className={`${styles.subText} ${styles.delayedAnimation} opacity-0`}>
                       <div>{t('subtitle_0')}</div>
                       <div>{t('subtitle_1')}</div>
                       <div>{t('subtitle_2')}</div>

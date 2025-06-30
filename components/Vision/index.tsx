@@ -22,28 +22,28 @@ export const Vision = async () => {
     const t = await getTranslations('vision');
 
     return (
-        <div className={`${styles.visionWrapper} ${styles.muchMoreDelayedAnimation}`}>
+        <div className={`${styles.visionWrapper}`}>
             <div>
             <div className={styles.visionHeader}>
                 <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>
                 <p className={styles.headerText}>The Vision</p>
             </div>
             </div>
-            <p className={styles.visionText}>
+            <p className={`${styles.visionText} ${styles.delayedAnimation}`}>
                 {t('vision')}
             </p>
             <div className={styles.blockHeader}>
                 <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
                 <p className={styles.headerText}>The Blockchain</p>
             </div>
-            <p className={`${styles.visionText} ${styles.blockText}`}>
+            <p className={`${styles.visionText} ${styles.blockText} ${styles.delayedAnimation}`}>
                 {t('blockchain')}
             </p>
             <div className={styles.vobHeader}>
                 <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
                 <p className={styles.headerText}>The Vision of Blockchain</p>
             </div>
-            <p className={styles.visionText}>
+            <p className={`${styles.visionText} ${styles.delayedAnimation}`}>
                 {t('vob')}
             </p>
             <div className={styles.btnContainer}>

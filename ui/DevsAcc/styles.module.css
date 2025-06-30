@@ -1,8 +1,8 @@
 .devsAccWrapper {
     margin-top: 4rem;
     opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
-    animation-delay: 1s;
+    animation: fadeIn .5s ease-in-out forwards;
+    animation-delay: .5s;
 }
 .accElem {
     border-bottom: 1px solid #999;

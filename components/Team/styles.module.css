@@ -129,8 +129,8 @@
     padding: 1rem;
     margin-top: 1rem;
     opacity: 0;
-    animation: 1s fadeIn ease-in-out forwards;
-    animation-delay: 1s;
+    animation: .5s fadeIn ease-in-out forwards;
+    animation-delay: .5s;
 }
 
 @keyframes fadeIn {

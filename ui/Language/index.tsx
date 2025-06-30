@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 import { usePathname, useRouter, Link } from '@/i18n/navigation'
 // import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { useState, useRef, useEffect } from 'react'
+import {useState, useRef, useEffect, Fragment} from 'react'
 import Image from 'next/image'
 import triangle   from '@/public/icons/triangle-icon-white.png'
 import rvtriangle from '@/public/icons/triangle-icon-white-rv.png'
@@ -72,27 +72,27 @@ export const Language = ({ lang }: { lang: string }) => {
                 ref={modalRef}
             >
                 {(['en', 'jp', 'cn'] as const).map((locale, index, array) => (
-                    <>
-                    <Link
-                        key={locale}
-                        href={baseHref}
-                        locale={locale}
-                        replace
-                        onClick={() => setShowModal(false)}
-                    >
-                        <button
-                            className={`${styles.langElem} ${
-                                lang === locale ? styles.current : ''
-                            }`}
+                    <Fragment key={locale}>
+                        <Link
+                            key={locale}
+                            href={baseHref}
+                            locale={locale}
+                            replace
+                            onClick={() => setShowModal(false)}
                         >
-                            {locale === 'en'
-                                ? 'English'
-                                : locale === 'jp'
-                                    ? '日本語'
-                                    : '汉文'}
-                        </button>
-                    </Link>
-                    </>
+                            <button
+                                className={`${styles.langElem} ${
+                                    lang === locale ? styles.current : ''
+                                }`}
+                            >
+                                {locale === 'en'
+                                    ? 'English'
+                                    : locale === 'jp'
+                                        ? '日本語'
+                                        : '汉文'}
+                            </button>
+                        </Link>
+                    </Fragment>
                 ))}
             </div>
         </>

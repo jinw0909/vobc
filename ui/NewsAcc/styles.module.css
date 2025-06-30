@@ -27,10 +27,10 @@
     opacity: 0;
 }
 .newsElem.even {
-    animation: 2s fromUp ease-in-out forwards;
+    animation: 1s fromUp ease-in-out forwards;
 }
 .newsElem.odd {
-    animation: 2s fromDown ease-in-out forwards;
+    animation: 1s fromDown ease-in-out forwards;
 }
 /*.newsContent > div:nth-child(1) {*/
 /*    background-color: #666;*/
@@ -313,10 +313,10 @@
     /*    height: 40vh;*/
     /*}*/
     .newsElem.even {
-        animation: 2s ease-in-out fromLeft forwards;
+        animation: 1s ease-in-out fromLeft forwards;
     }
     .newsElem.odd {
-        animation: 2s ease-in-out fromRight forwards;
+        animation: 1s ease-in-out fromRight forwards;
     }
     .overlayCenter {
         padding: 1.5rem 1rem;
