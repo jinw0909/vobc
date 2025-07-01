@@ -3,9 +3,9 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig: import('next').NextConfig = {
-    experimental: {
-        scrollRestoration: true
-    }
+    // experimental: {
+    //     scrollRestoration: true
+    // }
 };
 
 export default withNextIntl(nextConfig);

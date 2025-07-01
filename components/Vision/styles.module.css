@@ -9,6 +9,9 @@
 .visionWrapper > div:nth-child(1) {
     margin-top: 0;
 }
+.detailText {
+    opacity: 0;
+}
 .visionHeader {
     display: flex;
     justify-content: flex-start;
@@ -155,6 +158,7 @@
     }
     .headerText { font-size: 2rem; }
     .about {font-size: 2rem;}
+
 
 }
 

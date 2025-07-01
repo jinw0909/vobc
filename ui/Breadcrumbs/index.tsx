@@ -56,7 +56,7 @@ export const Breadcrumbs = () => {
                     <button
                         type="button"
                         className={styles.backButton}
-                        onClick={router.back}
+                        onClick={() => router.back()}
                     >
                         <div className={styles.imageWrapper}>
                             <Image className={styles.backArrow} src={arrowUp} width={24} height={24}

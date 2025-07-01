@@ -29,21 +29,21 @@ export const Vision = async () => {
                 <p className={styles.headerText}>The Vision</p>
             </div>
             </div>
-            <p className={`${styles.visionText} ${styles.delayedAnimation}`}>
+            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
                 {t('vision')}
             </p>
             <div className={styles.blockHeader}>
                 <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
                 <p className={styles.headerText}>The Blockchain</p>
             </div>
-            <p className={`${styles.visionText} ${styles.blockText} ${styles.delayedAnimation}`}>
+            <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}>
                 {t('blockchain')}
             </p>
             <div className={styles.vobHeader}>
                 <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
                 <p className={styles.headerText}>The Vision of Blockchain</p>
             </div>
-            <p className={`${styles.visionText} ${styles.delayedAnimation}`}>
+            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
                 {t('vob')}
             </p>
             <div className={styles.btnContainer}>
