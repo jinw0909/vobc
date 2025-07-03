@@ -1,18 +1,6 @@
 import styles from './styles.module.css';
 import {NewsMediaBand} from "@/ui/NewsMediaBand";
-import image0 from '@/public/news/deepcoin.png';
-import image1 from '@/public/news/blockchaintoday.jpg';
-import image2 from '@/public/news/koreatimes0.jpg';
-import image3 from '@/public/news/herald6.jpg';
-import image4 from '@/public/news/herald.jpeg'
-import image5 from '@/public/news/herald2.jpeg';
-import image6 from '@/public/news/herald3.jpeg';
-import image7 from '@/public/news/herald4.jpeg';
-import image8 from '@/public/news/cointelegraphimage.png';
-import image9 from '@/public/news/retriseminar.jpeg';
-import herald250401 from '@/public/news/herald250401.jpg';
-import herald250103 from '@/public/news/herald250103.jpg';
-import heraldbiz250610 from '@/public/news/heraldbiz250610.jpg';
+import newsImages from '@/newsImages'
 import data from '@/json/news.json';
 import {getTranslations} from "next-intl/server";
 import {LogoPlain} from "@/ui/LogoPlain";
@@ -27,9 +15,9 @@ const notosansjp = Noto_Sans_JP({
 const data0 = data.slice(0, 3);
 const data1 = data.slice(3, 7);
 const data2 = data.slice(7, 13);
-const imgSrc25 = [heraldbiz250610, herald250401, herald250103]
-const imgSrc1 = [image0, image1, image2, image3];
-const imgSrc2 = [image4, image5, image6, image7, image8, image9]
+const imgSrc25 = [newsImages[0].image, newsImages[1].image, newsImages[2].image]
+const imgSrc24 = [newsImages[3].image, newsImages[4].image, newsImages[5].image, newsImages[6].image];
+const imgSrc23 = [newsImages[7].image, newsImages[8].image, newsImages[9].image, newsImages[10].image, newsImages[11].image, newsImages[12].image]
 
 export async function NewsMedia() {
 
@@ -65,14 +53,14 @@ export async function NewsMedia() {
                     <h2 className={styles.year}>2024</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data1} imgSrc={imgSrc1} index={3}></NewsMediaBand>
+                        <NewsMediaBand data={data1} imgSrc={imgSrc24} index={3}></NewsMediaBand>
                     </div>
                 </div>
                 <div className={styles.yearWrapper}>
                     <h2 className={styles.year}>2023</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data2} imgSrc={imgSrc2} index={7}></NewsMediaBand>
+                        <NewsMediaBand data={data2} imgSrc={imgSrc23} index={7}></NewsMediaBand>
                     </div>
                 </div>
             </div>

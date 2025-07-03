@@ -1,32 +1,17 @@
 import styles from './styles.module.css';
 import Image from 'next/image';
-import image0 from "@/public/news/deepcoin.png";
-import image1 from "@/public/news/blockchaintoday.jpg";
-import image2 from "@/public/news/koreatimes0.jpg";
-import image3 from "@/public/news/herald6.jpg";
-import image4 from '@/public/news/herald.jpeg';
-import image5 from '@/public/news/herald2.jpeg';
-import image6 from '@/public/news/herald3.jpeg';
-import image7 from '@/public/news/herald4.jpeg';
-import image8 from '@/public/news/cointelegraphimage.png';
-import image9 from '@/public/news/retriseminar.jpeg';
-import herald250401 from '@/public/news/herald250401.jpg';
-import herald250103 from '@/public/news/herald250103.jpg';
-import heraldbiz250610 from '@/public/news/heraldbiz250610.jpg'
 import arrowUp from '@/public/icons/arrow-up-white.png';
 import arrowRight from '@/public/icons/right-arrow-white.png';
 import {NavigationLink} from "@/ui/NavigationLink";
 import data from '@/json/news.json';
 import Link from "next/link";
+import newsImages from '@/newsImages'
 export async function NewsDetail({idx} : {idx : any}) {
 
     let contentArr: string[] = [];
     const content = data[idx].content;
     if (content) { contentArr = content.split('\n'); }
     // let contentArr = data[idx].content.split(`\n`);
-
-    const imgSrc = [heraldbiz250610, herald250401, herald250103,
-        image0, image1, image2, image3, image4, image5, image6, image7, image8, image9];
 
     return (
         <div className={styles.detailWrapper}>
@@ -52,7 +37,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.imageWrapper}>
-                        <Image src={imgSrc[idx]} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
+                        <Image src={newsImages[idx].image} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
                     </div>
                     <span className={styles.imageDesc}>
                         {data[idx].desc}

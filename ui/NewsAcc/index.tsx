@@ -11,6 +11,8 @@ import image4 from '@/public/news/cointelegraphimage.png';
 import image5 from '@/public/news/retriseminar.jpeg';
 import {CloseBtn} from "@/ui/CloseBtn";
 import {NavigationLink} from "@/ui/NavigationLink";
+
+
 export function NewsAcc({data, imgSrc, index}:{data:any, imgSrc:any, index:number}) {
 
     const [currentIdx, setCurrentIdx] = useState(-1);

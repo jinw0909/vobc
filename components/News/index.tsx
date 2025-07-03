@@ -1,24 +1,14 @@
 import styles from './styles.module.css'
 import {NewsAcc} from "@/ui/NewsAcc";
-import image0 from '@/public/news/deepcoin.png';
-import image1 from '@/public/news/blockchaintoday.jpg';
-import image2 from '@/public/news/koreatimes0.jpg';
-// import image3 from '@/public/news/herald6.jpg';
-//import image4 from '@/public/news/herald.jpeg'
-// import image5 from '@/public/news/herald2.jpeg';
-import herald250401 from '@/public/news/herald250401.jpg'
-import herald250103 from '@/public/news/herald250103.jpg'
-import heraldbiz250610 from '@/public/news/heraldbiz250610.jpg'
-// import image5 from '@/public/news/herald3.jpeg';
-// import image5 from '@/public/news/herald4.jpeg';
 import data from '@/json/news.json';
 import {getTranslations} from "next-intl/server";
 import {NavigationLink} from "@/ui/NavigationLink";
-
+import newsImages from "@/newsImages";
 const data1 = data.slice(0, 3);
 const data2 = data.slice(3, 6);
-const imgSrc1 = [heraldbiz250610, herald250401, herald250103,];
-const imgSrc2 = [image0, image1, image2,]
+const imgSrc1 = [newsImages[0].image, newsImages[1].image, newsImages[2].image,];
+const imgSrc2 = [newsImages[3].image, newsImages[4].image, newsImages[5].image,]
+
 export async function News() {
 
     const t = await getTranslations('news');
