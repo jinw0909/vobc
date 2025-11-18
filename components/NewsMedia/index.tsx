@@ -15,9 +15,12 @@ const notosansjp = Noto_Sans_JP({
 const data0 = data.slice(0, 3);
 const data1 = data.slice(3, 7);
 const data2 = data.slice(7, 13);
-const imgSrc25 = [newsImages[0].image, newsImages[1].image, newsImages[2].image]
-const imgSrc24 = [newsImages[3].image, newsImages[4].image, newsImages[5].image, newsImages[6].image];
-const imgSrc23 = [newsImages[7].image, newsImages[8].image, newsImages[9].image, newsImages[10].image, newsImages[11].image, newsImages[12].image]
+const image0 = newsImages.slice(0, 4).map((i:any) => i.image);
+const image1 = newsImages.slice(4, 8).map((i:any) => i.image);
+const image2 = newsImages.slice(8, 14).map((i:any) => i.image);
+// const imgSrc25 = [newsImages[0].image, newsImages[1].image, newsImages[2].image]
+// const imgSrc24 = [newsImages[3].image, newsImages[4].image, newsImages[5].image, newsImages[6].image];
+// const imgSrc23 = [newsImages[7].image, newsImages[8].image, newsImages[9].image, newsImages[10].image, newsImages[11].image, newsImages[12].image]
 
 export async function NewsMedia() {
 
@@ -46,21 +49,21 @@ export async function NewsMedia() {
                     <h2 className={styles.year}>2025</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data0} imgSrc={imgSrc25} index={0}></NewsMediaBand>
+                        <NewsMediaBand data={data0} imgSrc={image0} index={0}></NewsMediaBand>
                     </div>
                 </div>
                 <div className={styles.yearWrapper}>
                     <h2 className={styles.year}>2024</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data1} imgSrc={imgSrc24} index={3}></NewsMediaBand>
+                        <NewsMediaBand data={data1} imgSrc={image1} index={4}></NewsMediaBand>
                     </div>
                 </div>
                 <div className={styles.yearWrapper}>
                     <h2 className={styles.year}>2023</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data2} imgSrc={imgSrc23} index={7}></NewsMediaBand>
+                        <NewsMediaBand data={data2} imgSrc={image2} index={8}></NewsMediaBand>
                     </div>
                 </div>
             </div>
