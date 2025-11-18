@@ -1,10 +1,11 @@
 import image from 'next/image';
-import newsImage13 from '@/public/news/heraldbiz251017.jpg';
+import newsImage14 from '@/public/news/heraldbiz251017.jpg';
+import newsImage13 from '@/public/news/heraldbiz251002.png';
 import newsImage12 from '@/public/news/heraldbiz250610.jpg';
 import newsImage11 from '@/public/news/herald250401.jpg';
 import newsImage10 from '@/public/news/herald250103.jpg';
 import newsImage9 from '@/public/news/deepcoin.png';
-import newsImage8 from '@/public/news/blockchaintoday.jpg';
+import newsImage8 from '@/public/news/blockchaintoday.png';
 import newsImage7 from '@/public/news/koreatimes0.jpg';
 import newsImage6 from '@/public/news/herald6.jpg';
 import newsImage5 from '@/public/news/herald.jpeg';
@@ -15,12 +16,13 @@ import newsImage1 from '@/public/news/cointelegraphimage.png';
 import newsImage0 from '@/public/news/retriseminar.jpeg';
 
 const newsImages: any = [
-    { image: newsImage13, url: '/news/heraldbiz251017.jpg'},
+    { image: newsImage14, url: '/news/heraldbiz251017.jpg'},
+    { image: newsImage13, url: '/news/heraldbiz251002.png'},
     { image: newsImage12, url: '/news/heraldbiz250610.jpg'},
     { image: newsImage11, url: '/news/herald250401.jpg'},
     { image: newsImage10, url: '/news/herald250103.jpg'},
     { image: newsImage9, url: '/news/deepcoin.png' },
-    { image: newsImage8, url: '/news/blockchaintoday.jpg' },
+    { image: newsImage8, url: '/news/blockchaintoday.png' },
     { image: newsImage7, url: '/news/koreatimes0.jpg'},
     { image: newsImage6, url: '/news/herald6.jpg'},
     { image: newsImage5, url: '/news/herald.jpeg'},

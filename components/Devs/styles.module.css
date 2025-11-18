@@ -12,9 +12,10 @@
 .imageBox {
     margin-right: 1rem;
     float: left;
+    padding-top: .5rem;
 }
 .imageStyle {
-    padding: .75rem;
+    padding: .5rem 0;
     border: 1px solid #999;
     border-radius: 8px;
 }

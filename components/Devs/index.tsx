@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import techPic from '@/public/devs_technology.png';
+import techPic from '@/public/devs_pic.png';
 import styles from './styles.module.css'
 import { DevsAcc } from "@/ui/DevsAcc";
 import { DevsCaro } from "@/ui/DevsCaro";

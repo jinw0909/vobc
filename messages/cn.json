@@ -75,7 +75,7 @@
     "checkbtn": "检查"
   },
   "roadmap": {
-    "title": "VOB项目路线图",
+    "title": "项目路线图",
     "0": {
       "date": "2017年2月",
       "title": "加密货币价格预测",
@@ -186,7 +186,8 @@
     "type": {
       "editorial": "社论文章",
       "interview": "采访",
-      "event": "活动"
+      "event": "活动",
+      "publicity": "宣传与公关"
     },
     "read": "立即阅读",
     "about": "关于媒体",

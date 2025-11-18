@@ -79,11 +79,11 @@ export const DevsMain = () => {
     }
 
     const handleClick = () => {
-        setShowDev(false);
-
-        setTimeout(() => {
-            router.push('/devs');
-        }, 1000);
+        // setShowDev(false);
+        router.push('/devs');
+        // setTimeout(() => {
+        //     router.push('/devs');
+        // }, 1000);
     }
 
     return (

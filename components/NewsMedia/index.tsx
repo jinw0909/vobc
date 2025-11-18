@@ -12,9 +12,9 @@ const notosansjp = Noto_Sans_JP({
     subsets: ['latin']
 });
 
-const data0 = data.slice(0, 3);
-const data1 = data.slice(3, 7);
-const data2 = data.slice(7, 13);
+const data0 = data.slice(0, 4);
+const data1 = data.slice(4, 8);
+const data2 = data.slice(8, 14);
 const image0 = newsImages.slice(0, 4).map((i:any) => i.image);
 const image1 = newsImages.slice(4, 8).map((i:any) => i.image);
 const image2 = newsImages.slice(8, 14).map((i:any) => i.image);

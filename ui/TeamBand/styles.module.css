@@ -148,7 +148,7 @@
     /*display: flex;*/
     overflow: hidden;
     position: relative;
-    max-height: 250vh;
+    max-height: 300vh;
     overflow: hidden;
     transition: .5s;
     opacity: 1;

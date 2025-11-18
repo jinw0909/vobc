@@ -23,6 +23,9 @@ export async function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSr
                         case 'event':
                             typeText = t('type.event');
                             break;
+                        case 'publicity':
+                            typeText = t('type.publicity');
+                            break;
                         default:
                             typeText = a.type;
                     }

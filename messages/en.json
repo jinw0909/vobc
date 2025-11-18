@@ -75,7 +75,7 @@
     "checkbtn": "Check"
   },
   "roadmap" : {
-    "title" : "VOB Project Roadmap",
+    "title" : "Project Roadmap",
     "0" : {
       "date" : "February 2017",
       "title" : "Crypto Price Prediction",
@@ -186,7 +186,8 @@
     "type" : {
       "editorial": "Editorial Article",
       "interview": "Interview",
-      "event": "Event"
+      "event": "Event",
+      "publicity": "Public Relations"
     },
     "read": "Read Now",
     "about": "About the Media",

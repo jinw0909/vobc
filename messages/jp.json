@@ -75,7 +75,7 @@
     "checkbtn": "確認"
   },
   "roadmap": {
-    "title": "VOBプロジェクトロードマップ",
+    "title": "プロジェクト・ロードマップ",
     "0": {
       "date": "2017年2月",
       "title": "暗号資産価格予測",
@@ -186,7 +186,8 @@
     "type": {
       "editorial": "編集記事",
       "interview": "インタビュー",
-      "event": "イベント"
+      "event": "イベント",
+      "publicity": "広報"
     },
     "read": "閲覧する",
     "about": "メディアについて",

@@ -2,7 +2,7 @@
 import styles from './styles.module.css';
 import Image from 'next/image';
 import paperPic from '@/public/whitepaper.png';
-import contractPic from '@/public/smartcontract.png';
+import contractPic from '@/public/smart_contract.png';
 import Link from "next/link";
 import { useTranslations} from "next-intl";
 import {useState} from "react";
