@@ -3,8 +3,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     padding: 2rem;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 @media (max-width: 768px) {

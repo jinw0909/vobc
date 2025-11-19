@@ -87,9 +87,9 @@
     .mediaElement { height: 300px; width: 350px; }
 }
 
-@media (min-width : 1400px) {
-    .mediaElement { width: 400px; height: 350px; }
-}
+/*@media (min-width : 1400px) {*/
+/*    .mediaElement { width: 400px; height: 350px; }*/
+/*}*/
 
 
 @media (max-width: 768px) {

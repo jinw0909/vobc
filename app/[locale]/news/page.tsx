@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import {setRequestLocale} from "next-intl/server";
 import type {Metadata} from "next";
 import newsImages from "@/newsImages";
+import {NewsMedia} from "@/components/NewsMedia";
 
 export async function generateMetadata({ params } : { params: Promise<{idx:number}> }) : Promise<Metadata> {
 
@@ -33,6 +34,7 @@ export default async function news({params} : any) {
     return (
         <div className={styles.newsWrapper}>
             <News/>
+            <NewsMedia/>
         </div>
     )
 }

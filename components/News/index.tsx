@@ -34,11 +34,11 @@ export async function News() {
                 {t('1')}
             </div>
 
-            <div className={styles.viewMore}>
-                <NavigationLink href={'/news/media'}>
-                    <span className={styles.viewMoreBtn}>{t('more')}</span>
-                </NavigationLink>
-            </div>
+            {/*<div className={styles.viewMore}>*/}
+            {/*    <NavigationLink href={'/news/media'}>*/}
+            {/*        <span className={styles.viewMoreBtn}>{t('more')}</span>*/}
+            {/*    </NavigationLink>*/}
+            {/*</div>*/}
         </div>
     )
 }
