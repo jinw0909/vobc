@@ -318,6 +318,12 @@
     .newsElem.odd {
         animation: 1s ease-in-out fromRight forwards;
     }
+    .newsElem img {
+        object-position: top center;
+    }
+    .newsElem.active img {
+        object-position: center;
+    }
     .overlayCenter {
         padding: 1.5rem 1rem;
         justify-content: flex-start;
