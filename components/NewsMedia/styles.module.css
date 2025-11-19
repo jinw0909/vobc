@@ -6,8 +6,8 @@
 .header {
     padding: 1rem 0;
     border-bottom: 1px solid #999;
-    position: sticky;
-    position: -webkit-sticky;
+    /*position: sticky;*/
+    /*position: -webkit-sticky;*/
     top: 7rem;
     background-color: black;
     z-index: 80;

@@ -13,11 +13,11 @@ const notosansjp = Noto_Sans_JP({
 });
 
 const data0 = data.slice(0, 5);
-const data1 = data.slice(5, 10);
-const data2 = data.slice(10, 16);
+const data1 = data.slice(5, 15);
+const data2 = data.slice(15, 21);
 const image0 = newsImages.slice(0, 5).map((i:any) => i.image);
-const image1 = newsImages.slice(5, 10).map((i:any) => i.image);
-const image2 = newsImages.slice(10, 16).map((i:any) => i.image);
+const image1 = newsImages.slice(5, 15).map((i:any) => i.image);
+const image2 = newsImages.slice(15, 21).map((i:any) => i.image);
 // const imgSrc25 = [newsImages[0].image, newsImages[1].image, newsImages[2].image]
 // const imgSrc24 = [newsImages[3].image, newsImages[4].image, newsImages[5].image, newsImages[6].image];
 // const imgSrc23 = [newsImages[7].image, newsImages[8].image, newsImages[9].image, newsImages[10].image, newsImages[11].image, newsImages[12].image]
@@ -63,7 +63,7 @@ export async function NewsMedia() {
                     <h2 className={styles.year}>2023</h2>
                     <hr className={styles.horizontal}/>
                     <div>
-                        <NewsMediaBand data={data2} imgSrc={image2} index={10}></NewsMediaBand>
+                        <NewsMediaBand data={data2} imgSrc={image2} index={15}></NewsMediaBand>
                     </div>
                 </div>
             </div>
