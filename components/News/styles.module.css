@@ -6,6 +6,7 @@
     flex-direction: column;
     margin-top: 8.5rem;
     transition: .5s;
+    overflow: hidden;
 }
 .middleContent {
     opacity: 0;
