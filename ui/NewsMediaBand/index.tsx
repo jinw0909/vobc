@@ -1,14 +1,51 @@
+'use client'
+
 import styles from './styles.module.css';
 import Image from "next/image";
 import rightArrow from "@/public/icons/right-arrow-white.png";
 import {NavigationLink} from "@/ui/NavigationLink";
 import {getTranslations} from "next-intl/server";
-export async function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSrc: any, index: number}) {
+import {useEffect, useRef} from "react";
+import {useTranslations} from "next-intl";
+export function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSrc: any, index: number}) {
 
-    const t = await getTranslations('media');
+    const t = useTranslations('media');
+    const wrapperRef = useRef<HTMLUListElement>(null);
+
+    useEffect(() => {
+        const el = wrapperRef.current;
+        if (!el) return
+
+        // apply only when width < 768
+        if (window.innerWidth >= 768) return;
+
+        const handleWheel = (event: WheelEvent) => {
+            if (event.deltaY !== 0) {
+                event.preventDefault();
+                el.scrollLeft += event.deltaY;
+            }
+        };
+
+        const updateWheelBehavior = () => {
+            if (window.innerWidth < 768) {
+                el.addEventListener('wheel', handleWheel, {passive: false});
+                console.log('add wheel');
+            } else {
+                el.removeEventListener('wheel', handleWheel);
+            }
+        }
+
+        updateWheelBehavior();
+        window.addEventListener('resize', updateWheelBehavior);
+
+        return () => {
+            el.removeEventListener('wheel', handleWheel);
+            window.removeEventListener('resize', updateWheelBehavior);
+        }
+    }, []);
 
     return (
-        <ul className={styles.mediaElementWrapper}>
+        <ul ref={wrapperRef} className={styles.mediaElementWrapper}>
             {
                 data.map((a:any, i:number) => {
 

@@ -1,3 +1,5 @@
+'use-client';
+
 import styles from "./styles.module.css";
 import Image from "next/image";
 import {useTranslations} from "next-intl";
@@ -7,10 +9,48 @@ import {spans} from "next/dist/build/webpack/plugins/profiling-plugin";
 export function TeamBand({selected, profile, order, registerRef, data} : {selected : any, profile: any, order : any, registerRef:any, data:any}) {
 
     const t = useTranslations('team');
+
+    const bandRef = useRef<HTMLDivElement | null>(null);
+    const listRef = useRef<HTMLUListElement | null>(null);
+
     useEffect(() => {
         registerRef(order, bandRef.current);
+    }, [order, registerRef]);
+
+    useEffect(() => {
+        const el = listRef.current;
+        if (!el) return;
+
+        const handleWheel = (event: WheelEvent) => {
+            if (event.deltaY !== 0) {
+                event.preventDefault();
+                el.scrollLeft += event.deltaY;
+            }
+        };
+
+        const updateWheelBehavior = () => {
+            if (window.innerWidth < 768) {
+                //enable wheel hijack
+                el.addEventListener('wheel', handleWheel, {passive: false});
+            } else {
+                //disable wheel hijack
+                el.removeEventListener('wheel', handleWheel);
+            }
+        }
+
+        //Initial check
+        updateWheelBehavior();
+
+        //Listen to resize and re-check
+        window.addEventListener('resize', updateWheelBehavior);
+
+        // Cleanup
+        return () => {
+            el.removeEventListener('wheel', handleWheel);;
+            window.removeEventListener('resize', updateWheelBehavior);
+        }
     }, []);
-    const bandRef = useRef(null);
+
     return (
             <div ref={bandRef} className={`${styles.itemBandWrapper}`}>
                 <div className={styles.itemContainer}>
@@ -18,7 +58,7 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
                     <div className={`${styles.itemBand}`}>
                         {/*<h2 className={`${selected ? styles.selected : ''}`}>{t(`${order}.title`)}</h2>*/}
                         <h2>{t(`${order}.title`)}</h2>
-                        <ul className={styles.itemList}>
+                        <ul ref={listRef} className={styles.itemList}>
                             {
                                 profile.map((a:any, i:any) => {
                                     if (order != 7) {

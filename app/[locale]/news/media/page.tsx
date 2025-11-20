@@ -28,7 +28,7 @@ export default async function Page({params} : any) {
 
     return (
         <div className={styles.mediaWrapper}>
-            <NewsMedia/>
+            <NewsMedia className={styles.mediaWrapperOnMediaPage}/>
         </div>
     )
 }

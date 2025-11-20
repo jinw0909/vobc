@@ -145,7 +145,8 @@
 }
 .itemBand {
     flex: 1;
-    /*display: flex;*/
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     position: relative;
     max-height: 300vh;
@@ -172,8 +173,10 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 1rem;
-    padding-bottom: 4rem;
+    margin-bottom: 4rem;
     -ms-overflow-style: none;
+    align-self: flex-start;
+    max-width: 100%;
 }
 .itemList::-webkit-scrollbar {
     display: none;

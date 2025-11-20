@@ -22,12 +22,16 @@ const image2 = newsImages.slice(18, 23).map((i:any) => i.image);
 // const imgSrc24 = [newsImages[3].image, newsImages[4].image, newsImages[5].image, newsImages[6].image];
 // const imgSrc23 = [newsImages[7].image, newsImages[8].image, newsImages[9].image, newsImages[10].image, newsImages[11].image, newsImages[12].image]
 
-export async function NewsMedia() {
+type NewsMediaProps = {
+    className?: string;
+}
+
+export async function NewsMedia({ className } : NewsMediaProps) {
 
     const t = await getTranslations('media');
 
     return (
-        <div className={styles.mediaWrapper}>
+        <div className={`${styles.mediaWrapper} ${className ?? ''}`}>
             <div className={styles.header}>
                 <div className={`${styles.headerTitle} ${styles.fadeInAnimation}`}>
                     <div>{t('title')}</div>

@@ -6,9 +6,14 @@
     padding: 2rem;
 }
 
+.mediaWrapperOnMediaPage {
+    margin-top: 10rem;
+}
+
 @media (max-width: 768px) {
     .mediaWrapper { padding: 1.5rem; }
 }
 @media (max-width: 576px) {
     .mediaWrapper { padding: 1rem; }
+    .mediaWrapperOnMediaPage { margin-top: 8rem; }
 }
