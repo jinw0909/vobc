@@ -81,27 +81,11 @@
       ]
     },
     {
-      "status" : "Assistant Manager",
-      "name" : "I.S. KIM",
-      "desc" : [
-        "Data Analysis",
-        "Algorithm & Review"
-      ]
-    },
-    {
       "status" : "Associate",
       "name" : "E.M. KO",
       "desc" : [
         "System Development",
         "Android Development"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "C.Y. KIM",
-      "desc" : [
-        "System Development",
-        "IOS Development"
       ]
     },
     {
@@ -225,27 +209,6 @@
       "name" : "B.J. HOO",
       "desc" : [
         "China Market Development"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "H.R. JUNG",
-      "desc" : [
-        "Thailand Market Development"
-      ]
-    },
-    {
-      "status" : "Branch Manager",
-      "name" : "Oumaima",
-      "desc" : [
-        "Head of Dubai Branch"
-      ]
-    },
-    {
-      "status" : "Branch Manager",
-      "name" : "U.H. SUN",
-      "desc" : [
-        "Head of U.S. Branch"
       ]
     }
   ],

@@ -11,7 +11,7 @@
     align-self: stretch;
     position: sticky;
     top: 7rem;
-    background-color: rgba(0,0,0,1);
+    background-color: rgba(30,30,30,1);
     z-index: 70;
     border-bottom: 1px solid #999;
     border-top: 1px solid #999;
@@ -71,7 +71,7 @@
 }
 .elem:last-child {
     z-index: 80;
-    background-color: black;
+    /*background-color: black;*/
 }
 /*.elem:hover { opacity: 1; }*/
 .elem.selected {

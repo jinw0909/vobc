@@ -17,16 +17,16 @@ import engineering0 from '@/public/teams/profile/cto.png';
 import engineering1 from '@/public/teams/profile/hong.png';
 import engineering2 from '@/public/teams/profile/sangyong.png';
 import engineering3 from '@/public/teams/profile/hunook.png';
-import engineering4 from '@/public/teams/profile/insup.png';
-import engineering5 from '@/public/teams/profile/eunmin.png';
-import engineering6 from '@/public/teams/profile/chanyoung.png';
-import engineering7 from '@/public/teams/profile/doyoon.png';
-import engineering8 from '@/public/teams/profile/hyunjung.png';
-import engineering9 from '@/public/teams/profile/seoungook.png';
-import engineering10 from '@/public/teams/profile/jinwoo.png';
-import engineering11 from '@/public/teams/profile/hyejin.png';
-import engineering12 from '@/public/teams/profile/yaejin.png';
-import engineering13 from '@/public/teams/profile/seonga.png';
+// import engineering4 from '@/public/teams/profile/insup.png';
+import engineering4 from '@/public/teams/profile/eunmin.png';
+// import engineering6 from '@/public/teams/profile/chanyoung.png';
+import engineering5 from '@/public/teams/profile/doyoon.png';
+import engineering6 from '@/public/teams/profile/hyunjung.png';
+import engineering7 from '@/public/teams/profile/seoungook.png';
+import engineering8 from '@/public/teams/profile/jinwoo.png';
+import engineering9 from '@/public/teams/profile/hyejin.png';
+import engineering10 from '@/public/teams/profile/yaejin.png';
+import engineering11 from '@/public/teams/profile/seonga.png';
 import strategy0 from '@/public/teams/profile/choi.png';
 import strategy1 from '@/public/teams/profile/jowoong.png';
 import strategy2 from '@/public/teams/profile/minho.png';
@@ -35,6 +35,7 @@ import strategy4 from '@/public/teams/profile/thichinh.png';
 import strategy5 from '@/public/teams/profile/ukyoon.png';
 import strategy6 from '@/public/teams/profile/he.png';
 import strategy7 from '@/public/teams/profile/jiwoong.png';
+import strategy8 from '@/public/teams/profile/byungjung.png';
 
 import business0 from '@/public/teams/profile/koo.png';
 import business1 from '@/public/teams/profile/doo.png';
@@ -56,8 +57,8 @@ import { useLocale } from "next-intl";
 
 const managementPic = [management0, management1];
 const supportPic = [support0, support1, fallbackImg]
-const engineeringPic = [engineering0, engineering1, engineering2, engineering3, engineering4, engineering5, engineering6, engineering7, engineering8, engineering9, engineering10, engineering11, engineering12, engineering13]
-const strategyPic = [strategy0, strategy1, strategy2, strategy3, strategy4, strategy5, strategy6, strategy7, fallbackImg, fallbackImg, fallbackImg, fallbackImg];
+const engineeringPic = [engineering0, engineering1, engineering2, engineering3, engineering4, engineering5, engineering6, engineering7, engineering8, engineering9, engineering10, engineering11]
+const strategyPic = [strategy0, strategy1, strategy2, strategy3, strategy4, strategy5, strategy6, strategy7, strategy8];
 const businessPic = [business0, business1, business2, business3];
 const tradingPic = [trading0, trading1, trading2, trading3, fallbackImg];
 const advisorPic = [advisor0, fallbackImg, fallbackImg, fallbackImg, fallbackImg];

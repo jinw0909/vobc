@@ -3,12 +3,25 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import {useTranslations} from "next-intl";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {spans} from "next/dist/build/webpack/plugins/profiling-plugin";
 
 export function TeamBand({selected, profile, order, registerRef, data} : {selected : any, profile: any, order : any, registerRef:any, data:any}) {
 
     const t = useTranslations('team');
+
+    const [expanded, setExpanded] = useState<boolean[]>(
+        new Array(profile.length).fill(false)
+    );
+
+    const toggleItem = (index: number) => {
+        setExpanded((prevExpanded) => {
+            const newExpanded = [...prevExpanded];
+            newExpanded[index] = !newExpanded[index];
+            return newExpanded;
+        });
+    }
+
 
     const bandRef = useRef<HTMLDivElement | null>(null);
     const listRef = useRef<HTMLUListElement | null>(null);
@@ -29,7 +42,7 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
         };
 
         const updateWheelBehavior = () => {
-            if (window.innerWidth < 768) {
+            if (window.innerWidth <= 768) {
                 //enable wheel hijack
                 el.addEventListener('wheel', handleWheel, {passive: false});
             } else {
@@ -63,7 +76,7 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
                                 profile.map((a:any, i:any) => {
                                     if (order != 7) {
                                         return (
-                                            <li className={styles.item} key={i}>
+                                            <li className={styles.item} key={i} onClick={() => toggleItem(i)}>
                                                 <div className={styles.itemInner}>
                                                     <div className={styles.profilePic}>
                                                         <Image src={profile[i]} width={128} height={128} alt="ceo"></Image>
@@ -81,7 +94,7 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
                                                             data[order] && data[order][i] && (
                                                                 <>
                                                                     <span>{data[order][i].status}</span>
-                                                                    <p>
+                                                                    <p className={expanded[i] ? styles.show : ''}>
                                                                         {
                                                                             data[order][i].desc.map((a:string, j:number) =>
                                                                                 <span key={j}>{a}</span>

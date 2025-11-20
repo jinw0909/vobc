@@ -101,7 +101,7 @@ export const DoughnutChart = ({ handleIdx, index, handleActive, isActive }: {han
         if (datasets && datasets.length > 0) {
             const backgroundColors = (datasets[0] as any)?.backgroundColor;
             const offsets = (datasets[0] as any)?.offset;
-            backgroundColors[currentIdx] = '#1DFCFF';
+            backgroundColors[currentIdx] = 'rgba(180, 180, 30, 0.8)';
 
             offsets[currentIdx] = 32;
             for (let i = 0; i < backgroundColors.length; i++) {

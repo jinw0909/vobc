@@ -18,9 +18,6 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
         const el = wrapperRef.current;
         if (!el) return
 
-        // apply only when width < 768
-        if (window.innerWidth >= 768) return;
-
         const handleWheel = (event: WheelEvent) => {
             if (event.deltaY !== 0) {
                 event.preventDefault();
@@ -29,7 +26,7 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
         };
 
         const updateWheelBehavior = () => {
-            if (window.innerWidth < 768) {
+            if (window.innerWidth <= 768) {
                 el.addEventListener('wheel', handleWheel, {passive: false});
             } else {
                 el.removeEventListener('wheel', handleWheel);

@@ -6,7 +6,9 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    background-color: black;
+    /*background-color: black;*/
+    /*background: linear-gradient(to right, rgba(120, 120, 120, 0.4), rgba(120, 120, 120, 0.2));*/
+    background: rgba(30, 30, 30, 1);
     color: white;
     overflow-x: hidden;
 }

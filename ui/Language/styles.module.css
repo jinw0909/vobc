@@ -57,6 +57,12 @@
     width: 1px;
     background-color: #999;
 }
+.separator {
+    color: #bbbbbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .languageModal.show {
     max-height: 3rem;
     padding-top: .5rem;

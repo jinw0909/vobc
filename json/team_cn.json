@@ -82,27 +82,11 @@
       ]
     },
     {
-      "status": "Assistant Manager",
-      "name": "I.S. KIM",
-      "desc": [
-        "数据分析",
-        "算法与审核"
-      ]
-    },
-    {
       "status": "Associate",
       "name": "E.M. KO",
       "desc": [
         "系统开发",
         "Android开发"
-      ]
-    },
-    {
-      "status": "Associate",
-      "name": "C.Y. KIM",
-      "desc": [
-        "系统开发",
-        "iOS开发"
       ]
     },
     {
@@ -227,27 +211,6 @@
       "name": "B.J. HOO",
       "desc": [
         "中国市场开发"
-      ]
-    },
-    {
-      "status": "Associate",
-      "name": "H.R. JUNG",
-      "desc": [
-        "泰国市场开发"
-      ]
-    },
-    {
-      "status": "Branch Manager",
-      "name": "Oumaima",
-      "desc": [
-        "迪拜分公司负责人"
-      ]
-    },
-    {
-      "status": "Branch Manager",
-      "name": "U.H. SUN",
-      "desc": [
-        "美国分公司负责人"
       ]
     }
   ],

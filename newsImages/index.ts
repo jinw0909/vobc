@@ -17,11 +17,11 @@ import newsImage8 from '@/public/news/healtheco240403.png';
 import newsImage7 from '@/public/news/moneys240319.png';
 import newsImage6 from '@/public/news/ge240130.png';
 import newsImage5 from '@/public/news/retriseminar.jpeg';
-import newsImage4 from '@/public/news/herald.jpeg';
-import newsImage3 from '@/public/news/herald2.jpeg';
-import newsImage2 from '@/public/news/herald3.jpeg';
-import newsImage1 from '@/public/news/herald4.jpeg';
-import newsImage0 from '@/public/news/cointelegraphimage.png';
+import newsImage4 from '@/public/news/herald2.jpeg';
+import newsImage3 from '@/public/news/herald4.jpeg';
+import newsImage2 from '@/public/news/cointelegraphimage.png';
+import newsImage1 from '@/public/news/herald3.jpeg';
+import newsImage0 from '@/public/news/herald.jpeg';
 
 const newsImages: any = [
     { image: newsImage22, url: '/news/heraldbiz251020.png'},
@@ -42,10 +42,10 @@ const newsImages: any = [
     { image: newsImage7, url: '/news/moneys240319.png'},
     { image: newsImage6, url: '/news/ge240130.png'},
     { image: newsImage5, url: '/news/retriseminar.jpeg'},
-    { image: newsImage4, url: '/news/herald.jpeg'},
-    { image: newsImage3, url: '/news/herald2.jpeg'},
-    { image: newsImage2, url: '/news/herald3.jpeg'},
-    { image: newsImage1, url: '/news/herald4.jpeg'},
-    { image: newsImage0, url: '/news/cointelegraphimage.png'},
+    { image: newsImage4, url: '/news/herald2.jpeg'},
+    { image: newsImage3, url: '/news/herald4.jpeg'},
+    { image: newsImage2, url: '/news/cointelegraphimage.png'},
+    { image: newsImage1, url: '/news/herald3.jpeg'},
+    { image: newsImage0, url: '/news/herald.jpeg'},
 ]
 export default newsImages;

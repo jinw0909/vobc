@@ -79,27 +79,11 @@
       ]
     },
     {
-      "status" : "Assistant Manager",
-      "name" : "I.S. KIM",
-      "desc" : [
-        "データ分析担当",
-        "アルトリズムレビュー"
-      ]
-    },
-    {
       "status" : "Associate",
       "name" : "E.M. KO",
       "desc" : [
         "システム開発担当",
         "Android開発担当"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "C.Y. KIM",
-      "desc" : [
-        "システム開発担当",
-        "IOS開発担当"
       ]
     },
     {
@@ -224,27 +208,6 @@
       "desc" : [
         "中国市場対応担当"
       ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "H.R. JUNG",
-      "desc" : [
-        "タイ市場対応担当"
-      ]
-    },
-    {
-      "status" : "Branch Manager",
-      "name" : "Oumaima",
-      "desc" : [
-        "ドバイブランチ総責任者"
-      ]
-    },
-    {
-      "status" : "Branch Manager",
-      "name" : "U.H. SUN",
-      "desc" : [
-        "米国ブランチ総責任者"
-      ]
     }
   ],
   [{
@@ -336,7 +299,7 @@
       ]
     },
     {
-      "status" : "External Spokesperso",
+      "status" : "External Spokesperson",
       "name" : "MR. CHOI",
       "desc" : [
         "前韓国市長",

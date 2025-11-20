@@ -16,9 +16,6 @@ export function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSrc: any
         const el = wrapperRef.current;
         if (!el) return
 
-        // apply only when width < 768
-        if (window.innerWidth >= 768) return;
-
         const handleWheel = (event: WheelEvent) => {
             if (event.deltaY !== 0) {
                 event.preventDefault();
@@ -27,7 +24,7 @@ export function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSrc: any
         };
 
         const updateWheelBehavior = () => {
-            if (window.innerWidth < 768) {
+            if (window.innerWidth <= 768) {
                 el.addEventListener('wheel', handleWheel, {passive: false});
                 console.log('add wheel');
             } else {
