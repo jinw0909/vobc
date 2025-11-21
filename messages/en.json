@@ -18,7 +18,8 @@
     "privacy" : "Privacy Policy",
     "terms" : "Terms of Use",
     "language": "Select Language",
-    "detail" : "Detail"
+    "detail" : "Detail",
+    "blog" : "Blog"
   },
   "about" : {
     "main_title" : "About VOB",

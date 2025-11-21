@@ -1,0 +1,13 @@
+.devsWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+@media (max-width: 768px) {
+    .devsWrapper { padding: 1.5rem; }
+}
+@media (max-width: 576px) {
+    .devsWrapper { padding: 1rem; }
+}
