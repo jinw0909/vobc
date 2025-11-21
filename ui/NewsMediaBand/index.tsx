@@ -68,17 +68,17 @@ export function NewsMediaBand({ data, imgSrc, index } : { data: any, imgSrc: any
                         <li key={i} className={styles.mediaElement}>
                             <p className={styles.mediaElemType}>{typeText}</p>
                             <div>
-                                <NavigationLink className={styles.white} href={`/news/${i + index}`}>
+                                <NavigationLink className={styles.white} href={`/news/${a.id}`}>
                                     <p className={styles.mediaElemTitle}>{a.title}</p>
                                 </NavigationLink>
                             </div>
                             <div className={styles.mediaElemImg}>
-                                <NavigationLink href={`/news/${i + index}`}>
+                                <NavigationLink href={`/news/${a.id}`}>
                                 <Image fill={true} className={styles.imgCss} src={imgSrc[i]} alt="media image"></Image>
                                 </NavigationLink>
                             </div>
                             <div className={styles.mediaElemViewWrapper}>
-                            <NavigationLink href={`/news/${i + index}`}>
+                            <NavigationLink href={`/news/${a.id}`}>
                                 <div className={styles.mediaElemView}>
                                     <span className={styles.viewBtn}>{t('read')}</span>
                                     <span className={styles.arrowPic}><Image src={rightArrow} width={10} alt="right arrow"></Image></span>

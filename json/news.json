@@ -1,5 +1,6 @@
 [
   {
+    "id": "2025102001",
     "date": "October 20, 2025",
     "author": "유동현·노아름·김유진·정호원·경예은",
     "title": "“비트코인 주류…스테이블코인으로 복리 추구" ,
@@ -12,6 +13,7 @@
     "type": "editorial"
   },
   {
+    "id": "2025101701",
     "date": "October 17, 2025",
     "author": "유동현·경예은·문이림",
     "title": "“인플레이션 시대 금융자산 어떻게 업시킬까”…가상자산·채권·파생까지 부스마다 상담에 첫 구매까지 이어져[헤럴드머니페스타 2025]" ,
@@ -24,6 +26,7 @@
     "type": "event"
   },
   {
+    "id": "2025101601",
     "date": "October 16, 2025",
     "author": "김유진·경예은",
     "title": "“AI는 잠들지 않는다”…유스메타, 24시간 코인시장 ‘리스크 레이더’ 구축 [헤럴드머니페스타 2025]" ,
@@ -36,6 +39,7 @@
     "type": "publicity"
   },
   {
+    "id": "2025100201",
     "date": "October 2, 2025",
     "author": "유동현",
     "title": "“시세정확도 70~80%…암호화폐시장 내비게이션 목표”" ,
@@ -48,6 +52,7 @@
     "type": "publicity"
   },
   {
+    "id": "2025061001",
     "date": "June 10, 2025",
     "author": "박상현",
     "title": "유스메타, 태국 상원의원과 MOU…태국 교육 플랫폼 시장 진출 본격화" ,
@@ -60,6 +65,7 @@
     "type": "editorial"
   },
   {
+    "id": "2025040101",
     "date": "Apr 1, 2025",
     "author": "Chung Hye-lim",
     "title": "YouthMeta Unveils Revamped 'RisingX' AI Crypto Platform, Accelerated Global Expansion" ,
@@ -72,6 +78,7 @@
     "type": "editorial"
   },
   {
+    "id": "2025010301",
     "date": "Jan 3, 2025",
     "author": "Park Min-ha",
     "title": "YouthMeta Unveils AI-powered Crypto Chart for Beginners" ,
@@ -84,6 +91,7 @@
     "type": "editorial"
   },
   {
+    "id": "2024093001",
     "date": "Sep 30, 2024",
     "author": "Deepcoin",
     "title": "[New Spot Listing] VOB/USDT Coming Soon, Stay Tuned!",
@@ -96,6 +104,7 @@
     "type": "event"
   },
   {
+    "id": "2024090601",
     "date": "Sep 6, 2024",
     "author": "블록체인투데이",
     "title": "[인터뷰] 블록스퀘어랩스 \"미래 지식으로 현재를 서비스하는 기업\"",
@@ -108,6 +117,7 @@
     "type": "interview"
   },
   {
+    "id": "2024061402",
     "date": "June 14, 2024",
     "author": "Lee Yeon-woo",
     "title": "BlockSquare Seoul to Enhance Crypto Price Analysis Service",
@@ -120,6 +130,7 @@
     "type": "editorial"
   },
   {
+    "id": "2024061401",
     "date": "June 14, 2024",
     "author": "プレスリリース",
     "title": "ブロックスクエアソウル、7月に仮想通貨分析アップデート予定",
@@ -132,6 +143,7 @@
     "type": "editorial"
   },
   {
+    "id": "2024061303",
     "date": "June 13, 2024",
     "author": "류영상",
     "title": "블록스퀘어 서울, 내달 암호화폐 분석 업데이트 정보 제공",
@@ -144,6 +156,7 @@
     "type": "editorial"
   },
   {
+    "id": "2024061302",
     "date": "June 13, 2024",
     "author": "Im Eun-byel",
     "title": "BlockSquare Seoul to Enhance Market Intelligence Service for Crypto Investors",
@@ -156,6 +169,7 @@
     "type": "editorial"
   },
   {
+    "id": "2024061301",
     "date": "June 13, 2024",
     "author": "プレスリリース",
     "title": "ブロックスクエアソウル、7月に仮想通貨分析機能をアップデートへ",
@@ -168,6 +182,7 @@
     "type": "editorial"
   },
   {
+    "id": "2024040301",
     "date": "April 3, 2024",
     "author": "이상혁",
     "title": "유스메타그룹 리트리, 몽골서 회사상품 비전공유 자리 가져",
@@ -180,6 +195,7 @@
     "type": "event"
   },
   {
+    "id": "2024032901",
     "date": "March 29, 2024",
     "author": "엄윤경",
     "title": "리트리, '블록체인 컨퍼런스' 개최… 300여 회원 참석",
@@ -192,6 +208,7 @@
     "type": "event"
   },
   {
+    "id": "2024013002",
     "date": "January 30, 2024",
     "author": "이상훈",
     "title": "가상화폐 시세예측 서비스업체 리트리, 스페셜 미팅행사 개최",
@@ -204,6 +221,7 @@
     "type": "event"
   },
   {
+    "id": "2023013001",
     "date": "Jan 30, 2024",
     "author": "엄윤경",
     "title": "리트리, '2024 스페셜 미팅' 행사 개최",
@@ -216,6 +234,7 @@
     "type": "event"
   },
   {
+    "id": "2023121203",
     "date": "Dec 12, 2023",
     "author": "Im Eun-byel",
     "title": "[Herald Interview] BlockSquare CTO on Importance of Real-time Data in Navigating Crypto Market",
@@ -228,6 +247,7 @@
     "type": "editorial"
   },
   {
+    "id": "2023121202",
     "date": "Dec 12, 2023",
     "author": "Im Eun-byel",
     "title": "BlockSquare Seoul Helps Crypto Investors Reduce Risks",
@@ -240,6 +260,7 @@
     "type": "interview"
   },
   {
+    "id": "2023121201",
     "date": "Dec 12, 2023",
     "author": "",
     "title": "ブロックスクエアソウル、仮想通貨市場のトレンドを読む",
@@ -252,6 +273,7 @@
     "type": "editorial"
   },
   {
+    "id": "2023112902",
     "date": "Nov 29, 2023",
     "author": "Im Eun-byel",
     "title": "[Herald Interview] Decoding Crypto Through Charts",
@@ -264,6 +286,7 @@
     "type": "interview"
   },
   {
+    "id": "2023112901",
     "date": "Nov 29, 2023",
     "author": "Im Eun-byel",
     "title": "BlockSquare Seoul Reads Crypto Market Trends",

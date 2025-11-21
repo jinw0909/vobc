@@ -69,7 +69,7 @@ export function NewsAcc({data, imgSrc, index}:{data:any, imgSrc:any, index:numbe
                                             <p className={styles.publisher}>{a.press}</p>
                                             <NavigationLink
                                                 className={`${styles.learnDetail} ${showOpen ? styles.showOpen : ''}`}
-                                                href={`/news/${i + index}`}>
+                                                href={`/news/${a.id}`}>
                                                 <span className={styles.learnDetailSpan}>Learn More</span>
                                                 <Image className={styles.rightArrow} src={arrowIcon} width={12} height={12} alt="right arrow"></Image>
                                             </NavigationLink>

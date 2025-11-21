@@ -6,24 +6,41 @@ import {NavigationLink} from "@/ui/NavigationLink";
 import data from '@/json/news.json';
 import Link from "next/link";
 import newsImages from '@/newsImages'
+import {notFound} from "next/navigation";
+
 export async function NewsDetail({idx} : {idx : any}) {
 
+    const article = data.find(item => item.id === idx);
+
+    if (!article) {
+        notFound()
+    }
+
+    // 2) find numeric index for this article
+    const index = data.findIndex(item => item.id === idx);
+    if (index === -1 || !newsImages[index]) {
+        // optional: fallback image or 404
+        notFound();
+    }
+
     let contentArr: string[] = [];
-    const content = data[idx].content;
-    if (content) { contentArr = content.split('\n'); }
-    // let contentArr = data[idx].content.split(`\n`);
+    if (article.content) { contentArr = article.content.split('\n'); }
+
+    // const content = article.content;
+    // if (content) { contentArr = content.split('\n'); }
+    // // let contentArr = article.content.split(`\n`);
 
     return (
         <div className={styles.detailWrapper}>
             <div className={styles.detailUp}>
                 <div className={styles.left}>
                     <div className={styles.leftContent}>
-                        <div className={styles.newsDate}>{data[idx].date}</div>
+                        <div className={styles.newsDate}>{article.date}</div>
                         <div className={styles.newsTitle}>
-                            {data[idx].title}
+                            {article.title}
                         </div>
                         <div className={styles.newsAuthor}>
-                            {`${data[idx].author == '' ? data[idx].press : `By ${data[idx].author}, ${data[idx].press}`}`}
+                            {`${article.author == '' ? article.press : `By ${article.author}, ${article.press}`}`}
                         </div>
                     </div>
                     <div className={styles.leftContentDown}>
@@ -37,17 +54,17 @@ export async function NewsDetail({idx} : {idx : any}) {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.imageWrapper}>
-                        <Image src={newsImages[idx].image} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
+                        <Image src={newsImages[index].image} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
                     </div>
                     <span className={styles.imageDesc}>
-                        {data[idx].desc}
+                        {article.desc}
                     </span>
                     <div className={styles.mainContent}>
                         <p className={styles.subTitle}>
-                            {data[idx].subtitle}
+                            {article.subtitle}
                         </p>
                         <hr/>
-                        {/*<NewsContent content={data[idx].content}/>*/}
+                        {/*<NewsContent content={article.content}/>*/}
                         {
                             contentArr.map((a, i) => {
                                 return (
@@ -67,7 +84,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                             <Image src={arrowUp} width={16} height={16} alt="arrow to top" />
                         </div>
                         <div className={styles.backToTop}>
-                            <Link href={data[idx].link as string}
+                            <Link href={article.link as string}
                               target="_blank"
                               rel="noopener noreferrer"
                               locale={undefined}>
@@ -82,7 +99,7 @@ export async function NewsDetail({idx} : {idx : any}) {
                         <hr/>
                         <span>About the Press</span>
                         <p>
-                            {data[idx].pressdesc}
+                            {article.pressdesc}
                         </p>
                     </div>
                 </div>

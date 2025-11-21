@@ -5,15 +5,52 @@ import { Metadata, ResolvingMetadata } from "next";
 import newsData from "@/json/news.json";
 import newsImages from "@/newsImages";
 
-export async function generateMetadata({ params } : { params: Promise<{idx:number}> }) : Promise<Metadata> {
+
+type NewsArticle = {
+    id: string
+    title: string
+    subtitle: string
+    content: string
+    date: string
+    author: string
+    press: string
+    desc: string
+    pressdesc: string
+    link: string
+}
+
+type PageParams = {
+    locale: string,
+    idx: string
+};
+
+type PageProps = {
+    params: Promise<PageParams>
+}
+
+export async function generateMetadata({ params } : PageProps) : Promise<Metadata> {
     const {idx} = await params;
 
-    const summary = newsData[idx].title + '\n'+  newsData[idx].subtitle;
+    const articles = newsData as NewsArticle[];
+    const article = articles.find(article => article.id === idx);
+
+    if (!article) {
+        return {
+            title: 'Not found',
+            description: 'This article does not exist'
+        }
+    }
+
+    // Find numeric index for image array
+    const index = newsData.findIndex(item => item.id === idx);
+    // const summary = newsData[idx].title + '\n'+  newsData[idx].subtitle;
+    const summary = `${article.title}\n${article.subtitle}`;
+
 
     return {
         description: summary,
         openGraph: {
-            images: `${process.env.SITE_URL}${newsImages[idx].url}`,
+            images: `${process.env.SITE_URL}${newsImages[index].url}`,
             description: summary
         }
     }

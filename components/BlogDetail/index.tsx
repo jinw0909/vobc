@@ -2,6 +2,7 @@ import styles from './styles.module.css';
 import blogData from '@/json/blog.json';
 import {getLocale} from 'next-intl/server';
 import Link from 'next/link';
+import {notFound} from "next/navigation";
 
 interface PageProps {
     params: {
@@ -17,12 +18,7 @@ export default async function BlogDetail({idx} : {idx : any}) {
     const post = blogData.find((p) => p.id === id);
 
     if (!post) {
-        return (
-            <div className={styles.blogWrapper}>
-                <p>해당 글을 찾을 수 없습니다.</p>
-                <Link href="/blog">← 블로그 목록으로</Link>
-            </div>
-        );
+        notFound();
     }
 
     const title = post.title[lang] || post.title.kr;
