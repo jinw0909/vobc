@@ -60,7 +60,7 @@
 }
 .elem {
     display: inline-block;
-    /*width: 6rem;*/
+    width: 4rem;
     /*border: 1px solid white;*/
     margin: .5rem 1rem;
     text-align: center;
@@ -68,6 +68,9 @@
     transition: .5s;
     cursor: pointer;
     /*opacity: 0.7;*/
+}
+.elem.cn {
+    width: 2rem;
 }
 .elem:last-child {
     z-index: 80;

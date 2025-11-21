@@ -79,7 +79,14 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
                                             <li className={styles.item} key={i} onClick={() => toggleItem(i)}>
                                                 <div className={styles.itemInner}>
                                                     <div className={styles.profilePic}>
-                                                        <Image src={profile[i]} width={128} height={128} alt="ceo"></Image>
+                                                        <div className={styles.imgContainer}>
+                                                            <Image
+                                                                src={profile[i]}
+                                                                alt="ceo"
+                                                                fill={true}
+                                                                style={{ objectFit: "cover"}}
+                                                            />
+                                                        </div>
                                                         {
                                                             data[order] && data[order][i] && (
                                                                 <>

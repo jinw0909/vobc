@@ -2,8 +2,8 @@
 import styles from './styles.module.css';
 import {useState, useEffect, useRef, RefObject} from "react";
 import Image from 'next/image';
-import plusPic from '@/public/icons/plus-icon.png';
-import minusPic from "@/public/icons/minus-icon.png";
+import plusPic from '@/public/icons/plus-icon-yellow.png';
+import minusPic from "@/public/icons/minus-icon-yellow.png";
 import {useTranslations} from "next-intl";
 const accData = [
     {title: "1. Improved Decision Making", content: "AI can analyze massive data from various sources. This helps traders make more informed decisions and identify opportunities that may have been overlooked when traditional methods were taken."},

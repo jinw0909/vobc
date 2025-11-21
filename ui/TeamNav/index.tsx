@@ -9,10 +9,13 @@ import iconTrading from "@/public/teams/teams_trading.png";
 import iconAdvisor from "@/public/teams/teams_advisors.png";
 import iconLaw from "@/public/teams/teams_law.png";
 import {useEffect, useRef, useState} from "react";
-import {useTranslations} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, handleIndex : any, selectedIdx : any }) {
     const t = useTranslations('team');
     const wrapperRef = useRef<HTMLUListElement | null>(null);
+
+    const locale = useLocale();
+    const isCN = locale === "cn" || locale === "zh" || locale === "zh-CN";
 
     useEffect(() => {
         const el = wrapperRef.current;
@@ -25,8 +28,10 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
             }
         };
 
+        const breakpoint = isCN ? 576 : 832
+
         const updateWheelBehavior = () => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= breakpoint) {
                 el.addEventListener('wheel', handleWheel, {passive: false});
             } else {
                 el.removeEventListener('wheel', handleWheel);
@@ -50,7 +55,7 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
                         {
                             selectedIdx.map((a:any, i:number) => {
                                 return (
-                                    <li key={i} className={`${styles.elem}`}
+                                    <li key={i} className={`${styles.elem} ${isCN ? styles.cn : ''}`}
                                         onClick={() => {handleIndex(i)}}>
                                         <div className={styles.elemInner}>
                                             <div className={styles.teamIcon}>

@@ -232,7 +232,7 @@
     }
     .left { position: sticky; position: -webkit-sticky; top: 4rem;
         z-index: 55; padding: 0; width: 100%;
-        background-color: black; border-bottom: 1px solid #999;}
+        background-color: rgba(30, 30, 30, 1); border-bottom: 1px solid #999;}
     .right { width: 100%; }
     .leftContent {
         top: 4rem;
@@ -240,6 +240,7 @@
         align-self: stretch;
         padding: 1rem 0;
         position: static;
+        margin-bottom: 0;
     }
     .leftContentDown {
         /*position: static;*/

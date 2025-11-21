@@ -306,9 +306,10 @@
         height: 60vh;
         transition: .5s;
     }
-    .expand {
-        height: 80vh;
-    }
+    /*.expand {*/
+    /*    height: 80vh;*/
+    /*}*/
+
     /*.newsContent.below {*/
     /*    height: 40vh;*/
     /*}*/
