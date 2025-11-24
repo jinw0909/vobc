@@ -22,6 +22,8 @@
     transition: .5s;
     gap: 1rem;
     flex-wrap: wrap;
+    max-width: 1028px;
+    margin: auto;
 }
 .subWrapperPlus > div {
     flex: 1 1 33%;
@@ -107,7 +109,7 @@
     .subWrapperPlus {
         width: 80vw;
         margin: auto;
-        max-width: 1200px;
+        /*max-width: 1200px;*/
     }
 }
 

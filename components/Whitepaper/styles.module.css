@@ -16,7 +16,8 @@
     /*padding: 1.5rem;*/
     border-radius: 8px;
     transition: .5s;
-    height: 45vw;
+    /*height: 45vw;*/
+    aspect-ratio: 1 / 1;
     flex-direction: column;
     padding: 1rem;
     position: relative;
@@ -252,7 +253,7 @@
 @media (max-width: 768px) {
     .whitepaperTitle { font-size: 1.5rem; }
     .whitepaperDesc { font-size: .8rem; }
-    .whitepaperInner { height: 50vh; }
+    /*.whitepaperInner { height: 50vh; }*/
 }
 
 @media (max-width: 576px) {
