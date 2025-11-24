@@ -1,6 +1,6 @@
 import "./global.css";
 import { Header } from "@/components/Header";
-import { Noto_Serif_JP, Noto_Serif_KR } from "next/font/google";
+import { Noto_Serif_JP, Noto_Serif_KR, Noto_Serif_SC } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { MobileHeader } from "@/components/MobileHeader";
 import { MobileFooter } from "@/components/MobileFooter";
@@ -13,6 +13,12 @@ import type { Metadata } from "next";
 
 
 const notoserifjp = Noto_Serif_JP({
+    weight: ['200', '300', '400', '500', '600', '700', '900'],
+    style: "normal",
+    subsets: ['latin']
+});
+
+const notoserifsc = Noto_Serif_SC({
     weight: ['200', '300', '400', '500', '600', '700', '900'],
     style: "normal",
     subsets: ['latin']
@@ -73,7 +79,7 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale}>
-        <body className={`${notoserifjp.className} ${notoserifkr.className}`}>
+        <body className={`${notoserifjp.className} ${notoserifkr.className} ${notoserifsc.className}`}>
         {/*<body className={notosansjp.className}>*/}
         <NextIntlClientProvider locale={locale} messages={messages}>
             <Header lang={locale} />
