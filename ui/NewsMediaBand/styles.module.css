@@ -28,7 +28,14 @@
     font-size: .6rem;
     opacity: 0.8;
 }
-.mediaElemTitle { display: inline; position: relative; cursor: pointer; }
+.mediaElemTitle {
+    display: inline;
+    position: relative;
+    cursor: pointer;
+    /*font-family: 'Nanum Myeongjo', serif;*/
+    font-family: 'Noto Serif KR', serif;
+    /*font-weight: 400;*/
+}
 .mediaElemTitle::after {
     position: absolute;
     content: '';
@@ -80,7 +87,7 @@
 .mediaElemView:hover .viewBtn { transform: translateX(0); }
 .mediaElemView:hover::after { width: 95%; }
 
-.white { color: white; }
+.white { color: white;}
 
 
 @media (min-width: 1200px) {
