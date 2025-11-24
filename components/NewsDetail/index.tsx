@@ -16,10 +16,8 @@ export async function NewsDetail({idx} : {idx : any}) {
         notFound()
     }
 
-    // 2) find numeric index for this article
-    const index = data.findIndex(item => item.id === idx);
-    if (index === -1 || !newsImages[index]) {
-        // optional: fallback image or 404
+    const imageObj = newsImages.find((item : any) => item.id === idx);
+    if (!imageObj) {
         notFound();
     }
 
@@ -54,7 +52,11 @@ export async function NewsDetail({idx} : {idx : any}) {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.imageWrapper}>
-                        <Image src={newsImages[index].image} fill={true} style={{objectFit: 'cover'}} alt="image0"/>
+                        <Image
+                            src={imageObj.image as string}
+                            fill={true}
+                            style={{objectFit: 'cover'}}
+                            alt={article.title as string}/>
                     </div>
                     <span className={styles.imageDesc}>
                         {article.desc}

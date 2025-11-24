@@ -4,7 +4,7 @@ import {setRequestLocale} from "next-intl/server";
 import { Metadata, ResolvingMetadata } from "next";
 import newsData from "@/json/news.json";
 import newsImages from "@/newsImages";
-
+import {notFound} from "next/navigation";
 
 type NewsArticle = {
     id: string
@@ -32,27 +32,38 @@ export async function generateMetadata({ params } : PageProps) : Promise<Metadat
     const {idx} = await params;
 
     const articles = newsData as NewsArticle[];
-    const article = articles.find(article => article.id === idx);
+    const article = articles.find(a => a.id === idx);
 
     if (!article) {
-        return {
-            title: 'Not found',
-            description: 'This article does not exist'
-        }
+        notFound();
     }
 
-    // Find numeric index for image array
-    const index = newsData.findIndex(item => item.id === idx);
-    // const summary = newsData[idx].title + '\n'+  newsData[idx].subtitle;
-    const summary = `${article.title}\n${article.subtitle}`;
+    const imageObj = newsImages.find((img : any) => img.id === idx);
+    const summary =
+        (article.subtitle && `${article.title} – ${article.subtitle}`) ||
+        article.desc ||
+        article.title;
 
+    const baseUrl = process.env.SITE_URL ?? 'https://www.vobc.io';
 
     return {
+        title: article.title,
         description: summary,
         openGraph: {
-            images: `${process.env.SITE_URL}${newsImages[index].url}`,
-            description: summary
-        }
+            title: article.title,
+            description: summary,
+            url: `${baseUrl}/news/media/${idx}`, // adjust path if your route differs
+            images: imageObj
+                ? [
+                    {
+                        url: `${baseUrl}${imageObj.url}`, // e.g. https://.../news/heraldbiz251020.png
+                        width: 1200,
+                        height: 630,
+                        alt: article.title,
+                    },
+                ]
+                : undefined,
+        },
     }
 }
 

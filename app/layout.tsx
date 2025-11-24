@@ -23,7 +23,7 @@ export const metadata = {
         description: 'The Vision of Blockchain foundation and the VOB token expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities.',
         type: 'website',
         // locale: 'en-US',
-        url: 'https://vobc.io',
+        url: 'https://www.vobc.io',
         siteName: 'The VOB Foundation'
     },
     icons: {

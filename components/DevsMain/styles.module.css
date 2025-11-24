@@ -6,7 +6,7 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
     padding: 2rem;
     border-radius: 8px;
-    /*min-height: 66vh;*/
+    min-height: 45vh;
     /*max-height: 66vh;*/
     gap: 1rem;
     /*cursor: pointer;*/
