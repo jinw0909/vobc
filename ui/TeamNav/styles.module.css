@@ -70,7 +70,7 @@
     /*opacity: 0.7;*/
 }
 .elem.cn {
-    width: 3rem;
+    width: 4rem;
 }
 .elem:last-child {
     z-index: 80;
