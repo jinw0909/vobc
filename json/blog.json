@@ -8,37 +8,122 @@
     "date": "2025.04.23 10:26",
     "tags": ["blockchain"],
     "summary": {
-      "kr": "요약",
-      "en": "Summary"
+      "kr": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial.",
+      "en": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial."
     },
     "content": {
       "kr": "◆1강: 암호화폐(Crypto)란 무엇인가?\n암호화폐는 인터넷 기반에서 사용되는 디지털 자산으로, 중앙은행이나 금융기관의 개입 없이 개인 간 직접 거래가 가능한 새로운 형태의 화폐다.\n\n전통적인 화폐처럼 인쇄소에서 제작되는 것도 아니며, 금처럼 자연 자원을 채굴하여 얻는 것도 아니다. 암호화폐는 복잡한 컴퓨터 연산 과정을 통해 생성되며, 이 과정을 ‘채굴(mining)’이라고 부른다.\n\n◇암호화폐가 만들어지는 방법 (대표적인 채굴의 3가지 종류)\n(1) POW(Proof of Work) 작업증명\nPoW는 가장 오래되고 널리 사용되는 합의 방식이다. 참여자는 컴퓨터를 통해 고난도의 수학 문제를 풀고, 정답을 가장 먼저 맞힌 컴퓨터가 블록 생성 권한과 보상을 얻게 된다.\n\n이 과정은 막대한 연산 능력을 요구하며, 에너지 소모가 크다는 특징이 있다. 대표적인 사례로는 비트코인(Bitcoin, BTC)이 있다.\n\n출처 : 블록체인투데이(https://www.blockchaintoday.co.kr)\n<img src=\"https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61233_255.jpg\">",
       "en": "◆ Lecture 1: What is Cryptocurrency (Crypto)?\nCryptocurrency is a digital asset used on the internet that enables a new form of money where people can transact directly with each other without the involvement of central banks or financial institutions.\n\nUnlike traditional currency, which is produced at a printing facility, or natural resources like gold that are mined from the earth, cryptocurrencies are created through complex computer computations. This process is called \"mining\".\n\n◇ How cryptocurrencies are created (three representative types of mining)\n(1) POW (Proof of Work)\nProof of Work is the oldest and most widely used consensus mechanism. Participants use computers to solve difficult mathematical problems, and the computer that finds the correct answer first gains the right to create a new block and receive a reward.\n\nThis process requires enormous computing power and therefore consumes a lot of energy. Bitcoin (BTC) is a representative example.\n\nSource: Blockchain Today (https://www.blockchaintoday.co.kr)\n<img src=\"https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61233_255.jpg\">"
     },
     "author": {
-      "kr": "일론머스크",
+      "kr": "가나다",
       "en": "Elon Musk"
     }
   },
   {
-    "id": 2,
+    "id": 3,
     "title": {
-      "kr": "[블록체인 A to Z] 암호화폐의 세계에 입문하다2",
-      "en": "[Blockchain A to Z] Introduction to the World of Cryptocurrency 2"
+      "kr": "[블록체인 A to Z] 암호화폐의 세계에 입문하다3",
+      "en": "[Blockchain A to Z] Introduction to the World of Cryptocurrency 3"
     },
     "date": "2025.04.23 10:26",
     "tags": ["blockchain"],
     "summary": {
-      "kr": "요약",
-      "en": "Summary"
+      "kr": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial.",
+      "en": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial."
     },
     "content": {
       "kr": "◆1강: 암호화폐(Crypto)란 무엇인가?\n암호화폐는 인터넷 기반에서 사용되는 디지털 자산으로, 중앙은행이나 금융기관의 개입 없이 개인 간 직접 거래가 가능한 새로운 형태의 화폐다.\n\n전통적인 화폐처럼 인쇄소에서 제작되는 것도 아니며, 금처럼 자연 자원을 채굴하여 얻는 것도 아니다. 암호화폐는 복잡한 컴퓨터 연산 과정을 통해 생성되며, 이 과정을 ‘채굴(mining)’이라고 부른다.\n\n◇암호화폐가 만들어지는 방법 (대표적인 채굴의 3가지 종류)\n(1) POW(Proof of Work) 작업증명\nPoW는 가장 오래되고 널리 사용되는 합의 방식이다. 참여자는 컴퓨터를 통해 고난도의 수학 문제를 풀고, 정답을 가장 먼저 맞힌 컴퓨터가 블록 생성 권한과 보상을 얻게 된다.\n\n이 과정은 막대한 연산 능력을 요구하며, 에너지 소모가 크다는 특징이 있다. 대표적인 사례로는 비트코인(Bitcoin, BTC)이 있다.\n\n출처 : 블록체인투데이(https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">",
       "en": "◆ Lecture 1: What is Cryptocurrency (Crypto)?\nCryptocurrency is a digital asset used on the internet that enables a new form of money where people can transact directly with each other without the involvement of central banks or financial institutions.\n\nUnlike traditional currency, which is produced at a printing facility, or natural resources like gold that are mined from the earth, cryptocurrencies are created through complex computer computations. This process is called \"mining\".\n\n◇ How cryptocurrencies are created (three representative types of mining)\n(1) POW (Proof of Work)\nProof of Work is the oldest and most widely used consensus mechanism. Participants use computers to solve difficult mathematical problems, and the computer that finds the correct answer first gains the right to create a new block and receive a reward.\n\nThis process requires enormous computing power and therefore consumes a lot of energy. Bitcoin (BTC) is a representative example.\n\nSource: Blockchain Today (https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">"
     },
     "author": {
-      "kr": "일론머스크",
+      "kr": "가나다",
+      "en": "Elon Musk"
+    }
+  },
+  {
+    "id": 4,
+    "title": {
+      "kr": "[블록체인 A to Z] 암호화폐의 세계에 입문하다4",
+      "en": "[Blockchain A to Z] Introduction to the World of Cryptocurrency 4"
+    },
+    "date": "2025.04.23 10:26",
+    "tags": ["blockchain"],
+    "summary": {
+      "kr": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial.",
+      "en": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial."
+    },
+    "content": {
+      "kr": "◆1강: 암호화폐(Crypto)란 무엇인가?\n암호화폐는 인터넷 기반에서 사용되는 디지털 자산으로, 중앙은행이나 금융기관의 개입 없이 개인 간 직접 거래가 가능한 새로운 형태의 화폐다.\n\n전통적인 화폐처럼 인쇄소에서 제작되는 것도 아니며, 금처럼 자연 자원을 채굴하여 얻는 것도 아니다. 암호화폐는 복잡한 컴퓨터 연산 과정을 통해 생성되며, 이 과정을 ‘채굴(mining)’이라고 부른다.\n\n◇암호화폐가 만들어지는 방법 (대표적인 채굴의 3가지 종류)\n(1) POW(Proof of Work) 작업증명\nPoW는 가장 오래되고 널리 사용되는 합의 방식이다. 참여자는 컴퓨터를 통해 고난도의 수학 문제를 풀고, 정답을 가장 먼저 맞힌 컴퓨터가 블록 생성 권한과 보상을 얻게 된다.\n\n이 과정은 막대한 연산 능력을 요구하며, 에너지 소모가 크다는 특징이 있다. 대표적인 사례로는 비트코인(Bitcoin, BTC)이 있다.\n\n출처 : 블록체인투데이(https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">",
+      "en": "◆ Lecture 1: What is Cryptocurrency (Crypto)?\nCryptocurrency is a digital asset used on the internet that enables a new form of money where people can transact directly with each other without the involvement of central banks or financial institutions.\n\nUnlike traditional currency, which is produced at a printing facility, or natural resources like gold that are mined from the earth, cryptocurrencies are created through complex computer computations. This process is called \"mining\".\n\n◇ How cryptocurrencies are created (three representative types of mining)\n(1) POW (Proof of Work)\nProof of Work is the oldest and most widely used consensus mechanism. Participants use computers to solve difficult mathematical problems, and the computer that finds the correct answer first gains the right to create a new block and receive a reward.\n\nThis process requires enormous computing power and therefore consumes a lot of energy. Bitcoin (BTC) is a representative example.\n\nSource: Blockchain Today (https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">"
+    },
+    "author": {
+      "kr": "가나다",
+      "en": "Elon Musk"
+    }
+  },
+  {
+    "id": 5,
+    "title": {
+      "kr": "[블록체인 A to Z] 암호화폐의 세계에 입문하다5",
+      "en": "[Blockchain A to Z] Introduction to the World of Cryptocurrency 5"
+    },
+    "date": "2025.04.23 10:26",
+    "tags": ["blockchain"],
+    "summary": {
+      "kr": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial.",
+      "en": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial."
+    },
+    "content": {
+      "kr": "◆1강: 암호화폐(Crypto)란 무엇인가?\n암호화폐는 인터넷 기반에서 사용되는 디지털 자산으로, 중앙은행이나 금융기관의 개입 없이 개인 간 직접 거래가 가능한 새로운 형태의 화폐다.\n\n전통적인 화폐처럼 인쇄소에서 제작되는 것도 아니며, 금처럼 자연 자원을 채굴하여 얻는 것도 아니다. 암호화폐는 복잡한 컴퓨터 연산 과정을 통해 생성되며, 이 과정을 ‘채굴(mining)’이라고 부른다.\n\n◇암호화폐가 만들어지는 방법 (대표적인 채굴의 3가지 종류)\n(1) POW(Proof of Work) 작업증명\nPoW는 가장 오래되고 널리 사용되는 합의 방식이다. 참여자는 컴퓨터를 통해 고난도의 수학 문제를 풀고, 정답을 가장 먼저 맞힌 컴퓨터가 블록 생성 권한과 보상을 얻게 된다.\n\n이 과정은 막대한 연산 능력을 요구하며, 에너지 소모가 크다는 특징이 있다. 대표적인 사례로는 비트코인(Bitcoin, BTC)이 있다.\n\n출처 : 블록체인투데이(https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">",
+      "en": "◆ Lecture 1: What is Cryptocurrency (Crypto)?\nCryptocurrency is a digital asset used on the internet that enables a new form of money where people can transact directly with each other without the involvement of central banks or financial institutions.\n\nUnlike traditional currency, which is produced at a printing facility, or natural resources like gold that are mined from the earth, cryptocurrencies are created through complex computer computations. This process is called \"mining\".\n\n◇ How cryptocurrencies are created (three representative types of mining)\n(1) POW (Proof of Work)\nProof of Work is the oldest and most widely used consensus mechanism. Participants use computers to solve difficult mathematical problems, and the computer that finds the correct answer first gains the right to create a new block and receive a reward.\n\nThis process requires enormous computing power and therefore consumes a lot of energy. Bitcoin (BTC) is a representative example.\n\nSource: Blockchain Today (https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">"
+    },
+    "author": {
+      "kr": "가나다",
+      "en": "Elon Musk"
+    }
+  },
+  {
+    "id": 6,
+    "title": {
+      "kr": "[블록체인 A to Z] 암호화폐의 세계에 입문하다6",
+      "en": "[Blockchain A to Z] Introduction to the World of Cryptocurrency 6"
+    },
+    "date": "2025.04.23 10:26",
+    "tags": ["blockchain"],
+    "summary": {
+      "kr": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial.",
+      "en": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial."
+    },
+    "content": {
+      "kr": "◆1강: 암호화폐(Crypto)란 무엇인가?\n암호화폐는 인터넷 기반에서 사용되는 디지털 자산으로, 중앙은행이나 금융기관의 개입 없이 개인 간 직접 거래가 가능한 새로운 형태의 화폐다.\n\n전통적인 화폐처럼 인쇄소에서 제작되는 것도 아니며, 금처럼 자연 자원을 채굴하여 얻는 것도 아니다. 암호화폐는 복잡한 컴퓨터 연산 과정을 통해 생성되며, 이 과정을 ‘채굴(mining)’이라고 부른다.\n\n◇암호화폐가 만들어지는 방법 (대표적인 채굴의 3가지 종류)\n(1) POW(Proof of Work) 작업증명\nPoW는 가장 오래되고 널리 사용되는 합의 방식이다. 참여자는 컴퓨터를 통해 고난도의 수학 문제를 풀고, 정답을 가장 먼저 맞힌 컴퓨터가 블록 생성 권한과 보상을 얻게 된다.\n\n이 과정은 막대한 연산 능력을 요구하며, 에너지 소모가 크다는 특징이 있다. 대표적인 사례로는 비트코인(Bitcoin, BTC)이 있다.\n\n출처 : 블록체인투데이(https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">",
+      "en": "◆ Lecture 1: What is Cryptocurrency (Crypto)?\nCryptocurrency is a digital asset used on the internet that enables a new form of money where people can transact directly with each other without the involvement of central banks or financial institutions.\n\nUnlike traditional currency, which is produced at a printing facility, or natural resources like gold that are mined from the earth, cryptocurrencies are created through complex computer computations. This process is called \"mining\".\n\n◇ How cryptocurrencies are created (three representative types of mining)\n(1) POW (Proof of Work)\nProof of Work is the oldest and most widely used consensus mechanism. Participants use computers to solve difficult mathematical problems, and the computer that finds the correct answer first gains the right to create a new block and receive a reward.\n\nThis process requires enormous computing power and therefore consumes a lot of energy. Bitcoin (BTC) is a representative example.\n\nSource: Blockchain Today (https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">"
+    },
+    "author": {
+      "kr": "가나다",
+      "en": "Elon Musk"
+    }
+  },
+  {
+    "id": 7,
+    "title": {
+      "kr": "[블록체인 A to Z] 암호화폐의 세계에 입문하다7",
+      "en": "[Blockchain A to Z] Introduction to the World of Cryptocurrency 7"
+    },
+    "date": "2025.04.23 10:26",
+    "tags": ["blockchain"],
+    "summary": {
+      "kr": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial.",
+      "en": "In her final 2025 Artlab Editorial Fellowship essay exploring the role of scripts in contemporary art practices, Elvia Wilk traces the ways artist and frequent collaborator Jenna Sutela acts as a medium for inspirations, be they human, animal, or extraterrestrial."
+    },
+    "content": {
+      "kr": "◆1강: 암호화폐(Crypto)란 무엇인가?\n암호화폐는 인터넷 기반에서 사용되는 디지털 자산으로, 중앙은행이나 금융기관의 개입 없이 개인 간 직접 거래가 가능한 새로운 형태의 화폐다.\n\n전통적인 화폐처럼 인쇄소에서 제작되는 것도 아니며, 금처럼 자연 자원을 채굴하여 얻는 것도 아니다. 암호화폐는 복잡한 컴퓨터 연산 과정을 통해 생성되며, 이 과정을 ‘채굴(mining)’이라고 부른다.\n\n◇암호화폐가 만들어지는 방법 (대표적인 채굴의 3가지 종류)\n(1) POW(Proof of Work) 작업증명\nPoW는 가장 오래되고 널리 사용되는 합의 방식이다. 참여자는 컴퓨터를 통해 고난도의 수학 문제를 풀고, 정답을 가장 먼저 맞힌 컴퓨터가 블록 생성 권한과 보상을 얻게 된다.\n\n이 과정은 막대한 연산 능력을 요구하며, 에너지 소모가 크다는 특징이 있다. 대표적인 사례로는 비트코인(Bitcoin, BTC)이 있다.\n\n출처 : 블록체인투데이(https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">",
+      "en": "◆ Lecture 1: What is Cryptocurrency (Crypto)?\nCryptocurrency is a digital asset used on the internet that enables a new form of money where people can transact directly with each other without the involvement of central banks or financial institutions.\n\nUnlike traditional currency, which is produced at a printing facility, or natural resources like gold that are mined from the earth, cryptocurrencies are created through complex computer computations. This process is called \"mining\".\n\n◇ How cryptocurrencies are created (three representative types of mining)\n(1) POW (Proof of Work)\nProof of Work is the oldest and most widely used consensus mechanism. Participants use computers to solve difficult mathematical problems, and the computer that finds the correct answer first gains the right to create a new block and receive a reward.\n\nThis process requires enormous computing power and therefore consumes a lot of energy. Bitcoin (BTC) is a representative example.\n\nSource: Blockchain Today (https://www.blockchaintoday.co.kr)\n<img src=\"https://www.blockchaintoday.co.kr/wp-content/uploads/2021/04/btc-mining.png\">"
+    },
+    "author": {
+      "kr": "가나다",
       "en": "Elon Musk"
     }
   }
+
 ]
