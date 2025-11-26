@@ -17,18 +17,22 @@ export function NewsAcc({ data, imgSrc, index }: { data: any, imgSrc: any, index
     const [showOpen, setShowOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
-    // 모바일(터치 디바이스) 감지
     useEffect(() => {
         const check = () => {
-            const isTouch = window.matchMedia("(pointer: coarse)").matches;
-            const canHover = window.matchMedia("(hover: hover)").matches;
-            setIsMobile(isTouch && !canHover);
+            const isTouch = (
+                "ontouchstart" in window ||
+                navigator.maxTouchPoints > 0 ||
+                window.matchMedia("(pointer: coarse)").matches
+            );
+
+            setIsMobile(isTouch);
         };
 
         check();
         window.addEventListener("resize", check);
         return () => window.removeEventListener("resize", check);
     }, []);
+
 
     // 모바일: 클릭 → 확장
     const openNews = (idx: number) => {

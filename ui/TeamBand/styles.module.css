@@ -269,7 +269,7 @@
     overflow: hidden;
     transition: .5s;
 }
-.profileDesc p.show { max-height: 10rem; margin-top: .5rem;}
+.profileDesc p.show { max-height: 12rem; margin-top: .5rem;}
 .profileDesc span { font-size: .8rem; }
 .profileDesc p span { font-size: .6rem; }
 
