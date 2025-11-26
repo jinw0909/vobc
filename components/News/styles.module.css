@@ -12,7 +12,7 @@
     opacity: 0;
     animation: .5s fadeIn ease-in-out forwards;
     animation-delay: 1s;
-    margin: 4rem 0;
+    margin: 2rem 0;
 }
 .viewMore {
     align-self: flex-end;

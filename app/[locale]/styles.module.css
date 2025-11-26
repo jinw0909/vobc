@@ -59,7 +59,7 @@
     /*transform: translateX(-50%);*/
     margin: 0 auto;
     padding: 2rem 0;
-    background: linear-gradient(to right, #888 0%, #ddd 50%, #888 100%);
+    background: linear-gradient(to right, #ddd 0%, #eee 50%, #ddd 100%);
     -webkit-background-clip: text; /* Apply gradient to text */
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;
