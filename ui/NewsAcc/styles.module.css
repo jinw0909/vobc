@@ -134,9 +134,25 @@
     min-width: 66vw;
     max-width: 66vw;
 }
+.mobileOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    display: block;
+    z-index: 100;
+}
+.closeFloating {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+}
 .closeBtn {
     position: relative;
-    z-index: 50;
+    z-index: 150;
     transition: .5s;
 }
 .closeBtn.hide {
@@ -306,13 +322,7 @@
         height: 75vh;
         transition: .5s;
     }
-    /*.expand {*/
-    /*    height: 80vh;*/
-    /*}*/
-
-    /*.newsContent.below {*/
-    /*    height: 40vh;*/
-    /*}*/
+    .closeBtn { display: block; }
     .newsElem.even {
         animation: 1s ease-in-out fromLeft forwards;
     }
