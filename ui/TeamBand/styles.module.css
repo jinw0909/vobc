@@ -150,7 +150,6 @@
     overflow: hidden;
     position: relative;
     max-height: 300vh;
-    overflow: hidden;
     transition: .5s;
     opacity: 1;
 }
@@ -203,6 +202,9 @@
 .item.wide {
     width: 28rem;
     align-self: stretch;
+}
+.profileDesc span {
+    white-space: pre-line;
 }
 .profileDesc.wide {
     align-items: flex-start;
@@ -300,6 +302,8 @@
     .elem { width: 6rem; margin: .5rem 0}
     .teamIcon { width: 24px; height: 24px; }
     .itemBand h2 { font-size: 1.25rem; }
+    .itemList { width: 100%; }
+    .item { width: 45%; }
 }
 
 /*.elem { overflow: hidden; }*/

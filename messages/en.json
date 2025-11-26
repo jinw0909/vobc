@@ -156,21 +156,16 @@
       "title" : "Global & Strategy"
     },
     "4" : {
-      "first" : "Communications",
-      "second" : "& Platform",
-      "title" : "Communications & Platform"
-    },
-    "5" : {
       "first" : "Algorithm",
       "second" : "& Trading",
       "title" : "Algorithm & Trading"
     },
-    "6" : {
+    "5" : {
       "first" : "Advisors",
       "second" : "& Consultants",
       "title" : "Advisors & Consultants"
     },
-    "7" : {
+    "6" : {
       "first" : "Defense",
       "second" : "& Law",
       "title" : "Defense & Law"

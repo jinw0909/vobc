@@ -74,7 +74,7 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
                         <ul ref={listRef} className={styles.itemList}>
                             {
                                 profile.map((a:any, i:any) => {
-                                    if (order != 7) {
+                                    if (order != 6) {
                                         return (
                                             <li className={styles.item} key={i} onClick={() => toggleItem(i)}>
                                                 <div className={styles.itemInner}>

@@ -1,6 +1,6 @@
 [
   [{
-    "status" : "最高経営責任者(CEO)",
+    "status" : "最高経営責任者\n(CEO)",
     "name" : "IRON WON",
     "desc" : [
       "経営顧問役",
@@ -8,7 +8,7 @@
     ]
   },
     {
-      "status" : "最高運営責任者(COO)",
+      "status" : "最高運営責任者\n(COO)",
       "name" : "GEON",
       "desc" : [
         "6年以上のアービトラージ取引と市場データ分析",
@@ -19,32 +19,32 @@
     }],
   [
     {
-      "status" : "最高財務責任者(CFO)",
+      "status" : "最高財務責任者\n(CFO)",
       "name" : "J.Y. LEE",
       "desc" : [
         "清華大学",
         "VOB財団創設メンバー",
         "VRA/EVZプロジェクト参加",
-        "財務管理担当"
+        "財務管理"
       ]
     },
     {
       "status" : "Manager",
       "name" : "H.A. KIM",
       "desc" : [
-        "事務管理担当"
+        "事務管理"
       ]
     },
     {
       "status" : "Associate",
       "name" : "S.Y. LEE",
       "desc" : [
-        "事務補助担当"
+        "事務補助"
       ]
     }
   ],
   [{
-    "status" : "最高技術責任者(CTO)",
+    "status" : "最高技術責任者\n(CTO)",
     "name" : "HYUK",
     "desc" : [
       "Bithumb取引所と多数の暗号通貨プロジェクト協力",
@@ -67,7 +67,7 @@
       "name" : "S.Y. OH",
       "desc" : [
         "ページデザイン&パブリッシング",
-        "プラットフォーム管理担当"
+        "プラットフォーム管理"
       ]
     },
     {
@@ -75,72 +75,86 @@
       "name" : "H.U. LEE",
       "desc" : [
         "データ分析総括",
-        "開発管理担当"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "E.M. KO",
-      "desc" : [
-        "システム開発担当",
-        "Android開発担当"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "D.Y. PARK",
-      "desc" : [
-        "データ分析担当",
-        "AI開発担当"
+        "開発管理"
       ]
     },
     {
       "status" : "Associate",
       "name" : "H.J. SHIM",
       "desc" : [
-        "システム開発担当",
-        "BE&FE開発担当",
-        "チャート開発担当"
+        "システム開発",
+        "BE&FE開発",
+        "チャート開発"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "D.Y. PARK",
+      "desc" : [
+        "データ分析",
+        "AI開発"
       ]
     },
     {
       "status" : "Associate",
       "name" : "S.U. IM",
       "desc" : [
-        "データ分析担当",
-        "BE&FE開発担当"
+        "データ分析",
+        "BE&FE開発"
       ]
     },
     {
       "status" : "Associate",
       "name" : "J.W. CHANG",
       "desc" : [
-        "システム開発担当",
-        "AI開発担当"
+        "システム開発",
+        "AI開発"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "E.M. KO",
+      "desc" : [
+        "システム開発",
+        "Android開発"
       ]
     },
     {
       "status" : "Associate",
       "name" : "H.J. GONG",
       "desc" : [
-        "データ分析担当",
-        "BE&FE開発担当"
+        "データ分析",
+        "BE&FE開発"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "Y.H. CHO",
+      "desc" : [
+        "ビジュアルアート"
       ]
     },
     {
       "status" : "Associate",
       "name" : "Y.J. CHO",
       "desc" : [
-        "システム開発担当",
-        "BE&FE開発担当"
+        "システム開発",
+        "BE&FE開発"
       ]
     },
     {
       "status" : "Associate",
       "name" : "S.A. LEE",
       "desc" : [
-        "システム開発担当",
-        "BE&FE開発担当"
+        "システム開発",
+        "BE&FE開発"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "J.Y. KANG",
+      "desc" : [
+        "グラフィックデザイン"
       ]
     }
   ],
@@ -152,94 +166,70 @@
       "アリババグローバルチャレンジ世界ファイナリスト",
       "釜山大学"
     ]
-  },
+    },
+    {
+      "status" : "General Manager",
+      "name" : "C. DOO",
+      "desc" : [
+        "外部コミュニケーション",
+        "新規事業開発",
+        "成均館大学"
+      ]
+    },
     {
       "status" : "General Manager",
       "name" : "J.W. JEON",
       "desc" : [
-        "市場開発全般担当"
+        "市場開発全般"
       ]
     },
     {
       "status" : "Manager",
       "name" : "M.H. CHOI",
       "desc" : [
-        "日本市場対応担当"
+        "日本市場対応"
       ]
     },
     {
       "status" : "Assistant Manager",
       "name" : "J.E. LEE",
       "desc" : [
-        "米国市場対応担当"
+        "米国市場対応"
       ]
     },
     {
       "status" : "Associate",
       "name" : "T.C. LA",
       "desc" : [
-        "ベトナム市場対応担当"
+        "ベトナム市場対応"
       ]
     },
     {
       "status" : "Associate",
       "name" : "U.Y. LEE",
       "desc" : [
-        "中国市場開発対応担当"
+        "中国市場開発対応"
       ]
     },
     {
       "status" : "Associate",
       "name" : "H. YANG",
       "desc" : [
-        "中国市場対応担当"
+        "中国市場対応"
       ]
     },
     {
       "status" : "Associate",
       "name" : "J.W. HEO",
       "desc" : [
-        "韓国市場対応担当"
+        "韓国市場対応"
       ]
     },
     {
       "status" : "Associate",
       "name" : "B.J. HOO",
       "desc" : [
-        "中国市場対応担当"
-      ]
-    }
-  ],
-  [{
-    "status" : "Managing Director",
-    "name" : "J.M. KOO",
-    "desc" : [
-      "前HPネットワークセキュリティおよびデータ分析スペシャリスト",
-      "8年以上フルタイム暗号通貨トレーダ"
-    ]
-  },
-    {
-      "status" : "General Manager",
-      "name" : "C. DOO",
-      "desc" : [
-        "外部コミュニケーション担当",
-        "新規事業開発担当",
-        "成均館大学"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "M.J. LEE",
-      "desc" : [
-        "グラフィックデザイン担当",
-        "ウェブ＆アプリケーションデザイン担当"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "Y.H. CHO",
-      "desc" : [
-        "ビジュアルアート担当"
+        "中国市場対応"
       ]
     }
   ],
@@ -255,7 +245,7 @@
       "status" : "Manager",
       "name" : "S.H. KIM",
       "desc" : [
-        "アルゴリズム企画担当",
+        "アルゴリズム企画",
         "主要国際トレーディングカップの世界セミファイナリスト"
       ]
     },
@@ -263,43 +253,43 @@
       "status" : "Associate",
       "name" : "H.R. KANG",
       "desc" : [
-        "システム開発担当",
-        "アルゴリズムグ＆自動化担当"
+        "システム開発",
+        "アルゴリズムグ＆自動化"
       ]
     },
     {
       "status" : "Associate",
       "name" : "Y.S. KIM",
       "desc" : [
-        "システム開発担当",
-        "アルゴリズムグ＆自動化担当"
+        "システム開発",
+        "アルゴリズムグ＆自動化"
       ]
     },
     {
       "status" : "Associate",
       "name" : "S.J. LEE",
       "desc" : [
-        "システム開発担当",
-        "アルゴリズムグ＆自動化担当"
+        "システム開発",
+        "アルゴリズムグ＆自動化"
       ]
     }
   ],
   [{
-    "status" : "External Consultant",
+    "status" : "External\nConsultant",
     "name" : "MR. MIN",
     "desc" : [
       "前HILIVING最高経営責任者(CEO)"
     ]
   },
     {
-      "status" : "External Advisor",
+      "status" : "External\nAdvisor",
       "name" : "MR. LEE",
       "desc" : [
         "前国家情報局長"
       ]
     },
     {
-      "status" : "External Spokesperson",
+      "status" : "External\nSpokesperson",
       "name" : "MR. CHOI",
       "desc" : [
         "前韓国市長",
@@ -307,7 +297,7 @@
       ]
     },
     {
-      "status" : "External Advisor",
+      "status" : "External\nAdvisor",
       "name" : "MR. JANG",
       "desc" : [
         "NewPromise LAB最高経営責任者（AI、ブロックチェーン、WEB3.0）",
@@ -315,7 +305,7 @@
       ]
     },
     {
-      "status" : "External Spokesperson",
+      "status" : "External\nSpokesperson",
       "name" : "MR. KIM",
       "desc" : [
         "The Korea Times産業コラムニスト",

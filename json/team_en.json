@@ -1,6 +1,6 @@
 [
     [{
-      "status" : "CEO",
+      "status" : "Chief\nExecutive Officer",
       "name" : "IRON WON",
       "desc" : [
         "Business Advisor",
@@ -8,7 +8,7 @@
       ]
     },
       {
-        "status" : "COO",
+        "status" : "Chief\nOperating Officer",
         "name" : "GEON",
         "desc" : [
           "Over 6 years of Experience in Arbitrage Trading and Market Data Analysis",
@@ -20,7 +20,7 @@
     ],
   [
     {
-      "status" : "CFO",
+      "status" : "Chief\nFinancial Officer",
       "name" : "J.Y. LEE",
       "desc" : [
         "Tsinghua University",
@@ -46,7 +46,7 @@
   ],
   [
     {
-      "status" : "CTO",
+      "status" : "Chief\nTechnology Officer",
       "name" : "HYUK",
       "desc" : [
         "Collaboration with Bithumb CEX on Cryptocurrency Projects",
@@ -82,10 +82,11 @@
     },
     {
       "status" : "Associate",
-      "name" : "E.M. KO",
+      "name" : "H.J. SHIM",
       "desc" : [
         "System Development",
-        "Android Development"
+        "BE & FE Development",
+        "Chart Development"
       ]
     },
     {
@@ -96,15 +97,7 @@
         "AI Development"
       ]
     },
-    {
-      "status" : "Associate",
-      "name" : "H.J. SHIM",
-      "desc" : [
-        "System Development",
-        "BE & FE Development",
-        "Chart Development"
-      ]
-    },
+
     {
       "status" : "Associate",
       "name" : "S.U. IM",
@@ -123,10 +116,25 @@
     },
     {
       "status" : "Associate",
+      "name" : "E.M. KO",
+      "desc" : [
+        "System Development",
+        "Android Development"
+      ]
+    },
+    {
+      "status" : "Associate",
       "name" : "H.J. GONG",
       "desc" : [
         "Data Analysis",
         "BE & FE Development"
+      ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "Y.H. CHO",
+      "desc" : [
+        "Visual Arts"
       ]
     },
     {
@@ -144,6 +152,13 @@
         "System Development",
         "BE & FE Development"
       ]
+    },
+    {
+      "status" : "Associate",
+      "name" : "J.Y. KANG",
+      "desc" : [
+        "Graphic Design"
+      ]
     }
   ],
   [{
@@ -153,6 +168,15 @@
         "General Market Planning",
         "Alibaba Global Challenge World Finalist",
         "Busan National University"
+      ]
+    },
+    {
+      "status" : "General Manager",
+      "name" : "C. DOO",
+      "desc" : [
+        "External Communications",
+        "New Business Development",
+        "Sungkyunkwan University"
       ]
     },
     {
@@ -213,39 +237,6 @@
     }
   ],
   [{
-    "status" : "Managing Director",
-    "name" : "J.M. KOO",
-    "desc" : [
-      "Served Network Security & Data Analysis Specialist at HP",
-      "Over 8 Years of Experience as a Full-Time Cryptocurrency Trader"
-    ]
-  },
-    {
-      "status" : "General Manager",
-      "name" : "C. DOO",
-      "desc" : [
-        "External Communications",
-        "New Business Development",
-        "Sungkyunkwan University"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "M.J. LEE",
-      "desc" : [
-        "Graphic Design",
-        "Web & Application Design"
-      ]
-    },
-    {
-      "status" : "Associate",
-      "name" : "Y.H. CHO",
-      "desc" : [
-        "Visual Arts"
-      ]
-    }
-  ],
-  [{
       "status" : "Director",
       "name" : "U.J. OH",
       "desc" : [
@@ -287,21 +278,21 @@
     }
   ],
   [{
-    "status" : "External Consultant",
+    "status" : "External\nConsultant",
     "name" : "MR. MIN",
     "desc" : [
       "Served CEO of HILIVING"
     ]
   },
     {
-      "status" : "External Advisor",
+      "status" : "External\nAdvisor",
       "name" : "MR. LEE",
       "desc" : [
         "Served National Intelligence Head of Department"
       ]
     },
     {
-      "status" : "External Spokesperson",
+      "status" : "External\nSpokesperson",
       "name" : "MR. CHOI",
       "desc" : [
         "Served Mayor in Korea",
@@ -309,7 +300,7 @@
       ]
     },
     {
-      "status" : "External Advisor",
+      "status" : "External\nAdvisor",
       "name" : "MR. JANG",
       "desc" : [
         "CEO, NewPromise LAB (AI, Blockchain, WEB3.0)",
@@ -317,7 +308,7 @@
       ]
     },
     {
-      "status" : "External Spokesperson",
+      "status" : "External\nSpokesperson",
       "name" : "MR. KIM",
       "desc" : [
         "The Korea Times Industry Columnist",
