@@ -303,7 +303,7 @@
     .teamIcon { width: 24px; height: 24px; }
     .itemBand h2 { font-size: 1.25rem; }
     .itemList { width: 100%; }
-    .item { width: 45%; }
+    .item { width: 45%; min-width: 132px;}
 }
 
 /*.elem { overflow: hidden; }*/
