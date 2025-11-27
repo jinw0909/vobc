@@ -43,7 +43,7 @@ import trading1 from '@/public/teams/profile/sunghyun.png';
 import trading2 from '@/public/teams/profile/harim.png';
 import trading3 from '@/public/teams/profile/yungsoo.png';
 import advisor0 from '@/public/teams/profile/mrmin.png';
-import fallbackImg from '@/public/teams/profile/fallback.png';
+import fallbackImg from '@/public/teams/fallback.png';
 
 import { useEffect, useRef, useState } from "react";
 import { TeamNav } from "@/ui/TeamNav";

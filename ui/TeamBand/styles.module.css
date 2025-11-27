@@ -239,6 +239,9 @@
     position: relative;
     overflow: hidden;
 }
+.fallback {
+    border: 1px solid #999;
+}
 /*.profilePic img { border-radius: 50%;}*/
 
 .profileName {
@@ -291,8 +294,9 @@
 @media (max-width: 768px) {
     /*.teamWrapper { padding : 1.5rem; }*/
     .itemList { flex-wrap: nowrap; }
+    .itemList.wide { flex-wrap: wrap; }
     .headbandWrapper { top: 4rem; }
-    .item.wide { width: 90%; }
+    /*.item.wide { width: 90%; }*/
 }
 
 @media (max-width: 576px) {
@@ -303,7 +307,13 @@
     .teamIcon { width: 24px; height: 24px; }
     .itemBand h2 { font-size: 1.25rem; }
     .itemList { width: 100%; }
+    .itemList.wide { flex-wrap: wrap; }
     .item { width: 45%; min-width: 132px; max-width: 10rem;}
+    .item.wide {
+        width: 100%;
+        align-self: stretch;
+        max-width: 100%;
+    }
 }
 
 /*.elem { overflow: hidden; }*/

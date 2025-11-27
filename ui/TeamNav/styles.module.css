@@ -72,6 +72,13 @@
 .elem.cn {
     width: 4rem;
 }
+.firstElem {
+    margin-left: 0;
+}
+/* 중국일 때 */
+.cn.firstElem {
+    margin-left: 0;
+}
 .elem:last-child {
     z-index: 80;
     /*background-color: black;*/
@@ -252,12 +259,25 @@
     .itemList { flex-wrap: nowrap; }
     .headbandWrapper { top: 4rem; }
 }
+/* 중국 아닐 때 (기본) */
+@media (max-width: 608px) {
+    .firstElem {
+        margin-left: 4rem;
+    }
+}
+
 
 @media (max-width: 576px) {
     .teamWrapper { padding: 1rem; }
     .profileDesc p { font-size: .6rem; }
     .iconDesc { font-size: .6rem; }
     .teamIcon { width: 24px; height: 24px; }
+}
+
+@media (max-width: 496px) {
+    .cn.firstElem {
+        margin-left: 3rem;
+    }
 }
 
 /* { overflow: hidden; }*/

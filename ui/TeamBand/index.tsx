@@ -71,15 +71,24 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
                     <div className={`${styles.itemBand}`}>
                         {/*<h2 className={`${selected ? styles.selected : ''}`}>{t(`${order}.title`)}</h2>*/}
                         <h2>{t(`${order}.title`)}</h2>
-                        <ul ref={listRef} className={styles.itemList}>
+                        <ul ref={listRef} className={`${styles.itemList} ${order == 6 ? styles.wide : ''}`}>
                             {
                                 profile.map((a:any, i:any) => {
+
+                                    const isFallback =
+                                        typeof profile[i] === 'object'
+                                            ? profile[i].src.includes('fallback')
+                                            : profile[i].includes('fallback');
+
                                     if (order != 6) {
                                         return (
                                             <li className={styles.item} key={i} onClick={() => toggleItem(i)}>
                                                 <div className={styles.itemInner}>
                                                     <div className={styles.profilePic}>
-                                                        <div className={styles.imgContainer}>
+                                                        <div className={`
+                                                            ${styles.imgContainer}
+                                                            ${isFallback ? styles.fallback : ''}
+                                                        `}>
                                                             <Image
                                                                 src={profile[i]}
                                                                 alt="ceo"

@@ -25,7 +25,7 @@
     overflow: hidden;
     transition: 1s;
     margin-top: .5rem;
-    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #999 100%);
+    background: linear-gradient(to right, #ddd 0%, #eee 50%, #ddd 100%);
     -webkit-background-clip: text; /* Apply gradient to text */
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;

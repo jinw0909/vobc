@@ -28,7 +28,7 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
             }
         };
 
-        const breakpoint = isCN ? 576 : 832
+        const breakpoint = isCN ? 496 : 608
 
         const updateWheelBehavior = () => {
             if (window.innerWidth <= breakpoint) {
@@ -45,7 +45,7 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
             el.removeEventListener('wheel', handleWheel);
             window.removeEventListener('resize', updateWheelBehavior);
         }
-    }, []);
+    }, [isCN]);
 
     return (
         <div className={styles.headbandWrapper}>
@@ -55,8 +55,15 @@ export function TeamNav({iconPic, handleIndex, selectedIdx} : { iconPic : any, h
                         {
                             selectedIdx.map((a:any, i:number) => {
                                 return (
-                                    <li key={i} className={`${styles.elem} ${isCN ? styles.cn : ''}`}
-                                        onClick={() => {handleIndex(i)}}>
+                                    <li
+                                        key={i}
+                                        className={`
+                                            ${styles.elem} 
+                                            ${isCN ? styles.cn : ''}
+                                            ${i === 0 ? styles.firstElem : ''}
+                                        `}
+                                        onClick={() => {handleIndex(i)}}
+                                    >
                                         <div className={styles.elemInner}>
                                             <div className={styles.teamIcon}>
                                                 <Image className={styles.teamIcon} src={iconPic[i]} width={64} height={64} alt="team icon"/>
