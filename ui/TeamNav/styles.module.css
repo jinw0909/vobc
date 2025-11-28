@@ -259,12 +259,12 @@
     .itemList { flex-wrap: nowrap; }
     .headbandWrapper { top: 4rem; }
 }
-/* 중국 아닐 때 (기본) */
-@media (max-width: 608px) {
-    .firstElem {
-        margin-left: 4rem;
-    }
-}
+/*!* 중국 아닐 때 (기본) *!*/
+/*@media (max-width: 608px) {*/
+/*    .firstElem {*/
+/*        margin-left: 4rem;*/
+/*    }*/
+/*}*/
 
 
 @media (max-width: 576px) {
@@ -274,11 +274,11 @@
     .teamIcon { width: 24px; height: 24px; }
 }
 
-@media (max-width: 496px) {
-    .cn.firstElem {
-        margin-left: 3rem;
-    }
-}
+/*@media (max-width: 496px) {*/
+/*    .cn.firstElem {*/
+/*        margin-left: 3rem;*/
+/*    }*/
+/*}*/
 
 /* { overflow: hidden; }*/
 /*.elem:hover .teamIcon {*/

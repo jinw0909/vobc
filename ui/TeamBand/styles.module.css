@@ -193,6 +193,7 @@
     align-self: flex-start;
     cursor: pointer;
     transition: .5s;
+    max-width: 10rem;
 }
 .item:active { transform: scale(0.95); }
 .item:last-child {
@@ -200,8 +201,9 @@
     /*background-color: black;*/
 }
 .item.wide {
-    width: 28rem;
+    width: 20rem;
     align-self: stretch;
+    max-width: 20rem;
 }
 .profileDesc span {
     white-space: pre-line;
@@ -294,7 +296,6 @@
 @media (max-width: 768px) {
     /*.teamWrapper { padding : 1.5rem; }*/
     .itemList { flex-wrap: nowrap; }
-    .itemList.wide { flex-wrap: wrap; }
     .headbandWrapper { top: 4rem; }
     /*.item.wide { width: 90%; }*/
 }
@@ -307,13 +308,8 @@
     .teamIcon { width: 24px; height: 24px; }
     .itemBand h2 { font-size: 1.25rem; }
     .itemList { width: 100%; }
-    .itemList.wide { flex-wrap: wrap; }
     .item { width: 45%; min-width: 132px; max-width: 10rem;}
-    .item.wide {
-        width: 100%;
-        align-self: stretch;
-        max-width: 100%;
-    }
+    .item.wide { width: 90%; min-width: 264px; max-width: 20rem;}
 }
 
 /*.elem { overflow: hidden; }*/
