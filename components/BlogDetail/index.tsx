@@ -13,7 +13,8 @@ interface PageProps {
 export default async function BlogDetail({idx} : {idx : any}) {
     const id = Number(idx);
     const locale = await getLocale();
-    const lang = locale === 'en' ? 'en' : 'kr';
+    // const lang = locale === 'en' ? 'en' : 'kr';
+    const lang = 'en';
 
     const post = blogData.find((p) => p.id === id);
 
@@ -22,37 +23,42 @@ export default async function BlogDetail({idx} : {idx : any}) {
     }
 
     const title = post.title[lang] || post.title.kr;
+    const author = post.author[lang] || post.author.kr;
     const rawContent = post.content[lang] || post.content.kr;
 
     // keep line breaks visually
     const htmlContent = rawContent.replace(/\n/g, '<br />');
 
     return (
-        <div className={styles.blogWrapper}>
+        <div className={styles.detailWrapper}>
             <article className={styles.blogDetail}>
                 <header className={styles.blogHeader}>
-                    <h1>{title}</h1>
-                    <p className={styles.blogMeta}>{post.date}</p>
-
-                    {post.tags?.length > 0 && (
-                        <div className={styles.tagRow}>
-                            {post.tags.map((tag: string) => (
-                                <span key={tag} className={styles.tag}>
-                                  #{tag}
-                                </span>
-                            ))}
+                    <div className={styles.blogMeta}>
+                        <div className={styles.blogFooter}>
+                            <Link href="/blog">Back to Index</Link>
                         </div>
-                    )}
+                        <p className={styles.blogDate}>{post.date}</p>
+                        <h1 className={styles.blogTitle}>{title}</h1>
+                        <p className={styles.blogAuthor}>By {author}</p>
+                        {post.tags?.length > 0 && (
+                            <div className={styles.tagRow}>
+                                {post.tags.map((tag: string) => (
+                                    <span key={tag} className={styles.tag}>
+                                      #{tag}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </header>
 
-                <section
-                    className={styles.blogContent}
-                    dangerouslySetInnerHTML={{__html: htmlContent}}
-                />
+                <section className={styles.blogSection}>
+                    <div
+                        className={styles.blogContent}
+                        dangerouslySetInnerHTML={{__html: htmlContent}}
+                    ></div>
+                </section>
 
-                <footer className={styles.blogFooter}>
-                    <Link href="/blog">← 블로그 목록으로</Link>
-                </footer>
             </article>
         </div>
     );

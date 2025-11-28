@@ -1,0 +1,84 @@
+.detailWrapper {
+    margin-top: 9rem;
+}
+.blogDetail {
+    display: flex;
+    gap: 1.5rem;
+}
+.blogHeader {
+    flex: 1;
+}
+.blogMeta {
+    position: sticky;
+    top: 10rem;
+}
+.blogSection {
+    flex: 2;
+}
+.blogDate { font-size: 1rem; margin-top: .5rem; }
+.blogTitle {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+.blogAuthor {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.blogContent img {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.blogContent img:first-child {
+    margin-top: 0;
+}
+.blogFooter {
+    font-size: .8rem;
+    opacity: .8;
+    width: fit-content;
+}
+.blogFooter::after {
+    content: '';
+    display: block;
+    width: 0;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background: #ddd;
+    transition: .5s;
+}
+.blogFooter:hover::after {
+    width: 100%;
+}
+.tag {
+    font-size: .8rem;
+    font-family: 'Noto Sans', sans-serif;
+    position: relative;
+    cursor: pointer;
+}
+.tag::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: white;
+    width: 100%;
+    transition: .5s;
+}
+.tag:hover::after {
+    width: 0;
+}
+@media (min-width: 1200px) {
+    .blogWrapper {
+        width: 80vw;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .blogWrapper {
+        margin-top: 7rem;
+    }
+    .blogDetail { flex-direction: column; }
+}

@@ -14,6 +14,8 @@
     width: 100%;
     height: 66vh;
     min-height: 420px;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
 }
 .newsContent > div {
     flex: 1;
@@ -24,14 +26,14 @@
     overflow: hidden;
     transition: .5s;
     position: relative;
-    opacity: 0;
+    opacity: 1;
 }
-.newsElem.even {
-    animation: 1s fromUp ease-in-out forwards;
-}
-.newsElem.odd {
-    animation: 1s fromDown ease-in-out forwards;
-}
+/*.newsElem.even {*/
+/*    animation: 1s fromUp ease-in-out forwards;*/
+/*}*/
+/*.newsElem.odd {*/
+/*    animation: 1s fromDown ease-in-out forwards;*/
+/*}*/
 /*.newsContent > div:nth-child(1) {*/
 /*    background-color: #666;*/
 /*    animation: 2s fromUp ease-in-out forwards;*/

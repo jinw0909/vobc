@@ -41,6 +41,9 @@ export const MobileNav = ({click, onClick} : {click : any, onClick : any}) => {
                     <NavigationLink href="/about" onClick={onClick}>{t('about')}</NavigationLink>
                 </li>
                 <li className={styles.navElem}>
+                    <NavigationLink href="/blog" onClick={onClick}>{t('blog')}</NavigationLink>
+                </li>
+                <li className={styles.navElem}>
                     <NavigationLink href="/devs" onClick={onClick}>{t('devs')}</NavigationLink>
                 </li>
                 <li className={styles.navElem}>

@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "title": {
+      "kr": "[블록체인 A to Z] 암호화폐의 세계에 입문하다①",
+      "en": "[Blockchain A to Z] Entering the World of Cryptocurrency ①"
+    },
+    "date": "April 23,2025",
+    "tags": ["blockchain"],
+    "summary": {
+      "kr": "이 글은 암호화폐와 블록체인의 기본 개념을 설명하고, PoW·PoS·DPoS 등 주요 합의 알고리즘의 차이를 소개한다. 또한 비트코인의 탄생 배경과 채굴 구조, 그리고 비트코인이 전통적 화폐가 아닌 디지털 자산에 가깝다는 점을 이해하기 쉽게 풀어낸다.",
+      "en": "This article introduces the core concepts of cryptocurrency and blockchain, explains key consensus mechanisms such as PoW, PoS, and DPoS, and explores Bitcoin’s origin, mining process, and why it is better understood as a digital asset rather than a traditional currency."
+    },
+    "content": {
+      "kr": "<img src=\"https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61233_255.jpg\">◆1강: 암호화폐(Crypto)란 무엇인가?\n암호화폐는 인터넷 기반에서 사용되는 디지털 자산으로, 중앙은행이나 금융기관의 개입 없이 개인 간 직접 거래가 가능한 새로운 형태의 화폐다.\n\n전통적인 화폐처럼 인쇄소에서 제작되는 것도 아니며, 금처럼 자연 자원을 채굴하여 얻는 것도 아니다. 암호화폐는 복잡한 컴퓨터 연산 과정을 통해 생성되며, 이 과정을 ‘채굴(mining)’이라고 부른다.\n\n◇암호화폐가 만들어지는 방법 (대표적인 채굴의 3가지 종류)\n(1) POW(Proof of work) 작업증명\nPoW는 가장 오래되고 널리 사용되는 합의 방식이다. 참여자는 컴퓨터를 통해 고난도의 수학 문제를 풀고, 정답을 가장 먼저 맞힌 컴퓨터가 블록 생성 권한과 보상을 얻게 된다.\n\n이 과정은 막대한 연산 능력을 요구하며, 에너지 소모가 크다는 특징이 있다. 대표적인 사례로는 비트코인(Bitcoin, BTC)이 있다.\n\n(2) POS(Proof of Stake) 지분증명\nPoS는 컴퓨팅 연산력 대신 보유한 암호화폐의 양과 보유 기간, 즉 ‘지분’을 기준으로 블록 생성자를 선정한다. 연산 작업을 요구하지 않기 때문에 에너지 효율이 높고 친환경적이라는 평가를 받는다. 대표적인 예로는 이더리움(Ethereum, ETH)이 있으며, 2022년부터 PoS 기반의 블록체인 구조로 전환되었다.\n\n(3) DPoS(Delegata Proof of Stake) 위임지분 증명\nDPoS는 PoS를 기반으로 발전된 구조로, 참여자들이 투표를 통해 블록 생성 역할을 맡을 대표자를 선출하는 방식이다. 선출된 소수의 대표자들이 거래를 검증하고 블록을 생성하며, 보상을 분배받는다. 이 방식은 처리 속도가 빠르고 효율성이 높다는 장점이 있지만, 네트워크의 중앙집중화 우려가 제기되기도 한다. 대표적인 적용 사례로는 스팀(Steem)과 이오스(EOS)가 있다.\n\n◇암호화폐의 개념, 블록체인의 원리\n블록체인은 모두가 동시에 기록하고, 감시하는 분산형 장부 시스템이다. 이 구조를 쉽게 이해하기 위해 하나의 게임 상황에 비유해볼 수 있다.\n\n예를 들어, 다섯 명이 고스톱 게임을 하고 있다고 가정하자. 이 게임에는 독특한 규칙이 존재한다. 바로 누가 얼마를 땄고, 어떤 패가 나왔는지 모든 참여자가 동일하게 기록한다는 점이다.\n\n게임이 끝날 때마다 한 사람이 “이번 판에서 민수는 3점을 땄고, 민지는 2점을 잃었다”고 말하면, 모든 참여자가 이 내용을 자신의 수첩에 적는다. 이 과정을 매 판 반복하며, 누구든 기록을 조작하려고 한다면 다른 사람들의 기록과 비교해 쉽게 검증할 수 있다.\n\n이와 같은 구조가 블록체인의 핵심 원리와 맞닿아 있다.\n\n- 핵심 원리 1: 모두가 동일한 장부를 보유한다 (분산원장)\n블록체인 시스템에서는 특정 개인이나 기관이 아닌, 모든 참여자가 동일한 거래 내역을 보유하고 있다. 누군가 데이터를 변경하려면 과반수 이상의 기록을 동시에 조작해야 하며, 이는 현실적으로 불가능에 가깝다.\n\n- 핵심 원리 2: 기록 전, 정합성을 검증한다 (작업 증명)\n기록은 단순히 저장되는 것이 아니라, 사전 검증 과정을 거친 후에야 유효한 정보로 인정된다. 이 과정을 ‘작업 증명(Proof of Work)’이라 하며, 참여자들이 연산을 통해 기록의 정당성을 확인해야만 블록으로 등록된다.\n\n- 그래서 블록체인이란?\n블록체인은 단순한 데이터 저장 기술이 아닌, 디지털 시대의 ‘신뢰’를 구조화한 시스템이다.\n\n△모든 거래 내역은 동시 기록되고 △서로가 감시하며 △외부 개입 없이 스스로 검증된다. 그 결과, 중앙 기관 없이도 투명하고 안전한 거래 환경을 구현할 수 있게 된다.\n\n◆2강: 비트코인은 왜 특별할까?\n<img src=\"https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61230_1754.jpg\">\n비트코인은 2009년, ‘사토시 나카모토’라는 정체불명의 인물에 의해 세상에 처음 공개되었다. 당시는 글로벌 금융 위기로 인해 은행과 정부에 대한 신뢰가 급격히 흔들리던 시기였다. 사토시는 중앙기관 없이도 작동하는 화폐, 즉 신뢰할 수 있는 제3자가 없어도 개인 간 직접 거래가 가능한 시스템을 만들고자 했다. 그 결과물이 바로 ‘비트코인(Bitcoin)’이다.\n\n◇숫자를 맞히는 연산 경쟁 – ‘작업 증명’ 방식\n비트코인 채굴은 하나의 퍼즐 게임에 비유할 수 있다. 예를 들어, 어떤 사람이 “1부터 22제곱 사이의 숫자 중 하나를 생각하고 있으니, 정답을 맞히면 보상을 주겠다”고 말한다면 컴퓨터는 이 숫자를 맞히기 위해 무작위로 조합을 시도하게 된다. 가장 먼저 정답을 찾아낸 컴퓨터가 새로운 비트코인을 보상으로 받는다.\n\n이러한 구조를 ‘작업 증명(Proof of Work, PoW)’이라고 한다. 가장 많은 연산을 수행한 컴퓨터가 보상을 가져가는 방식이며, 경쟁이 치열할수록 더 강력한 컴퓨팅 성능이 요구된다.\n\n- 개인 채굴이 어려운 이유\n비트코인의 채굴 난이도는 시간이 지날수록 점점 높아진다. 그에 따라 일반적인 개인용 컴퓨터로는 채굴이 거의 불가능해졌으며, 현재는 수백 대의 고성능 장비가 모여 있는 채굴 시설에서나 효율적인 채굴이 가능하다.\n\n◇비트코인, ‘화폐’인가 ‘디지털 자산’인가?\n비트코인은 종종 ‘오리너구리’에 비유된다. 포유류지만 알을 낳고, 오리 같은 부리를 가졌지만 포유류의 분류에 속하는 독특한 생물처럼, 비트코인 역시 기존의 화폐 또는 자산의 기준에 정확히 들어맞지 않는다.\n\n비트코인은 실물 화폐처럼 사용할 수 있는 ‘전통적 화폐’라기보다는, 디지털 공간에서 거래되고 가치가 변동하는 ‘디지털 자산’에 더 가깝다. 일부 국가에서는 세금 부과 대상 자산으로 분류되기도 한다.\n\n결국 비트코인은 완전히 새로운 유형의 디지털 가치 저장 수단이라고 볼 수 있다. 고전적인 분류 체계로는 정의하기 어렵지만, 전 세계 금융 시스템에 큰 영향을 미치고 있다는 사실은 분명하다.",
+      "en": "<img src=\"https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61233_255.jpg\">◆ Lesson 1: What is Cryptocurrency?\nCryptocurrency is a digital asset used on the internet that enables direct peer-to-peer transactions without the involvement of a central bank or financial institution.\n\nUnlike traditional currency that is printed or gold that is extracted from natural resources, cryptocurrencies are created through complex computational processes known as “mining.”\n\n◇ How cryptocurrencies are created (Three major mechanisms)\n(1) Proof of Work (PoW)\nPoW is the oldest and most widely used consensus mechanism. Participants solve complex mathematical problems using computers, and the one that finds the correct solution first gains the right to create a new block and receive a reward. Bitcoin (BTC) is the most well-known example.\n\n(2) Proof of Stake (PoS)\nInstead of relying on computing power, PoS selects block creators based on how much cryptocurrency they hold and for how long. It is more energy efficient and environmentally friendly. Ethereum (ETH) transitioned to a PoS-based structure in 2022.\n\n(3) Delegated Proof of Stake (DPoS)\nDPoS is an advanced version of PoS in which participants vote to select representatives who validate transactions and create blocks on their behalf. Examples include Steem and EOS.\n\n◇ The concept of blockchain explained\nBlockchain is a distributed ledger system where all participants record and verify transactions together. Imagine a group of people playing a game where everyone writes down the same results in their notebooks. If someone attempts to cheat, the difference becomes immediately obvious.\n\nThis shared and transparent structure is the foundation of blockchain technology.\n\n◆ Lesson 2: Why is Bitcoin special?\n<img src=\"https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61230_1754.jpg\">\nBitcoin was introduced in 2009 by the mysterious figure known as Satoshi Nakamoto during the global financial crisis. It was designed to operate without a central authority, enabling trustless peer-to-peer transactions.\n\nBitcoin mining works like a giant puzzle competition, where computers race to solve cryptographic challenges. The first to solve it receives newly created Bitcoin.\n\nToday, mining requires massive computing power and is done in specialized facilities. Although controversial due to energy use, this process is critical to maintaining network security.\n\nBitcoin is best understood not as traditional money, but as a new kind of digital asset. Like the platypus—difficult to classify but undeniably real—Bitcoin represents a revolutionary store of value that is reshaping the global financial landscape."
+    },
+    "author": {
+      "kr": "유스메타",
+      "en": "Youth Meta"
+    },
+    "seo": {
+      "kr": {
+        "title": "[블록체인 A to Z] 암호화폐의 세계에 입문하다①",
+        "description": "암호화폐와 블록체인의 개념, PoW·PoS·DPoS 합의 방식, 비트코인의 탄생과 채굴 구조, 디지털 자산으로서의 특징을 쉽게 설명한다.",
+        "keywords": ["암호화폐", "블록체인", "비트코인", "PoW", "PoS", "DPoS", "디지털 자산", "채굴"]
+      },
+      "en": {
+        "title": "[Blockchain A to Z] Entering the World of Cryptocurrency ①",
+        "description": "An introduction to cryptocurrency and blockchain, including PoW, PoS, DPoS, Bitcoin mining, and the concept of digital assets.",
+        "keywords": ["cryptocurrency", "blockchain", "bitcoin", "mining", "proof of work", "proof of stake"]
+      }
+    },
+    "openGraph": {
+      "title": "[Blockchain A to Z] Entering the World of Cryptocurrency ①",
+      "description": "Explore how cryptocurrency and blockchain work, including Bitcoin mining and consensus mechanisms.",
+      "type": "article",
+      "url": "https://your-domain.com/blog/1",
+      "image": "https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61233_255.jpg"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "[Blockchain A to Z] Entering the World of Cryptocurrency ①",
+      "description": "Learn the basics of blockchain, cryptocurrency, and Bitcoin mining.",
+      "image": "https://cdn.blockchaintoday.co.kr/news/photo/202504/51703_61233_255.jpg"
+    }
+  }
+]

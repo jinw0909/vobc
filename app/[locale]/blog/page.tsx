@@ -14,7 +14,7 @@ export default async function Page( { params } : any) {
 
     console.log("bloglocale: ");
     return (
-        <div className={styles.devsWrapper}>
+        <div className={styles.blogWrapper}>
             <Blog/>
         </div>
     )

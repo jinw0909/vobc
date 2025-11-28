@@ -1,13 +1,19 @@
+/*.mediaElementWrapper {*/
+/*    display:  flex;*/
+/*    gap: 1.5rem;*/
+/*    margin-top: 1rem;*/
+/*    flex-wrap: wrap;*/
+/*    overflow-x: scroll;*/
+/*    overflow-y: hidden;*/
+/*    scrollbar-width: none;*/
+/*    justify-content: flex-start;*/
+/*    -ms-overflow-style: none;*/
+/*}*/
 .mediaElementWrapper {
-    display:  flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
     gap: 1.5rem;
     margin-top: 1rem;
-    flex-wrap: wrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    justify-content: flex-start;
-    -ms-overflow-style: none;
 }
 .mediaElementWrapper::-webkit-scrollbar {
     display: none;
@@ -15,8 +21,10 @@
 
 .mediaElement {
     /*border: 1px solid white;*/
-    width: 250px;
-    height: 250px;
+    /*width: 250px;*/
+    /*height: 250px;*/
+    width: 100%;
+    aspect-ratio: 1/1;
     display: flex;
     flex-direction: column;
     gap: .5rem;
@@ -34,20 +42,24 @@
     cursor: pointer;
     /*font-family: 'Nanum Myeongjo', serif;*/
     font-family: 'Noto Serif KR', serif;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     /*font-weight: 400;*/
 }
 .mediaElemTitle::after {
     position: absolute;
     content: '';
-    bottom: -.25rem;
+    bottom: 0;
     left: 0;
     height: 1px;
-    width: 0%;
+    width: 0;
     background-color: white;
     transition: 1s;
 }
 .mediaElemTitle:hover::after {
-    width: 100%;
+    width: fit-content;
 }
 
 .mediaElemImg {
@@ -90,18 +102,38 @@
 .white { color: white;}
 
 
-@media (min-width: 1200px) {
-    .mediaElement { height: 300px; width: 350px; }
-}
 
-/*@media (min-width : 1400px) {*/
-/*    .mediaElement { width: 400px; height: 350px; }*/
-/*}*/
+
+@media (min-width: 1200px) {
+    .mediaElementWrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 한 줄에 3개 */
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    /*.mediaElement { height: 300px; width: 350px; }*/
+}
 
 
 @media (max-width: 768px) {
-    .mediaElementWrapper { flex-wrap: nowrap; gap: 1rem; }
-    .mediaElement { flex-shrink: 0;}
+    /*.mediaElementWrapper { flex-wrap: nowrap; gap: 1rem; }*/
+    .mediaElementWrapper {
+        display:  flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        justify-content: flex-start;
+        -ms-overflow-style: none;
+    }
+
+    .mediaElement { flex-shrink: 0; width: 300px; height: 300px;}
+}
+
+@media (max-width: 576px) {
+    .mediaElement { width: 250px; height: 250px;}
 }
 
 /*@media (min-width: 1200px) {*/

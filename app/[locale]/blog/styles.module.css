@@ -1,4 +1,4 @@
-.devsWrapper {
+.blogWrapper {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -6,8 +6,8 @@
     padding: 2rem;
 }
 @media (max-width: 768px) {
-    .devsWrapper { padding: 1.5rem; }
+    .blogWrapper { padding: 1.5rem; }
 }
 @media (max-width: 576px) {
-    .devsWrapper { padding: 1rem; }
+    .blogWrapper { padding: 1rem; }
 }

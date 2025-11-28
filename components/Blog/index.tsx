@@ -10,7 +10,8 @@ import arrowRight from '@/public/icons/arrow-up-white.png';
 
 export default async function Blog() {
     const locale = await getLocale();             // e.g. 'ko', 'en', 'ja'
-    const lang = locale === 'en' ? 'en' : 'kr';   // simple mapping
+    // const lang = locale === 'en' ? 'en' : 'kr';   // simple mapping
+    const lang = 'en';
 
     const firstPost = blogData[0];
     const restPosts = blogData.slice(1);
@@ -29,18 +30,20 @@ export default async function Blog() {
                     <div className={styles.left}>
                         <div className={styles.leftTop}>
                             <p className={styles.blogDate}>{firstDate}</p>
-                            <NavigationLink className={styles.blogTitle} href={`/blog/${firstId}`}>
-                                <p className={styles.inline}>{firstTitle}</p>
-                                <div className={styles.iconElem}>
-                                    <Image
-                                        alt={"arrowRight"}
-                                        src={arrowRight}
-                                        fill={true}
-                                        style={{objectFit: 'contain'}}
-                                        className={styles.svgArrow}
-                                    ></Image>
-                                </div>
-                            </NavigationLink>
+                            <div className={styles.blogTitle} >
+                                <NavigationLink href={`/blog/${firstId}`}>
+                                    <p className={styles.inline}>{firstTitle}</p>
+                                    <div className={styles.iconElem}>
+                                        <Image
+                                            alt={"arrowRight"}
+                                            src={arrowRight}
+                                            fill={true}
+                                            style={{objectFit: 'cover'}}
+                                            className={styles.svgArrow}
+                                        ></Image>
+                                    </div>
+                                </NavigationLink>
+                            </div>
                         </div>
                         <div className={styles.leftDown}>
                             <p className={styles.blogSummary}>{firstSummary}</p>
@@ -59,23 +62,35 @@ export default async function Blog() {
                                 </div>
                             )}
                         </div>
-                        <div className={styles.imageElem}>
-                            <Link href={`/blog/${firstId}`}>
+                        <Link className={styles.imageLink} href={`/blog/${firstId}`}>
+                            <div className={styles.imageElem}>
                                 <Image
                                     src={blogImages[0].image}
                                     alt={firstTitle}
-                                    style={{objectFit: 'contain'}}
+                                    style={{objectFit: 'cover'}}
                                     fill={true}
                                 />
-                            </Link>
+                            </div>
+                        </Link>
+                        <p className={styles.blogSummaryMobile}>{firstSummary}</p>
+                        <div className={styles.tagElemMobile}>
+                            {firstTags?.length > 0 && (
+                                <div className={styles.tagRow}>
+                                    {firstTags.map((tag: string) => (
+                                        <span key={tag} className={styles.tag}>
+                                            #{tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
             <div className={styles.filterBar}>
-                <span>Filter by</span>
-                <span>Article Type</span>
-                <span>Contributor</span>
+                {/*<span>Filter by</span>*/}
+                {/*<span>Article Type</span>*/}
+                {/*<span>Contributor</span>*/}
             </div>
             <ul className={styles.blogList}>
                 {restPosts.map((post, index) => {
@@ -85,31 +100,22 @@ export default async function Blog() {
                     const author = post.author[lang] || post.author.kr;
 
                     return (
-                        <li key={post.id} className={`${styles.blogItem}`}>
-                            <div>
+                        <li key={post.id}>
+                            <div className={styles.blogItemInner}>
                                 <NavigationLink className={styles.blogTitle} href={`/blog/${post.id}`}>
                                     <p className={styles.inline}>{title}</p>
-                                    <div className={styles.iconElem}>
-                                        <Image
-                                            alt={"arrowRight"}
-                                            src={arrowRight}
-                                            fill={true}
-                                            style={{objectFit: 'contain'}}
-                                            className={styles.svgArrow}
-                                        ></Image>
-                                    </div>
                                 </NavigationLink>
-                                <div>
-                                    <div className={styles.imageElem}>
-                                        <Link href={`/blog/${post.id}`}>
+                                <div className={styles.blogThumbnail}>
+                                    <Link href={`/blog/${post.id}`}>
+                                        <div className={styles.imageElem}>
                                             <Image
-                                                src={blogImages[0].image}
+                                                src={blogImages[index + 1].image}
                                                 alt={post.title[lang] || post.title.kr}
-                                                style={{objectFit: 'contain'}}
+                                                style={{objectFit: 'cover'}}
                                                 fill={true}
                                             />
-                                        </Link>
-                                    </div>
+                                        </div>
+                                    </Link>
                                 </div>
                                 <p className={styles.blogSummary}>{summary}</p>
                                 <p className={styles.blogAuthor}>{author} | {date}</p>

@@ -14,6 +14,7 @@ export const Nav = () => {
             <ul className={styles.navbar}>
                 <NavigationLink href="/" pseudo="true">{t('home')}</NavigationLink>
                 <NavigationLink href="/about" pseudo="true">{t('about')}</NavigationLink>
+                <NavigationLink href="/blog" pseudo="true">{t('blog')}</NavigationLink>
                 <NavigationLink href="/devs" pseudo="true">{t('devs')}</NavigationLink>
                 <NavigationLink href="/team" pseudo="true">{t('team')}</NavigationLink>
                 <NavigationLink href="/news" pseudo="true">{t('news')}</NavigationLink>
