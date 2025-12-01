@@ -14,6 +14,7 @@
 }
 .blogSection {
     flex: 2;
+    margin-bottom: 6rem;
 }
 .blogDate { font-size: 1rem; margin-top: .5rem; }
 .blogTitle {
@@ -26,8 +27,8 @@
 }
 .blogContent img {
     width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    /*margin-top: 1rem;*/
+    /*margin-bottom: 1rem;*/
 }
 .blogContent img:first-child {
     margin-top: 0;

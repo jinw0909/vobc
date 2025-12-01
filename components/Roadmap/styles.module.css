@@ -28,7 +28,7 @@
     width: 200px;
     aspect-ratio: 2/3;
     flex-shrink: 0;
-    min-width: 200px;
+    height: 300px;
     transition: .5s;
     cursor: pointer;
     position: relative;
@@ -120,6 +120,7 @@
 }
 @media (min-width: 1200px) {
     .roadmapElem { width: 250px;}
+    .roadmapElem { height: 375px; }
     .roadmapElem.clicked { width: 336px; }
 }
 
