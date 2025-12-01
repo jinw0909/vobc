@@ -29,6 +29,7 @@
     /*background-color: black;*/
     /*border: 1px solid #999;*/
 }
+.whitepaperInner:active { transform: scale(0.95);}
 .whitepaperInner.show {
     /*width: 44%;*/
     border: 0;

@@ -82,7 +82,11 @@ export function TeamBand({selected, profile, order, registerRef, data} : {select
 
                                     if (order != 6) {
                                         return (
-                                            <li className={styles.item} key={i} onClick={() => toggleItem(i)}>
+                                            <li
+                                                className={`${styles.item} ${expanded[i] ? styles.show : ''}`}
+                                                key={i}
+                                                onClick={() => toggleItem(i)}
+                                            >
                                                 <div className={styles.itemInner}>
                                                     <div className={styles.profilePic}>
                                                         <div className={`

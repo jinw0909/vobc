@@ -1,7 +1,7 @@
 // 'use client';
 // import Image from "next/image";
 // import techPic from "@/public/devs_technology.png";
-// import styles from "./styles.module.css"
+// import styles from "./Roadmap3x3.module.css"
 // // import Link from "next/link";
 // import {NavigationLink} from "@/ui/NavigationLink";
 // import {getTranslations} from "next-intl/server";

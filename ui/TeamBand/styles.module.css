@@ -195,6 +195,14 @@
     transition: .5s;
     max-width: 10rem;
 }
+.item.show {
+    width: 12rem;
+    max-width: 12rem;
+}
+.item.show .imgContainer {
+    width: 156px;
+    height: 156px;
+}
 .item:active { transform: scale(0.95); }
 .item:last-child {
     z-index: 55;
@@ -240,6 +248,7 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
+    transition: .5s;
 }
 .fallback {
     border: 1px solid #999;
