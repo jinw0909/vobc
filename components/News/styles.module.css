@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 8.5rem;
+    margin-top: 10rem;
     transition: .5s;
     overflow: hidden;
 }
@@ -47,7 +47,7 @@
 }
 
 @media (min-width: 1200px) {
-    .newsWrapper { width: 80vw;}
+    .newsWrapper { width: 100%; }
 }
 @media (max-width: 768px) {
     .newsWrapper { margin-top: 8rem;}

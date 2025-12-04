@@ -77,8 +77,9 @@
         left: 1.5rem;
     }
 }
+
 @media (max-width : 578px) {
-    .breadcrumb {
+    .breadcrumbWrapper {
         left: 1rem;
         right: 1rem;
     }

@@ -6,6 +6,14 @@
     padding: 2rem;
 }
 
+@media (min-width: 1200px) {
+    .detailWrapper {
+        width: 80vw;
+        margin: auto;
+        max-width: 1280px;
+    }
+}
+
 @media (max-width: 768px) {
     .detailWrapper { padding: 1.5rem; }
 }

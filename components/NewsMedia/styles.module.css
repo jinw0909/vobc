@@ -94,9 +94,9 @@
 }
 
 
-@media (min-width: 1200px) {
-    .mediaWrapper { width: 80vw; }
-}
+/*@media (min-width: 1200px) {*/
+/*    .mediaWrapper { width: 80vw; }*/
+/*}*/
 @media (min-width: 1400px) {
     .headerTitle { font-size: 2rem; }
     .headerDesc { font-size: 1.2rem; }

@@ -38,30 +38,32 @@ export const Language = ({ lang }: { lang: string }) => {
     return (
         <>
             <div className={styles.languageWrapper} ref={wrapperRef}>
-                <div
-                    onClick={() => setShowModal((v) => !v)}
-                    className={styles.languageSelect}
-                >
-          <span>
-            {showModal ? (
-                <Image
-                    src={triangle}
-                    width={12}
-                    height={12}
-                    alt="▲"
-                    className={styles.languageArrowUp}
-                />
-            ) : (
-                <Image
-                    src={rvtriangle}
-                    width={12}
-                    height={12}
-                    alt="▼"
-                    className={styles.languageArrow}
-                />
-            )}
-          </span>
-                    <span>{lang.toUpperCase()}</span>
+                <div className={styles.languageInner}>
+                    <div
+                        onClick={() => setShowModal((v) => !v)}
+                        className={styles.languageSelect}
+                    >
+                          <span>
+                            {showModal ? (
+                                <Image
+                                    src={triangle}
+                                    width={12}
+                                    height={12}
+                                    alt="▲"
+                                    className={styles.languageArrowUp}
+                                />
+                            ) : (
+                                <Image
+                                    src={rvtriangle}
+                                    width={12}
+                                    height={12}
+                                    alt="▼"
+                                    className={styles.languageArrow}
+                                />
+                            )}
+                          </span>
+                          <span>{lang.toUpperCase()}</span>
+                    </div>
                 </div>
             </div>
 
