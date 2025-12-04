@@ -8,18 +8,18 @@
     "description": "The Vision of Blockchain foundation and the VOB token expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities."
   },
   "nav" : {
-    "home" : "Home",
-    "about" : "About",
-    "devs" : "Devs",
-    "team" : "Team",
-    "news" : "News",
-    "media" : "Media",
+    "home" : "HOME",
+    "about" : "ABOUT",
+    "devs" : "DEVS",
+    "team" : "TEAM",
+    "news" : "NEWS",
+    "media" : "MEDIA",
     "cookies" : "Cookies Policy",
     "privacy" : "Privacy Policy",
     "terms" : "Terms of Use",
     "language": "Select Language",
-    "detail" : "Detail",
-    "blog" : "Blog"
+    "detail" : "DETAIL",
+    "blog" : "BLOG"
   },
   "about" : {
     "main_title" : "About VOB",

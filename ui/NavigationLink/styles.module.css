@@ -16,7 +16,7 @@
     height: 1px;
     width: 0;
     left: 50%;
-    bottom: -1px;
+    bottom: -2px;
     transform: translateX(-50%);
     background-color: rgba(180, 180, 30, 0.8);
     transition: .5s;

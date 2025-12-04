@@ -46,7 +46,12 @@ export const Breadcrumbs = () => {
                                     <span className={styles.arrowImg}>
                                         <Image src={arrowPic} width={12} height={12} alt="arrow icon"/>
                                     </span>
-                                    <NavigationLink href={`/${segment}`}>{t(segment)}</NavigationLink>
+                                    <NavigationLink
+                                        href={`/${segment}`}
+                                        matchMode={"exact"}
+                                    >
+                                        {t(segment)}
+                                    </NavigationLink>
                                 </div>
                             )
                         })
@@ -63,16 +68,6 @@ export const Breadcrumbs = () => {
                                    alt="back history arrow"/>
                         </div>
                     </button>
-                    {/*<button*/}
-                    {/*    type="button"*/}
-                    {/*    className={styles.forwardButton}*/}
-                    {/*    onClick={() => {window.history.forward()}}*/}
-                    {/*>*/}
-                    {/*    <div className={styles.imageWrapper}>*/}
-                    {/*        <Image className={styles.forwardArrow} src={arrowUp} width={24} height={24}*/}
-                    {/*               alt="forward history arrow"/>*/}
-                    {/*    </div>*/}
-                    {/*</button>*/}
                 </div>
             </div>
         )

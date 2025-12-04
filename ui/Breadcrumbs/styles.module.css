@@ -60,8 +60,10 @@
 
 @media (min-width: 1200px) {
     .breadcrumbWrapper {
-        margin-left: 10vw;
-        margin-right: 10vw;
+        width: 80vw;
+        max-width: 1280px;
+        margin: auto;
+        padding: 0 2rem;
     }
 }
 @media (max-width : 768px) {
