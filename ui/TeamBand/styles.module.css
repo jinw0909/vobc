@@ -205,7 +205,7 @@
 }
 .item:active { transform: scale(0.95); }
 .item:last-child {
-    z-index: 55;
+    z-index: 55;.container
     /*background-color: black;*/
 }
 .item.wide {
