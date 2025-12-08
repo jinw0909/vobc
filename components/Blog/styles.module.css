@@ -94,7 +94,9 @@
     font-size: .8rem;
     position: relative;
     cursor: pointer;
+    margin-left: .5rem;
 }
+.tag:first-child { margin-left: 0; }
 .tag::after {
     content: '';
     position: absolute;
