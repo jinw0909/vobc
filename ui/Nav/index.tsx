@@ -1,8 +1,4 @@
 import styles from './styles.module.css'
-// import Link from 'next/link';
-import { Link } from "@/navigation";
-import {usePathname, useRouter} from "next/navigation";
-import {useState, useEffect} from "react";
 import { useTranslations } from "next-intl";
 import { NavigationLink } from "@/ui/NavigationLink";
 

@@ -2,6 +2,8 @@ import styles from './styles.module.css'
 import {setRequestLocale} from "next-intl/server";
 import { Metadata, ResolvingMetadata } from "next";
 import BlogDetail from "@/components/BlogDetail";
+import { Suspense } from "react";
+import Loading from "./temp/loading"
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
@@ -104,7 +106,9 @@ export default async function Page({ params }: PageProps) {
 
     return (
         <div className={styles.detailWrapper}>
-            <BlogDetail idx={idx} />
+            <Suspense fallback={<Loading/>}>
+                <BlogDetail idx={idx} />
+            </Suspense>
         </div>
     );
 }

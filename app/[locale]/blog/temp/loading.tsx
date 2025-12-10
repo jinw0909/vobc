@@ -1,5 +1,5 @@
 // app/[locale]/blog/loading.tsx
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
 
 export default function Loading() {
     return (

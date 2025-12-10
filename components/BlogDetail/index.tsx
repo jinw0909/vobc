@@ -94,7 +94,12 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
             <header className={styles.blogHeader}>
                 <div className={styles.blogMeta}>
                     <div className={styles.blogFooter}>
-                        <Link href="/blog">Back to Index</Link>
+                        <Link
+                            href="/blog"
+                            scroll={true}
+                        >
+                            Back to Index
+                        </Link>
                     </div>
 
                     {formattedReleaseDate && (

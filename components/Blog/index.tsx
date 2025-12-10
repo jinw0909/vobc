@@ -232,7 +232,7 @@ export default async function Blog() {
                         <div className={styles.leftTop}>
                             <p className={styles.blogDate}>{firstDate}</p>
                             <div className={styles.blogTitle}>
-                                <NavigationLink href={`/blog/${firstId}`}>
+                                <NavigationLink href={`/blog/${firstId}`} scroll={true}>
                                     <p className={styles.inline}>{firstTitle}</p>
                                     <div className={styles.iconElem}>
                                         <Image
@@ -265,7 +265,10 @@ export default async function Blog() {
                             )}
                         </div>
 
-                        <Link className={styles.imageLink} href={`/blog/${firstId}`}>
+                        <Link
+                            className={styles.imageLink} href={`/blog/${firstId}`}
+                            scroll={true}
+                        >
                             <div className={styles.imageElem}>
                                 {firstPost.thumbnail && (
                                     <Image
@@ -320,7 +323,7 @@ export default async function Blog() {
                                 </NavigationLink>
 
                                 <div className={styles.blogThumbnail}>
-                                    <Link href={`/blog/${post.id}`}>
+                                    <Link href={`/blog/${post.id}`} scroll={true}>
                                         <div className={styles.imageElem}>
                                             {post.thumbnail && (
                                                 <Image
