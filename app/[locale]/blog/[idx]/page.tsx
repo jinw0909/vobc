@@ -43,7 +43,7 @@ export async function generateMetadata(
 
     try {
         const res = await fetch(
-            `${API_BASE}/api/post/${idx}?languageCode=${lang}`,
+            `${API_BASE}/api/post/${idx}?lang=${lang}`,
             {
                 // 메타데이터용은 굳이 no-store까지는 안 해도 됨(원하면 써도 되고)
                 cache: 'force-cache',

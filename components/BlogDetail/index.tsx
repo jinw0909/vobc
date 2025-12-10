@@ -46,7 +46,7 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
             : 'en';
 
     const res = await fetch(
-        `${API_BASE}/api/post/${idx}?languageCode=${lang}`,
+        `${API_BASE}/api/post/${idx}?lang=${lang}`,
         {
             cache: 'no-store',
         }

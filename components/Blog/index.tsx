@@ -185,7 +185,7 @@ export default async function Blog() {
             : 'en';
 
     const res = await fetch(
-        `${API_BASE}/api/post/list?languageCode=${lang}&page=0&size=10`,
+        `${API_BASE}/api/post/list?lang=${lang}&page=0&size=10`,
         {
             // 최신 글 보고 싶으면 no-store, 약간 캐싱하고 싶으면 revalidate 사용
             cache: 'no-store',
