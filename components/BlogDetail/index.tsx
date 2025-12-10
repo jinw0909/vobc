@@ -5,6 +5,7 @@ import { getLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import parse, { DOMNode, Element } from 'html-react-parser';
 import Image from 'next/image';
+import {NavigationLink} from "@/ui/NavigationLink";
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
@@ -94,12 +95,20 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
             <header className={styles.blogHeader}>
                 <div className={styles.blogMeta}>
                     <div className={styles.blogFooter}>
-                        <Link
+
+                        {/*<Link*/}
+                        {/*    href="/blog"*/}
+                        {/*    scroll={true}*/}
+                        {/*>*/}
+                        {/*    Back to Index*/}
+                        {/*</Link>*/}
+
+                        <NavigationLink
                             href="/blog"
                             scroll={true}
                         >
                             Back to Index
-                        </Link>
+                        </NavigationLink>
                     </div>
 
                     {formattedReleaseDate && (
