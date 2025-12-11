@@ -15,20 +15,30 @@ import type { Metadata } from "next";
 const notoserifjp = Noto_Serif_JP({
     weight: ['200', '300', '400', '500', '600', '700', '900'],
     style: "normal",
-    subsets: ['latin']
+    subsets: ['latin'],
+    preload: false
 });
 
 const notoserifsc = Noto_Serif_SC({
     weight: ['200', '300', '400', '500', '600', '700', '900'],
     style: "normal",
-    subsets: ['latin']
+    subsets: ['latin'],
+    preload: false
 });
 
 const notoserifkr = Noto_Serif_KR({
     weight: ['400','700','800'],
     style: "normal",
-    subsets: ['latin']
+    subsets: ['latin'],
+    preload: false
 });
+
+const fontByLocale: Record<string, any> = {
+    en: notoserifkr,
+    jp: notoserifjp,
+    cn: notoserifsc,
+    kr: notoserifkr,
+};
 
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
@@ -74,13 +84,13 @@ export default async function LocaleLayout({
     }
 
     setRequestLocale(locale);
-
     const messages = await getMessages();
+
+    const font = fontByLocale[locale];
 
     return (
         <html lang={locale}>
-        <body className={`${notoserifjp.className} ${notoserifkr.className} ${notoserifsc.className}`}>
-        {/*<body className={notosansjp.className}>*/}
+        <body className={font.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
             <Header lang={locale} />
             <MobileHeader />

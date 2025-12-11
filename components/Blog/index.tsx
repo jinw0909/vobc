@@ -142,30 +142,31 @@ import arrowRight from '@/public/icons/arrow-up-white.png';
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
 
-interface Tag {
-    id: number;
-    name: string;
+interface PostTag {
+    sortOrder: number;
+    tagName: string;
+    primaryTag: boolean;
 }
 
 interface PostItem {
-    id: number;
+    postId: number;
     title: string;
     content: string;
     author: string;
     summary: string;
     releaseDate: string | null;
     thumbnail: string | null;
-    requestedLanguage: string | null;
-    effectiveLanguage: string | null;
-    translated: boolean;
-    createdAt: string;
-    updatedAt: string;
-    tags: Tag[];
+    // requestedLanguage: string | null;
+    // effectiveLanguage: string | null;
+    // translated: boolean;
+    // createdAt: string;
+    // updatedAt: string;
+    postTags: PostTag[];
 }
 
 interface PagedResponse<T> {
     content: T[];
-    page: number;
+    number: number;
     size: number;
     totalElements: number;
     totalPages: number;
@@ -185,7 +186,7 @@ export default async function Blog() {
             : 'en';
 
     const res = await fetch(
-        `${API_BASE}/api/post/list?lang=${lang}&page=0&size=10`,
+        `${API_BASE}/api/post/query/page?lang=${lang}&size=7`,
         {
             // 최신 글 보고 싶으면 no-store, 약간 캐싱하고 싶으면 revalidate 사용
             cache: 'no-store',
@@ -216,12 +217,12 @@ export default async function Blog() {
     const firstPost = posts[0];
     const restPosts = posts.slice(1);
 
-    const firstId = firstPost.id;
+    const firstId = firstPost.postId;
     const firstTitle = firstPost.title;
     const firstDate = firstPost.releaseDate ?? '';
     const firstSummary = firstPost.summary;
     const firstAuthor = firstPost.author;
-    const firstTags = firstPost.tags ?? [];
+    const firstTags = firstPost.postTags ?? [];
 
     return (
         <div className={styles.blogWrapper}>
@@ -256,10 +257,10 @@ export default async function Blog() {
                         <div className={styles.tagElem}>
                             {firstTags.length > 0 && (
                                 <div className={styles.tagRow}>
-                                    {firstTags.map((tag) => (
-                                        <span key={tag.id} className={styles.tag}>
-                      #{tag.name}
-                    </span>
+                                    {firstTags.map((tag, index: number) => (
+                                        <span key={index} className={styles.tag}>
+                                          #{tag.tagName}
+                                        </span>
                                     ))}
                                 </div>
                             )}
@@ -286,10 +287,10 @@ export default async function Blog() {
                         <div className={styles.tagElemMobile}>
                             {firstTags.length > 0 && (
                                 <div className={styles.tagRow}>
-                                    {firstTags.map((tag) => (
-                                        <span key={tag.id} className={styles.tag}>
-                      #{tag.name}
-                    </span>
+                                    {firstTags.map((tag, index: number) => (
+                                        <span key={index} className={styles.tag}>
+                                          #{tag.tagName}
+                                        </span>
                                     ))}
                                 </div>
                             )}
@@ -310,21 +311,21 @@ export default async function Blog() {
                     const date = post.releaseDate ?? '';
                     const summary = post.summary;
                     const author = post.author;
-                    const tags = post.tags ?? [];
+                    const tags = post.postTags ?? [];
 
                     return (
-                        <li key={post.id}>
+                        <li key={post.postId}>
                             <div className={styles.blogItemInner}>
                                 <NavigationLink
                                     className={styles.blogTitle}
-                                    href={`/blog/${post.id}`}
+                                    href={`/blog/${post.postId}`}
                                     scroll={true}
                                 >
                                     <p className={styles.inline}>{title}</p>
                                 </NavigationLink>
 
                                 <div className={styles.blogThumbnail}>
-                                    <NavigationLink href={`/blog/${post.id}`} scroll={true}>
+                                    <NavigationLink href={`/blog/${post.postId}`} scroll={true}>
                                         <div className={styles.imageElem}>
                                             {post.thumbnail && (
                                                 <Image
@@ -345,10 +346,10 @@ export default async function Blog() {
 
                                 {tags.length > 0 && (
                                     <div className={styles.tagRow}>
-                                        {tags.map((tag) => (
-                                            <span key={tag.id} className={styles.tag}>
-                        #{tag.name}
-                      </span>
+                                        {tags.map((tag, index) => (
+                                            <span key={index} className={styles.tag}>
+                                                #{tag.tagName}
+                                            </span>
                                         ))}
                                     </div>
                                 )}

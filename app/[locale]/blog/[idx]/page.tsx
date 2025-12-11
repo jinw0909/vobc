@@ -4,6 +4,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import BlogDetail from "@/components/BlogDetail";
 import { Suspense } from "react";
 import Loading from "./temp/loading"
+import {notFound} from "next/navigation";
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
@@ -43,7 +44,7 @@ export async function generateMetadata(
 
     try {
         const res = await fetch(
-            `${API_BASE}/api/post/${idx}?lang=${lang}`,
+            `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
             {
                 // 메타데이터용은 굳이 no-store까지는 안 해도 됨(원하면 써도 되고)
                 cache: 'force-cache',
@@ -51,11 +52,7 @@ export async function generateMetadata(
         );
 
         if (!res.ok) {
-            // 포스트 없으면 fallback 메타데이터
-            return {
-                title: 'Post not found',
-                description: 'The requested blog post does not exist.',
-            };
+            notFound();
         }
 
         const post = (await res.json()) as PostMetaResponse;

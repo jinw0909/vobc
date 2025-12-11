@@ -1,0 +1,16 @@
+.blogTagWrapper {
+    width: 100%;
+    margin-top: 9rem;
+    min-height: 100vh;
+}
+
+.post {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+@media (min-width: 1200px) {
+    .blogTagWrapper {
+        width: 80vw;
+    }
+}

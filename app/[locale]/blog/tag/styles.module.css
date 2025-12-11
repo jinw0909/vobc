@@ -1,0 +1,23 @@
+.blogTagWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+
+@media (min-width: 1200px) {
+    .blogTagWrapper {
+        width: 80vw;
+        margin: auto;
+        max-width: 1280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .blogTagWrapper { padding: 1.5rem; }
+}
+@media (max-width: 576px) {
+    .blogTagWrapper { padding: 1rem; }
+}

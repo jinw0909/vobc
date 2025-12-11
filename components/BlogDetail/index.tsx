@@ -10,7 +10,7 @@ import {NavigationLink} from "@/ui/NavigationLink";
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
 
-interface Tag {
+interface PostTag {
     id: number;
     name: string;
 }
@@ -28,7 +28,7 @@ interface PostResponse {
     translated: boolean;
     createdAt: string;
     updatedAt: string;
-    tags: Tag[];
+    postTags: PostTag[];
 }
 
 interface BlogDetailProps {
@@ -47,7 +47,7 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
             : 'en';
 
     const res = await fetch(
-        `${API_BASE}/api/post/${idx}?lang=${lang}`,
+        `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
         {
             cache: 'no-store',
         }
@@ -57,13 +57,17 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
         notFound();
     }
 
-    const post: PostResponse = await res.json();
+    const post = (await res.json()) as PostResponse || null;
+
+    if (!post || !post.id || post.id !== Number(idx)) {
+        notFound();
+    }
 
     const formattedReleaseDate = post.releaseDate ?? '';
 
     // 🔴 여기서 HTML 문자열을 React 요소로 파싱하면서
     // <img> 태그를 Next.js <Image> 컴포넌트로 교체
-    const parsedContent = parse(post.content, {
+    const parsedContent = post.content ? parse(post.content, {
         replace: (domNode: DOMNode) => {
             if (
                 domNode.type === 'tag' && domNode.name === 'img'
@@ -88,7 +92,7 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
                 );
             }
         },
-    });
+    }) : null;
 
     return (
         <article className={styles.blogDetail}>
@@ -124,12 +128,12 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
                         <p className={styles.blogSummary}>{post.summary}</p>
                     )}
 
-                    {post.tags?.length > 0 && (
+                    {post.postTags?.length > 0 && (
                         <div className={styles.tagRow}>
-                            {post.tags.map((tag) => (
+                            {post.postTags.map((tag) => (
                                 <span key={tag.id} className={styles.tag}>
-                  #{tag.name}
-                </span>
+                                  #{tag.name}
+                                </span>
                             ))}
                         </div>
                     )}

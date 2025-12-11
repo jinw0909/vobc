@@ -19,7 +19,8 @@
     "terms" : "Terms of Use",
     "language": "Select Language",
     "detail" : "DETAIL",
-    "blog" : "BLOG"
+    "blog" : "BLOG",
+    "tag" : "TAG"
   },
   "about" : {
     "main_title" : "About VOB",
