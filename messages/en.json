@@ -20,7 +20,8 @@
     "language": "Select Language",
     "detail" : "DETAIL",
     "blog" : "BLOG",
-    "tag" : "TAG"
+    "tag" : "TAG",
+    "roadmap" : "ROADMAP"
   },
   "about" : {
     "main_title" : "About VOB",
