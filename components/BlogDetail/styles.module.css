@@ -61,6 +61,10 @@
     padding: 0.25rem 0.6rem;
     border-radius: 999px;
     border: 1px solid #555;
+    transition: .5s;
+}
+.tag:hover {
+    border: 1px solid #aaa;
 }
 
 .thumbnailWrapper {
@@ -106,6 +110,17 @@
     padding-left: 1.25rem;
     margin-bottom: 1rem;
 }
+.blogContent hr {
+    margin: 2rem 0;
+}
+.blogContent figure {
+    text-align: left;
+}
+.blogContent figure > img {
+    display: block;
+    margin: 1rem 0;
+    width: 33%;
+}
 
 /* 예: globals.css or blog detail용 css */
 .content-scroll-box {
@@ -128,6 +143,8 @@
 .blogDetail {
     margin-top: 10rem;
 }
+
+.colorWhite { color: white; }
 
 @media (min-width: 1200px) {
     .blogDetail {

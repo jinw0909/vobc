@@ -259,7 +259,9 @@ export default async function Blog() {
                                 <div className={styles.tagRow}>
                                     {firstTags.map((tag, index: number) => (
                                         <span key={index} className={styles.tag}>
-                                          #{tag.tagName}
+                                            <NavigationLink className={styles.colorWhite} href={`/blog/tag/${tag.tagName}`} key={index}>
+                                                  #{tag.tagName}
+                                            </NavigationLink>
                                         </span>
                                     ))}
                                 </div>
@@ -289,7 +291,9 @@ export default async function Blog() {
                                 <div className={styles.tagRow}>
                                     {firstTags.map((tag, index: number) => (
                                         <span key={index} className={styles.tag}>
-                                          #{tag.tagName}
+                                            <NavigationLink className={styles.colorWhite} href={`/blog/tag/${tag.tagName}`} key={index}>
+                                                  #{tag.tagName}
+                                            </NavigationLink>
                                         </span>
                                     ))}
                                 </div>
@@ -348,7 +352,9 @@ export default async function Blog() {
                                     <div className={styles.tagRow}>
                                         {tags.map((tag, index) => (
                                             <span key={index} className={styles.tag}>
-                                                #{tag.tagName}
+                                                <NavigationLink className={styles.colorWhite} href={`/blog/tag/${tag.tagName}`} key={index}>
+                                                      #{tag.tagName}
+                                                </NavigationLink>
                                             </span>
                                         ))}
                                     </div>

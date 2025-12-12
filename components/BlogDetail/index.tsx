@@ -99,14 +99,6 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
             <header className={styles.blogHeader}>
                 <div className={styles.blogMeta}>
                     <div className={styles.blogFooter}>
-
-                        {/*<Link*/}
-                        {/*    href="/blog"*/}
-                        {/*    scroll={true}*/}
-                        {/*>*/}
-                        {/*    Back to Index*/}
-                        {/*</Link>*/}
-
                         <NavigationLink
                             href="/blog"
                             scroll={true}
@@ -132,7 +124,9 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
                         <div className={styles.tagRow}>
                             {post.postTags.map((tag) => (
                                 <span key={tag.id} className={styles.tag}>
-                                  #{tag.name}
+                                    <NavigationLink href={`/blog/tag/${tag.name}`} className={styles.colorWhite}>
+                                        #{tag.name}
+                                    </NavigationLink>
                                 </span>
                             ))}
                         </div>
