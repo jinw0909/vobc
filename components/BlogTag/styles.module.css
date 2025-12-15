@@ -12,12 +12,12 @@
 }
 .post {
     padding: 1.5rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #999;
     display: flex;
     column-gap: 2rem;
 }
 .post:first-child {
-    border-top: 1px solid #eee;
+    border-top: 1px solid #999;
 }
 .postThumbnail {
     width: 4rem;
@@ -57,7 +57,10 @@
     cursor: pointer;
     position: relative;
 }
-.tag::after {
+.tagSpan {
+    color: white; position: relative;
+}
+.tagSpan::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -68,7 +71,7 @@
     transition: .5s;
     margin-left: .5rem;
 }
-.tag:hover::after {
+.tagSpan:hover::after {
     width: 0;
 }
 .colorWhite {
@@ -89,6 +92,10 @@
     border-radius: 999px;
     border: 1px solid rgba(255,255,255,0.4);
     font-size: 0.9rem;
+    transition: .5s;
+}
+.pageLink:active {
+    transform: scale(.9);
 }
 
 .activePage {
@@ -111,6 +118,10 @@
     }
     .postThumbnail {
         height: 4rem;
+        width: 100%;
+    }
+    .postThumbnail:hover {
+        width: 100%;
     }
     .postTitle {
         font-size: 1rem;

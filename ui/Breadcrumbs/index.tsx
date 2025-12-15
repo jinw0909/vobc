@@ -86,7 +86,7 @@ import arrowUp from '@/public/icons/arrow-up-white.png';
 import Image from "next/image";
 import styles from "./styles.module.css";
 
-const VISIBLE_SEGMENTS = ['blog', 'news', 'media', 'about', 'team', 'devs']; // nav에서 번역 키로 쓰는 것들만
+const VISIBLE_SEGMENTS = ['blog', 'news', 'media', 'about', 'team', 'devs', 'tag']; // nav에서 번역 키로 쓰는 것들만
 
 export const Breadcrumbs = () => {
     const segments = useSelectedLayoutSegments();
@@ -128,7 +128,8 @@ export const Breadcrumbs = () => {
                     // 3) 바로 앞이 'tag'인 세그먼트 = [name] (태그 이름)
                     else if (index > 0 && segments[index - 1] === 'tag') {
                         // 태그 이름 그대로 사용 (필요하면 # 붙이기)
-                        label = `#${decodeURIComponent(segment)}`;
+                        return null;
+                        // label = `#${decodeURIComponent(segment)}`;
                     }
                     // 4) 그 외 세그먼트는 표시하지 않음 (원하면 여기서도 label = segment 로 보여줄 수 있음)
                     else {

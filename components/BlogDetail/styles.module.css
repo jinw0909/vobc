@@ -23,10 +23,6 @@
     gap: 0.5rem;
     position: sticky;
     top: 9rem;
-    overflow-y: scroll;
-    max-height: 66vh;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
 }
 .blogMeta::-webkit-scrollbar {
     display: none;
@@ -49,6 +45,10 @@
 .blogSummary {
     font-size: 1rem;
     color: #aaa;
+    overflow-y: scroll;
+    max-height: 33vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .blogAuthor {
@@ -73,6 +73,9 @@
 .tag:hover {
     border: 1px solid #aaa;
 }
+.tag:active {
+    transform: scale(.95);
+}
 
 .thumbnailWrapper {
     margin-top: 1rem;
@@ -87,7 +90,6 @@
 
 /* 본문 안의 html 공통 스타일 */
 .blogSection {
-    margin-top: 1.5rem;
     flex: 2;
 }
 
@@ -97,6 +99,9 @@
     max-width: 100%;
     height: auto;
     margin: 1rem auto;
+}
+.blogContent img:first-child {
+    margin-top: 0;
 }
 
 .blogContent p {
@@ -119,13 +124,16 @@
 }
 .blogContent hr {
     margin: 2rem 0;
+    border: none;
+    height: 1px;
+    background-color: #999;
 }
 .blogContent figure {
-    text-align: left;
+    text-align: center;
+    padding: .5rem 0;
 }
 .blogContent figure > img {
     display: block;
-    margin: 1rem 0;
     width: 33%;
 }
 
@@ -139,7 +147,10 @@
     display: block;
     max-width: 100%;
     height: auto;
-    margin: 1rem auto;
+    margin: 2rem auto;
+}
+.content-scroll-box img:first-child {
+    margin-top: 1rem;
 }
 
 .content-scroll-box p {
@@ -153,6 +164,10 @@
 
 .colorWhite { color: white; }
 
+.whiteBg {
+    background-color: white;
+}
+
 @media (min-width: 1200px) {
     .blogDetail {
         width: 80vw;
@@ -165,7 +180,9 @@
         margin-top: 7rem;
         flex-direction: column;
     }
-    .blogMeta { position: static;  }
+    .blogMeta { position: static; }
+    .blogTitle { font-size: 1.5rem; }
+    .blogSummary { overflow-y: auto; max-height: none; font-size: 0.8rem;}
     .blogHeader { flex: auto; }
     .blogSection { flex: auto; }
 

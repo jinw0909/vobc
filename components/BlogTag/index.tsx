@@ -58,15 +58,6 @@ export default async function BlogTag({tagName , page}: BlogTagProps) {
 
     const zeroBasedPage = Math.max(page - 1, 0);
 
-    // const res = await fetch(
-    //     `${API_BASE}/api/post/query/page?lang=${lang}&size=1&tagName=${tagName}`,
-    //     {
-    //         // 최신 글 보고 싶으면 no-store, 약간 캐싱하고 싶으면 revalidate 사용
-    //         cache: 'no-store',
-    //         // next: { revalidate: 60 },
-    //     }
-    // );
-
     const res = await fetch(
         `${API_BASE}/api/post/query/page?lang=${lang}&size=2&page=${zeroBasedPage}&tagName=${encodeURIComponent(tagName)}`,
         {
@@ -87,7 +78,7 @@ export default async function BlogTag({tagName , page}: BlogTagProps) {
     return (
         <div className={styles.blogTagWrapper}>
             <div className={styles.tagName}>#{tagName}</div>
-            <p className={styles.explanation}>Posts with #{tagName}</p>
+            <p className={styles.explanation}>Posts about #{tagName}</p>
             <ul>
                 {posts.map((post) => (
                     <li key={post.postId} className={styles.post}>
@@ -123,7 +114,7 @@ export default async function BlogTag({tagName , page}: BlogTagProps) {
                                 {post.postTags.map((tag, index) => {
                                     return(
                                         <span className={styles.tag} key={index}>
-                                            <NavigationLink href={`/blog/tag/${tag.tagName}`} className={styles.colorWhite}>
+                                            <NavigationLink href={`/blog/tag/${tag.tagName}`} className={styles.tagSpan}>
                                                 #{tag.tagName}
                                             </NavigationLink>
                                         </span>

@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import Link from 'next/link';
 import { getLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import parse, { DOMNode, Element } from 'html-react-parser';
+import parse, {DOMNode, domToReact, Element} from 'html-react-parser';
 import Image from 'next/image';
 import {NavigationLink} from "@/ui/NavigationLink";
 
@@ -65,34 +65,72 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
 
     const formattedReleaseDate = post.releaseDate ?? '';
 
-    // 🔴 여기서 HTML 문자열을 React 요소로 파싱하면서
-    // <img> 태그를 Next.js <Image> 컴포넌트로 교체
-    const parsedContent = post.content ? parse(post.content, {
-        replace: (domNode: DOMNode) => {
-            if (
-                domNode.type === 'tag' && domNode.name === 'img'
-            ) {
-                const { src, alt, width, height } = domNode.attribs ?? {};
 
-                if (!src) return domNode; // src 없으면 그대로 둠
+    const parsedContent = post.content
+        ? parse(post.content, {
+            replace: (domNode: DOMNode) => {
+                if (domNode.type !== 'tag') return;
 
-                // width/height 없으면 기본값 설정 (레이아웃 깨지지 않게)
-                const w = width ? Number(width) : 800;
-                const h = height ? Number(height) : 450;
+                // 1) figure에 white-bg 붙이기
+                if (domNode.name === 'figure') {
+                    const el = domNode as unknown as Element;
 
-                return (
-                    <Image
-                        src={src}
-                        alt={alt || ''}
-                        width={w}
-                        height={h}
-                        className="content-inline-image"
-                        // 필요하면 style이나 sizes 추가 가능
-                    />
-                );
-            }
-        },
-    }) : null;
+                    // 기존 class 유지하면서 추가
+                    const existing = el.attribs?.class ?? '';
+                    const className = `${existing} ${styles.whiteBg}`.trim();
+
+                    return (
+                        <figure className={className}>
+                            {domToReact(el.children as DOMNode[], {
+                                replace: (node) => {
+                                    // figure 안의 img도 Next/Image로 바꾸고 싶으면 여기서 처리
+                                    if (node.type === 'tag' && node.name === 'img') {
+                                        const imgEl = node as unknown as Element;
+                                        const { src, alt, width, height } = imgEl.attribs ?? {};
+                                        if (!src) return node;
+
+                                        const w = width ? Number(width) : 800;
+                                        const h = height ? Number(height) : 450;
+
+                                        return (
+                                            <Image
+                                                src={src}
+                                                alt={alt || ''}
+                                                width={w}
+                                                height={h}
+                                                className="content-inline-image"
+                                            />
+                                        );
+                                    }
+                                },
+                            })}
+                        </figure>
+                    );
+                }
+
+                // 2) figure 밖의 img도 치환
+                if (domNode.name === 'img') {
+                    const el = domNode as unknown as Element;
+                    const { src, alt, width, height } = el.attribs ?? {};
+                    if (!src) return domNode;
+
+                    const w = width ? Number(width) : 800;
+                    const h = height ? Number(height) : 450;
+
+                    return (
+                        <Image
+                            src={src}
+                            alt={alt || ''}
+                            width={w}
+                            height={h}
+                            className="content-inline-image"
+                        />
+                    );
+                }
+            },
+        })
+        : null;
+
 
     return (
         <article className={styles.blogDetail}>
