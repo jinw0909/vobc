@@ -24,7 +24,7 @@ export const LogoMobile = ({onClick} : any) => {
                     src={logoPic}
                     width={16}
                     height={35}
-                    quality={100}
+                    unoptimized={true}
                 />
                 <div className={`${styles.logoText} ${vollkorn.className}`}>VOB</div>
             </div>

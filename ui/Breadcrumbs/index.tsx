@@ -86,7 +86,7 @@ import arrowUp from '@/public/icons/arrow-up-white.png';
 import Image from "next/image";
 import styles from "./styles.module.css";
 
-const VISIBLE_SEGMENTS = ['blog', 'news', 'media', 'about']; // nav에서 번역 키로 쓰는 것들만
+const VISIBLE_SEGMENTS = ['blog', 'news', 'media', 'about', 'team', 'devs']; // nav에서 번역 키로 쓰는 것들만
 
 export const Breadcrumbs = () => {
     const segments = useSelectedLayoutSegments();
