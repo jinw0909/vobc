@@ -46,14 +46,12 @@ export const DevsCaro = () => {
                 <Image
                     src={firstPic} width={200} height={200}
                     alt="describing security architecture one"
-                    quality={100}
                 />
             </div>
             <div className={`${styles.caroElem}`}>
                 <Image
                     src={secondPic} width={300} height={300}
                     alt="describing security architecture two"
-                    quality={100}
                 />
             </div>
             {/*{   showModal &&*/}

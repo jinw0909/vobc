@@ -23,7 +23,6 @@ export const LogoSub = async () => {
                    src={logoPic}
                    width={15}
                    height={45}
-                   quality={100}
                />
                 <div className={`${styles.logoText} ${vollkorn.className}`}>VOB</div>
             </div>

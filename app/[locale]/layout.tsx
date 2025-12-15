@@ -10,6 +10,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import BottomReachedHint from "@/ui/BottomHint";
 
 
 const notoserifjp = Noto_Serif_JP({
@@ -98,6 +99,7 @@ export default async function LocaleLayout({
             {children}
             <MobileFooter />
             <Footer />
+            <BottomReachedHint/>
         </NextIntlClientProvider>
         </body>
         </html>

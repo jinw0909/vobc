@@ -1,0 +1,27 @@
+.bottomHint {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 250px;
+    /*background; linearGradient()!* 필요하면 height 지정 *!*/
+    background: linear-gradient(to top, rgba(170,170,170,1) 0%, rgba(90, 90, 90, 0.5) 50%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+
+    pointer-events: none;  /* 클릭/스크롤 방해 X */
+    z-index: 0;            /* 낮게 (필요시 더 낮게) */
+
+    transition: opacity 200ms ease;
+    will-change: opacity;
+}
+
+.bottomHint.active {
+    opacity: 0.25;         /* 원하는 희미함 */
+}
+
+/* 문서 맨 끝을 “감지”하기 위한 1px */
+.sentinel {
+    height: 5px;
+}

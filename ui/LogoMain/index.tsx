@@ -24,7 +24,6 @@ export const LogoMain = async () => {
                        src={logoPic}
                        width={25}
                        height={45}
-                       quality={100}
                    />
                     <div className={`${styles.logoText} ${vollkorn.className}`}>VOB</div>
             </div>
