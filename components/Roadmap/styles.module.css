@@ -1,5 +1,9 @@
-.roadmap { width: 100%; padding-left: 100px; transition: .5s;
-    margin-top: 4rem;}
+.roadmap {
+    width: 100%;
+    padding-left: 100px;
+    transition: .5s;
+    margin-top: 2rem;
+}
 .roadmapTitle { font-size: 1.75rem;}
 .roadmapContainer {
     border-top: 1px solid #999;
@@ -136,6 +140,6 @@
     }
 }
 
-@media (max-width: 576px) {
-    .roadmapTitle { font-size: 1.25rem;}
-}
+/*@media (max-width: 576px) {*/
+/*    .roadmapTitle { font-size: 1.5rem;}*/
+/*}*/

@@ -103,6 +103,9 @@
 .blogContent img:first-child {
     margin-top: 0;
 }
+.blogContent figure > img:first-child {
+    margin-top: 1rem;
+}
 
 .blogContent p {
     margin-bottom: 1rem;

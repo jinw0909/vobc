@@ -6,7 +6,7 @@
     padding: 2rem;
 }
 .subWrapper {
-    min-height: 75vh;
+    /*min-height: 75vh;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
     transition: .5s;
 }
 .subWrapperPlus {
-    min-height: 75vh;
+    /*min-height: 75vh;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -144,11 +144,11 @@
 @media (max-width: 575px) {
     .mainWrapper {
         padding: 1rem;
-        min-height: 75vh;
+        /*min-height: 75vh;*/
     }
     .subWrapper {
         padding: 1rem;
-        min-height: 50vh;
+        /*min-height: 50vh;*/
     }
     .subWrapperPlus {
         padding: 1rem;

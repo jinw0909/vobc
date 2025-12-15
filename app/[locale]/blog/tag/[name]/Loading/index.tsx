@@ -1,10 +1,10 @@
 import styles from '../styles.module.css'
 
-export default function Loading() {
+export default function Index() {
     return (
         <div className={styles.loadingWrapper}>
             <div className={styles.spinner}></div>
-            <p>Loading Post</p>
+            <p>Loading Posts</p>
         </div>
     )
 }

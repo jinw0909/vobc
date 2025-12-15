@@ -138,6 +138,7 @@ import { getLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { NavigationLink } from '@/ui/NavigationLink';
 import arrowRight from '@/public/icons/arrow-up-white.png';
+import Pagination from "@/ui/Pagination";
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
@@ -172,7 +173,8 @@ interface PagedResponse<T> {
     totalPages: number;
 }
 
-export default async function Blog() {
+
+export default async function Blog({searchParams}: { searchParams: {page?: string; size?: string; }}) {
     const locale = await getLocale();
 
     // 백엔드 LanguageCode(enum) 기준으로 매핑
@@ -185,8 +187,17 @@ export default async function Blog() {
             ? locale
             : 'en';
 
+    const page = Math.max(1, Number(searchParams.page ?? '1') || 1);
+    const size = Math.min(
+        30,
+        Math.max(1, Number(searchParams.size) || 7)
+    );
+
+    const zeroBasedPage = page - 1;
+
+
     const res = await fetch(
-        `${API_BASE}/api/post/query/page?lang=${lang}&size=7`,
+        `${API_BASE}/api/post/query/page?lang=${lang}&page=${zeroBasedPage}&size=${size}`,
         {
             // 최신 글 보고 싶으면 no-store, 약간 캐싱하고 싶으면 revalidate 사용
             cache: 'no-store',
@@ -205,6 +216,9 @@ export default async function Blog() {
 
     const data: PagedResponse<PostItem> = await res.json();
     const posts = data.content ?? [];
+
+    const currentPage = data.number + 1;
+    const totalPages = data.totalPages;
 
     if (posts.length === 0) {
         return (
@@ -364,6 +378,13 @@ export default async function Blog() {
                     );
                 })}
             </ul>
+
+            <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                basePath={'/blog'}
+                size={size}
+            />
         </div>
     );
 }

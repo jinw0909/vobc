@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 import { setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import {Suspense} from "react";
-import Loading from "../../temp/loading";
+import Loading from "@/app/[locale]/blog/tag/[name]/Loading";
 import BlogTag from "@/components/BlogTag";
 
 
@@ -20,6 +20,7 @@ interface PageParams {
 
 interface PageSearchParams {
     page?: string;
+    size?: string;
 }
 
 
@@ -28,18 +29,16 @@ export default async function Page( { params, searchParams } : {
     searchParams: Promise<PageSearchParams>
 }) {
     const { locale, name } = await params;
-    const { page: pageParam } = await searchParams;
+    const resolvedSearchParams = await searchParams;
 
     setRequestLocale(locale);
-
-    const page = Number(pageParam ?? '1');
 
     return (
         <div className={styles.blogTagWrapper}>
             <Suspense fallback={<Loading/>}>
                 <BlogTag
-                    tagName={decodeURIComponent(name)}
-                    page={page}
+                    params={{ tagName: decodeURIComponent(name)}}
+                    searchParams={resolvedSearchParams}
                 />
             </Suspense>
         </div>

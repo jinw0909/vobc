@@ -199,7 +199,7 @@
 }
 
 @media (max-width: 576px) {
-    .title { font-size: 1.25rem;}
+    /*.title { font-size: 1.25rem;}*/
     .desc {font-size: .8rem; }
     .partnersElem.clicked { width: 80%; }
     .partnersDetail { max-width: 80%; }

@@ -3,7 +3,7 @@ import {setRequestLocale} from "next-intl/server";
 import Blog from "@/components/Blog";
 import { Metadata } from "next";
 import {Suspense} from "react";
-import Loading from "./temp/loading";
+import Loading from "@/app/[locale]/blog/Loading";
 
 export async function generateMetadata() : Promise<Metadata> {
     return {
@@ -12,14 +12,32 @@ export async function generateMetadata() : Promise<Metadata> {
     };
 }
 
-export default async function Page( { params } : any) {
-    const { locale } = await params;
+interface PageParams {
+    locale: string;
+    name: string;
+}
+
+interface PageSearchParams {
+    page?: string;
+    size?: string;
+}
+
+
+export default async function Page( { params, searchParams } : {
+    params: Promise<PageParams>,
+    searchParams: Promise<PageSearchParams>
+}) {
+    const { locale, name } = await params;
+    const resolvedSearchParams = await searchParams;
+
     setRequestLocale(locale);
 
     return (
         <div className={styles.blogWrapper}>
             <Suspense fallback={<Loading/>}>
-                <Blog/>
+                <Blog
+                    searchParams={resolvedSearchParams}
+                />
             </Suspense>
         </div>
     )

@@ -3,7 +3,7 @@ import {setRequestLocale} from "next-intl/server";
 import { Metadata, ResolvingMetadata } from "next";
 import BlogDetail from "@/components/BlogDetail";
 import { Suspense } from "react";
-import Loading from "./temp/loading"
+import Loading from "@/app/[locale]/blog/[idx]/Loading"
 import {notFound} from "next/navigation";
 
 const API_BASE =

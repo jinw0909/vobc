@@ -1,7 +1,7 @@
 .blogTagWrapper {
     width: 100%;
     margin-top: 9rem;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
 }
 .tagName {
     font-size: 2rem;
@@ -12,12 +12,9 @@
 }
 .post {
     padding: 1.5rem 0;
-    border-bottom: 1px solid #999;
+    border-top: 1px solid #999;
     display: flex;
     column-gap: 2rem;
-}
-.post:first-child {
-    border-top: 1px solid #999;
 }
 .postThumbnail {
     width: 4rem;
@@ -76,6 +73,7 @@
 }
 .colorWhite {
     color: white;
+    font-weight: bold;
 }
 
 .pagination {

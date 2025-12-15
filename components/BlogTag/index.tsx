@@ -3,6 +3,7 @@ import {getLocale} from "next-intl/server";
 import {notFound} from "next/navigation";
 import Image from "next/image";
 import {NavigationLink} from "@/ui/NavigationLink";
+import Pagination from "@/ui/Pagination";
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
@@ -37,14 +38,18 @@ interface PagedResponse<T> {
     totalPages: number;
 }
 
-interface BlogTagProps {
-    tagName: string,
-    page : number
-}
 
-
-export default async function BlogTag({tagName , page}: BlogTagProps) {
+export default async function BlogTag({params, searchParams}: {
+    params: {tagName: string},
+    searchParams: {page?: string, size?: string}
+}) {
     const locale = await getLocale();
+    const {tagName} = params;
+    const page = Math.max(1, Number(searchParams.page ?? '1'));
+    const size = Math.min(
+        30,
+        Math.max(1, Number(searchParams.size) || 3)
+    );
 
     // 백엔드 LanguageCode(enum) 기준으로 매핑
     // 필요하면 jp, cn 등 추가
@@ -59,7 +64,7 @@ export default async function BlogTag({tagName , page}: BlogTagProps) {
     const zeroBasedPage = Math.max(page - 1, 0);
 
     const res = await fetch(
-        `${API_BASE}/api/post/query/page?lang=${lang}&size=2&page=${zeroBasedPage}&tagName=${encodeURIComponent(tagName)}`,
+        `${API_BASE}/api/post/query/page?lang=${lang}&size=${size}&page=${zeroBasedPage}&tagName=${encodeURIComponent(tagName)}`,
         {
             cache: 'no-store',
         }
@@ -126,43 +131,13 @@ export default async function BlogTag({tagName , page}: BlogTagProps) {
                     </li>
                 ))}
             </ul>
-            {/* 페이지네이션 영역 */}
-            {totalPages > 1 && (
-                <div className={styles.pagination}>
-                    {/* 이전 버튼 */}
-                    {currentPage > 1 && (
-                        <NavigationLink
-                            href={`/blog/tag/${encodeURIComponent(tagName)}?page=${currentPage - 1}`}
-                            className={styles.pageLink}
-                        >
-                            ‹ Prev
-                        </NavigationLink>
-                    )}
+            <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                basePath={`/blog/tag/${encodeURIComponent(tagName)}`}
+                size={size}
+            />
 
-                    {/* 페이지 숫자들 */}
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                        <NavigationLink
-                            key={p}
-                            href={`/blog/tag/${encodeURIComponent(tagName)}?page=${p}`}
-                            className={`${styles.pageLink} ${
-                                p === currentPage ? styles.activePage : ''
-                            }`}
-                        >
-                            {p}
-                        </NavigationLink>
-                    ))}
-
-                    {/* 다음 버튼 */}
-                    {currentPage < totalPages && (
-                        <NavigationLink
-                            href={`/blog/tag/${encodeURIComponent(tagName)}?page=${currentPage + 1}`}
-                            className={styles.pageLink}
-                        >
-                            Next ›
-                        </NavigationLink>
-                    )}
-                </div>
-            )}
         </div>
     )
 }

@@ -141,6 +141,7 @@
     color: white;
     display: inline-block;
     font-size: 1.2rem;
+    font-weight: 600;
 }
 .inline {
     position: relative;
@@ -203,7 +204,7 @@
 .filterBar {
     width: 100%;
     height: 1px;
-    background-color: #ddd;
+    background-color: #999;
     margin-top: 4rem;
 }
 
@@ -231,5 +232,6 @@
 @media (max-width: 576px) {
     .blogList {
         grid-template-columns: repeat(1, 1fr);
+        gap: 4rem;
     }
 }
