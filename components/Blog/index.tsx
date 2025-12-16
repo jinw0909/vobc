@@ -200,8 +200,8 @@ export default async function Blog({searchParams}: { searchParams: {page?: strin
         `${API_BASE}/api/post/query/page?lang=${lang}&page=${zeroBasedPage}&size=${size}`,
         {
             // 최신 글 보고 싶으면 no-store, 약간 캐싱하고 싶으면 revalidate 사용
-            cache: 'no-store',
-            // next: { revalidate: 60 },
+            // cache: 'no-store',
+            next: { revalidate: 60 },
         }
     );
 

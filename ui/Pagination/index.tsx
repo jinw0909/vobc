@@ -10,7 +10,7 @@ type PaginationProps = {
 }
 
 export default function Pagination({
-   totalPages,
+    totalPages,
     currentPage,
     basePath,
     size

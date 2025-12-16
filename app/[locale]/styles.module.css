@@ -36,7 +36,7 @@
     padding: 0 2rem;
     line-height: 1.2;
     position: relative;
-    padding-top: 7rem;
+    padding-top: 5rem;
 }
 .mainText > div {
     text-align: center;
@@ -164,7 +164,7 @@
     .mainText {
         margin: 0 auto;
         padding: 0 2rem;
-        padding-top: 4rem;
+        padding-top: 2rem;
     }
     .mainText > div:nth-child(1) {
         font-size: 1.5rem;

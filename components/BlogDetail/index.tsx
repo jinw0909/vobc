@@ -49,7 +49,8 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
     const res = await fetch(
         `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
         {
-            cache: 'no-store',
+            // cache: 'no-store',
+            next: { revalidate: 60 },
         }
     );
 

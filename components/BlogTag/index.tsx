@@ -66,7 +66,8 @@ export default async function BlogTag({params, searchParams}: {
     const res = await fetch(
         `${API_BASE}/api/post/query/page?lang=${lang}&size=${size}&page=${zeroBasedPage}&tagName=${encodeURIComponent(tagName)}`,
         {
-            cache: 'no-store',
+            // cache: 'no-store',
+            next: { revalidate: 60 },
         }
     );
 
