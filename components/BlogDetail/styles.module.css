@@ -23,6 +23,10 @@
     gap: 0.5rem;
     position: sticky;
     top: 9rem;
+    max-height: calc(100vh - 11rem);
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 .blogMeta::-webkit-scrollbar {
     display: none;
@@ -45,10 +49,6 @@
 .blogSummary {
     font-size: 1rem;
     color: #aaa;
-    overflow-y: scroll;
-    max-height: 33vh;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
 }
 
 .blogAuthor {
@@ -185,7 +185,7 @@
     }
     .blogMeta { position: static; }
     .blogTitle { font-size: 1.5rem; }
-    .blogSummary { overflow-y: auto; max-height: none; font-size: 0.8rem;}
+    .blogSummary { font-size: 0.8rem;}
     .blogHeader { flex: auto; }
     .blogSection { flex: auto; }
 

@@ -33,10 +33,9 @@
 }
 .mainText {
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 8rem;
     line-height: 1.2;
     position: relative;
-    padding-top: 5rem;
 }
 .mainText > div {
     text-align: center;
@@ -45,7 +44,7 @@
     font-size: 2rem;
 }
 .mainText > div:nth-child(2) {
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 .mainText > div:nth-child(2) {
     margin-top: 1rem;
@@ -58,7 +57,7 @@
     /*left: 50%;*/
     /*transform: translateX(-50%);*/
     margin: 0 auto;
-    padding: 2rem 0;
+    padding-top: 2rem;
     background: linear-gradient(to right, #ddd 0%, #eee 50%, #ddd 100%);
     -webkit-background-clip: text; /* Apply gradient to text */
     -webkit-text-fill-color: transparent; /* Make text transparent */
@@ -139,6 +138,17 @@
     .mainWrapper { padding: 1.5rem; }
     .subWrapper { padding: 1.5rem; }
     .subWrapperPlus { padding: 1.5rem; }
+    .mainText { padding: 0 4rem;}
+    .mainText > div:nth-child(1) {
+        font-size: 1.5rem;
+    }
+    .mainText > div:nth-child(2) {
+        font-size: 3rem;
+    }
+    .subText {
+        line-height: 1.5;
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 575px) {
@@ -164,10 +174,9 @@
     .mainText {
         margin: 0 auto;
         padding: 0 2rem;
-        padding-top: 2rem;
     }
     .mainText > div:nth-child(1) {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
     .mainText > div:nth-child(2) {
         font-size: 2rem;
