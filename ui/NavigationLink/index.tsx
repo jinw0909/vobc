@@ -13,7 +13,7 @@ interface NavigationLinkProps extends ComponentProps<typeof Link> {
     mainSegments?: string[];
 }
 
-const DEFAULT_MAIN_SEGMENTS = ['home', 'about', 'blog', 'devs', 'team', 'news', 'media', 'tag'];
+const DEFAULT_MAIN_SEGMENTS = ['home', 'about', 'blog', 'devs', 'team', 'news', 'media', 'tag', 'cookies', 'use', 'privacy'];
 
 export const NavigationLink = ({
     href,

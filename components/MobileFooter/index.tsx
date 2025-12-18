@@ -2,7 +2,7 @@ import styles from './styles.module.css'
 import {LogoSub} from "@/ui/LogoSub";
 import Image from 'next/image';
 import mediumLogo from '@/public/medium_logo_white.png';
-import xLogo from '@/public/x-logo-white.png';
+import xLogo from '@/public/x_logo_white.png';
 import { NavigationLink} from "@/ui/NavigationLink";
 import {getTranslations} from "next-intl/server";
 import Link from "next/link";
@@ -22,12 +22,7 @@ export const MobileFooter  = async () => {
                           rel="noopener noreferrer" locale={undefined}
                     >
                         <div className={`${styles.snsLogo} ${styles.footerElem}`}>
-                            <Image className={styles.snsImg}
-                                src={xLogo}
-                                width={16}
-                                height={16}
-                                alt="x.com logo"
-                            />
+                            <span className={`${styles.iconX} ${styles.snsIcon}`}></span>
                             <span>X.com</span>
                         </div>
                     </Link>
@@ -35,14 +30,8 @@ export const MobileFooter  = async () => {
                           rel="noopener noreferrer" locale={undefined}
                     >
                         <div className={`${styles.snsLogo} ${styles.footerElem}`}>
-
-                                <Image className={styles.snsImg}
-                                       src={mediumLogo}
-                                       width={16}
-                                       height={16}
-                                       alt="medium logo"
-                                />
-                                <span>Medium</span>
+                            <span className={`${styles.iconMedium} ${styles.snsIcon}`}></span>
+                            <span>Medium</span>
                         </div>
                     </Link>
                 </div>

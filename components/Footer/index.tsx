@@ -1,4 +1,4 @@
-import xLogo from '@/public/x-logo-white.png';
+import xLogo from '@/public/x_logo_white.png';
 import mediumLogo from '@/public/medium_logo_white.png';
 import Image from 'next/image';
 import styles from './styles.module.css';
@@ -31,12 +31,7 @@ export const Footer = async () => {
                           rel="noopener noreferrer" locale={undefined}
                     >
                         <div className={`${styles.snsLogo} ${styles.footerElem}`}>
-                            <Image className={styles.snsImg}
-                                src={xLogo}
-                                width={20}
-                                height={20}
-                                alt="x.com logo"
-                            />
+                            <span className={`${styles.iconX} ${styles.snsIcon}`}></span>
                             <span>X.com</span>
                         </div>
                     </Link>
@@ -44,12 +39,7 @@ export const Footer = async () => {
                           rel="noopener noreferrer" locale={undefined}
                     >
                         <div className={`${styles.snsLogo} ${styles.footerElem}`}>
-                            <Image className={styles.snsImg}
-                                src={mediumLogo}
-                                width={20}
-                                height={20}
-                                alt="medium logo"
-                            />
+                            <span className={`${styles.iconMedium} ${styles.snsIcon}`}></span>
                             <span>Medium</span>
                         </div>
                     </Link>

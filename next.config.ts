@@ -16,7 +16,7 @@ const nextConfig: import('next').NextConfig = {
                 pathname: '/**',
             }
         ]
-    }
+    },
     // experimental: {
     //     scrollRestoration: true
     // }
