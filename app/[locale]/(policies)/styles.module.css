@@ -12,21 +12,31 @@
     margin: 6rem 4rem;
 }
 .termsContent h2 {
-    font-size: 1rem;
-    margin-top: 1rem;
+    font-size: 1.5rem;
+    margin-top: 2rem;
     margin-bottom: .5rem;
 }
+.termsContent h3 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+.termsContent h4 {
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
 .termsContent p,
 .termsContent ul {
-    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #eee 100%);
+    background: linear-gradient(to right, #ddd 0%, #bbb 50%, #ddd 100%);
     -webkit-background-clip: text; /* Apply gradient to text */
     -webkit-text-fill-color: transparent; /* Make text transparent */
     background-clip: text;
     color: transparent;
     font-size: .8rem;
+    margin-top: .25rem;
 }
-.termsContent h2 {
-    margin-top: 2rem;
+.termsContent hr {
+    margin: 1rem 0;
 }
 
 .loadingWrapper {
