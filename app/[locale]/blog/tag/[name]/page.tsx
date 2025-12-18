@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 import { setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import {Suspense} from "react";
-import Loading from "@/app/[locale]/blog/tag/[name]/Loading";
+import Loading from "@/app/[locale]/blog/tag/[name]/_components";
 import BlogTag from "@/components/BlogTag";
 
 

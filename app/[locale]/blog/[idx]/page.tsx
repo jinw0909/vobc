@@ -3,7 +3,7 @@ import {setRequestLocale} from "next-intl/server";
 import { Metadata, ResolvingMetadata } from "next";
 import BlogDetail from "@/components/BlogDetail";
 import { Suspense } from "react";
-import Loading from "@/app/[locale]/blog/[idx]/Loading"
+import Loading from "@/app/[locale]/blog/[idx]/_components"
 import {notFound} from "next/navigation";
 
 const API_BASE =
@@ -47,7 +47,8 @@ export async function generateMetadata(
             `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
             {
                 // 메타데이터용은 굳이 no-store까지는 안 해도 됨(원하면 써도 되고)
-                cache: 'force-cache',
+                // cache: 'force-cache',
+                next: { revalidate: 60 },
             }
         );
 

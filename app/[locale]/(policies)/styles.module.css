@@ -1,14 +1,15 @@
 .termsWrapper {
     padding: 2rem;
+    min-height: 100vh;
 }
 .termsTitle {
-    margin-top: 10rem;
+    margin-top: 12rem;
     font-size: 1.5rem;
     text-align: center;
 }
 .termsContent {
     text-align: left;
-    margin-top: 2rem;
+    margin: 6rem 4rem;
 }
 .termsContent h2 {
     font-size: 1rem;
@@ -24,6 +25,40 @@
     color: transparent;
     font-size: .8rem;
 }
+.termsContent h2 {
+    margin-top: 2rem;
+}
+
+.loadingWrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid #333;
+    border-top: 4px solid #aaa;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (min-width: 1200px) {
+    .termsContent {
+        margin: 6rem 8rem;
+    }
+}
+
 @media (min-width: 1200px) {
     .termsWrapper {
         width: 80vw;
@@ -47,5 +82,8 @@
     }
     .termsContent h2 {
         font-size: 1.2rem;
+    }
+    .termsContent {
+        margin: 4rem 0;
     }
 }

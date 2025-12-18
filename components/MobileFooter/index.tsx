@@ -51,7 +51,7 @@ export const MobileFooter  = async () => {
                 <div className={styles.levelLeft}></div>
                 <div className={styles.levelRight}>
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/terms">{t('terms')}</NavigationLink>
+                        <NavigationLink href="/use">{t('use')}</NavigationLink>
                     </div>
                 </div>
             </div>

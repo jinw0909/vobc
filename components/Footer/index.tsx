@@ -17,7 +17,7 @@ export const Footer = async () => {
                 <div className={styles.footerLeft}>
                     <LogoSub />
                     <div className={styles.footerElem}>
-                        <NavigationLink href="/terms">{t('terms')}</NavigationLink>
+                        <NavigationLink href="/use">{t('use')}</NavigationLink>
                     </div>
                     <div className={styles.footerElem}>
                         <NavigationLink href="/privacy">{t('privacy')}</NavigationLink>
