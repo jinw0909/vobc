@@ -48,7 +48,7 @@ export async function generateMetadata(
             {
                 // 메타데이터용은 굳이 no-store까지는 안 해도 됨(원하면 써도 되고)
                 // cache: 'force-cache',
-                next: { revalidate: 60 },
+                next: { revalidate: 10 },
             }
         );
 

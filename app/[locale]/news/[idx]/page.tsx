@@ -35,14 +35,14 @@ type NewsArticle = {
     thumbnail: string;
 };
 
-const API_BASE = process.env.API_BASE_URL ?? "http://localhost:8080";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
 const SITE_URL = process.env.SITE_URL ?? "https://www.vobc.io";
 
 async function fetchArticleById(id: string, locale: string): Promise<SpringArticleResponse | null> {
     const res = await fetch(
         `${API_BASE}/api/article/${encodeURIComponent(id)}?lang=${encodeURIComponent(locale)}`,
         {
-            next: { revalidate: 60 },
+            next: { revalidate: 10 },
             // cache: "no-store",
             headers: { Accept: "application/json" }
         }
@@ -71,8 +71,8 @@ function mapSpringToNewsArticle(a: SpringArticleResponse): NewsArticle {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { idx, locale } = await params;
     const article = await fetchArticleById(idx, locale);
-    console.log("API article.thumbnail =", article?.thumbnail);
-    console.log("API raw =", article);
+    // console.log("API article.thumbnail =", article?.thumbnail);
+    // console.log("API raw =", article);
     if (!article) notFound();
 
     const summary =
