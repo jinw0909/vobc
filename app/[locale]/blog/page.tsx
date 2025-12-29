@@ -3,7 +3,7 @@ import {setRequestLocale} from "next-intl/server";
 import Blog from "@/components/Blog";
 import { Metadata } from "next";
 import {Suspense} from "react";
-import Loading from "@/app/[locale]/blog/_components";
+import Loading from "@/app/[locale]/blog/_components/loading";
 
 export async function generateMetadata() : Promise<Metadata> {
     return {

@@ -1,5 +1,5 @@
 .blogTagWrapper {
-    min-height: 100vh;
+    min-height: calc(100vh - 3rem - 6px);
     display: flex;
     align-items: flex-start;
     justify-content: center;

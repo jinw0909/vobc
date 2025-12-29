@@ -1,7 +1,7 @@
-// app/[locale]/blog/index.tsx
+// app/[locale]/blog/loading.tsx
 import styles from '../styles.module.css';
 
-export default function Index() {
+export default function Loading() {
     return (
         <div className={styles.blogWrapper}>
             <div className={styles.blogFirst}>

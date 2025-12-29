@@ -50,7 +50,7 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
         `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
         {
             // cache: 'no-store',
-            next: { revalidate: 60 },
+            next: { revalidate: 10 },
         }
     );
 
@@ -73,46 +73,47 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
                 if (domNode.type !== 'tag') return;
 
                 // 1) figure에 white-bg 붙이기
-                if (domNode.name === 'figure') {
-                    const el = domNode as unknown as Element;
-
-                    // 기존 class 유지하면서 추가
-                    const existing = el.attribs?.class ?? '';
-                    const className = `${existing} ${styles.whiteBg}`.trim();
-
-                    return (
-                        <figure className={className}>
-                            {domToReact(el.children as DOMNode[], {
-                                replace: (node) => {
-                                    // figure 안의 img도 Next/Image로 바꾸고 싶으면 여기서 처리
-                                    if (node.type === 'tag' && node.name === 'img') {
-                                        const imgEl = node as unknown as Element;
-                                        const { src, alt, width, height } = imgEl.attribs ?? {};
-                                        if (!src) return node;
-
-                                        const w = width ? Number(width) : 800;
-                                        const h = height ? Number(height) : 450;
-
-                                        return (
-                                            <Image
-                                                src={src}
-                                                alt={alt || ''}
-                                                width={w}
-                                                height={h}
-                                                className="content-inline-image"
-                                            />
-                                        );
-                                    }
-                                },
-                            })}
-                        </figure>
-                    );
-                }
+                // if (domNode.name === 'figure') {
+                //     const el = domNode as unknown as Element;
+                //
+                //     // 기존 class 유지하면서 추가
+                //     const existing = el.attribs?.class ?? '';
+                //     const className = `${existing} ${styles.whiteBg}`.trim();
+                //
+                //     return (
+                //         <figure className={className}>
+                //             {domToReact(el.children as DOMNode[], {
+                //                 replace: (node) => {
+                //                     // figure 안의 img도 Next/Image로 바꾸고 싶으면 여기서 처리
+                //                     if (node.type === 'tag' && node.name === 'img') {
+                //                         const imgEl = node as unknown as Element;
+                //                         const { src, alt, width, height } = imgEl.attribs ?? {};
+                //                         if (!src) return node;
+                //
+                //                         const w = width ? Number(width) : 800;
+                //                         const h = height ? Number(height) : 450;
+                //
+                //                         return (
+                //                             <Image
+                //                                 src={src}
+                //                                 alt={alt || ''}
+                //                                 width={w}
+                //                                 height={h}
+                //                                 className="content-inline-image"
+                //                             />
+                //                         );
+                //                     }
+                //                 },
+                //             })}
+                //         </figure>
+                //     );
+                // }
 
                 // 2) figure 밖의 img도 치환
                 if (domNode.name === 'img') {
                     const el = domNode as unknown as Element;
                     const { src, alt, width, height } = el.attribs ?? {};
+                    console.log("IMG SRC:", src);
                     if (!src) return domNode;
 
                     const w = width ? Number(width) : 800;

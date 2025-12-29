@@ -89,7 +89,7 @@
     left: 0;
     bottom: -2px;
     height: 1px;
-    background-color: white;
+    background-color: rgba(180,180,30,0.7);
     width: 0;
     transition: .5s;
 }
@@ -97,7 +97,7 @@
 .arrowPic { margin-top: 2px; opacity: 0; transition: .5s; }
 .mediaElemView:hover .arrowPic { opacity: 1; }
 .mediaElemView:hover .viewBtn { transform: translateX(0); }
-.mediaElemView:hover::after { width: 95%; }
+.mediaElemView:hover::after { width: 100%; }
 
 .white { color: white;}
 

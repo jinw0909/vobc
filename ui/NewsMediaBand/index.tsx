@@ -2,7 +2,7 @@
 
 import styles from './styles.module.css';
 import Image from "next/image";
-import rightArrow from "@/public/icons/right-arrow-white.png";
+import rightArrow from "@/public/icons/right-arrow-yellow.png";
 import {NavigationLink} from "@/ui/NavigationLink";
 import {getTranslations} from "next-intl/server";
 import {useEffect, useRef} from "react";

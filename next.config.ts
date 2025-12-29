@@ -14,7 +14,7 @@ const nextConfig: import('next').NextConfig = {
                 protocol: 'https',
                 hostname: 'vobc-image-bucket.s3.ap-northeast-2.amazonaws.com',
                 pathname: '/**',
-            }
+            },
         ]
     },
     // experimental: {

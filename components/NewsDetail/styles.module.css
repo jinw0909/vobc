@@ -7,6 +7,23 @@
     margin-top: 9rem;
     gap: 8rem;
 }
+
+/* html 컨텐츠*/
+.htmlContent img {
+    max-width: 100%;
+    height: auto;
+}
+
+.htmlContent a {
+    text-decoration: underline;
+}
+
+.htmlContent p {
+    margin: 0 0 1em 0;
+    line-height: 1.7;
+}
+/* html 컨텐츠*/
+
 .detailUp {
     display: flex;
     align-items: center;
