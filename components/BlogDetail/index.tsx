@@ -113,7 +113,7 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
                 if (domNode.name === 'img') {
                     const el = domNode as unknown as Element;
                     const { src, alt, width, height } = el.attribs ?? {};
-                    console.log("IMG SRC:", src);
+                    // console.log("IMG SRC:", src);
                     if (!src) return domNode;
 
                     const w = width ? Number(width) : 800;
@@ -141,7 +141,7 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
                     <div className={styles.blogFooter}>
                         <NavigationLink
                             href="/blog"
-                            scroll={true}
+                            scroll={false}
                         >
                             Back to Index
                         </NavigationLink>

@@ -36,7 +36,7 @@ export default async function Page( { params, searchParams } : {
         <div className={styles.blogWrapper}>
             <Suspense fallback={<Loading/>}>
                 <Blog
-                    searchParams={resolvedSearchParams}
+                   // searchParams={resolvedSearchParams}
                 />
             </Suspense>
         </div>

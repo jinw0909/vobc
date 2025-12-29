@@ -54,6 +54,12 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
         <div className={styles.detailWrapper}>
             <div className={styles.detailUp}>
                 <div className={styles.left}>
+                    <input
+                        type="checkbox"
+                        id={"mobileToggle"}
+                        className={styles.mobileToggle}
+                    />
+
                     <div className={styles.leftContent}>
                         <div className={styles.newsDate}>{article.date}</div>
                         <div className={styles.newsTitle}>{article.title}</div>
@@ -69,6 +75,9 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
                                 <span>To List</span>
                             </div>
                         </NavigationLink>
+                        <label htmlFor={"mobileToggle"} className={styles.mobileButton}>
+                            <Image src={arrowRight} width={12} height={12} alt="arrow to top" />
+                        </label>
                     </div>
                 </div>
 
@@ -113,6 +122,15 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
                             >
                                 To the original report
                             </Link>
+                        </div>
+                        <div className={styles.backToTop}>
+                            <NavigationLink href="/news/media">
+                                <div className={styles.backToMainMobile}>
+                                    to News List
+                                    {/*<Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow" />*/}
+                                    {/*<span>To List</span>*/}
+                                </div>
+                            </NavigationLink>
                         </div>
                     </div>
                 </div>
