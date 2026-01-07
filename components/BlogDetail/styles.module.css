@@ -91,6 +91,7 @@
 /* 본문 안의 html 공통 스타일 */
 .blogSection {
     flex: 2;
+    width: 0;
 }
 
 .blogContent img {
@@ -188,6 +189,6 @@
     .blogAuthor { font-size: 0.9rem;}
     .blogSummary { font-size: 0.8rem;}
     .blogHeader { flex: auto; }
-    .blogSection { flex: auto; }
+    .blogSection { flex: auto; width: auto; }
 
 }
