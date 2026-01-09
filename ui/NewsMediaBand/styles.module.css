@@ -122,12 +122,21 @@
         gap: 1rem;
         margin-top: 1rem;
         flex-wrap: nowrap;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        scrollbar-width: none;
         justify-content: flex-start;
-        -ms-overflow-style: none;
+        /*overflow-x: scroll;*/
+        /*overflow-y: hidden;*/
+        overflow: visible;
+        /*scrollbar-width: none;*/
+        /*-ms-overflow-style: none;*/
+
     }
+
+    .mediaViewport {
+        overflow: hidden;     /* ✅ 처음부터 잘라내기 */
+        width: 100%;
+        touch-action: pan-y;
+    }
+
 
     .mediaElement { flex-shrink: 0; width: 300px; height: 300px;}
 }
@@ -139,3 +148,41 @@
 /*@media (min-width: 1200px) {*/
 /*    .mediaElement { width: 20%; }*/
 /*}*/
+
+
+/* ✅ Embla viewport (모바일에서만 overflow hidden) */
+.mediaViewport {
+    width: 100%;
+}
+
+.mediaEmbla {
+    overflow: hidden;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ✅ Embla container (ul) */
+.mediaContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;            /* 필요하면 조절 */
+    will-change: transform;
+}
+
+/* ✅ Embla slide (li) */
+/*.mediaSlide {*/
+/*    flex: 0 0 auto;*/
+/*}*/
+.mediaSlide:last-child { margin-right: 2rem; }
+
+/* ✅ 이미지/링크가 드래그 이벤트 끊지 않게 (필요 시) */
+.mediaEmbla img {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+/* (선택) 드래그 중 선택 방지 */
+.mediaEmbla * {
+    user-select: none;
+}

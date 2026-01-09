@@ -46,6 +46,7 @@
     display: flex;
     overflow: hidden;
     position: relative;
+    justify-content: center;
 }
 .list {
     overflow-x: scroll;
@@ -59,7 +60,6 @@
     display: none;
 }
 .elem {
-    display: inline-block;
     width: 5rem;
     /*border: 1px solid white;*/
     margin: .5rem 0;
@@ -67,6 +67,7 @@
     position: relative;
     transition: .5s;
     cursor: pointer;
+    flex: 0 0 auto;
     /*opacity: 0.7;*/
 }
 .elem.cn {
@@ -286,3 +287,56 @@
 /*    filter: drop-shadow(0 1000px 0 blue);*/
 /*    transform: translateY(-1000px);*/
 /*}*/
+
+
+/* viewport: overflow 숨기고 드래그 영역 */
+.emblaViewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* container: 가로로 나열 */
+/* ✅ Embla viewport */
+.embla {
+    overflow: hidden;
+    width: 100%;
+
+    /* ✅ 이거 없으면 모바일에서 가로 드래그가 먹히다 말거나, 세로 스크롤에 밀릴 수 있음 */
+    touch-action: pan-y;
+
+    /* ✅ 드래그할 때 선택/하이라이트 방지 */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+
+}
+.scrollable.embla {
+    display: block;
+}
+
+/* ✅ Embla container */
+.embla__container {
+    display: flex;
+    gap: 12px;                 /* 필요에 맞게 */
+    will-change: transform;
+}
+
+/* ✅ 슬라이드: "drag free 카드 리스트" 느낌의 기본 */
+.embla__slide {
+    flex: 0 0 auto;
+}
+.embla__slide.elem {
+    display: block;
+}
+
+
+/* ✅ 내부 텍스트/이미지가 드래그 이벤트 방해하는 거 방지 */
+.embla__container * {
+    user-select: none;
+}
+
+/* 이미지가 기본 drag ghost 생기는 것 방지 */
+.teamIconImg {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none; /* ✅ 이미지가 포인터 이벤트 잡아먹으면 드래그가 끊기는 경우가 있음 */
+}

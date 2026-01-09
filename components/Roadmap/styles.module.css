@@ -1,145 +1,161 @@
+/* ===== Roadmap section ===== */
 .roadmap {
     width: 100%;
-    padding-left: 100px;
-    transition: .5s;
     margin-top: 2rem;
-}
-.roadmapTitle { font-size: 1.75rem;}
-.roadmapContainer {
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    height: 450px;
-    display: flex;
-    align-items: center;
-}
-.roadmapWrapper {
-    display: flex;
-    width: 100%;
-    gap: 1rem;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    margin: 0 auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    align-items: center;
-    padding: 1rem 0;
-}
-.roadmapWrapper::-webkit-scrollbar {
-    display: none
+    min-width: 0; /* flex/grid 안에서 shrink 허용 */
 }
 
-.roadmapElem {
+.roadmapTitle {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+/* ===== Embla ===== */
+.embla {
+    overflow: hidden;
+    width: 100%;
+    min-width: 0;           /* 중요 */
+}
+
+.embla__container {
+    display: flex;
+    gap: 1rem;
+    will-change: transform;
+    min-width: 0;           /* 중요 */
+}
+
+.embla__slide {
+    flex: 0 0 auto;
+    /* ✅ 슬라이드 폭은 여기서 결정 */
     width: 200px;
-    aspect-ratio: 2/3;
-    flex-shrink: 0;
+    transition: .5s;
+}
+
+/* ===== Card ===== */
+.roadmapElem {
+    width: 100%;            /* ✅ slide 폭을 따라감 */
     height: 300px;
+
     transition: .5s;
     cursor: pointer;
     position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     overflow: hidden;
     border-radius: 6px;
+
     color: black;
-    /*background: linear-gradient(90deg, rgba(125, 125, 125, 0.4), rgba(255, 255, 255, 0));*/
+    background: linear-gradient(90deg, rgba(125, 125, 125, 0.4), rgba(255, 255, 255, 0));
     border: 1px solid rgba(255,255,255,0.4);
 }
-.roadmapElem:active { transform: scale(0.95); }
-/*.roadmapElem:nth-child(even) {*/
-/*    background: linear-gradient(*/
-/*            0deg,   !* reverse direction *!*/
-/*            rgba(125, 125, 125, 0.4),*/
-/*            rgba(255, 255, 255, 0)*/
-/*    );*/
-/*}*/
 
-.roadmapElem.clicked {
-    width: 250px;
-    /*height: 400px;*/
+.roadmapElem:active {
+    transform: scale(0.95);
+}
+
+.roadmapElem:nth-child(even) {
+    background: linear-gradient(0deg, rgba(125, 125, 125, 0.4), rgba(255, 255, 255, 0));
+}
+
+/* 클릭 상태: 폭 변경 금지(중요) — 대신 내부 표현만 바꿈 */
+.clicked {
     color: white;
 }
+
+/* overlays */
 .backgroundWhite {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgba(255,255,255,0.7);
     z-index: 55;
     opacity: 1;
     transition: .5s;
 }
-.roadmapElem.clicked .backgroundWhite { opacity: 0.2; }
+
+.clicked .backgroundWhite {
+    opacity: 0.2;
+}
+
 .roadmapBackground {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 50;
     opacity: 1;
     transition: .5s;
 }
-.roadmapElem.clicked .roadmapBackground {
+
+.clicked .roadmapBackground {
     opacity: 0.1;
 }
+
+/* content */
 .roadmapElemHead {
     text-align: center;
     margin-top: .5rem;
     position: relative;
     z-index: 75;
 }
+
 .roadmapElemBody {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     flex: 1;
     text-align: center;
     padding: 1rem;
 }
+
 .roadmapBodyTitle {
     font-size: 1rem;
     position: relative;
     z-index: 75;
+    transition: .5s;
 }
+
 .roadmapBodyContent {
     overflow: hidden;
     max-height: 0;
     transition: .5s;
     margin-top: 1rem;
+
     position: relative;
     z-index: 75;
+
     font-size: .8rem;
     color: white;
 }
-.roadmapElem.clicked .roadmapBodyContent {
-    max-height: 100%;
+
+.clicked .roadmapBodyContent {
+    max-height: 200px; /* 필요하면 값 조절 */
 }
-.roadmapElem.clicked .roadmapBodyTitle {
+
+.clicked .roadmapBodyTitle {
     font-size: 1.25rem;
+    color: white;
 }
+.clicked .roadmapElemHead {
+    color: white;
+}
+
+.clicked.embla__slide { width: 250px;}
+/* ===== Responsive ===== */
 @media (min-width: 1200px) {
-    .roadmapElem { width: 250px;}
+    .embla__slide { width: 250px; }
     .roadmapElem { height: 375px; }
-    .roadmapElem.clicked { width: 336px; }
 }
 
 @media (min-width: 1400px) {
-    .roadmapBodyTitle { font-size: 1.5rem; }
-    .roadmapElem.clicked .roadmapBodyTitle { font-size: 1.5rem; }
-    .roadmapElem.clicked .roadmapBodyContent { font-size: 1rem; }
     .roadmapTitle { font-size: 2.5rem; }
+    .roadmapBodyTitle { font-size: 1.5rem; }
+    .clicked .roadmapBodyTitle { font-size: 1.5rem; }
+    .clicked .roadmapBodyContent { font-size: 1rem; }
 }
 
 @media (max-width: 768px) {
     .roadmapTitle { font-size: 1.5rem; }
-    .roadmap {
-        padding-left: 0;
-    }
 }
-
-/*@media (max-width: 576px) {*/
-/*    .roadmapTitle { font-size: 1.5rem;}*/
-/*}*/

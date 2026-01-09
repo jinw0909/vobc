@@ -195,14 +195,12 @@
     transition: .5s;
     max-width: 10rem;
 }
-/*.item.show {*/
-/*    width: 12rem;*/
-/*    max-width: 12rem;*/
-/*}*/
 /*.item.show .imgContainer {*/
 /*    width: 100%;*/
 /*    height: 100%;*/
 /*}*/
+.item.show .descP { max-height: 12rem; margin-top: 0.5rem;}
+.item.wide .wideP { max-height: 12rem; margin-top: 0.5rem;}
 .item:active { transform: scale(0.95); }
 .item:last-child {
     z-index: 55;
@@ -328,3 +326,249 @@
 /*    filter: drop-shadow(0 1000px 0 blue);*/
 /*    transform: translateY(-1000px);*/
 /*}*/
+
+/* ===== Band Layout ===== */
+.itemBandWrapper {
+    width: 100%;
+}
+
+.itemContainer {
+    width: 100%;
+}
+
+.itemBand {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-height: 300vh;
+    transition: 0.5s;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.itemBand h2 {
+    font-size: 1.5rem;
+    transition: 0.5s;
+    margin-bottom: 1rem;
+}
+
+.selectedTitle {
+    opacity: 1;
+}
+
+/* ===== Embla viewport (모바일에서만 실제로 중요) ===== */
+.bandViewport {
+    width: 100%;
+}
+
+.isMobile {
+    overflow: hidden;        /* ✅ Embla 필수 */
+    touch-action: pan-y;     /* ✅ 세로 스크롤 유지 + 가로 드래그 */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.isDesktop {
+    /* 데스크탑은 그냥 리스트(그리드) */
+}
+
+/* ===== List ===== */
+.itemList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    align-self: flex-start;
+    max-width: 100%;
+
+    overflow-x: visible;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.itemList::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== Embla container/slide (모바일에서만 활성화) ===== */
+.emblaContainer {
+    flex-wrap: nowrap;       /* ✅ 한 줄 트랙 */
+    will-change: transform;
+    cursor: grab;
+}
+
+.emblaContainer:active {
+    cursor: grabbing;
+}
+
+.emblaSlide {
+    flex: 0 0 auto;          /* ✅ slide 고정 */
+}
+
+/* 이미지 드래그/포인터 방지 (드래그 끊김 방지) */
+.isMobile img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+/* ===== Card ===== */
+.item {
+    text-align: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    width: 10rem;
+    max-width: 10rem;
+
+    border: 1px solid #999;
+    border-radius: 1rem;
+
+    position: relative;
+    align-self: flex-start;
+
+    cursor: pointer;
+    transition: 0.5s;
+    background: transparent;
+}
+
+.item:active {
+    transform: scale(0.95);
+}
+
+.itemInner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* ===== Profile area ===== */
+.profilePic {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.imgContainer {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s;
+    aspect-ratio: 1 / 1;
+}
+
+.fallback {
+    border: 1px solid #999;
+}
+
+.profileName {
+    font-size: 0.85rem;
+}
+
+/* ===== Description ===== */
+.profileDesc {
+    width: 100%;
+    border-top: 1px solid #999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5rem;
+    height: 100%;
+}
+
+.profileStatus {
+    font-size: 0.8rem;
+    white-space: pre-line;
+}
+
+.descP {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 0.8rem;
+    color: #bbb;
+
+    gap: 0.5rem;
+
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.descP span {
+    font-size: 0.6rem;
+    white-space: pre-line;
+}
+
+.descShow {
+    max-height: 12rem;
+    margin-top: 0.5rem;
+}
+
+/* ===== Wide band (order === 6) ===== */
+.wideList {
+    /* 필요하면 */
+}
+
+.wide {
+    width: 20rem;
+    max-width: 20rem;
+    align-self: stretch;
+}
+
+.wideDesc {
+    align-items: flex-start;
+    text-align: left;
+    border-top: 0;
+}
+
+.wideP {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .itemList {
+        flex-wrap: nowrap; /* 기존 동작 유지 */
+    }
+}
+
+@media (max-width: 576px) {
+    .itemBand h2 {
+        font-size: 1.25rem;
+    }
+
+    /* 모바일에서 카드 폭 조절 */
+    .item {
+        width: 45%;
+        min-width: 132px;
+        max-width: 10rem;
+    }
+
+    .wide {
+        width: 90%;
+        min-width: 264px;
+        max-width: 20rem;
+    }
+
+    .descP {
+        font-size: 0.6rem;
+    }
+}
