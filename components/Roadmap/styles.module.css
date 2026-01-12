@@ -25,9 +25,9 @@
 }
 
 .embla__slide {
-    flex: 0 0 auto;
+    flex: 0 0 200px;
     /* ✅ 슬라이드 폭은 여기서 결정 */
-    width: 200px;
+    /*width: 200px;*/
     transition: .5s;
 }
 
@@ -142,10 +142,54 @@
     color: white;
 }
 
-.clicked.embla__slide { width: 250px;}
+/* ✅ Swiper 적용을 위해 필요한 최소 CSS (기존 스타일과 합쳐서 쓰면 됨) */
+
+.roadmap {
+    width: 100%;
+}
+
+.roadmapInner {
+    max-width: 1200px; /* 너 레이아웃에 맞게 */
+    margin: 0 auto;
+}
+
+/* Swiper 컨테이너 */
+.swiper {
+    overflow: visible; /* 그림자/outline 보이게(원하면 hidden) */
+    padding-right: 0;  /* 필요하면 여백 조절 */
+    padding-left: 0;
+}
+
+/* ✅ slide 폭은 여기서 고정: "auto" + width */
+.swiperSlide {
+    width: clamp(200px, 80vw, 250px) !important;
+}
+
+/* 클릭 스타일은 레이아웃 영향 없는 걸로 */
+.clicked {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: -2px;
+}
+
+/* 내용 펼치기/접기 (폭 유지) */
+.bodyCollapsed .roadmapBodyContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.bodyExpanded .roadmapBodyContent {
+    max-height: 500px;
+    transition: max-height 0.5s ease;
+}
+
+
+
+
+/*.clicked.embla__slide { width: 250px;}*/
 /* ===== Responsive ===== */
 @media (min-width: 1200px) {
-    .embla__slide { width: 250px; }
+    .embla__slide { flex: 0 0 250px; }
     .roadmapElem { height: 375px; }
 }
 
