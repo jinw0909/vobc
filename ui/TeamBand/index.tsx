@@ -75,10 +75,10 @@ export function TeamBand({ selected, profile, order, registerRef, data }: TeamBa
                     >
                         <ul
                             className={`
-                ${styles.itemList}
-                ${isMobile ? styles.emblaContainer : ''}
-                ${isWideBand ? styles.wideList : ''}
-              `}
+                                ${styles.itemList}
+                                ${isMobile ? styles.emblaContainer : ''}
+                                ${isWideBand ? styles.wideList : ''}
+                              `}
                         >
                             {profile.map((_, i: number) => {
                                 const img = profile[i]
