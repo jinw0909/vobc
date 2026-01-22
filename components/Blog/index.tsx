@@ -130,12 +130,12 @@ export default async function BlogPage() {
                                 <div className={styles.tagRow}>
                                     {firstTags.map((tag, index) => (
                                         <span key={index} className={styles.tag}>
-                      <NavigationLink
-                          className={styles.tagSpan}
-                          href={`/blog/tag/${tag.tagName}`}
-                      >
-                        #{tag.tagName}
-                      </NavigationLink>
+                          <NavigationLink
+                              className={styles.tagSpan}
+                              href={`/blog/tag/${tag.tagName}`}
+                          >
+                            #{tag.tagName}
+                          </NavigationLink>
                     </span>
                                     ))}
                                 </div>

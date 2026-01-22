@@ -6,6 +6,32 @@
     padding: 2rem;
 }
 
+
+.loadingWrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid #333;
+    border-top: 4px solid #aaa;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
 @media (min-width: 1200px) {
     .teamWrapper { width: 80vw; margin: auto; max-width: 1280px;}
 }

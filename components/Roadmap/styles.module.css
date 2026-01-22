@@ -166,10 +166,10 @@
 }
 
 /* 클릭 스타일은 레이아웃 영향 없는 걸로 */
-.clicked {
-    outline: 2px solid rgba(255, 255, 255, 0.6);
-    outline-offset: -2px;
-}
+/*.clicked {*/
+/*    outline: 2px solid rgba(255, 255, 255, 0.6);*/
+/*    outline-offset: -2px;*/
+/*}*/
 
 /* 내용 펼치기/접기 (폭 유지) */
 .bodyCollapsed .roadmapBodyContent {

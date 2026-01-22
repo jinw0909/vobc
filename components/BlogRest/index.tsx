@@ -173,8 +173,8 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
             {/* 마지막 페이지면 버튼 숨김 (No more 문구 없음) */}
             {hasMore && (
                 <div className={styles.moreButtonWrapper}>
-                    <div className={styles.moreButton}>
-                        <button onClick={() => load(pageToLoad)} disabled={loading}>
+                    <div className={styles.moreButton} onClick={() => load(pageToLoad)} >
+                        <button disabled={loading}>
                             {loading ? "Loading..." : "Load More"}
                         </button>
                     </div>
