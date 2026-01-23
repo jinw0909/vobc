@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 const BG = 'rgba(30, 30, 30, 1)';
 const FG = '#fff';
-const SUB_FG = '#fff';
+const SUB_FG = 'rgba(255, 255, 255, 0.78)';
 const PADDING_X = 24;
 
 // ✅ 더 따뜻한 옐로우 톤 (원하면 숫자만 더 노랗게 조정 가능)
@@ -213,7 +213,11 @@ export const Main = () => {
             // fonts
             const headerSize = fitFontSize(header, Math.min(22, w * 0.04), maxTextWidth, 700);
             const line1Size = fitFontSize(line1, Math.min(56, w * 0.07), maxTextWidth, 800);
-            const subBase = Math.min(18, w * 0.03);
+            // 아래 4줄 기본 폰트: PC에서만 더 크게
+            const subBase = isMobile()
+                ? Math.min(18, w * 0.03)
+                : Math.min(24, w * 0.022); // PC: 상한 24px, 화면에 따라 자연 증가
+
 
             const s1Size = fitFontSize(s1, subBase, maxTextWidth, 600);
             const s2Size = fitFontSize(s2, subBase, maxTextWidth, 600);
@@ -224,8 +228,8 @@ export const Main = () => {
 
             // spacing
             const headerToLine1 = isMobile() ? h * 0.045 : h * 0.055;
-            const line1ToSubs = isMobile() ? h * 0.055 : h * 0.07;
-            const subGap = isMobile() ? h * 0.022 : h * 0.018;
+            const line1ToSubs = isMobile() ? h * 0.06 : h * 0.095;
+            const subGap = isMobile() ? h * 0.022 : h * 0.032;
 
             // Y
             const line1Y = h * 0.46;
