@@ -248,10 +248,10 @@ export const Main = () => {
 
             const headerX = centerX(header, headerSize, 700);
             const line1X = centerX(line1, line1Size, 800);
-            const s1X = centerX(s1, s1Size, 600);
-            const s2X = centerX(s2, s2Size, 600);
-            const s3X = centerX(s3, s3Size, 600);
-            const s4X = centerX(s4, s4Size, 600);
+            const s1X = centerX(s1, s1Size, 400);
+            const s2X = centerX(s2, s2Size, 400);
+            const s3X = centerX(s3, s3Size, 400);
+            const s4X = centerX(s4, s4Size, 400);
 
             // O center
             ctx.font = `800 ${line1Size}px ${FONT_FAMILY}`;
@@ -281,16 +281,16 @@ export const Main = () => {
             ctx.fillText(line1, line1X, line1Y);
 
             ctx.fillStyle = SUB_FG;
-            ctx.font = `600 ${s1Size}px ${FONT_FAMILY}`;
+            ctx.font = `500 ${s1Size}px ${FONT_FAMILY}`;
             ctx.fillText(s1, s1X, s1Y);
 
-            ctx.font = `600 ${s2Size}px ${FONT_FAMILY}`;
+            ctx.font = `500 ${s2Size}px ${FONT_FAMILY}`;
             ctx.fillText(s2, s2X, s2Y);
 
-            ctx.font = `600 ${s3Size}px ${FONT_FAMILY}`;
+            ctx.font = `500 ${s3Size}px ${FONT_FAMILY}`;
             ctx.fillText(s3, s3X, s3Y);
 
-            ctx.font = `600 ${s4Size}px ${FONT_FAMILY}`;
+            ctx.font = `500 ${s4Size}px ${FONT_FAMILY}`;
             ctx.fillText(s4, s4X, s4Y);
 
             ctx.restore();
