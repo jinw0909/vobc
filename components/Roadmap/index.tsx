@@ -398,7 +398,9 @@ export function Roadmap() {
                     {roadmapData.map((item, i) => (
                         <SwiperSlide
                             key={i}
-                            className={styles.swiperSlide}
+                            className={`
+                                ${styles.swiperSlide}
+                            `}
                         >
                             <div
                                 className={`${styles.roadmapElem} ${

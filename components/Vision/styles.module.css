@@ -12,11 +12,18 @@
 .detailText {
     opacity: 0;
 }
+.visionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 .visionHeader {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 4px;
+    position: relative;
 }
 .visionHeader::after {
     content : '';
@@ -32,6 +39,7 @@
     justify-content: flex-end;
     align-items: center;
     gap: 4px;
+    position: relative;
 }
 .blockHeader::after {
     content : '';
@@ -47,6 +55,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 4px;
+    position: relative;
 }
 .vobHeader::after {
     content : '';

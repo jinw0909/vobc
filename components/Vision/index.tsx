@@ -23,29 +23,35 @@ export const Vision = async () => {
 
     return (
         <div className={`${styles.visionWrapper}`}>
-            <div>
-            <div className={styles.visionHeader}>
-                <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>
-                <p className={styles.headerText}>The Vision</p>
+            <div className={styles.visionContent}>
+                <div className={styles.visionElem}>
+                    <div className={styles.visionHeader}>
+                        <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>
+                        <p className={styles.headerText}>The Vision</p>
+                    </div>
+                    <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
+                        {t('vision')}
+                    </p>
+                </div>
+                <div className={styles.visionElem}>
+                    <div className={styles.blockHeader}>
+                        <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
+                        <p className={styles.headerText}>The Blockchain</p>
+                    </div>
+                    <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}>
+                        {t('blockchain')}
+                    </p>
+                </div>
+                <div className={styles.visionElem}>
+                    <div className={styles.vobHeader}>
+                        <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
+                        <p className={styles.headerText}>The Vision of Blockchain</p>
+                    </div>
+                    <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
+                        {t('vob')}
+                    </p>
+                </div>
             </div>
-            </div>
-            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
-                {t('vision')}
-            </p>
-            <div className={styles.blockHeader}>
-                <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
-                <p className={styles.headerText}>The Blockchain</p>
-            </div>
-            <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}>
-                {t('blockchain')}
-            </p>
-            <div className={styles.vobHeader}>
-                <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
-                <p className={styles.headerText}>The Vision of Blockchain</p>
-            </div>
-            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
-                {t('vob')}
-            </p>
             <div className={styles.btnContainer}>
                 <NavigationLink href="/about">
                     <button className={styles.about}>{t('about')}</button>

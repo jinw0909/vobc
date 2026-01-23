@@ -14,6 +14,7 @@ import {Distribution} from "@/components/Distribution";
 import {Vision} from "@/components/Vision";
 // import {Wrapup} from "@/components/Wrapup";
 import {PartnersNew} from "@/components/PartnersNew";
+import {Main} from "@/ui/Main";
 // import {Devs} from "@/components/Devs";
 
 
@@ -27,19 +28,20 @@ export default async function Page({params} : any) {
 
   return (
       <>
-          <main className={styles.mainWrapper}>
-              <div className={styles.mainText}>
-                  {/*<div className={`${styles.fadeInAnimation}`}>{intl.main.title_0}</div>*/}
-                  {/*<div className={`${styles.delayedAnimation} opacity-0`}>{intl.main.title_1}</div>*/}
-                  <div>{t('title_0')}</div>
-                  <div className={`${styles.fadeInAnimation} opacity-0`}>{t('title_1')}</div>
-                  <div className={`${styles.subText} ${styles.delayedAnimation} opacity-0`}>
-                      <div>{t('subtitle_0')}</div>
-                      <div>{t('subtitle_1')}</div>
-                      <div>{t('subtitle_2')}</div>
-                  </div>
-              </div>
-          </main>
+          {/*<main className={styles.mainWrapper}>*/}
+          {/*    <div className={styles.mainText}>*/}
+          {/*        /!*<div className={`${styles.fadeInAnimation}`}>{intl.main.title_0}</div>*!/*/}
+          {/*        /!*<div className={`${styles.delayedAnimation} opacity-0`}>{intl.main.title_1}</div>*!/*/}
+          {/*        <div>{t('title_0')}</div>*/}
+          {/*        <div className={`${styles.fadeInAnimation} opacity-0`}>{t('title_1')}</div>*/}
+          {/*        <div className={`${styles.subText} ${styles.delayedAnimation} opacity-0`}>*/}
+          {/*            <div>{t('subtitle_0')}</div>*/}
+          {/*            <div>{t('subtitle_1')}</div>*/}
+          {/*            <div>{t('subtitle_2')}</div>*/}
+          {/*        </div>*/}
+          {/*    </div>*/}
+          {/*</main>*/}
+          <Main/>
           <div className={`${styles.subWrapper} ${styles.visionWrapper}`}>
               <Vision/>
           </div>

@@ -157,6 +157,8 @@
     pointer-events: none;
     color: black;
     opacity: 0;
+    max-height: 0;
+    padding: 0;
 
 }
 .whitepaperBtn a {
@@ -202,6 +204,8 @@
 .whitepaperInner.show .whitepaperBtn {
     border: 1px solid black;
     opacity: 1;
+    padding: .5rem 2rem;
+    max-height: 3rem;
 }
 .vtLine {
     width: 100%;

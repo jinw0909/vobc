@@ -162,7 +162,11 @@
 
 /* ✅ slide 폭은 여기서 고정: "auto" + width */
 .swiperSlide {
-    width: clamp(200px, 80vw, 250px) !important;
+    width: clamp(200px, 50vw, 250px) !important;
+    transition: .5s;
+}
+.swiperSlide.clicked {
+    width: 250px !important;
 }
 
 /* 클릭 스타일은 레이아웃 영향 없는 걸로 */

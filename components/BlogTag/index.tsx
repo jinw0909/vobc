@@ -83,55 +83,57 @@ export default async function BlogTag({params, searchParams}: {
 
     return (
         <div className={styles.blogTagWrapper}>
-            <div className={styles.tagName}>#{tagName}</div>
-            <p className={styles.explanation}>Posts about #{tagName}</p>
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.postId} className={styles.post}>
-                        <div className={styles.postThumbnail}>
-                            <NavigationLink href={`/blog/${post.postId}`}>
-                                <div>
-                                    {post.thumbnail ? (
-                                        <Image
-                                            src={post.thumbnail}
-                                            alt={post.title}
-                                            fill={true}
-                                            style={{objectFit: 'cover'}}
-                                        />
-                                    ) : (
-                                        <div className={styles.postThumbnailPlaceholder}>
-                                            {/* 썸네일 없는 경우 대체 UI */}
-                                            No image
-                                        </div>
-                                    )}
+            <div>
+                <div className={styles.tagName}>#{tagName}</div>
+                <p className={styles.explanation}>Posts about #{tagName}</p>
+                <ul>
+                    {posts.map((post) => (
+                        <li key={post.postId} className={styles.post}>
+                            <div className={styles.postThumbnail}>
+                                <NavigationLink href={`/blog/${post.postId}`}>
+                                    <div>
+                                        {post.thumbnail ? (
+                                            <Image
+                                                src={post.thumbnail}
+                                                alt={post.title}
+                                                fill={true}
+                                                style={{objectFit: 'cover'}}
+                                            />
+                                        ) : (
+                                            <div className={styles.postThumbnailPlaceholder}>
+                                                {/* 썸네일 없는 경우 대체 UI */}
+                                                No image
+                                            </div>
+                                        )}
+                                    </div>
+                                </NavigationLink>
+                            </div>
+                            <div className={styles.postTitle}>
+                                <NavigationLink className={styles.colorWhite} href={`/blog/${post.postId}`}>
+                                    {post.title}
+                                </NavigationLink>
+                            </div>
+                            <div className={styles.postRight}>
+                                <div className={styles.postSummary}>
+                                    {post.summary}
                                 </div>
-                            </NavigationLink>
-                        </div>
-                        <div className={styles.postTitle}>
-                            <NavigationLink className={styles.colorWhite} href={`/blog/${post.postId}`}>
-                                {post.title}
-                            </NavigationLink>
-                        </div>
-                        <div className={styles.postRight}>
-                            <div className={styles.postSummary}>
-                                {post.summary}
+                                <div className={styles.postTags}>
+                                    {post.postTags.map((tag, index) => {
+                                        return(
+                                            <span className={styles.tag} key={index}>
+                                                <NavigationLink href={`/blog/tag/${tag.tagName}`} className={styles.tagSpan}>
+                                                    #{tag.tagName}
+                                                </NavigationLink>
+                                            </span>
+                                        )
+                                    })}
+                                </div>
                             </div>
-                            <div className={styles.postTags}>
-                                {post.postTags.map((tag, index) => {
-                                    return(
-                                        <span className={styles.tag} key={index}>
-                                            <NavigationLink href={`/blog/tag/${tag.tagName}`} className={styles.tagSpan}>
-                                                #{tag.tagName}
-                                            </NavigationLink>
-                                        </span>
-                                    )
-                                })}
-                            </div>
-                        </div>
 
-                    </li>
-                ))}
-            </ul>
+                        </li>
+                    ))}
+                </ul>
+            </div>
             <Pagination
                 totalPages={totalPages}
                 currentPage={currentPage}
