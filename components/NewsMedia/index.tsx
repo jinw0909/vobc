@@ -71,9 +71,13 @@ export async function NewsMedia({ className, locale }: NewsMediaProps) {
     const articles = (await fetchAllArticles(locale)).sort(sortByReleaseDateDesc);
 
     // ✅ 연도별로 분리
+    const by2026 = articles.filter(a => getYear(a.releaseDate) === 2026);
     const by2025 = articles.filter(a => getYear(a.releaseDate) === 2025);
     const by2024 = articles.filter(a => getYear(a.releaseDate) === 2024);
     const by2023 = articles.filter(a => getYear(a.releaseDate) === 2023);
+
+    const data2026: NewsItem[] = by2026.map(mapSpringToNewsItem);
+    const img2026: string[] = by2026.map(a => a.thumbnail ?? "");
 
     // ✅ NewsMediaBand가 받는 data/imgSrc로 변환 (길이/순서 동일하게)
     const data2025: NewsItem[] = by2025.map(mapSpringToNewsItem);
@@ -86,7 +90,8 @@ export async function NewsMedia({ className, locale }: NewsMediaProps) {
     const img2023: string[] = by2023.map(a => a.thumbnail ?? "");
 
     // ✅ index는 “전체 리스트에서의 오프셋”처럼 쓰는 거면 누적 계산
-    const idx2025 = 0;
+    const idx2026 = 0;
+    const idx2025 = idx2026 + data2026.length;
     const idx2024 = idx2025 + data2025.length;
     const idx2023 = idx2024 + data2024.length;
 
@@ -111,6 +116,15 @@ export async function NewsMedia({ className, locale }: NewsMediaProps) {
             </p>
 
             <div className={`${styles.main} ${styles.moreDelayedAnimation}`}>
+                <div className={styles.yearWrapper}>
+                    <h2 className={styles.year}>2026</h2>
+                    <hr className={styles.horizontal} />
+                    <div>
+                        <NewsMediaBand data={data2026} imgSrc={img2026} index={idx2026} />
+                    </div>
+                </div>
+
+
                 <div className={styles.yearWrapper}>
                     <h2 className={styles.year}>2025</h2>
                     <hr className={styles.horizontal} />

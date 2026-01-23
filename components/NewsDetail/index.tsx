@@ -85,8 +85,11 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
                     <div className={styles.imageWrapper}>
                         <Image
                             src={article.thumbnail} // ✅ thumbnail로 대체 (fallback은 너 프로젝트에 맞게)
-                            fill={true}
-                            style={{ objectFit: 'cover' }}
+                            // fill={true}
+                            // style={{ objectFit: 'contain' }}
+                            width={100}
+                            height={100}
+                            style={{ width: '100%', height: 'auto' }}
                             alt={article.title}
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />

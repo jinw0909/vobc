@@ -119,7 +119,7 @@
 .imageWrapper {
     position: relative;
     width: 100%;
-    height: 50vh;
+    /*height: 50vh;*/
     opacity: 0;
     animation: .5s ease-in-out fadeIn forwards;
     animation-delay: .5s;
