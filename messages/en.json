@@ -7,6 +7,12 @@
     "subtitle_2":"Build a thriving ecosystem with us",
     "description": "The Vision of Blockchain foundation and the VOB token expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities."
   },
+  "hero": {
+    "line1": "Discover emotion-free and secure trading",
+    "line2": "Powered by advanced AI technology",
+    "line3": "Unlock global revenue opportunities",
+    "line4": "And build a thriving ecosystem together"
+  },
   "nav" : {
     "home" : "HOME",
     "about" : "ABOUT",
