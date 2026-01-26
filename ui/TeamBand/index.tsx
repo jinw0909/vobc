@@ -267,7 +267,7 @@ export function TeamBand({ selected, order, registerRef, team, members }: TeamBa
     const isLawTeam = team.id === LAW_TEAM_ID;
     const isAdvisorsTeam = team.id === ADVISOR_TEAM_ID;
 
-    const canToggle = !isAdvisorsTeam;
+    const canToggle = !isLawTeam;
 
     return (
         <div ref={bandRef} className={styles.itemBandWrapper}>
@@ -347,9 +347,12 @@ export function TeamBand({ selected, order, registerRef, team, members }: TeamBa
                                                 <span className={styles.profileStatus}>
                                                   {m.teamRoleLabel ?? m.role ?? ''}
                                                 </span>
-
                                                 {/* ✅ 자문팀은 expanded에 따라 클래스 토글하지 않게 */}
-                                                <p className={`${styles.descP} ${canToggle && expanded[i] ? styles.descShow : ''}`}>
+                                                <p className={`
+                                                    ${styles.descP} 
+                                                    ${canToggle && expanded[i] ? styles.descShow : ''}
+                                                    ${isAdvisorsTeam && expanded[i] ? styles.advisorScroll : ''}
+                                                `}>
                                                     {/*{m.introduction && <span>{m.introduction}</span>}*/}
                                                     {(m.resumes ?? []).map((r) => (
                                                         <span key={r.id}>{r.content}</span>

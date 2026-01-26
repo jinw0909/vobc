@@ -244,25 +244,47 @@ export function TeamNav({
 
                                     <div className={styles.iconDesc}>
                                         {(() => {
-                                            const text = team.description ?? '';
-                                            const idx = text.indexOf('&');
+                                            const raw = team.description ?? '';
 
-                                            if (idx === -1) {
-                                                // & 없으면 한 줄로
-                                                return <span>{text}</span>;
+                                            // 1) HTML 엔티티 정규화
+                                            const text = raw.replace(/&amp;/g, '&').trim();
+
+                                            // 2) & 또는 ＆ 기준 분리
+                                            const m = text.match(/^(.*?)([&＆])(.*)$/);
+                                            if (!m) return <span>{text}</span>;
+
+                                            const left = m[1].trim();
+                                            const amp = m[2]; // & or ＆
+                                            const right = m[3].trim();
+
+                                            // 한쪽이 비어 있으면 그냥 한 줄
+                                            if (!left || !right) return <span>{text}</span>;
+
+                                            const leftLen = left.length;
+                                            const rightLen = right.length;
+
+                                            let firstLine = '';
+                                            let secondLine = '';
+
+                                            if (leftLen <= rightLen) {
+                                                // ✅ 앞이 더 짧으면 → 뒤에 &
+                                                firstLine = `${left}${amp}`;
+                                                secondLine = right;
+                                            } else {
+                                                // ✅ 뒤가 더 짧으면 → 앞에 &
+                                                firstLine = left;
+                                                secondLine = `${amp}${right}`;
                                             }
-
-                                            const first = text.slice(0, idx + 1); // &까지 포함
-                                            const second = text.slice(idx + 1).trim(); // 그 다음 내용
 
                                             return (
                                                 <>
-                                                    <span>{first}</span>
-                                                    <span className={styles.subText}>{second}</span>
+                                                    <span>{firstLine}</span>
+                                                    <span className={styles.subText}>{secondLine}</span>
                                                 </>
                                             );
                                         })()}
                                     </div>
+
                                 </div>
                             </SwiperSlide>
                         ))}

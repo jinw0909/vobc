@@ -1,0 +1,4 @@
+.heroSection { height: 980vh; background: rgba(30,30,30,1); }
+@media (min-width: 769px) {
+    .heroSection { height: 400vh; }  /* PC만 줄임 */
+}

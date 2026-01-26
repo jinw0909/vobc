@@ -543,6 +543,19 @@
     align-items: flex-start !important;
 }
 
+.advisorScroll {
+    max-height: 12rem !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+
+    /* 스크롤바 숨김 */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.advisorScroll::-webkit-scrollbar {
+    display: none;
+}
 
 
 /* ===== Responsive ===== */

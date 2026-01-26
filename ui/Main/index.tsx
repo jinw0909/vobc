@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
+import styles from './styles.module.css';
 
 const BG = 'rgba(30, 30, 30, 1)';
 const FG = '#fff';
@@ -71,6 +72,20 @@ export const Main = () => {
         const easeInOutCubic = (tt: number) =>
             tt < 0.5 ? 4 * tt * tt * tt : 1 - Math.pow(-2 * tt + 2, 3) / 2;
 
+        // 초반 매우 느림 → 중반 이후 급가속 (Phase3 확대용)
+        const easeInQuint = (tt: number) => Math.pow(tt, 5);
+        const accel2 = (tt: number) => {
+            const t = clamp01(tt);
+            const k = 0.45; // 전환 지점 (낮출수록 더 빨리 가속)
+            if (t < k) {
+                const a = t / k; // 0~1
+                return 0.22 * easeInQuint(a); // 초반 거의 정지
+            } else {
+                const b = (t - k) / (1 - k); // 0~1
+                return 0.22 + 0.78 * easeOutCubic(b);
+            }
+        };
+
         const getZoomEase = (tt: number) =>
             isMobile() ? Math.pow(easeOutCubic(tt), 2.2) : easeOutCubic(tt);
 
@@ -79,7 +94,12 @@ export const Main = () => {
         let rafId: number | null = null;
         let lastT = 0;
         let time = 0;
+
+        // 실제 스크롤 progress
         let latestP = 0;
+
+        // ✅ 애니메이션 progress(느리게 따라감)
+        let animP = 0;
 
         // 전환 파동 time reset
         let withStartTime: number | null = null;
@@ -246,14 +266,14 @@ export const Main = () => {
 
             // -------- withVOB(최대 크기) 기준 --------
             const withBasePx = Math.max(18, w * 0.06);
-            const WITH_MAX_SCALE = 1.22; // 조금 더 크게
+            const WITH_MAX_SCALE = 1.22;
             const withMaxSize = fitFontSize(withVOB, withBasePx * WITH_MAX_SCALE, maxTextWidth, 800);
 
             // Phase2 전환 진행도(배경/파동): WITH_START~WITH_END
             const crossRaw = clamp01((p - WITH_START) / (WITH_END - WITH_START));
             const cross = easeInOutCubic(crossRaw);
 
-            // withVOB 등장(알파/스케일): WITH_START~PHASE3_START (더 빨리 끝)
+            // withVOB 등장(알파/스케일): WITH_START~PHASE3_START
             const appearRaw = clamp01((p - WITH_START) / (PHASE3_START - WITH_START));
             const appear = easeOutCubic(appearRaw);
 
@@ -276,7 +296,6 @@ export const Main = () => {
             const oCenterY2 = withY;
 
             // ============== 배경/파동 렌더 ==============
-            // 1) 기본: 옐로 배경/파동 (등장/전환에 따라 점점 약화)
             drawRipple({
                 w,
                 h,
@@ -291,13 +310,11 @@ export const Main = () => {
                 intensityMul: lerp(1, 0, cross),
             });
 
-            // 2) 전환: 시안 배경 오버레이(서서히)
             if (cross > 0.0001) {
                 ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},${0.92 * cross})`;
                 ctx.fillRect(0, 0, w, h);
             }
 
-            // 3) 새 시안 파동(등장 시점부터, cross로 강도 증가)
             if (p >= WITH_START) {
                 if (withStartTime == null) withStartTime = tSec;
                 const localT2 = tSec - withStartTime;
@@ -320,15 +337,12 @@ export const Main = () => {
             }
 
             // ============== 텍스트 렌더 ==============
-            // Phase1 텍스트 줌(Emotion O)
             const z1 = clamp01(p / Z1_END);
             const scale1 = lerp(1, getZoomMax(), getZoomEase(z1));
 
-            // ✅ 기존 문구는 appear가 커질수록 빠르게 죽여서 withVOB가 "빨리 보이게"
             let groupAlpha = lerp(1, 0, easeInOutCubic(z1));
             if (p >= WITH_START) groupAlpha *= 1 - appear;
 
-            // Phase1(원문) - Phase3 시작 전까지만 그리기
             if (!isPhase3) {
                 ctx.save();
                 ctx.globalAlpha = groupAlpha;
@@ -358,7 +372,6 @@ export const Main = () => {
                 ctx.globalAlpha = 1;
             }
 
-            // withVOB 텍스트: 등장 구간에서만 (PHASE3_START까지)
             if (p >= WITH_START && p < PHASE3_START) {
                 ctx.save();
                 ctx.globalAlpha = appear;
@@ -368,20 +381,17 @@ export const Main = () => {
                 ctx.restore();
             }
 
-            // ============== Phase3: VOB의 O 줌(등장 완료 즉시 시작) ==============
+            // ============== Phase3: VOB의 O 줌 ==============
             if (isPhase3) {
-                // Phase3 진행도: PHASE3_START ~ 1
                 const z3 = clamp01((p - PHASE3_START) / (1 - PHASE3_START));
 
-                // 줌은 앞에 몰고, 끝에 짧게 페이드
                 const SCALE_END = 0.78;
                 const zScale = clamp01(z3 / SCALE_END);
                 const zFade = clamp01((z3 - SCALE_END) / (1 - SCALE_END));
 
-                const scale2 = lerp(1, getZoomMax(), getZoomEase(zScale));
+                const scale2 = lerp(1, getZoomMax(), accel2(zScale));
                 const textAlpha = 1 - easeInOutCubic(zFade);
 
-                // ✅ 배경은 "시안톤 유지" -> "BG"로 서서히 수렴
                 ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},0.92)`;
                 ctx.fillRect(0, 0, w, h);
 
@@ -389,19 +399,16 @@ export const Main = () => {
                 ctx.fillStyle = `rgba(30,30,30,${bgFade})`;
                 ctx.fillRect(0, 0, w, h);
 
-                // Phase3에서 기준 withVOB는 "최대치"로 고정 (점프 방지)
                 ctx.font = `800 ${withMaxSize}px ${FONT_FAMILY}`;
                 const withWMax = ctx.measureText(withVOB).width;
                 const withXMax = oCenterX1 - withWMax / 2;
                 const withYMax = oCenterY1;
 
-                // O 중심(최대 사이즈 기준)
                 const beforeO2b = 'with V';
                 const oW2b = ctx.measureText('O').width;
                 const oCenterX2b = withXMax + ctx.measureText(beforeO2b).width + oW2b / 2;
                 const oCenterY2b = withYMax;
 
-                // (선택) Phase3 초반엔 파동 잔광을 아주 약하게 남김
                 const rippleKeep = 1 - bgFade;
                 if (rippleKeep > 0.02) {
                     const localT2 = withStartTime == null ? 0 : tSec - withStartTime;
@@ -420,7 +427,6 @@ export const Main = () => {
                     });
                 }
 
-                // 줌(앵커=O 중심)
                 ctx.save();
                 ctx.translate(oCenterX2b, oCenterY2b);
                 ctx.scale(scale2, scale2);
@@ -436,7 +442,6 @@ export const Main = () => {
                 ctx.restore();
                 ctx.globalAlpha = 1;
 
-                // 마지막에 O/텍스트가 사라지며 BG로 자연스럽게
                 const f = easeInOutCubic(zFade);
                 if (f > 0.001) {
                     ctx.fillStyle = `rgba(30,30,30,${f})`;
@@ -455,25 +460,33 @@ export const Main = () => {
             lastT = ms;
             time += dt;
 
-            draw(latestP, time);
+            // ✅ 스크롤 진행도를 "느리게" 따라가는 애니메이션 progress
+            // 값 ↓ = 더 느림 / 값 ↑ = 더 빠름
+            const FOLLOW = isMobile() ? 12 : 7;
+
+            // 1 - exp(-k*dt) 형태가 프레임레이트에 덜 민감함
+            animP += (latestP - animP) * (1 - Math.exp(-FOLLOW * dt));
+
+            draw(animP, time);
             rafId = window.requestAnimationFrame(tick);
         };
 
         const onScroll = () => {
             updateProgress();
-            draw(latestP, time);
+            // ✅ draw는 tick에서만 (여기서 그리면 즉시 점프해서 느려지는 효과가 약해짐)
         };
 
         const onResize = () => {
             setCanvasSize();
             updateProgress();
-            draw(latestP, time);
+            // 리사이즈 직후는 현재 animP로 한번 그려서 깜빡임 방지
+            draw(animP, time);
         };
 
         const onVhResize = () => {
             setCanvasSize();
             updateProgress();
-            draw(latestP, time);
+            draw(animP, time);
         };
 
         const start = async () => {
@@ -484,7 +497,8 @@ export const Main = () => {
 
             setCanvasSize();
             updateProgress();
-            draw(latestP, time);
+            animP = latestP; // 시작 시점 점프 방지
+            draw(animP, time);
 
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onResize);
@@ -513,7 +527,7 @@ export const Main = () => {
     }, [s1, s2, s3, s4]);
 
     return (
-        <section ref={sectionRef} style={{ height: '980vh', background: BG }}>
+        <section ref={sectionRef} className={styles.heroSection}>
             <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
