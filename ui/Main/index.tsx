@@ -47,7 +47,7 @@ export const Main = () => {
         // ======================================================
         // 타임라인(0~1)
         // 1) Emotion O 줌: 0 ~ Z1_END
-        // 2) withVOB 등장(오버랩) + 배경/파동 전환: WITH_START ~ ...
+        // 2) withVOB 등장(오버랩) + 배경/파동 전환: ...
         // 3) VOB의 O 줌: PHASE3_START ~ 1
         // ======================================================
         const Z1_END = 0.58;
@@ -61,6 +61,11 @@ export const Main = () => {
         //    최대치 도달 순간 바로 Phase3(= O 줌) 시작
         const APPEAR_RATIO = 0.40;
         const PHASE3_START = WITH_START + (WITH_END - WITH_START) * APPEAR_RATIO;
+
+        // ✅ (중요) Phase1 후반부터 "파란 배경이 스며들기" 시작하는 지점
+        // 값 ↓ : 더 늦게 스며듦 / 값 ↑ : 더 빨리 스며듦
+        const CROSS_START = Z1_END - 0.12;
+        const CROSS_END = WITH_END;
 
         const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
         const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
@@ -78,10 +83,10 @@ export const Main = () => {
             const t = clamp01(tt);
             const k = 0.45; // 전환 지점 (낮출수록 더 빨리 가속)
             if (t < k) {
-                const a = t / k; // 0~1
-                return 0.22 * easeInQuint(a); // 초반 거의 정지
+                const a = t / k;
+                return 0.22 * easeInQuint(a);
             } else {
-                const b = (t - k) / (1 - k); // 0~1
+                const b = (t - k) / (1 - k);
                 return 0.22 + 0.78 * easeOutCubic(b);
             }
         };
@@ -187,8 +192,7 @@ export const Main = () => {
             for (let i = 0; i < ringCount; i++) {
                 const r = i * ringSpacing + travel;
                 const wave = 0.6 + 0.4 * Math.sin(localT * 0.9 + i * 0.7);
-                const alpha =
-                    intensity * lerp(0.055, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
+                const alpha = intensity * lerp(0.055, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
 
                 if (alpha <= 0.001) continue;
 
@@ -269,9 +273,30 @@ export const Main = () => {
             const WITH_MAX_SCALE = 1.22;
             const withMaxSize = fitFontSize(withVOB, withBasePx * WITH_MAX_SCALE, maxTextWidth, 800);
 
-            // Phase2 전환 진행도(배경/파동): WITH_START~WITH_END
-            const crossRaw = clamp01((p - WITH_START) / (WITH_END - WITH_START));
-            const cross = easeInOutCubic(crossRaw);
+            // ✅ Phase2 전환 진행도(배경/파동): CROSS_START~CROSS_END (미리 스며들기)
+            // const crossRaw = clamp01((p - CROSS_START) / (CROSS_END - CROSS_START));
+            // const cross = easeInOutCubic(crossRaw);
+
+            // smoothstep(0~1) 유틸
+            const smoothstep = (a: number, b: number, x: number) => {
+                const t = clamp01((x - a) / (b - a));
+                return t * t * (3 - 2 * t);
+            };
+
+            // 1) 예열: Phase1 후반(CROSS_START) ~ WITH_START
+            const warm = smoothstep(CROSS_START, WITH_START, p);
+
+            // 2) 본 전환: WITH_START ~ WITH_END
+            const swap = smoothstep(WITH_START, WITH_END, p);
+
+            // 배경 파란 오버레이 알파: 예열은 약하게 + 본전환은 강하게
+            const bgBlueAlpha = 0.16 * warm + 0.92 * swap;
+
+            // 노란 파동 강도는 "본 전환" 때만 줄어들게 (예열때는 그대로)
+            const yellowMul = 1 - swap;
+
+            // 파란 파동 강도도 "본 전환" 때부터 (예열때는 거의 안 보이게)
+            const cyanMul = swap;
 
             // withVOB 등장(알파/스케일): WITH_START~PHASE3_START
             const appearRaw = clamp01((p - WITH_START) / (PHASE3_START - WITH_START));
@@ -307,22 +332,28 @@ export const Main = () => {
                 tint: TINT1_RGB,
                 ring: RING1_RGB,
                 settleToBG: true,
-                intensityMul: lerp(1, 0, cross),
+                intensityMul: yellowMul,
             });
 
-            if (cross > 0.0001) {
-                ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},${0.92 * cross})`;
+            // ✅ 전환: 시안 배경 오버레이(서서히) - Phase1 후반부터
+            if (bgBlueAlpha > 0.0001) {
+                ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},${bgBlueAlpha})`;
                 ctx.fillRect(0, 0, w, h);
             }
 
-            if (p >= WITH_START) {
+
+            // ✅ 시안 파동도 cross가 생기면 아주 약하게부터(갑툭튀 방지)
+            if (cyanMul > 0.0001) {
                 if (withStartTime == null) withStartTime = tSec;
                 const localT2 = tSec - withStartTime;
+
+                // 처음엔 거의 안 보이다가 서서히
+                const waveK = Math.pow(cyanMul, 1.6);
 
                 drawRipple({
                     w,
                     h,
-                    fade: lerp(0.0, 0.12, cross),
+                    fade: lerp(0.0, 0.12, cyanMul),
                     localT: localT2,
                     cx: oCenterX2,
                     cy: oCenterY2,
@@ -330,11 +361,12 @@ export const Main = () => {
                     tint: TINT2_RGB,
                     ring: RING2_RGB,
                     settleToBG: false,
-                    intensityMul: cross,
+                    intensityMul: waveK,
                 });
             } else {
                 withStartTime = null;
             }
+
 
             // ============== 텍스트 렌더 ==============
             const z1 = clamp01(p / Z1_END);
@@ -473,13 +505,12 @@ export const Main = () => {
 
         const onScroll = () => {
             updateProgress();
-            // ✅ draw는 tick에서만 (여기서 그리면 즉시 점프해서 느려지는 효과가 약해짐)
+            // ✅ draw는 tick에서만
         };
 
         const onResize = () => {
             setCanvasSize();
             updateProgress();
-            // 리사이즈 직후는 현재 animP로 한번 그려서 깜빡임 방지
             draw(animP, time);
         };
 
@@ -527,7 +558,7 @@ export const Main = () => {
     }, [s1, s2, s3, s4]);
 
     return (
-        <section ref={sectionRef} className={styles.heroSection}>
+        <section ref={sectionRef} className={styles.heroSection} style={{ background: BG }}>
             <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
