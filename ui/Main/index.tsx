@@ -8,9 +8,16 @@ const FG = '#fff';
 const SUB_FG = 'rgba(255, 255, 255, 0.78)';
 const PADDING_X = 24;
 
-// ✅ 더 따뜻한 옐로우 톤 (원하면 숫자만 더 노랗게 조정 가능)
-const TINT_RGB = { r: 0xf2, g: 0xe9, b: 0x7a }; // soft warm yellow
-const RING_RGB = { r: 0xd9, g: 0xd0, b: 0x52 }; // slightly deeper yellow for rings
+// Emotion(옐로)
+const TINT1_RGB = { r: 0xf2, g: 0xe9, b: 0x7a };
+const RING1_RGB = { r: 0xd9, g: 0xd0, b: 0x52 };
+
+// with VOB(시안)
+const TINT2_RGB = { r: 0x7a, g: 0xe2, b: 0xf2 };
+const RING2_RGB = { r: 0x52, g: 0xc8, b: 0xd9 };
+
+// 전환 배경(시안 기운)
+const BG2_BASE = { r: 14, g: 22, b: 26 };
 
 export const Main = () => {
     const t = useTranslations('hero');
@@ -34,22 +41,38 @@ export const Main = () => {
 
         const header = 'VOB 1.0 Smart Trading';
         const line1 = 'Experience EmOtion-Free Trading';
-        const withAI = 'with VOB';
+        const withVOB = 'with VOB';
 
-        const O_FULL_AT = 0.6;
+        // ======================================================
+        // 타임라인(0~1)
+        // 1) Emotion O 줌: 0 ~ Z1_END
+        // 2) withVOB 등장(오버랩) + 배경/파동 전환: WITH_START ~ ...
+        // 3) VOB의 O 줌: PHASE3_START ~ 1
+        // ======================================================
+        const Z1_END = 0.58;
+
+        // ✅ withVOB 더 빨리
+        const WITH_START = 0.22;
+        // 전환 구간의 "총 길이"(배경/파동이 다 바뀌는 끝)
+        const WITH_END = 0.60;
+
+        // ✅ withVOB는 전환 구간의 일부(APPEAR_RATIO)만에 "최대치" 도달
+        //    최대치 도달 순간 바로 Phase3(= O 줌) 시작
+        const APPEAR_RATIO = 0.40;
+        const PHASE3_START = WITH_START + (WITH_END - WITH_START) * APPEAR_RATIO;
+
+        const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+        const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
 
         const isMobile = () => window.innerWidth < 769;
         const getZoomMax = () => (isMobile() ? 52 : 70);
 
         const easeOutCubic = (tt: number) => 1 - Math.pow(1 - tt, 3);
-        const getZoomEase = (tt: number) =>
-            isMobile() ? Math.pow(easeOutCubic(tt), 2.2) : easeOutCubic(tt);
-
         const easeInOutCubic = (tt: number) =>
             tt < 0.5 ? 4 * tt * tt * tt : 1 - Math.pow(-2 * tt + 2, 3) / 2;
 
-        const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-        const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
+        const getZoomEase = (tt: number) =>
+            isMobile() ? Math.pow(easeOutCubic(tt), 2.2) : easeOutCubic(tt);
 
         let dpr = window.devicePixelRatio || 1;
 
@@ -57,6 +80,9 @@ export const Main = () => {
         let lastT = 0;
         let time = 0;
         let latestP = 0;
+
+        // 전환 파동 time reset
+        let withStartTime: number | null = null;
 
         const setCanvasSize = () => {
             dpr = window.devicePixelRatio || 1;
@@ -88,111 +114,83 @@ export const Main = () => {
             return clamp01(-rect.top / scrollable);
         };
 
-        /**
-         * ✅ "따뜻한 옐로우 톤" 파동 배경 (노이즈 제거)
-         * - 중심: O 위치
-         * - 초반: 은은한 옐로우 안개 + 부드러운 링
-         * - 끝: 정확히 BG로 수렴
-         */
-        const drawWarmRippleBackground = (
-            w: number,
-            h: number,
-            p2: number,
-            tSec: number,
-            cx: number,
-            cy: number
-        ) => {
-            const fade = clamp01(p2);
+        const drawRipple = (args: {
+            w: number;
+            h: number;
+            fade: number;
+            localT: number;
+            cx: number;
+            cy: number;
+            baseColor: string | 'transparent';
+            tint: { r: number; g: number; b: number };
+            ring: { r: number; g: number; b: number };
+            settleToBG: boolean;
+            intensityMul?: number;
+        }) => {
+            const { w, h, fade, localT, cx, cy, baseColor, tint, ring, settleToBG } = args;
+            const f = clamp01(fade);
+            const intensityMul = args.intensityMul ?? 1;
 
-            // 끝에서는 정확한 BG
-            if (fade >= 0.999) {
-                ctx.fillStyle = BG;
+            if (baseColor !== 'transparent') {
+                ctx.fillStyle = baseColor;
                 ctx.fillRect(0, 0, w, h);
-                return;
             }
 
-            // 1) base: 완전 단색 대신 "조금 더 밝은 차콜"로 시작 (칙칙함 완화)
-            ctx.fillStyle = 'rgba(22,22,22,1)';
-            ctx.fillRect(0, 0, w, h);
-
-            // 2) 전체 따뜻한 톤 워시(초반 강, 후반 약)
-            // 너무 노랗게 하면 촌스러워져서 alpha는 낮게
-            const washA = 0.08 * Math.pow(1 - fade, 0.9);
+            const washA = 0.08 * Math.pow(1 - f, 0.9) * intensityMul;
             if (washA > 0.0005) {
-                ctx.fillStyle = `rgba(${TINT_RGB.r},${TINT_RGB.g},${TINT_RGB.b},${washA})`;
+                ctx.fillStyle = `rgba(${tint.r},${tint.g},${tint.b},${washA})`;
                 ctx.fillRect(0, 0, w, h);
             }
 
             const maxR = Math.hypot(w, h) * 0.78;
-
             const ringCount = isMobile() ? 8 : 12;
             const ringSpacing = maxR / ringCount;
 
-            // 느리게, 부드럽게
             const speed = isMobile() ? 110 : 140;
-            const travel = (tSec * speed) % ringSpacing;
+            const travel = (localT * speed) % ringSpacing;
 
-            // 링 강도: 초반 강, 후반 약
-            const intensity = lerp(0.85, 0.0, Math.pow(fade, 1.1));
+            const baseIntensity = lerp(0.88, 0.0, Math.pow(f, 1.05));
+            const intensity = baseIntensity * intensityMul;
 
-            // 3) 중앙 글로우(옐로우 안개) — 텍스트 뒤에 은은하게
             if (intensity > 0.01) {
                 const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.65);
-                const a0 = 0.14 * intensity;
-                glow.addColorStop(0, `rgba(${TINT_RGB.r},${TINT_RGB.g},${TINT_RGB.b},${a0})`);
+                const a0 = 0.16 * intensity;
+                glow.addColorStop(0, `rgba(${tint.r},${tint.g},${tint.b},${a0})`);
                 glow.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = glow;
                 ctx.fillRect(0, 0, w, h);
             }
 
-            // 4) 링: 선명한 선 대신 "부드러운 잔광" 느낌
             ctx.save();
             ctx.translate(cx, cy);
 
             for (let i = 0; i < ringCount; i++) {
                 const r = i * ringSpacing + travel;
+                const wave = 0.6 + 0.4 * Math.sin(localT * 0.9 + i * 0.7);
+                const alpha =
+                    intensity * lerp(0.055, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
 
-                // 너무 "기계적"이면 레이더 같으니 아주 약한 변조만
-                const wave = 0.6 + 0.4 * Math.sin(tSec * 0.9 + i * 0.7);
-                const alpha = intensity * lerp(0.05, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
                 if (alpha <= 0.001) continue;
 
                 const thickness = lerp(2.2, 1.0, i / ringCount) * (isMobile() ? 0.95 : 1.0);
 
-                // 링을 2번 그려서 '잔광'처럼: 두꺼운 약한 선 + 얇은 조금 진한 선
                 ctx.beginPath();
                 ctx.arc(0, 0, r, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(${RING_RGB.r},${RING_RGB.g},${RING_RGB.b},${alpha * 0.55})`;
+                ctx.strokeStyle = `rgba(${ring.r},${ring.g},${ring.b},${alpha * 0.55})`;
                 ctx.lineWidth = thickness * 1.8;
                 ctx.stroke();
 
                 ctx.beginPath();
                 ctx.arc(0, 0, r, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(${RING_RGB.r},${RING_RGB.g},${RING_RGB.b},${alpha})`;
+                ctx.strokeStyle = `rgba(${ring.r},${ring.g},${ring.b},${alpha})`;
                 ctx.lineWidth = thickness;
                 ctx.stroke();
             }
 
             ctx.restore();
 
-            // 5) 끝으로 갈수록 BG로 덮어씌워 "완전 단색" 수렴
-            ctx.fillStyle = `rgba(30,30,30,${fade})`;
-            ctx.fillRect(0, 0, w, h);
-
-            // 6) 비네팅은 끝에서 0으로 수렴 (끝이 더 어두워 보이는 문제 방지)
-            const vignetteAlpha = lerp(0.18, 0.0, Math.pow(fade, 1.25));
-            if (vignetteAlpha > 0.001) {
-                const vignette = ctx.createRadialGradient(
-                    w / 2,
-                    h / 2,
-                    h * 0.55,
-                    w / 2,
-                    h / 2,
-                    h
-                );
-                vignette.addColorStop(0, 'rgba(0,0,0,0)');
-                vignette.addColorStop(1, `rgba(0,0,0,${vignetteAlpha})`);
-                ctx.fillStyle = vignette;
+            if (settleToBG) {
+                ctx.fillStyle = `rgba(30,30,30,${f})`;
                 ctx.fillRect(0, 0, w, h);
             }
         };
@@ -203,22 +201,11 @@ export const Main = () => {
             const h = Math.max(1, rect.height);
             const maxTextWidth = Math.max(1, w - PADDING_X * 2);
 
-            // phases
-            const p1 = clamp01(p / O_FULL_AT);
-            const scale = lerp(1, getZoomMax(), getZoomEase(p1));
-
-            const p2 = clamp01((p - O_FULL_AT) / (1 - O_FULL_AT));
-            const t2 = easeInOutCubic(p2);
-
-            // fonts
+            // -------- layout(원문 기준) --------
             const headerSize = fitFontSize(header, Math.min(22, w * 0.04), maxTextWidth, 700);
             const line1Size = fitFontSize(line1, Math.min(56, w * 0.07), maxTextWidth, 800);
-            // 아래 4줄 기본 폰트: PC에서만 더 크게
-            const subBase = isMobile()
-                ? Math.min(18, w * 0.03)
-                : Math.min(24, w * 0.022); // PC: 상한 24px, 화면에 따라 자연 증가
 
-
+            const subBase = isMobile() ? Math.min(18, w * 0.03) : Math.min(24, w * 0.022);
             const s1Size = fitFontSize(s1, subBase, maxTextWidth, 600);
             const s2Size = fitFontSize(s2, subBase, maxTextWidth, 600);
             const s3Size = fitFontSize(s3, subBase, maxTextWidth, 600);
@@ -226,12 +213,10 @@ export const Main = () => {
 
             ctx.textBaseline = 'middle';
 
-            // spacing
             const headerToLine1 = isMobile() ? h * 0.045 : h * 0.055;
             const line1ToSubs = isMobile() ? h * 0.06 : h * 0.095;
             const subGap = isMobile() ? h * 0.022 : h * 0.032;
 
-            // Y
             const line1Y = h * 0.46;
             const headerY = line1Y - headerToLine1;
 
@@ -240,79 +225,223 @@ export const Main = () => {
             const s3Y = s2Y + subGap * 1.6;
             const s4Y = s3Y + subGap;
 
-            // centerX helper
-            const centerX = (text: string, size: number, weight: number) => {
+            const cx = (text: string, size: number, weight: number) => {
                 ctx.font = `${weight} ${size}px ${FONT_FAMILY}`;
                 return (w - ctx.measureText(text).width) / 2;
             };
 
-            const headerX = centerX(header, headerSize, 700);
-            const line1X = centerX(line1, line1Size, 800);
-            const s1X = centerX(s1, s1Size, 400);
-            const s2X = centerX(s2, s2Size, 400);
-            const s3X = centerX(s3, s3Size, 400);
-            const s4X = centerX(s4, s4Size, 400);
+            const headerX = cx(header, headerSize, 700);
+            const line1X = cx(line1, line1Size, 800);
+            const s1X = cx(s1, s1Size, 400);
+            const s2X = cx(s2, s2Size, 400);
+            const s3X = cx(s3, s3Size, 400);
+            const s4X = cx(s4, s4Size, 400);
 
-            // O center
+            // -------- Emotion의 O 중심(첫 파동 중심) --------
             ctx.font = `800 ${line1Size}px ${FONT_FAMILY}`;
-            const beforeO = 'Experience Em';
-            const oW = ctx.measureText('O').width;
-            const oCenterX = line1X + ctx.measureText(beforeO).width + oW / 2;
-            const oCenterY = line1Y;
+            const beforeO1 = 'Experience Em';
+            const oW1 = ctx.measureText('O').width;
+            const oCenterX1 = line1X + ctx.measureText(beforeO1).width + oW1 / 2;
+            const oCenterY1 = line1Y;
 
-            // background
-            drawWarmRippleBackground(w, h, p2, tSec, oCenterX, oCenterY);
+            // -------- withVOB(최대 크기) 기준 --------
+            const withBasePx = Math.max(18, w * 0.06);
+            const WITH_MAX_SCALE = 1.22; // 조금 더 크게
+            const withMaxSize = fitFontSize(withVOB, withBasePx * WITH_MAX_SCALE, maxTextWidth, 800);
 
-            // text group alpha
-            const groupAlpha = p2 <= 0 ? 1 : lerp(1, 0, t2);
+            // Phase2 전환 진행도(배경/파동): WITH_START~WITH_END
+            const crossRaw = clamp01((p - WITH_START) / (WITH_END - WITH_START));
+            const cross = easeInOutCubic(crossRaw);
 
-            // draw zoom block
-            ctx.save();
-            ctx.globalAlpha = groupAlpha;
-            ctx.translate(oCenterX, oCenterY);
-            ctx.scale(scale, scale);
-            ctx.translate(-oCenterX, -oCenterY);
+            // withVOB 등장(알파/스케일): WITH_START~PHASE3_START (더 빨리 끝)
+            const appearRaw = clamp01((p - WITH_START) / (PHASE3_START - WITH_START));
+            const appear = easeOutCubic(appearRaw);
 
-            ctx.fillStyle = FG;
-            ctx.font = `700 ${headerSize}px ${FONT_FAMILY}`;
-            ctx.fillText(header, headerX, headerY);
+            const appearScale = lerp(0.55, WITH_MAX_SCALE, appear);
+            const withSize = fitFontSize(withVOB, withBasePx * appearScale, maxTextWidth, 800);
 
-            ctx.font = `800 ${line1Size}px ${FONT_FAMILY}`;
-            ctx.fillText(line1, line1X, line1Y);
+            // ✅ Phase3는 "등장 완료 순간"부터 시작
+            const isPhase3 = p >= PHASE3_START;
 
-            ctx.fillStyle = SUB_FG;
-            ctx.font = `500 ${s1Size}px ${FONT_FAMILY}`;
-            ctx.fillText(s1, s1X, s1Y);
+            // ✅ with VOB는 “첫 파동 중심”에서 등장 & 확대만 (X/Y 고정)
+            ctx.font = `800 ${withSize}px ${FONT_FAMILY}`;
+            const withW = ctx.measureText(withVOB).width;
+            const withX = oCenterX1 - withW / 2;
+            const withY = oCenterY1;
 
-            ctx.font = `500 ${s2Size}px ${FONT_FAMILY}`;
-            ctx.fillText(s2, s2X, s2Y);
+            // withVOB의 O 중심(새 파동 중심)
+            const beforeO2 = 'with V';
+            const oW2 = ctx.measureText('O').width;
+            const oCenterX2 = withX + ctx.measureText(beforeO2).width + oW2 / 2;
+            const oCenterY2 = withY;
 
-            ctx.font = `500 ${s3Size}px ${FONT_FAMILY}`;
-            ctx.fillText(s3, s3X, s3Y);
+            // ============== 배경/파동 렌더 ==============
+            // 1) 기본: 옐로 배경/파동 (등장/전환에 따라 점점 약화)
+            drawRipple({
+                w,
+                h,
+                fade: 0.0,
+                localT: tSec,
+                cx: oCenterX1,
+                cy: oCenterY1,
+                baseColor: 'rgba(22,22,22,1)',
+                tint: TINT1_RGB,
+                ring: RING1_RGB,
+                settleToBG: true,
+                intensityMul: lerp(1, 0, cross),
+            });
 
-            ctx.font = `500 ${s4Size}px ${FONT_FAMILY}`;
-            ctx.fillText(s4, s4X, s4Y);
+            // 2) 전환: 시안 배경 오버레이(서서히)
+            if (cross > 0.0001) {
+                ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},${0.92 * cross})`;
+                ctx.fillRect(0, 0, w, h);
+            }
 
-            ctx.restore();
-            ctx.globalAlpha = 1;
+            // 3) 새 시안 파동(등장 시점부터, cross로 강도 증가)
+            if (p >= WITH_START) {
+                if (withStartTime == null) withStartTime = tSec;
+                const localT2 = tSec - withStartTime;
 
-            // with AI 오래 유지: 일찍 등장 + 계속 유지
-            const appearStart = 0.12;
-            const appearEnd = 0.45;
-            const aiIn = clamp01((p2 - appearStart) / (appearEnd - appearStart));
-            const aiAlpha = easeInOutCubic(aiIn);
+                drawRipple({
+                    w,
+                    h,
+                    fade: lerp(0.0, 0.12, cross),
+                    localT: localT2,
+                    cx: oCenterX2,
+                    cy: oCenterY2,
+                    baseColor: 'transparent',
+                    tint: TINT2_RGB,
+                    ring: RING2_RGB,
+                    settleToBG: false,
+                    intensityMul: cross,
+                });
+            } else {
+                withStartTime = null;
+            }
 
-            if (aiAlpha > 0.001) {
-                const aiScale = lerp(0.98, 1.55, aiAlpha);
-                const aiTargetPx = Math.max(18, w * 0.06) * aiScale;
-                const aiSize = fitFontSize(withAI, aiTargetPx, maxTextWidth, 800);
+            // ============== 텍스트 렌더 ==============
+            // Phase1 텍스트 줌(Emotion O)
+            const z1 = clamp01(p / Z1_END);
+            const scale1 = lerp(1, getZoomMax(), getZoomEase(z1));
 
+            // ✅ 기존 문구는 appear가 커질수록 빠르게 죽여서 withVOB가 "빨리 보이게"
+            let groupAlpha = lerp(1, 0, easeInOutCubic(z1));
+            if (p >= WITH_START) groupAlpha *= 1 - appear;
+
+            // Phase1(원문) - Phase3 시작 전까지만 그리기
+            if (!isPhase3) {
                 ctx.save();
-                ctx.globalAlpha = aiAlpha;
+                ctx.globalAlpha = groupAlpha;
+
+                ctx.translate(oCenterX1, oCenterY1);
+                ctx.scale(scale1, scale1);
+                ctx.translate(-oCenterX1, -oCenterY1);
+
                 ctx.fillStyle = FG;
-                ctx.font = `800 ${aiSize}px ${FONT_FAMILY}`;
-                ctx.fillText(withAI, centerX(withAI, aiSize, 800), h * 0.62);
+                ctx.font = `700 ${headerSize}px ${FONT_FAMILY}`;
+                ctx.fillText(header, headerX, headerY);
+
+                ctx.font = `800 ${line1Size}px ${FONT_FAMILY}`;
+                ctx.fillText(line1, line1X, line1Y);
+
+                ctx.fillStyle = SUB_FG;
+                ctx.font = `500 ${s1Size}px ${FONT_FAMILY}`;
+                ctx.fillText(s1, s1X, s1Y);
+                ctx.font = `500 ${s2Size}px ${FONT_FAMILY}`;
+                ctx.fillText(s2, s2X, s2Y);
+                ctx.font = `500 ${s3Size}px ${FONT_FAMILY}`;
+                ctx.fillText(s3, s3X, s3Y);
+                ctx.font = `500 ${s4Size}px ${FONT_FAMILY}`;
+                ctx.fillText(s4, s4X, s4Y);
+
                 ctx.restore();
+                ctx.globalAlpha = 1;
+            }
+
+            // withVOB 텍스트: 등장 구간에서만 (PHASE3_START까지)
+            if (p >= WITH_START && p < PHASE3_START) {
+                ctx.save();
+                ctx.globalAlpha = appear;
+                ctx.fillStyle = FG;
+                ctx.font = `800 ${withSize}px ${FONT_FAMILY}`;
+                ctx.fillText(withVOB, withX, withY);
+                ctx.restore();
+            }
+
+            // ============== Phase3: VOB의 O 줌(등장 완료 즉시 시작) ==============
+            if (isPhase3) {
+                // Phase3 진행도: PHASE3_START ~ 1
+                const z3 = clamp01((p - PHASE3_START) / (1 - PHASE3_START));
+
+                // 줌은 앞에 몰고, 끝에 짧게 페이드
+                const SCALE_END = 0.78;
+                const zScale = clamp01(z3 / SCALE_END);
+                const zFade = clamp01((z3 - SCALE_END) / (1 - SCALE_END));
+
+                const scale2 = lerp(1, getZoomMax(), getZoomEase(zScale));
+                const textAlpha = 1 - easeInOutCubic(zFade);
+
+                // ✅ 배경은 "시안톤 유지" -> "BG"로 서서히 수렴
+                ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},0.92)`;
+                ctx.fillRect(0, 0, w, h);
+
+                const bgFade = easeInOutCubic(clamp01(z3 / 0.7));
+                ctx.fillStyle = `rgba(30,30,30,${bgFade})`;
+                ctx.fillRect(0, 0, w, h);
+
+                // Phase3에서 기준 withVOB는 "최대치"로 고정 (점프 방지)
+                ctx.font = `800 ${withMaxSize}px ${FONT_FAMILY}`;
+                const withWMax = ctx.measureText(withVOB).width;
+                const withXMax = oCenterX1 - withWMax / 2;
+                const withYMax = oCenterY1;
+
+                // O 중심(최대 사이즈 기준)
+                const beforeO2b = 'with V';
+                const oW2b = ctx.measureText('O').width;
+                const oCenterX2b = withXMax + ctx.measureText(beforeO2b).width + oW2b / 2;
+                const oCenterY2b = withYMax;
+
+                // (선택) Phase3 초반엔 파동 잔광을 아주 약하게 남김
+                const rippleKeep = 1 - bgFade;
+                if (rippleKeep > 0.02) {
+                    const localT2 = withStartTime == null ? 0 : tSec - withStartTime;
+                    drawRipple({
+                        w,
+                        h,
+                        fade: 0.08,
+                        localT: localT2,
+                        cx: oCenterX2b,
+                        cy: oCenterY2b,
+                        baseColor: 'transparent',
+                        tint: TINT2_RGB,
+                        ring: RING2_RGB,
+                        settleToBG: false,
+                        intensityMul: rippleKeep * 0.55,
+                    });
+                }
+
+                // 줌(앵커=O 중심)
+                ctx.save();
+                ctx.translate(oCenterX2b, oCenterY2b);
+                ctx.scale(scale2, scale2);
+                ctx.translate(-oCenterX2b, -oCenterY2b);
+
+                if (textAlpha > 0.001) {
+                    ctx.globalAlpha = textAlpha;
+                    ctx.fillStyle = FG;
+                    ctx.font = `800 ${withMaxSize}px ${FONT_FAMILY}`;
+                    ctx.fillText(withVOB, withXMax, withYMax);
+                }
+
+                ctx.restore();
+                ctx.globalAlpha = 1;
+
+                // 마지막에 O/텍스트가 사라지며 BG로 자연스럽게
+                const f = easeInOutCubic(zFade);
+                if (f > 0.001) {
+                    ctx.fillStyle = `rgba(30,30,30,${f})`;
+                    ctx.fillRect(0, 0, w, h);
+                }
             }
         };
 
@@ -384,7 +513,7 @@ export const Main = () => {
     }, [s1, s2, s3, s4]);
 
     return (
-        <section ref={sectionRef} style={{ height: '300vh', background: BG }}>
+        <section ref={sectionRef} style={{ height: '980vh', background: BG }}>
             <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
