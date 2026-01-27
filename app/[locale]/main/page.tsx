@@ -1,4 +1,4 @@
-import {Main} from "@/ui/Main";
+import {Main} from "@/components/Main";
 import styles from './styles.module.css';
 
 export default function MainPage() {

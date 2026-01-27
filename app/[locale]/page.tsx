@@ -14,7 +14,7 @@ import {Distribution} from "@/components/Distribution";
 import {Vision} from "@/components/Vision";
 // import {Wrapup} from "@/components/Wrapup";
 import {PartnersNew} from "@/components/PartnersNew";
-import {Main} from "@/ui/Main";
+import {Main} from "@/components/Main";
 // import {Devs} from "@/components/Devs";
 
 
@@ -42,9 +42,9 @@ export default async function Page({params} : any) {
           {/*    </div>*/}
           {/*</main>*/}
           <Main/>
-          <div className={`${styles.subWrapper} ${styles.visionWrapper}`}>
-              <Vision/>
-          </div>
+          {/*<div className={`${styles.subWrapper} ${styles.visionWrapper}`}>*/}
+          {/*    <Vision/>*/}
+          {/*</div>*/}
           {/*<div className={styles.subWrapper}>*/}
           {/*    <About/>*/}
           {/*</div>*/}

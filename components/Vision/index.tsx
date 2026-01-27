@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './styles.module.css'
 import Image from 'next/image';
 import {Kaisei_HarunoUmi, Vollkorn} from "next/font/google";
@@ -7,6 +9,7 @@ import vobPic from '@/public/vob_crop.png';
 import blockPic from '@/public/blockchain_white.png';
 import visionPic from '@/public/vision_white.png';
 import {NavigationLink} from "@/ui/NavigationLink";
+import {useTranslations} from "next-intl";
 const notoserifjp = Noto_Serif_JP({
     weight: ['200', '300', '400', '500', '600', '700', '900'],
     style : "normal",
@@ -17,9 +20,11 @@ const kaisei = Kaisei_HarunoUmi({
     subsets: ["latin"],
 });
 
-export const Vision = async () => {
+export const Vision = () => {
 
-    const t = await getTranslations('vision');
+    // const t = await getTranslations('vision');
+    // const t = await getTranslations('vision');
+    const t = useTranslations('vision');
 
     return (
         <div className={`${styles.visionWrapper}`}>

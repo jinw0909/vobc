@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './styles.module.css';
+import { Vision } from '@/components/Vision';
 
 const BG = 'rgba(30, 30, 30, 1)';
 const FG = '#fff';
@@ -24,6 +25,9 @@ export const Main = () => {
     const t = useTranslations('hero');
     const sectionRef = useRef<HTMLElement | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+    // ✅ Vision: slot(레이아웃 자리) + inner(fixed/relative 전환)
+    const visionRef = useRef<HTMLDivElement | null>(null);
 
     const s1 = t('line1');
     const s2 = t('line2');
@@ -47,7 +51,7 @@ export const Main = () => {
         // ======================================================
         // 타임라인(0~1)
         // 1) Emotion O 줌: 0 ~ Z1_END
-        // 2) withVOB 등장(오버랩) + 배경/파동 전환: ...
+        // 2) withVOB 등장(오버랩) + 배경/파동 전환
         // 3) VOB의 O 줌: PHASE3_START ~ 1
         // ======================================================
         const Z1_END = 0.58;
@@ -55,17 +59,17 @@ export const Main = () => {
         // ✅ withVOB 더 빨리
         const WITH_START = 0.22;
         // 전환 구간의 "총 길이"(배경/파동이 다 바뀌는 끝)
-        const WITH_END = 0.60;
+        const WITH_END = 0.6;
 
         // ✅ withVOB는 전환 구간의 일부(APPEAR_RATIO)만에 "최대치" 도달
         //    최대치 도달 순간 바로 Phase3(= O 줌) 시작
-        const APPEAR_RATIO = 0.40;
+        const APPEAR_RATIO = 0.4;
         const PHASE3_START = WITH_START + (WITH_END - WITH_START) * APPEAR_RATIO;
 
         // ✅ (중요) Phase1 후반부터 "파란 배경이 스며들기" 시작하는 지점
-        // 값 ↓ : 더 늦게 스며듦 / 값 ↑ : 더 빨리 스며듦
         const CROSS_START = Z1_END - 0.12;
-        const CROSS_END = WITH_END;
+
+
 
         const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
         const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
@@ -103,7 +107,7 @@ export const Main = () => {
         // 실제 스크롤 progress
         let latestP = 0;
 
-        // ✅ 애니메이션 progress(느리게 따라감)
+        // ✅ 애니메이션 progress(느리게 따라감) - 캔버스용
         let animP = 0;
 
         // 전환 파동 time reset
@@ -219,11 +223,14 @@ export const Main = () => {
             }
         };
 
-        const draw = (p: number, tSec: number) => {
+        const draw = (p: number, tSec: number, pReal?: number) => {
             const rect = canvas.getBoundingClientRect();
             const w = Math.max(1, rect.width);
             const h = Math.max(1, rect.height);
             const maxTextWidth = Math.max(1, w - PADDING_X * 2);
+
+            const pA = p;              // ✅ 애니메이션(느리게 따라감): 텍스트 줌/알파용
+            const pR = pReal ?? p;     // ✅ 실제 스크롤(즉시 반영): 배경/파동/컷용
 
             // -------- layout(원문 기준) --------
             const headerSize = fitFontSize(header, Math.min(22, w * 0.04), maxTextWidth, 700);
@@ -273,40 +280,44 @@ export const Main = () => {
             const WITH_MAX_SCALE = 1.22;
             const withMaxSize = fitFontSize(withVOB, withBasePx * WITH_MAX_SCALE, maxTextWidth, 800);
 
-            // ✅ Phase2 전환 진행도(배경/파동): CROSS_START~CROSS_END (미리 스며들기)
-            // const crossRaw = clamp01((p - CROSS_START) / (CROSS_END - CROSS_START));
-            // const cross = easeInOutCubic(crossRaw);
-
-            // smoothstep(0~1) 유틸
             const smoothstep = (a: number, b: number, x: number) => {
                 const t = clamp01((x - a) / (b - a));
                 return t * t * (3 - 2 * t);
             };
+            const lerpInt = (a: number, b: number, t: number) => Math.round(a + (b - a) * t);
 
-            // 1) 예열: Phase1 후반(CROSS_START) ~ WITH_START
-            const warm = smoothstep(CROSS_START, WITH_START, p);
+            // ===============================
+            // ✅ 타임라인 (배경/파동은 pR 기준)
+            // ===============================
 
-            // 2) 본 전환: WITH_START ~ WITH_END
-            const swap = smoothstep(WITH_START, WITH_END, p);
+            // 1) 노란 파동: 0 ~ WITH_START 동안만 서서히 감소, WITH_START부터 0 고정
+            const tY = clamp01(pR / WITH_START); // 0~1
+            const yellowMul = pR >= WITH_START ? 0 : Math.pow(1 - tY, 1.6);
 
-            // 배경 파란 오버레이 알파: 예열은 약하게 + 본전환은 강하게
-            const bgBlueAlpha = 0.16 * warm + 0.92 * swap;
+            // 2) 배경(파란 기운): 0 ~ WITH_START 사이에 완료, phase3에서 다시 BG로 복귀
+            const BLUE_START = 0.02; // 더 빨리 파랑 깔고 싶으면 0
+            const blueIn = smoothstep(BLUE_START, WITH_START, pR); // 0->1
+            const blueOut = smoothstep(PHASE3_START, 1, pR);       // 0->1
+            const blueHold = blueIn * (1 - blueOut);               // 0->1->0
 
-            // 노란 파동 강도는 "본 전환" 때만 줄어들게 (예열때는 그대로)
-            const yellowMul = 1 - swap;
+            // BG(30,30,30) ↔ BG2_BASE(14,22,26) 블렌딩(과하게 파랗게 안 보이게)
+            const baseR = lerpInt(30, BG2_BASE.r, blueHold);
+            const baseG = lerpInt(30, BG2_BASE.g, blueHold);
+            const baseB = lerpInt(30, BG2_BASE.b, blueHold);
 
-            // 파란 파동 강도도 "본 전환" 때부터 (예열때는 거의 안 보이게)
-            const cyanMul = swap;
+            // 3) 파란 파동: phase2(withVOB 등장 구간)에서 등장, phase3에서 소멸
+            const cyanIn = smoothstep(WITH_START, PHASE3_START, pR);
+            const cyanMul = cyanIn * (1 - blueOut);
 
             // withVOB 등장(알파/스케일): WITH_START~PHASE3_START
-            const appearRaw = clamp01((p - WITH_START) / (PHASE3_START - WITH_START));
+            const appearRaw = clamp01((pA - WITH_START) / (PHASE3_START - WITH_START));
             const appear = easeOutCubic(appearRaw);
 
             const appearScale = lerp(0.55, WITH_MAX_SCALE, appear);
             const withSize = fitFontSize(withVOB, withBasePx * appearScale, maxTextWidth, 800);
 
             // ✅ Phase3는 "등장 완료 순간"부터 시작
-            const isPhase3 = p >= PHASE3_START;
+            const isPhase3 = pA >= PHASE3_START;
 
             // ✅ with VOB는 “첫 파동 중심”에서 등장 & 확대만 (X/Y 고정)
             ctx.font = `800 ${withSize}px ${FONT_FAMILY}`;
@@ -321,38 +332,36 @@ export const Main = () => {
             const oCenterY2 = withY;
 
             // ============== 배경/파동 렌더 ==============
-            drawRipple({
-                w,
-                h,
-                fade: 0.0,
-                localT: tSec,
-                cx: oCenterX1,
-                cy: oCenterY1,
-                baseColor: 'rgba(22,22,22,1)',
-                tint: TINT1_RGB,
-                ring: RING1_RGB,
-                settleToBG: true,
-                intensityMul: yellowMul,
-            });
 
-            // ✅ 전환: 시안 배경 오버레이(서서히) - Phase1 후반부터
-            if (bgBlueAlpha > 0.0001) {
-                ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},${bgBlueAlpha})`;
-                ctx.fillRect(0, 0, w, h);
+            // ✅ "기본 배경" 자체를 블렌딩해서 깔기 (phase1 끝에서 검정으로 떨어지는 느낌 방지)
+            ctx.fillStyle = `rgba(${baseR},${baseG},${baseB},1)`;
+            ctx.fillRect(0, 0, w, h);
+
+            // ✅ phase2 시작(WITH_START) 전까지만 노란 파동을 그리고, 시작부터 점점 옅어짐
+            if (pR < WITH_START && yellowMul > 0.001) {
+                drawRipple({
+                    w, h,
+                    fade: 0.0,
+                    localT: tSec,
+                    cx: oCenterX1,
+                    cy: oCenterY1,
+                    baseColor: 'transparent',
+                    tint: TINT1_RGB,
+                    ring: RING1_RGB,
+                    settleToBG: false,
+                    intensityMul: yellowMul,
+                });
             }
 
-
-            // ✅ 시안 파동도 cross가 생기면 아주 약하게부터(갑툭튀 방지)
+            // ✅ 파란 파동 (phase2에서 등장 → phase3에서 소멸)
             if (cyanMul > 0.0001) {
                 if (withStartTime == null) withStartTime = tSec;
                 const localT2 = tSec - withStartTime;
 
-                // 처음엔 거의 안 보이다가 서서히
                 const waveK = Math.pow(cyanMul, 1.6);
 
                 drawRipple({
-                    w,
-                    h,
+                    w, h,
                     fade: lerp(0.0, 0.12, cyanMul),
                     localT: localT2,
                     cx: oCenterX2,
@@ -367,13 +376,12 @@ export const Main = () => {
                 withStartTime = null;
             }
 
-
             // ============== 텍스트 렌더 ==============
-            const z1 = clamp01(p / Z1_END);
+            const z1 = clamp01(pA / Z1_END);
             const scale1 = lerp(1, getZoomMax(), getZoomEase(z1));
 
             let groupAlpha = lerp(1, 0, easeInOutCubic(z1));
-            if (p >= WITH_START) groupAlpha *= 1 - appear;
+            if (pA >= WITH_START) groupAlpha *= 1 - appear;
 
             if (!isPhase3) {
                 ctx.save();
@@ -404,7 +412,7 @@ export const Main = () => {
                 ctx.globalAlpha = 1;
             }
 
-            if (p >= WITH_START && p < PHASE3_START) {
+            if (pA >= WITH_START && pA < PHASE3_START) {
                 ctx.save();
                 ctx.globalAlpha = appear;
                 ctx.fillStyle = FG;
@@ -415,19 +423,17 @@ export const Main = () => {
 
             // ============== Phase3: VOB의 O 줌 ==============
             if (isPhase3) {
-                const z3 = clamp01((p - PHASE3_START) / (1 - PHASE3_START));
+                const z3A = clamp01((pA - PHASE3_START) / (1 - PHASE3_START)); // 줌/텍스트
+                const z3R = clamp01((pR - PHASE3_START) / (1 - PHASE3_START)); // 배경/파동
 
                 const SCALE_END = 0.78;
-                const zScale = clamp01(z3 / SCALE_END);
-                const zFade = clamp01((z3 - SCALE_END) / (1 - SCALE_END));
+                const zScale = clamp01(z3A / SCALE_END);
+                const zFade = clamp01((z3R - SCALE_END) / (1 - SCALE_END));
 
                 const scale2 = lerp(1, getZoomMax(), accel2(zScale));
                 const textAlpha = 1 - easeInOutCubic(zFade);
 
-                ctx.fillStyle = `rgba(${BG2_BASE.r},${BG2_BASE.g},${BG2_BASE.b},0.92)`;
-                ctx.fillRect(0, 0, w, h);
-
-                const bgFade = easeInOutCubic(clamp01(z3 / 0.7));
+                const bgFade = easeInOutCubic(clamp01(z3R / 0.7));
                 ctx.fillStyle = `rgba(30,30,30,${bgFade})`;
                 ctx.fillRect(0, 0, w, h);
 
@@ -445,8 +451,7 @@ export const Main = () => {
                 if (rippleKeep > 0.02) {
                     const localT2 = withStartTime == null ? 0 : tSec - withStartTime;
                     drawRipple({
-                        w,
-                        h,
+                        w, h,
                         fade: 0.08,
                         localT: localT2,
                         cx: oCenterX2b,
@@ -486,38 +491,117 @@ export const Main = () => {
             latestP = getProgressInSection();
         };
 
+        const updateVision = () => {
+            const el = visionRef.current;
+            const section = sectionRef.current;
+            if (!el || !section) return;
+
+            const rect = section.getBoundingClientRect();
+            const vh = window.innerHeight;
+
+            // hero 섹션 progress (0~1)
+            const scrollable = rect.height - vh;
+            const progress =
+                scrollable <= 0 ? 1 : Math.min(1, Math.max(0, -rect.top / scrollable));
+
+            // ===== opacity =====
+            const FADE_START = 0.7;
+            const FADE_END = 0.85;
+
+            let opacity = 0;
+            if (progress > FADE_START) {
+                opacity = Math.min(1, (progress - FADE_START) / (FADE_END - FADE_START));
+            }
+
+            el.style.opacity = String(opacity);
+            el.style.pointerEvents = opacity > 0.95 ? 'auto' : 'none';
+
+            // ===== position switching =====
+            const shouldUnfix = rect.bottom <= vh;
+
+            // ============================
+            // FIXED 상태
+            // ============================
+            if (!shouldUnfix) {
+
+                const isMobile = window.innerWidth < 768;
+
+                el.style.position = 'fixed';
+                el.style.left = '50%';
+                el.style.top = isMobile ? '8rem' : '12rem';
+                el.style.transform = 'translateX(-50%)';
+                el.style.right = '';
+                el.style.bottom = '';
+
+                // ✅ 중요: fixed 상태에서는 margin 제거
+                section.style.marginBottom = '0px';
+
+                return;
+            }
+
+            // ============================
+            // ABSOLUTE 상태
+            // ============================
+
+            // 1️⃣ 현재 화면에서의 Vision 위치
+            const elRect = el.getBoundingClientRect();
+
+            // 2️⃣ heroSection의 문서 좌표
+            const heroTop = window.scrollY + rect.top;
+
+            // 3️⃣ Vision의 문서 좌표
+            const visionTop = window.scrollY + elRect.top;
+
+            // 4️⃣ section 기준 absolute top
+            const topInSection = visionTop - heroTop;
+
+            el.style.position = 'absolute';
+            el.style.left = '50%';
+            el.style.transform = 'translateX(-50%)';
+            el.style.top = `${topInSection}px`;
+            el.style.right = '';
+            el.style.bottom = '';
+
+
+            // ✅ 뷰포트 기준 겹침 계산 (안 튐)
+            const overlap = elRect.bottom - rect.bottom; // 둘 다 viewport 기준
+            const extra = Math.max(0, overlap + 32);
+            section.style.marginBottom = `${extra}px`;
+        };
+
+
+
+
         const tick = (ms: number) => {
             if (!lastT) lastT = ms;
             const dt = Math.min(0.05, (ms - lastT) / 1000);
             lastT = ms;
             time += dt;
 
-            // ✅ 스크롤 진행도를 "느리게" 따라가는 애니메이션 progress
-            // 값 ↓ = 더 느림 / 값 ↑ = 더 빠름
+            // ✅ 스크롤 진행도를 "느리게" 따라가는 애니메이션 progress (캔버스용)
             const FOLLOW = isMobile() ? 12 : 7;
-
-            // 1 - exp(-k*dt) 형태가 프레임레이트에 덜 민감함
             animP += (latestP - animP) * (1 - Math.exp(-FOLLOW * dt));
 
-            draw(animP, time);
+            draw(animP, time, latestP);
             rafId = window.requestAnimationFrame(tick);
         };
 
         const onScroll = () => {
             updateProgress();
-            // ✅ draw는 tick에서만
-        };
+            updateVision();
+        }
 
         const onResize = () => {
             setCanvasSize();
             updateProgress();
-            draw(animP, time);
+            updateVision();
+            draw(animP, time, latestP);
         };
 
         const onVhResize = () => {
             setCanvasSize();
             updateProgress();
-            draw(animP, time);
+            draw(animP, time, latestP);
         };
 
         const start = async () => {
@@ -528,8 +612,9 @@ export const Main = () => {
 
             setCanvasSize();
             updateProgress();
+
             animP = latestP; // 시작 시점 점프 방지
-            draw(animP, time);
+            draw(animP, time, latestP);
 
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onResize);
@@ -543,6 +628,7 @@ export const Main = () => {
         };
 
         start();
+        updateVision();
 
         return () => {
             window.removeEventListener('scroll', onScroll);
@@ -561,6 +647,11 @@ export const Main = () => {
         <section ref={sectionRef} className={styles.heroSection} style={{ background: BG }}>
             <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
+            </div>
+
+            {/* ✅ Vision이 지나갈 자리(레이아웃 공간 확보) */}
+            <div ref={visionRef} className={styles.vision}>
+                <Vision />
             </div>
         </section>
     );

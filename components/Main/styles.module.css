@@ -1,0 +1,29 @@
+.heroSection {
+    position: relative;
+    height: 1080vh;
+    background: rgba(30,30,30,1);
+}
+
+.vision {
+    position: fixed;
+    /*top: 12rem;*/
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+    width: 80vw;
+}
+
+@media (min-width: 769px) {
+    .heroSection {
+        height: 450vh;
+    }  /* PC만 줄임 */
+}
+
+@media (max-width: 768px) {
+    .vision {
+        /*top: 8rem;*/
+        width: 90%;
+    }
+}
