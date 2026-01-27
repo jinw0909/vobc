@@ -126,6 +126,7 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
                             width={w}
                             height={h}
                             className="content-inline-image"
+                            unoptimized
                         />
                     );
                 }

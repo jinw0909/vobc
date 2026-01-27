@@ -163,6 +163,7 @@ export function NewsAcc({ data, imgSrc, index }: { data: any, imgSrc: any, index
                                 fill={true}
                                 style={{ objectFit: 'cover' }}
                                 alt={`news image ${i}`}
+                                unoptimized
                             />
 
                             {`news${i}`}

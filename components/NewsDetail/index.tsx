@@ -92,6 +92,7 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
                             style={{ width: '100%', height: 'auto' }}
                             alt={article.title}
                             sizes="(max-width: 768px) 100vw, 50vw"
+                            unoptimized
                         />
                     </div>
 

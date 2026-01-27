@@ -338,6 +338,7 @@ export function TeamBand({ selected, order, registerRef, team, members }: TeamBa
                                                         sizes="128px"
                                                         style={{ objectFit: 'cover' }}
                                                         draggable={false}
+                                                        unoptimized
                                                     />
                                                 </div>
                                                 <span className={styles.profileName}>{m.name}</span>

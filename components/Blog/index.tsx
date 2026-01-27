@@ -80,6 +80,7 @@ export default async function BlogPage() {
                                             fill
                                             style={{ objectFit: "cover" }}
                                             className={styles.svgArrow}
+                                            unoptimized
                                         />
                                     </div>
                                 </NavigationLink>
@@ -118,6 +119,7 @@ export default async function BlogPage() {
                                         alt={firstTitle}
                                         style={{ objectFit: "cover" }}
                                         fill
+                                        unoptimized
                                     />
                                 )}
                             </div>

@@ -188,6 +188,7 @@ export function NewsMediaBand({
                                         src={imgSrc[i]}
                                         alt="media image"
                                         draggable={false}
+                                        unoptimized
                                     />
                                 </NavigationLink>
                             </div>

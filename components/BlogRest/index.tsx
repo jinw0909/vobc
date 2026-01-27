@@ -142,7 +142,7 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
                                     <NavigationLink href={`/blog/${post.id}`} scroll={true}>
                                         <div className={styles.imageElem}>
                                             {post.thumbnail && (
-                                                <Image src={post.thumbnail} alt={title} style={{ objectFit: "cover" }} fill />
+                                                <Image src={post.thumbnail} alt={title} style={{ objectFit: "cover" }} fill unoptimized/>
                                             )}
                                         </div>
                                     </NavigationLink>
