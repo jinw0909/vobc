@@ -98,6 +98,7 @@ export default async function BlogTag({params, searchParams}: {
                                                 alt={post.title}
                                                 fill={true}
                                                 style={{objectFit: 'cover'}}
+                                                unoptimized
                                             />
                                         ) : (
                                             <div className={styles.postThumbnailPlaceholder}>
