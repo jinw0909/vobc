@@ -45,23 +45,49 @@
     /*background-color: white;*/
 }
 
+/*.whitepaperInner::after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    bottom: 0;*/
+/*    right: 0;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    background: rgba(255, 255, 255, 0.7);*/
+/*    !*background: linear-gradient(*!*/
+/*    !*        180deg,*!*/
+/*    !*        rgba(255, 255, 255),*!*/
+/*    !*        rgba(255, 255, 255, 0.7));*!*/
+/*    opacity: 0;*/
+/*    transition: 1s;*/
+/*}*/
 .whitepaperInner::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.7);
-    /*background: linear-gradient(*/
-    /*        180deg,*/
-    /*        rgba(255, 255, 255),*/
-    /*        rgba(255, 255, 255, 0.7));*/
+    inset: 0;
+
+    /* 노란 종이 */
+    background-color: rgba(255, 247, 200, 0.95);
+
+    /* 파란 줄 */
+    background-image:
+            repeating-linear-gradient(
+                    to bottom,
+                    rgba(60, 120, 200, 0.35) 0px,
+                    rgba(60, 120, 200, 0.35) 1px,
+                    transparent 1px,
+                    transparent 22px
+            );
+
+    /* 종이 질감 살짝 */
+    filter: brightness(1.03) contrast(0.95);
+
     opacity: 0;
-    transition: 1s;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
 }
+
 .whitepaperInner.show::before {
     /*height: 100%;*/
     /*transition: .5s;*/
