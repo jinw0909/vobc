@@ -513,7 +513,7 @@ export const Main = () => {
 
             // ===== opacity =====
             const FADE_START = 0.7;
-            const FADE_END = 0.85;
+            const FADE_END = 0.95;
 
             let opacity = 0;
             if (progress > FADE_START) {

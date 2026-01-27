@@ -1,6 +1,7 @@
 .heroSection {
     position: relative;
-    height: 1080vh;
+    height: 980vh;
+    /*height: 1200vh;*/
     background: rgba(30,30,30,1);
 }
 
