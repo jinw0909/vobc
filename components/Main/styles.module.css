@@ -12,18 +12,33 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease-out;
-    width: 80vw;
+    max-width: 1080px;
+    width: 100%;
+    padding: 2rem;
 }
+
+@media (min-width: 1400px) {
+    .vision {
+        max-width: 1280px;
+        padding: 2rem;
+    }
+}
+
 
 @media (min-width: 769px) {
     .heroSection {
         height: 450vh;
     }  /* PC만 줄임 */
+    .vision { padding: 2rem; }
 }
 
 @media (max-width: 768px) {
     .vision {
         /*top: 8rem;*/
-        width: 90%;
+        width: 100%;
     }
+}
+
+@media (max-width: 576px) {
+    .vision { padding: 1rem; }
 }

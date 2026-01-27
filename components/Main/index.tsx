@@ -42,7 +42,14 @@ export const Main = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const FONT_FAMILY = `"Noto Serif KR","Noto Serif JP","Times New Roman",serif`;
+        const FONT_FAMILY = `
+          "Noto Serif KR",
+          "Noto Serif JP",
+          "Noto Serif SC",
+          "Noto Serif TC",
+          "Times New Roman",
+          serif
+        `;
 
         const header = 'VOB 1.0 Smart Trading';
         const line1 = 'Experience EmOtion-Free Trading';
