@@ -1,21 +1,35 @@
 .heroSection {
     position: relative;
-    height: 980vh;
+    height: 1280vh;
     /*height: 1200vh;*/
     background: rgba(30,30,30,1);
 }
 
+/*.vision {*/
+/*    position: fixed;*/
+/*    !*top: 12rem;*!*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%);*/
+/*    opacity: 0;*/
+/*    pointer-events: none;*/
+/*    transition: opacity 0.2s ease-out;*/
+/*    max-width: 1080px;*/
+/*    width: 100%;*/
+/*    padding: 2rem;*/
+/*}*/
+
+
 .vision {
-    position: fixed;
-    /*top: 12rem;*/
+    position: fixed; /* ✅ 초기 상태를 fixed로 잡아두면 JS 죽어도 화면 확인 가능 */
+    top: 12rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(85vh);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s ease-out;
-    max-width: 1080px;
     width: 100%;
+    max-width: 1080px;
     padding: 2rem;
+    will-change: transform, opacity;
 }
 
 @media (min-width: 1400px) {
@@ -28,7 +42,7 @@
 
 @media (min-width: 769px) {
     .heroSection {
-        height: 450vh;
+        /*height: 900vh;*/
     }  /* PC만 줄임 */
     .vision { padding: 2rem; }
 }

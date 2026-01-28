@@ -1,5 +1,7 @@
 'use client';
 
+console.log('Main module loaded');
+
 import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './styles.module.css';
@@ -26,8 +28,9 @@ export const Main = () => {
     const sectionRef = useRef<HTMLElement | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    // ✅ Vision: slot(레이아웃 자리) + inner(fixed/relative 전환)
-    const visionRef = useRef<HTMLDivElement | null>(null);
+    // ✅ Vision: 자리(slot) + 실제 보이는(inner)  (inner는 반드시 slot 안에!)
+    // const visionSlotRef = useRef<HTMLDivElement | null>(null);
+    const visionInnerRef = useRef<HTMLDivElement | null>(null);
 
     const s1 = t('line1');
     const s2 = t('line2');
@@ -35,20 +38,23 @@ export const Main = () => {
     const s4 = t('line4');
 
     useEffect(() => {
+        console.log('effect entered');
+        console.log('refs', {
+            section: !!sectionRef.current,
+            canvas: !!canvasRef.current,
+            inner: !!visionInnerRef.current,
+        });
         const section = sectionRef.current;
         const canvas = canvasRef.current;
-        if (!section || !canvas) return;
+        // const slot = visionSlotRef.current;
+        const inner = visionInnerRef.current;
+        if (!section || !canvas || !inner) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         const FONT_FAMILY = `
-          "Noto Serif KR",
-          "Noto Serif JP",
-          "Noto Serif SC",
-          "Noto Serif TC",
-          "Times New Roman",
-          serif
+          "Noto Serif KR","Noto Serif JP","Noto Serif SC","Noto Serif TC","Times New Roman",serif
         `;
 
         const header = 'VOB 1.0 Smart Trading';
@@ -56,28 +62,24 @@ export const Main = () => {
         const withVOB = 'with VOB';
 
         // ======================================================
-        // 타임라인(0~1)
-        // 1) Emotion O 줌: 0 ~ Z1_END
-        // 2) withVOB 등장(오버랩) + 배경/파동 전환
-        // 3) VOB의 O 줌: PHASE3_START ~ 1
+        // 타임라인(0~1) (너 원본 유지)
         // ======================================================
         const Z1_END = 0.58;
-
-        // ✅ withVOB 더 빨리
         const WITH_START = 0.22;
-        // 전환 구간의 "총 길이"(배경/파동이 다 바뀌는 끝)
         const WITH_END = 0.6;
-
-        // ✅ withVOB는 전환 구간의 일부(APPEAR_RATIO)만에 "최대치" 도달
-        //    최대치 도달 순간 바로 Phase3(= O 줌) 시작
         const APPEAR_RATIO = 0.4;
         const PHASE3_START = WITH_START + (WITH_END - WITH_START) * APPEAR_RATIO;
 
-        // ✅ (중요) Phase1 후반부터 "파란 배경이 스며들기" 시작하는 지점
-        const CROSS_START = Z1_END - 0.12;
 
+        // fixed에서 목표 top(12rem)을 px로 고정 계산
+        const getRem = () => {
+            const fs = parseFloat(getComputedStyle(document.documentElement).fontSize || '16');
+            return Number.isFinite(fs) ? fs : 16;
+        };
 
-
+        // ======================================================
+        // 공통 유틸
+        // ======================================================
         const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
         const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
 
@@ -88,11 +90,10 @@ export const Main = () => {
         const easeInOutCubic = (tt: number) =>
             tt < 0.5 ? 4 * tt * tt * tt : 1 - Math.pow(-2 * tt + 2, 3) / 2;
 
-        // 초반 매우 느림 → 중반 이후 급가속 (Phase3 확대용)
         const easeInQuint = (tt: number) => Math.pow(tt, 5);
         const accel2 = (tt: number) => {
             const t = clamp01(tt);
-            const k = 0.45; // 전환 지점 (낮출수록 더 빨리 가속)
+            const k = 0.45;
             if (t < k) {
                 const a = t / k;
                 return 0.22 * easeInQuint(a);
@@ -101,72 +102,29 @@ export const Main = () => {
                 return 0.22 + 0.78 * easeOutCubic(b);
             }
         };
+        // “초반 진짜 느리게 → 점점 가속 → 마지막엔 일반속도처럼”
 
         const getZoomEase = (tt: number) =>
             isMobile() ? Math.pow(easeOutCubic(tt), 2.2) : easeOutCubic(tt);
 
+
+        // ======================================================
+        // Canvas state
+        // ======================================================
         let dpr = window.devicePixelRatio || 1;
 
         let rafId: number | null = null;
         let lastT = 0;
         let time = 0;
 
-        // 실제 스크롤 progress
         let latestP = 0;
-
-        // ✅ 애니메이션 progress(느리게 따라감) - 캔버스용
         let animP = 0;
-
-        // 전환 파동 time reset
         let withStartTime: number | null = null;
 
-        // ✅ phase-end scroll lock
-        let lockUntil = 0;
-        let endTriggered = false; // 완료 진입 1회만 트리거
-        const LOCK_MS = 650;      // 멈출 시간(원하는 만큼 조절)
-
-        let lockTimer: number | null = null;
-
-        const lockScrollFor = (ms: number) => {
-            // 이미 락 중이면 연장만
-            const now = performance.now();
-            lockUntil = Math.max(lockUntil, now + ms);
-
-            // ✅ 관성까지 확실히 끊기: overflow 잠깐 잠그기
-            document.documentElement.style.overflow = 'hidden';
-            document.body.style.overflow = 'hidden';
-
-            if (lockTimer) window.clearTimeout(lockTimer);
-            lockTimer = window.setTimeout(() => {
-                // lockUntil 지난 뒤에만 풀기
-                if (performance.now() >= lockUntil) {
-                    document.documentElement.style.overflow = '';
-                    document.body.style.overflow = '';
-                }
-            }, ms);
-        };
-
-        // passive:false 여야 preventDefault 먹음
-        const onWheelLock = (e: WheelEvent) => {
-            if (performance.now() >= lockUntil) return;
-            // ✅ 아래로만 차단
-            if (e.deltaY > 0) e.preventDefault();
-        };
-        let touchStartY: number | null = null;
-        const onTouchMoveLock = (e: TouchEvent) => {
-            if (performance.now() >= lockUntil) return;
-            if (touchStartY == null) return;
-
-            const y = e.touches[0]?.clientY;
-            if (y == null) return;
-
-            // 사용자가 손가락을 위로 밀면(y 감소) => 페이지는 아래로 스크롤(차단 대상)
-            const fingerUp = y < touchStartY;
-
-            if (fingerUp) e.preventDefault();
-        };
-
         const setCanvasSize = () => {
+            console.log('canvas rect', canvas.getBoundingClientRect());
+            console.log('canvas size', canvas.width, canvas.height);
+
             dpr = window.devicePixelRatio || 1;
             const rect = canvas.getBoundingClientRect();
             const cw = Math.max(1, rect.width);
@@ -249,8 +207,8 @@ export const Main = () => {
             for (let i = 0; i < ringCount; i++) {
                 const r = i * ringSpacing + travel;
                 const wave = 0.6 + 0.4 * Math.sin(localT * 0.9 + i * 0.7);
-                const alpha = intensity * lerp(0.055, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
-
+                const alpha =
+                    intensity * lerp(0.055, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
                 if (alpha <= 0.001) continue;
 
                 const thickness = lerp(2.2, 1.0, i / ringCount) * (isMobile() ? 0.95 : 1.0);
@@ -282,10 +240,9 @@ export const Main = () => {
             const h = Math.max(1, rect.height);
             const maxTextWidth = Math.max(1, w - PADDING_X * 2);
 
-            const pA = p;              // ✅ 애니메이션(느리게 따라감): 텍스트 줌/알파용
-            const pR = pReal ?? p;     // ✅ 실제 스크롤(즉시 반영): 배경/파동/컷용
+            const pA = p;
+            const pR = pReal ?? p;
 
-            // -------- layout(원문 기준) --------
             const headerSize = fitFontSize(header, Math.min(22, w * 0.04), maxTextWidth, 700);
             const line1Size = fitFontSize(line1, Math.min(56, w * 0.07), maxTextWidth, 800);
 
@@ -321,14 +278,12 @@ export const Main = () => {
             const s3X = cx(s3, s3Size, 400);
             const s4X = cx(s4, s4Size, 400);
 
-            // -------- Emotion의 O 중심(첫 파동 중심) --------
             ctx.font = `800 ${line1Size}px ${FONT_FAMILY}`;
             const beforeO1 = 'Experience Em';
             const oW1 = ctx.measureText('O').width;
             const oCenterX1 = line1X + ctx.measureText(beforeO1).width + oW1 / 2;
             const oCenterY1 = line1Y;
 
-            // -------- withVOB(최대 크기) 기준 --------
             const withBasePx = Math.max(18, w * 0.06);
             const WITH_MAX_SCALE = 1.22;
             const withMaxSize = fitFontSize(withVOB, withBasePx * WITH_MAX_SCALE, maxTextWidth, 800);
@@ -339,61 +294,46 @@ export const Main = () => {
             };
             const lerpInt = (a: number, b: number, t: number) => Math.round(a + (b - a) * t);
 
-            // ===============================
-            // ✅ 타임라인 (배경/파동은 pR 기준)
-            // ===============================
-
-            // 1) 노란 파동: 0 ~ WITH_START 동안만 서서히 감소, WITH_START부터 0 고정
-            const tY = clamp01(pR / WITH_START); // 0~1
+            const tY = clamp01(pR / WITH_START);
             const yellowMul = pR >= WITH_START ? 0 : Math.pow(1 - tY, 1.6);
 
-            // 2) 배경(파란 기운): 0 ~ WITH_START 사이에 완료, phase3에서 다시 BG로 복귀
-            const BLUE_START = 0.02; // 더 빨리 파랑 깔고 싶으면 0
-            const blueIn = smoothstep(BLUE_START, WITH_START, pR); // 0->1
-            const blueOut = smoothstep(PHASE3_START, 1, pR);       // 0->1
-            const blueHold = blueIn * (1 - blueOut);               // 0->1->0
+            const BLUE_START = 0.02;
+            const blueIn = smoothstep(BLUE_START, WITH_START, pR);
+            const blueOut = smoothstep(PHASE3_START, 1, pR);
+            const blueHold = blueIn * (1 - blueOut);
 
-            // BG(30,30,30) ↔ BG2_BASE(14,22,26) 블렌딩(과하게 파랗게 안 보이게)
             const baseR = lerpInt(30, BG2_BASE.r, blueHold);
             const baseG = lerpInt(30, BG2_BASE.g, blueHold);
             const baseB = lerpInt(30, BG2_BASE.b, blueHold);
 
-            // 3) 파란 파동: phase2(withVOB 등장 구간)에서 등장, phase3에서 소멸
             const cyanIn = smoothstep(WITH_START, PHASE3_START, pR);
             const cyanMul = cyanIn * (1 - blueOut);
 
-            // withVOB 등장(알파/스케일): WITH_START~PHASE3_START
             const appearRaw = clamp01((pA - WITH_START) / (PHASE3_START - WITH_START));
             const appear = easeOutCubic(appearRaw);
 
             const appearScale = lerp(0.55, WITH_MAX_SCALE, appear);
             const withSize = fitFontSize(withVOB, withBasePx * appearScale, maxTextWidth, 800);
 
-            // ✅ Phase3는 "등장 완료 순간"부터 시작
             const isPhase3 = pA >= PHASE3_START;
 
-            // ✅ with VOB는 “첫 파동 중심”에서 등장 & 확대만 (X/Y 고정)
             ctx.font = `800 ${withSize}px ${FONT_FAMILY}`;
             const withW = ctx.measureText(withVOB).width;
             const withX = oCenterX1 - withW / 2;
             const withY = oCenterY1;
 
-            // withVOB의 O 중심(새 파동 중심)
             const beforeO2 = 'with V';
             const oW2 = ctx.measureText('O').width;
             const oCenterX2 = withX + ctx.measureText(beforeO2).width + oW2 / 2;
             const oCenterY2 = withY;
 
-            // ============== 배경/파동 렌더 ==============
-
-            // ✅ "기본 배경" 자체를 블렌딩해서 깔기 (phase1 끝에서 검정으로 떨어지는 느낌 방지)
             ctx.fillStyle = `rgba(${baseR},${baseG},${baseB},1)`;
             ctx.fillRect(0, 0, w, h);
 
-            // ✅ phase2 시작(WITH_START) 전까지만 노란 파동을 그리고, 시작부터 점점 옅어짐
             if (pR < WITH_START && yellowMul > 0.001) {
                 drawRipple({
-                    w, h,
+                    w,
+                    h,
                     fade: 0.0,
                     localT: tSec,
                     cx: oCenterX1,
@@ -406,15 +346,14 @@ export const Main = () => {
                 });
             }
 
-            // ✅ 파란 파동 (phase2에서 등장 → phase3에서 소멸)
             if (cyanMul > 0.0001) {
                 if (withStartTime == null) withStartTime = tSec;
                 const localT2 = tSec - withStartTime;
-
                 const waveK = Math.pow(cyanMul, 1.6);
 
                 drawRipple({
-                    w, h,
+                    w,
+                    h,
                     fade: lerp(0.0, 0.12, cyanMul),
                     localT: localT2,
                     cx: oCenterX2,
@@ -429,7 +368,6 @@ export const Main = () => {
                 withStartTime = null;
             }
 
-            // ============== 텍스트 렌더 ==============
             const z1 = clamp01(pA / Z1_END);
             const scale1 = lerp(1, getZoomMax(), getZoomEase(z1));
 
@@ -474,10 +412,9 @@ export const Main = () => {
                 ctx.restore();
             }
 
-            // ============== Phase3: VOB의 O 줌 ==============
             if (isPhase3) {
-                const z3A = clamp01((pA - PHASE3_START) / (1 - PHASE3_START)); // 줌/텍스트
-                const z3R = clamp01((pR - PHASE3_START) / (1 - PHASE3_START)); // 배경/파동
+                const z3A = clamp01((pA - PHASE3_START) / (1 - PHASE3_START));
+                const z3R = clamp01((pR - PHASE3_START) / (1 - PHASE3_START));
 
                 const SCALE_END = 0.78;
                 const zScale = clamp01(z3A / SCALE_END);
@@ -504,7 +441,8 @@ export const Main = () => {
                 if (rippleKeep > 0.02) {
                     const localT2 = withStartTime == null ? 0 : tSec - withStartTime;
                     drawRipple({
-                        w, h,
+                        w,
+                        h,
                         fade: 0.08,
                         localT: localT2,
                         cx: oCenterX2b,
@@ -540,109 +478,155 @@ export const Main = () => {
             }
         };
 
-        const updateProgress = () => {
-            latestP = getProgressInSection();
+        // ======================================================
+// ✅ Vision Phase4 (slot 없이) : fixed → absolute 전환 + heroSection 겹침 방지(padding-bottom 보정)
+// ======================================================
+
+// rem → px
+        const getRemPx = () => {
+            const fs = parseFloat(getComputedStyle(document.documentElement).fontSize || '16');
+            return Number.isFinite(fs) ? fs : 16;
         };
 
+        const isMobileNow = () => window.innerWidth < 769;
+
+// ✅ 목표 fixed top: PC 12rem / 모바일 6rem
+        const FIXED_TOP_PX = () => (isMobileNow() ? 6 : 12) * getRemPx();
+
+// ✅ 겹침 방지 여유: +2rem
+        const EXTRA_GAP_PX = () => 2 * getRemPx();
+
+// 상태
+        let pinned = false;
+        let pinnedTopInSection = 0;
+
+// ✅ heroSection 겹침 방지: margin-bottom 계산
+        const setHeroMarginBottom = (px: number) => {
+            section.style.marginBottom = `${Math.ceil(Math.max(0, px))}px`;
+        };
+
+        const resetHeroMarginBottom = () => {
+            section.style.marginBottom = '0px';
+        };
+
+// ✅ "Vision이 fixed top(12rem/6rem)에 있는 상태"에서 필요한 margin-bottom 계산
+        const computeNeededMarginBottom = () => {
+            // heroSection 문서상 bottom
+            const heroBottomDoc = window.scrollY + section.getBoundingClientRect().bottom;
+
+            // vision bottom은 "fixed 위치" 기준으로 계산하는 게 제일 안정적임
+            // (= absolute 전환 후 rect가 흔들리지 않게)
+            const innerRect = inner.getBoundingClientRect();
+            const visionBottomDoc = window.scrollY + innerRect.bottom;
+
+            const extra = visionBottomDoc - heroBottomDoc + EXTRA_GAP_PX();
+            return Math.max(0, extra);
+        };
+
+
+        const applyFixed = (yPx: number, opacity: number) => {
+            // fixed 상태에서는 문서 흐름에 참여 안 하므로, 겹침 보정은 꺼둠
+            pinned = false;
+            resetHeroMarginBottom();
+
+            inner.style.position = 'fixed';
+            inner.style.left = '50%';
+            inner.style.top = `${FIXED_TOP_PX()}px`;
+            inner.style.transform = `translateX(-50%) translateY(${yPx}px)`;
+            inner.style.opacity = String(opacity);
+            inner.style.pointerEvents = opacity > 0.98 ? 'auto' : 'none';
+        };
+
+// ✅ fixed(현재 화면상 위치) → section 기준 absolute top으로 "그대로" 옮김 (튐 방지)
+        const pinAbsoluteAtCurrentVisualPos = () => {
+            const secRect = section.getBoundingClientRect();
+            const innerRect = inner.getBoundingClientRect();
+
+            const secDocTop = window.scrollY + secRect.top;
+            const innerDocTop = window.scrollY + innerRect.top;
+
+            pinnedTopInSection = innerDocTop - secDocTop;
+            pinned = true;
+
+            inner.style.position = 'absolute';
+            inner.style.left = '50%';
+            inner.style.top = `${pinnedTopInSection}px`;
+            inner.style.transform = `translateX(-50%) translateY(0px)`;
+            inner.style.opacity = '1';
+            inner.style.pointerEvents = 'auto';
+
+            // ✅ 여기서 margin-bottom 확정 (1프레임 뒤에 측정)
+            requestAnimationFrame(() => {
+                const mb = computeNeededMarginBottom();
+                setHeroMarginBottom(mb);
+            });
+        };
+
+        // ✅ pinned 상태에서 레이아웃 변화/리사이즈에도 겹침 방지 재계산
+        const refreshPinnedLayout = () => {
+            if (!pinned) return;
+            // absolute top은 고정하되, padding-bottom은 계속 최신화
+            const mb = computeNeededMarginBottom();
+            setHeroMarginBottom(mb);
+        };
+
+        // ======================================================
+        // ✅ Phase4 타이밍/움직임 파라미터
+        // ======================================================
+        const SHOW_START = 0.40; // 필요하면 조절
+        const MOVE_END = 0.992;
+        const START_VH = 65;     // 시작이 너무 아래면 55~65 추천
+
+        // “초반 진짜 느리게 → 점점 가속”
+        // 느리게 시작 → 점점 가속
+        const slowToFast = (t: number) => {
+            t = clamp01(t);
+            return Math.pow(t, 5); // ← 이게 딱 기본형
+        };
+
+
+
+        // ======================================================
+        // ✅ updateVision (onScroll/onResize에서 호출)
+        // ======================================================
         const updateVision = () => {
-            const el = visionRef.current;
-            const section = sectionRef.current;
-            if (!el || !section) return;
+            const p = latestP;
 
-            const rect = section.getBoundingClientRect();
-            const vh = window.innerHeight;
-
-            // hero 섹션 progress (0~1)
-            const scrollable = rect.height - vh;
-            const progress =
-                scrollable <= 0 ? 1 : Math.min(1, Math.max(0, -rect.top / scrollable));
-
-            // ===== opacity =====
-            const FADE_START = 0.7;
-            const FADE_END = 0.95;
-
-            let opacity = 0;
-            if (progress > FADE_START) {
-                opacity = Math.min(1, (progress - FADE_START) / (FADE_END - FADE_START));
-            }
-
-            el.style.opacity = String(opacity);
-            el.style.pointerEvents = opacity > 0.95 ? 'auto' : 'none';
-
-            // ✅ ===== underline progress bar (0~1) =====
-            // opacity가 "증가하기 시작하는 시점"부터(FADE_START)
-            // 섹션 progress가 1일 때(phase 종료) 1이 되도록
-            const barRaw = clamp01((progress - FADE_START) / (1 - FADE_START));
-            // 취향: 살짝 더 자연스럽게(초반 빠르게 늘어나고 끝에서 완만)
-            const barT = easeOutCubic(barRaw);
-
-            el.style.setProperty('--vbar', String(barT));
-            const done = barT >= 0.999;
-
-            if (done && !endTriggered) {
-                endTriggered = true;
-                lockScrollFor(LOCK_MS); // ✅ 여기로!
-            }
-            if (!done) {
-                endTriggered = false;
-            }
-
-
-            // ===== position switching =====
-            const shouldUnfix = rect.bottom <= vh;
-
-            // ============================
-            // FIXED 상태
-            // ============================
-            if (!shouldUnfix) {
-
-                const isMobile = window.innerWidth < 768;
-
-                el.style.position = 'fixed';
-                el.style.left = '50%';
-                el.style.top = isMobile ? '8rem' : '12rem';
-                el.style.transform = 'translateX(-50%)';
-                el.style.right = '';
-                el.style.bottom = '';
-
-                // ✅ 중요: fixed 상태에서는 margin 제거
-                section.style.marginBottom = '0px';
-
+            // Phase4 시작 전: 아래에서 대기(완전 숨김)
+            if (p < SHOW_START) {
+                applyFixed((START_VH / 100) * window.innerHeight, 0);
                 return;
             }
 
-            // ============================
-            // ABSOLUTE 상태
-            // ============================
+            // Phase4 종료: absolute로 고정 + padding-bottom 보정 유지
+            if (p >= MOVE_END) {
+                if (!pinned) pinAbsoluteAtCurrentVisualPos();
+                else refreshPinnedLayout();
+                return;
+            }
 
-            // 1️⃣ 현재 화면에서의 Vision 위치
-            const elRect = el.getBoundingClientRect();
+            // Phase4 진행 중: fixed로 천천히 올라오다가 가속
+            const END_REACH = 1;
 
-            // 2️⃣ heroSection의 문서 좌표
-            const heroTop = window.scrollY + rect.top;
+            const t01 = clamp01((p - SHOW_START) / (MOVE_END - SHOW_START));
+            const eased = END_REACH * slowToFast(t01);
 
-            // 3️⃣ Vision의 문서 좌표
-            const visionTop = window.scrollY + elRect.top;
+            const startPx = (START_VH / 100) * window.innerHeight;
+            const yPx = startPx * (1 - eased);
 
-            // 4️⃣ section 기준 absolute top
-            const topInSection = visionTop - heroTop;
+            // opacity는 너무 늦으면 안 보이니 적당히 빠르게
+            const op = clamp01(Math.pow(t01, 2.2) * 1.15);
 
-            el.style.position = 'absolute';
-            el.style.left = '50%';
-            el.style.transform = 'translateX(-50%)';
-            el.style.top = `${topInSection}px`;
-            el.style.right = '';
-            el.style.bottom = '';
-
-
-            // ✅ 뷰포트 기준 겹침 계산 (안 튐)
-            const overlap = elRect.bottom - rect.bottom; // 둘 다 viewport 기준
-            const extra = Math.max(0, overlap + 32);
-            section.style.marginBottom = `${extra}px`;
+            applyFixed(yPx, op);
         };
 
 
-
+        // ======================================================
+        // raf + events
+        // ======================================================
+        const updateProgress = () => {
+            latestP = getProgressInSection();
+        };
 
         const tick = (ms: number) => {
             if (!lastT) lastT = ms;
@@ -650,7 +634,6 @@ export const Main = () => {
             lastT = ms;
             time += dt;
 
-            // ✅ 스크롤 진행도를 "느리게" 따라가는 애니메이션 progress (캔버스용)
             const FOLLOW = isMobile() ? 12 : 7;
             animP += (latestP - animP) * (1 - Math.exp(-FOLLOW * dt));
 
@@ -661,19 +644,24 @@ export const Main = () => {
         const onScroll = () => {
             updateProgress();
             updateVision();
-        }
+        };
 
         const onResize = () => {
             setCanvasSize();
             updateProgress();
             updateVision();
             draw(animP, time, latestP);
+            refreshPinnedLayout();
+
         };
 
         const onVhResize = () => {
             setCanvasSize();
             updateProgress();
+            updateVision();
             draw(animP, time, latestP);
+            refreshPinnedLayout();
+
         };
 
         const start = async () => {
@@ -685,13 +673,13 @@ export const Main = () => {
             setCanvasSize();
             updateProgress();
 
-            animP = latestP; // 시작 시점 점프 방지
+            animP = latestP;
             draw(animP, time, latestP);
+
+            updateVision();
 
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onResize);
-            window.addEventListener('wheel', onWheelLock, { passive: false });
-            window.addEventListener('touchmove', onTouchMoveLock, { passive: false });
 
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', onVhResize);
@@ -702,25 +690,17 @@ export const Main = () => {
         };
 
         start();
-        updateVision();
 
         return () => {
-            window.removeEventListener('scroll', onScroll);
-            window.removeEventListener('resize', onResize);
-            window.removeEventListener('wheel', onWheelLock as any);
-            window.removeEventListener('touchmove', onTouchMoveLock as any);
+            window.removeEventListener('scroll', onScroll as any);
+            window.removeEventListener('resize', onResize as any);
 
             if (window.visualViewport) {
-                window.visualViewport.removeEventListener('resize', onVhResize);
-                window.visualViewport.removeEventListener('scroll', onVhResize);
+                window.visualViewport.removeEventListener('resize', onVhResize as any);
+                window.visualViewport.removeEventListener('scroll', onVhResize as any);
             }
 
             if (rafId) window.cancelAnimationFrame(rafId);
-
-            // ✅ 혹시 락 상태로 언마운트되면 복구
-            document.documentElement.style.overflow = '';
-            document.body.style.overflow = '';
-
         };
     }, [s1, s2, s3, s4]);
 
@@ -730,8 +710,8 @@ export const Main = () => {
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
 
-            {/* ✅ Vision이 지나갈 자리(레이아웃 공간 확보) */}
-            <div ref={visionRef} className={styles.vision}>
+            {/* ✅ 문서 흐름 자리(레이아웃 공간). inner는 반드시 이 안에 들어가야 absolute가 정상 */}
+            <div ref={visionInnerRef} className={styles.vision}>
                 <Vision />
             </div>
         </section>
