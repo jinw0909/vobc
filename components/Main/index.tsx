@@ -67,7 +67,7 @@ export const Main = () => {
         const Z1_END = 0.58;
         const WITH_START = 0.22;
         const WITH_END = 0.6;
-        const APPEAR_RATIO = 0.4;
+        const APPEAR_RATIO = 0.25;
         const PHASE3_START = WITH_START + (WITH_END - WITH_START) * APPEAR_RATIO;
 
 
@@ -91,17 +91,23 @@ export const Main = () => {
             tt < 0.5 ? 4 * tt * tt * tt : 1 - Math.pow(-2 * tt + 2, 3) / 2;
 
         const easeInQuint = (tt: number) => Math.pow(tt, 5);
+        // const accel2 = (tt: number) => {
+        //     const t = clamp01(tt);
+        //     const k = 0.45;
+        //     if (t < k) {
+        //         const a = t / k;
+        //         return 0.22 * easeInQuint(a);
+        //     } else {
+        //         const b = (t - k) / (1 - k);
+        //         return 0.22 + 0.78 * easeOutCubic(b);
+        //
+        //     }
+        // };
         const accel2 = (tt: number) => {
             const t = clamp01(tt);
-            const k = 0.45;
-            if (t < k) {
-                const a = t / k;
-                return 0.22 * easeInQuint(a);
-            } else {
-                const b = (t - k) / (1 - k);
-                return 0.22 + 0.78 * easeOutCubic(b);
-            }
+            return Math.pow(easeOutCubic(t), 1.45); // ✅ 더 느리게 (1.2~1.8 사이로 조절)
         };
+
         // “초반 진짜 느리게 → 점점 가속 → 마지막엔 일반속도처럼”
 
         const getZoomEase = (tt: number) =>
@@ -573,7 +579,7 @@ export const Main = () => {
         // ======================================================
         // ✅ Phase4 타이밍/움직임 파라미터
         // ======================================================
-        const SHOW_START = 0.40; // 필요하면 조절
+        const SHOW_START = 0.30; // 필요하면 조절
         const MOVE_END = 0.992;
         const START_VH = 65;     // 시작이 너무 아래면 55~65 추천
 
