@@ -1,5 +1,7 @@
 'use client';
 
+import { layouts } from 'chart.js';
+
 console.log('Main module loaded');
 
 import { useEffect, useRef } from 'react';
@@ -28,8 +30,6 @@ export const Main = () => {
     const sectionRef = useRef<HTMLElement | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    // ✅ Vision: 자리(slot) + 실제 보이는(inner)  (inner는 반드시 slot 안에!)
-    // const visionSlotRef = useRef<HTMLDivElement | null>(null);
     const visionInnerRef = useRef<HTMLDivElement | null>(null);
 
     const s1 = t('line1');
@@ -44,9 +44,9 @@ export const Main = () => {
             canvas: !!canvasRef.current,
             inner: !!visionInnerRef.current,
         });
+
         const section = sectionRef.current;
         const canvas = canvasRef.current;
-        // const slot = visionSlotRef.current;
         const inner = visionInnerRef.current;
         if (!section || !canvas || !inner) return;
 
@@ -62,20 +62,13 @@ export const Main = () => {
         const withVOB = 'with VOB';
 
         // ======================================================
-        // 타임라인(0~1) (너 원본 유지)
+        // 타임라인(0~1) (원본 유지)
         // ======================================================
         const Z1_END = 0.58;
         const WITH_START = 0.22;
         const WITH_END = 0.6;
         const APPEAR_RATIO = 0.25;
         const PHASE3_START = WITH_START + (WITH_END - WITH_START) * APPEAR_RATIO;
-
-
-        // fixed에서 목표 top(12rem)을 px로 고정 계산
-        const getRem = () => {
-            const fs = parseFloat(getComputedStyle(document.documentElement).fontSize || '16');
-            return Number.isFinite(fs) ? fs : 16;
-        };
 
         // ======================================================
         // 공통 유틸
@@ -90,29 +83,13 @@ export const Main = () => {
         const easeInOutCubic = (tt: number) =>
             tt < 0.5 ? 4 * tt * tt * tt : 1 - Math.pow(-2 * tt + 2, 3) / 2;
 
-        const easeInQuint = (tt: number) => Math.pow(tt, 5);
-        // const accel2 = (tt: number) => {
-        //     const t = clamp01(tt);
-        //     const k = 0.45;
-        //     if (t < k) {
-        //         const a = t / k;
-        //         return 0.22 * easeInQuint(a);
-        //     } else {
-        //         const b = (t - k) / (1 - k);
-        //         return 0.22 + 0.78 * easeOutCubic(b);
-        //
-        //     }
-        // };
         const accel2 = (tt: number) => {
             const t = clamp01(tt);
-            return Math.pow(easeOutCubic(t), 1.45); // ✅ 더 느리게 (1.2~1.8 사이로 조절)
+            return Math.pow(easeOutCubic(t), 1.45);
         };
-
-        // “초반 진짜 느리게 → 점점 가속 → 마지막엔 일반속도처럼”
 
         const getZoomEase = (tt: number) =>
             isMobile() ? Math.pow(easeOutCubic(tt), 2.2) : easeOutCubic(tt);
-
 
         // ======================================================
         // Canvas state
@@ -128,9 +105,6 @@ export const Main = () => {
         let withStartTime: number | null = null;
 
         const setCanvasSize = () => {
-            console.log('canvas rect', canvas.getBoundingClientRect());
-            console.log('canvas size', canvas.width, canvas.height);
-
             dpr = window.devicePixelRatio || 1;
             const rect = canvas.getBoundingClientRect();
             const cw = Math.max(1, rect.width);
@@ -213,8 +187,7 @@ export const Main = () => {
             for (let i = 0; i < ringCount; i++) {
                 const r = i * ringSpacing + travel;
                 const wave = 0.6 + 0.4 * Math.sin(localT * 0.9 + i * 0.7);
-                const alpha =
-                    intensity * lerp(0.055, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
+                const alpha = intensity * lerp(0.055, 0.012, i / ringCount) * lerp(0.85, 1.15, wave);
                 if (alpha <= 0.001) continue;
 
                 const thickness = lerp(2.2, 1.0, i / ringCount) * (isMobile() ? 0.95 : 1.0);
@@ -485,55 +458,55 @@ export const Main = () => {
         };
 
         // ======================================================
-// ✅ Vision Phase4 (slot 없이) : fixed → absolute 전환 + heroSection 겹침 방지(padding-bottom 보정)
-// ======================================================
+        // ✅ Vision Phase4 — margin 관련만 “안 튀게” 개선
+        //    - pinned(absolute)일 때만 overflow 기반 marginBottom 계산
+        //    - unpin(absolute→fixed) 순간 marginBottom을 바로 줄이지 않고
+        //      이전 pinned margin을 잠깐 유지했다가(hold) 안전 구간에서 32px로 복귀
+        // ======================================================
 
-// rem → px
         const getRemPx = () => {
             const fs = parseFloat(getComputedStyle(document.documentElement).fontSize || '16');
             return Number.isFinite(fs) ? fs : 16;
         };
-
         const isMobileNow = () => window.innerWidth < 769;
 
-// ✅ 목표 fixed top: PC 12rem / 모바일 6rem
-        const FIXED_TOP_PX = () => (isMobileNow() ? 6 : 12) * getRemPx();
+        // ✅ 모바일 8rem / PC 12rem (너 요구 반영)
+        const FIXED_TOP_PX = () => (isMobileNow() ? 0 : 0) * getRemPx();
 
-// ✅ 겹침 방지 여유: +2rem
-        const EXTRA_GAP_PX = () => 2 * getRemPx();
+        const START_VH = 70;
+        const START_PX = () => (START_VH / 100) * window.innerHeight;
 
-// 상태
+        const SHOW_START = 0.5;
+        const SHOW_END = 1.0;
+
         let pinned = false;
-        let pinnedTopInSection = 0;
 
-// ✅ heroSection 겹침 방지: margin-bottom 계산
-        const setHeroMarginBottom = (px: number) => {
-            section.style.marginBottom = `${Math.ceil(Math.max(0, px))}px`;
-        };
+        const EXTRA_PX = 32;
 
-        const resetHeroMarginBottom = () => {
-            section.style.marginBottom = '0px';
-        };
+        // ✅ marginBottom 튐 방지용 상태
+        let lastPinnedMB = EXTRA_PX;
+        let holdMargin = false;
 
-// ✅ "Vision이 fixed top(12rem/6rem)에 있는 상태"에서 필요한 margin-bottom 계산
-        const computeNeededMarginBottom = () => {
-            // heroSection 문서상 bottom
-            const heroBottomDoc = window.scrollY + section.getBoundingClientRect().bottom;
 
-            // vision bottom은 "fixed 위치" 기준으로 계산하는 게 제일 안정적임
-            // (= absolute 전환 후 rect가 흔들리지 않게)
+        const applyHeroMarginBottom = () => {
+            if (!pinned) {
+                // ✅ fixed(또는 pinned 아님)일 때는 margin을 0으로
+                section.style.marginBottom = `0px`;
+                return;
+            }
+
+            // ✅ pinned(absolute)일 때만: (vision.bottom - section.bottom) + 32
+            const secRect = section.getBoundingClientRect();
             const innerRect = inner.getBoundingClientRect();
-            const visionBottomDoc = window.scrollY + innerRect.bottom;
+            const overflow = Math.max(0, innerRect.bottom - secRect.bottom);
 
-            const extra = visionBottomDoc - heroBottomDoc + EXTRA_GAP_PX();
-            return Math.max(0, extra);
+            section.style.marginBottom = `${Math.ceil(overflow + EXTRA_PX)}px`;
         };
 
 
         const applyFixed = (yPx: number, opacity: number) => {
-            // fixed 상태에서는 문서 흐름에 참여 안 하므로, 겹침 보정은 꺼둠
-            pinned = false;
-            resetHeroMarginBottom();
+            inner.style.removeProperty('bottom');
+            inner.style.removeProperty('right');
 
             inner.style.position = 'fixed';
             inner.style.left = '50%';
@@ -543,89 +516,116 @@ export const Main = () => {
             inner.style.pointerEvents = opacity > 0.98 ? 'auto' : 'none';
         };
 
-// ✅ fixed(현재 화면상 위치) → section 기준 absolute top으로 "그대로" 옮김 (튐 방지)
-        const pinAbsoluteAtCurrentVisualPos = () => {
+        const pinAbsolute = () => {
+            if (pinned) return;
+            pinned = true;
+
             const secRect = section.getBoundingClientRect();
             const innerRect = inner.getBoundingClientRect();
+            const topInSection = innerRect.top - secRect.top;
 
-            const secDocTop = window.scrollY + secRect.top;
-            const innerDocTop = window.scrollY + innerRect.top;
-
-            pinnedTopInSection = innerDocTop - secDocTop;
-            pinned = true;
+            inner.style.removeProperty('position');
+            inner.style.removeProperty('top');
+            inner.style.removeProperty('left');
+            inner.style.removeProperty('transform');
 
             inner.style.position = 'absolute';
             inner.style.left = '50%';
-            inner.style.top = `${pinnedTopInSection}px`;
-            inner.style.transform = `translateX(-50%) translateY(0px)`;
+            inner.style.top = `${Math.round(topInSection)}px`;
+            inner.style.transform = 'translateX(-50%)';
             inner.style.opacity = '1';
             inner.style.pointerEvents = 'auto';
 
-            // ✅ 여기서 margin-bottom 확정 (1프레임 뒤에 측정)
-            requestAnimationFrame(() => {
-                const mb = computeNeededMarginBottom();
-                setHeroMarginBottom(mb);
-            });
+            applyHeroMarginBottom(); // ✅ pinned 계산
         };
 
-        // ✅ pinned 상태에서 레이아웃 변화/리사이즈에도 겹침 방지 재계산
-        const refreshPinnedLayout = () => {
-            if (!pinned) return;
-            // absolute top은 고정하되, padding-bottom은 계속 최신화
-            const mb = computeNeededMarginBottom();
-            setHeroMarginBottom(mb);
-        };
+        const easeInCubic = (t: number) => t * t * t;
 
-        // ======================================================
-        // ✅ Phase4 타이밍/움직임 파라미터
-        // ======================================================
-        const SHOW_START = 0.30; // 필요하면 조절
-        const MOVE_END = 0.992;
-        const START_VH = 65;     // 시작이 너무 아래면 55~65 추천
+        let skipFixedOnce = false;
 
-        // “초반 진짜 느리게 → 점점 가속”
-        // 느리게 시작 → 점점 가속
-        const slowToFast = (t: number) => {
-            t = clamp01(t);
-            return Math.pow(t, 5); // ← 이게 딱 기본형
-        };
-
-
-
-        // ======================================================
-        // ✅ updateVision (onScroll/onResize에서 호출)
-        // ======================================================
         const updateVision = () => {
-            const p = latestP;
+            const rect = section.getBoundingClientRect();
+            const vh = window.innerHeight;
 
-            // Phase4 시작 전: 아래에서 대기(완전 숨김)
+            const scrollable = rect.height - vh;
+            if (scrollable <= 0) return;
+
+            const p = clamp01(-rect.top / scrollable);
+
+            // ✅ pinned(absolute) 상태에서: 실제 top 기준으로 unpin
+            if (pinned) {
+                const targetTop = FIXED_TOP_PX();
+                const nowTop = inner.getBoundingClientRect().top;
+
+                const EPS = 2;
+                const shouldUnpin = nowTop >= targetTop + EPS;
+
+                if (shouldUnpin) {
+                    pinned = false;
+
+                    // ✅ unpin 순간 margin을 바로 줄이지 않고 “잠깐 유지”
+                    holdMargin = true;
+
+                    inner.style.removeProperty('bottom');
+                    inner.style.removeProperty('right');
+
+                    inner.style.position = 'fixed';
+                    inner.style.left = '50%';
+                    inner.style.top = `${targetTop}px`;
+                    inner.style.transform = `translateX(-50%) translateY(${nowTop - targetTop}px)`;
+                    inner.style.opacity = '1';
+                    inner.style.pointerEvents = 'auto';
+
+                    applyHeroMarginBottom(); // ✅ holdMargin이라 lastPinnedMB 유지
+                    skipFixedOnce = true;
+                }
+
+                return;
+            }
+
+            // ✅ unpin 직후 1회는 applyFixed로 덮어쓰지 않게
+            if (skipFixedOnce) {
+                skipFixedOnce = false;
+                return;
+            }
+
             if (p < SHOW_START) {
-                applyFixed((START_VH / 100) * window.innerHeight, 0);
+                applyFixed(START_PX(), 0);
+                // ✅ 이 구간은 항상 32px만
+                holdMargin = false;
+                applyHeroMarginBottom();
                 return;
             }
 
-            // Phase4 종료: absolute로 고정 + padding-bottom 보정 유지
-            if (p >= MOVE_END) {
-                if (!pinned) pinAbsoluteAtCurrentVisualPos();
-                else refreshPinnedLayout();
-                return;
+            const t01 = clamp01((p - SHOW_START) / (SHOW_END - SHOW_START));
+
+            // ✅ 조금만 위로 올라오면(=fixed 구간 진입) margin을 32px로 복귀
+            if (holdMargin && t01 < 0.92) {
+                holdMargin = false;
+                applyHeroMarginBottom();
             }
 
-            // Phase4 진행 중: fixed로 천천히 올라오다가 가속
-            const END_REACH = 1;
-
-            const t01 = clamp01((p - SHOW_START) / (MOVE_END - SHOW_START));
-            const eased = END_REACH * slowToFast(t01);
-
-            const startPx = (START_VH / 100) * window.innerHeight;
-            const yPx = startPx * (1 - eased);
-
-            // opacity는 너무 늦으면 안 보이니 적당히 빠르게
-            const op = clamp01(Math.pow(t01, 2.2) * 1.15);
+            const eased = easeInCubic(t01);
+            const yPx = START_PX() * (1 - eased);
+            const op = easeOutCubic(t01);
 
             applyFixed(yPx, op);
+            if (!holdMargin) applyHeroMarginBottom(); // ✅ hold 중에는 건드리지 않음
+
+            // ✅ 내려갈 때 absolute 전환 (기존 방식 유지)
+            const reached = t01 >= 0.999 && op > 0.98;
+            if (reached) {
+                applyFixed(0, 1);
+                requestAnimationFrame(() => {
+                    pinAbsolute();
+                    // pinAbsolute 내부에서 margin 계산함
+                });
+            }
         };
 
+        // 초기 1회
+        applyHeroMarginBottom();
+        updateVision();
 
         // ======================================================
         // raf + events
@@ -647,9 +647,16 @@ export const Main = () => {
             rafId = window.requestAnimationFrame(tick);
         };
 
+        let pendingVision = false;
         const onScroll = () => {
             updateProgress();
-            updateVision();
+            if (!pendingVision) {
+                pendingVision = true;
+                requestAnimationFrame(() => {
+                    pendingVision = false;
+                    updateVision();
+                });
+            }
         };
 
         const onResize = () => {
@@ -657,8 +664,6 @@ export const Main = () => {
             updateProgress();
             updateVision();
             draw(animP, time, latestP);
-            refreshPinnedLayout();
-
         };
 
         const onVhResize = () => {
@@ -666,8 +671,6 @@ export const Main = () => {
             updateProgress();
             updateVision();
             draw(animP, time, latestP);
-            refreshPinnedLayout();
-
         };
 
         const start = async () => {
@@ -716,7 +719,6 @@ export const Main = () => {
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
 
-            {/* ✅ 문서 흐름 자리(레이아웃 공간). inner는 반드시 이 안에 들어가야 absolute가 정상 */}
             <div ref={visionInnerRef} className={styles.vision}>
                 <Vision />
             </div>

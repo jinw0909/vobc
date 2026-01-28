@@ -1,29 +1,22 @@
 .heroSection {
     position: relative;
-    height: 1280vh;
-    /*height: 1200vh;*/
+    height: 1080vh;
     background: rgba(30,30,30,1);
 }
 
-/*.vision {*/
-/*    position: fixed;*/
-/*    !*top: 12rem;*!*/
-/*    left: 50%;*/
-/*    transform: translateX(-50%);*/
-/*    opacity: 0;*/
-/*    pointer-events: none;*/
-/*    transition: opacity 0.2s ease-out;*/
-/*    max-width: 1080px;*/
-/*    width: 100%;*/
-/*    padding: 2rem;*/
-/*}*/
-
+.visionSlot {
+    position: relative;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    height: calc(70vh + 12rem); /* ✅ 자리 */
+}
 
 .vision {
-    position: fixed; /* ✅ 초기 상태를 fixed로 잡아두면 JS 죽어도 화면 확인 가능 */
-    top: 12rem;
+    position: absolute; /* ✅ 기본값: JS가 fixed/absolute 변경 */
     left: 50%;
-    transform: translateX(-50%) translateY(85vh);
+    top: 0;
+    transform: translateX(-50%);
     opacity: 0;
     pointer-events: none;
     width: 100%;
@@ -33,24 +26,15 @@
 }
 
 @media (min-width: 1400px) {
+    .visionSlot,
     .vision {
         max-width: 1280px;
-        padding: 2rem;
     }
 }
 
-
-@media (min-width: 769px) {
-    .heroSection {
-        /*height: 900vh;*/
-    }  /* PC만 줄임 */
-    .vision { padding: 2rem; }
-}
-
 @media (max-width: 768px) {
-    .vision {
-        /*top: 8rem;*/
-        width: 100%;
+    .visionSlot {
+        height: calc(70vh + 6rem);
     }
 }
 
