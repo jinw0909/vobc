@@ -120,6 +120,52 @@ export const Main = () => {
         // 전환 파동 time reset
         let withStartTime: number | null = null;
 
+        // ✅ phase-end scroll lock
+        let lockUntil = 0;
+        let endTriggered = false; // 완료 진입 1회만 트리거
+        const LOCK_MS = 650;      // 멈출 시간(원하는 만큼 조절)
+
+        let lockTimer: number | null = null;
+
+        const lockScrollFor = (ms: number) => {
+            // 이미 락 중이면 연장만
+            const now = performance.now();
+            lockUntil = Math.max(lockUntil, now + ms);
+
+            // ✅ 관성까지 확실히 끊기: overflow 잠깐 잠그기
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+
+            if (lockTimer) window.clearTimeout(lockTimer);
+            lockTimer = window.setTimeout(() => {
+                // lockUntil 지난 뒤에만 풀기
+                if (performance.now() >= lockUntil) {
+                    document.documentElement.style.overflow = '';
+                    document.body.style.overflow = '';
+                }
+            }, ms);
+        };
+
+        // passive:false 여야 preventDefault 먹음
+        const onWheelLock = (e: WheelEvent) => {
+            if (performance.now() >= lockUntil) return;
+            // ✅ 아래로만 차단
+            if (e.deltaY > 0) e.preventDefault();
+        };
+        let touchStartY: number | null = null;
+        const onTouchMoveLock = (e: TouchEvent) => {
+            if (performance.now() >= lockUntil) return;
+            if (touchStartY == null) return;
+
+            const y = e.touches[0]?.clientY;
+            if (y == null) return;
+
+            // 사용자가 손가락을 위로 밀면(y 감소) => 페이지는 아래로 스크롤(차단 대상)
+            const fingerUp = y < touchStartY;
+
+            if (fingerUp) e.preventDefault();
+        };
+
         const setCanvasSize = () => {
             dpr = window.devicePixelRatio || 1;
             const rect = canvas.getBoundingClientRect();
@@ -523,6 +569,25 @@ export const Main = () => {
             el.style.opacity = String(opacity);
             el.style.pointerEvents = opacity > 0.95 ? 'auto' : 'none';
 
+            // ✅ ===== underline progress bar (0~1) =====
+            // opacity가 "증가하기 시작하는 시점"부터(FADE_START)
+            // 섹션 progress가 1일 때(phase 종료) 1이 되도록
+            const barRaw = clamp01((progress - FADE_START) / (1 - FADE_START));
+            // 취향: 살짝 더 자연스럽게(초반 빠르게 늘어나고 끝에서 완만)
+            const barT = easeOutCubic(barRaw);
+
+            el.style.setProperty('--vbar', String(barT));
+            const done = barT >= 0.999;
+
+            if (done && !endTriggered) {
+                endTriggered = true;
+                lockScrollFor(LOCK_MS); // ✅ 여기로!
+            }
+            if (!done) {
+                endTriggered = false;
+            }
+
+
             // ===== position switching =====
             const shouldUnfix = rect.bottom <= vh;
 
@@ -625,6 +690,8 @@ export const Main = () => {
 
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onResize);
+            window.addEventListener('wheel', onWheelLock, { passive: false });
+            window.addEventListener('touchmove', onTouchMoveLock, { passive: false });
 
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', onVhResize);
@@ -640,6 +707,8 @@ export const Main = () => {
         return () => {
             window.removeEventListener('scroll', onScroll);
             window.removeEventListener('resize', onResize);
+            window.removeEventListener('wheel', onWheelLock as any);
+            window.removeEventListener('touchmove', onTouchMoveLock as any);
 
             if (window.visualViewport) {
                 window.visualViewport.removeEventListener('resize', onVhResize);
@@ -647,6 +716,11 @@ export const Main = () => {
             }
 
             if (rafId) window.cancelAnimationFrame(rafId);
+
+            // ✅ 혹시 락 상태로 언마운트되면 복구
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+
         };
     }, [s1, s2, s3, s4]);
 
