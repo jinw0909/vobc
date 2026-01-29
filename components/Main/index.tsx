@@ -8,6 +8,11 @@ import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './styles.module.css';
 import { Vision } from '@/components/Vision';
+import Image from "next/image";
+import visionPic from "@/public/vision_white.png";
+import blockPic from "@/public/blockchain_white.png";
+import vobPic from "@/public/vob_crop.png";
+import {NavigationLink} from "@/ui/NavigationLink";
 
 const BG = 'rgba(30, 30, 30, 1)';
 const FG = '#fff';
@@ -458,76 +463,78 @@ export const Main = () => {
         };
 
         // ======================================================
-        // ✅ Vision Phase4 — margin 관련만 “안 튀게” 개선
-        //    - pinned(absolute)일 때만 overflow 기반 marginBottom 계산
-        //    - unpin(absolute→fixed) 순간 marginBottom을 바로 줄이지 않고
-        //      이전 pinned margin을 잠깐 유지했다가(hold) 안전 구간에서 32px로 복귀
-        // ======================================================
+// ✅ Phase4 (트리거 기반) — 8 sub phases (F/A 반복)
+//    - absolute 구간에서 elem이 top12rem 닿는 순간 → fixed로 즉시 스냅
+//    - fixed 구간은 스케줄 기반(스크롤 대부분 차지), localT로 opacity 진행
+//    - 마지막 fixed 끝나면 1회만 absolute로 풀어서 위로 자연스럽게 사라짐
+// ======================================================
 
         const getRemPx = () => {
             const fs = parseFloat(getComputedStyle(document.documentElement).fontSize || '16');
             return Number.isFinite(fs) ? fs : 16;
         };
+
         const isMobileNow = () => window.innerWidth < 769;
 
-        // ✅ 모바일 8rem / PC 12rem (너 요구 반영)
-        const FIXED_TOP_PX = () => (isMobileNow() ? 0 : 0) * getRemPx();
+// ✅ 너가 말한 "fixed top 12rem" (모바일은 0)
+        const FIXED_TOP_PX = () => (isMobileNow() ? 0 : 12) * getRemPx();
 
-        const START_VH = 70;
-        const START_PX = () => (START_VH / 100) * window.innerHeight;
+// ✅ Phase4 범위
+        const P4_START = 0.5;
+        const P4_END = 1.0;
 
-        const SHOW_START = 0.5;
-        const SHOW_END = 1.0;
+// ✅ 첫 등장: viewport 기준 Y 고정(80vh), opacity 0 → 0.2
+        const ENTRY_Y = () => window.innerHeight * 0.80;
 
-        let pinned = false;
+// ------------------------------------------------------
+// ✅ 요소/오프셋 캐시
+// ------------------------------------------------------
+        let visionElems: HTMLElement[] = [];
+        let elemOffsets: number[] = []; // inner 상단 기준 offsetTop
+        let offsetsReady = false;
 
-        const EXTRA_PX = 32;
+        const measureVisionElems = () => {
+            const list = Array.from(inner.querySelectorAll(`.${styles.visionElem}`)) as HTMLElement[];
+            visionElems = list.slice(0, 3);
+            elemOffsets = visionElems.map((el) => el.offsetTop);
+            offsetsReady = visionElems.length === 3;
 
-        // ✅ marginBottom 튐 방지용 상태
-        let lastPinnedMB = EXTRA_PX;
-        let holdMargin = false;
-
-
-        const applyHeroMarginBottom = () => {
-            if (!pinned) {
-                // ✅ fixed(또는 pinned 아님)일 때는 margin을 0으로
-                section.style.marginBottom = `0px`;
-                return;
+            // base opacity: 1번 0.2, 나머지 0
+            if (offsetsReady) {
+                visionElems[0].style.opacity = '0.2';
+                visionElems[1].style.opacity = '0';
+                visionElems[2].style.opacity = '0';
             }
-
-            // ✅ pinned(absolute)일 때만: (vision.bottom - section.bottom) + 32
-            const secRect = section.getBoundingClientRect();
-            const innerRect = inner.getBoundingClientRect();
-            const overflow = Math.max(0, innerRect.bottom - secRect.bottom);
-
-            section.style.marginBottom = `${Math.ceil(overflow + EXTRA_PX)}px`;
         };
 
+// ------------------------------------------------------
+// ✅ fixed/absolute 적용 유틸
+// ------------------------------------------------------
 
-        const applyFixed = (yPx: number, opacity: number) => {
-            inner.style.removeProperty('bottom');
-            inner.style.removeProperty('right');
+// entry 전용: viewport 기준( top:0 + translateY )
+        const setEntryFixedAtViewportY = (y: number) => {
+            inner.style.position = 'fixed';
+            inner.style.left = '50%';
+            inner.style.top = `0px`;
+            inner.style.transform = `translateX(-50%) translateY(${y}px)`;
+            inner.style.pointerEvents = 'auto';
+        };
 
+// elem i를 top12rem에 붙이는 fixed
+        const setInnerFixedAtOffset = (targetOffsetTop: number) => {
             inner.style.position = 'fixed';
             inner.style.left = '50%';
             inner.style.top = `${FIXED_TOP_PX()}px`;
-            inner.style.transform = `translateX(-50%) translateY(${yPx}px)`;
-            inner.style.opacity = String(opacity);
-            inner.style.pointerEvents = opacity > 0.98 ? 'auto' : 'none';
+            inner.style.transform = `translateX(-50%) translateY(${-targetOffsetTop}px)`;
+            inner.style.opacity = '1';
+            inner.style.pointerEvents = 'auto';
         };
 
-        const pinAbsolute = () => {
-            if (pinned) return;
-            pinned = true;
-
+// ✅ fixed → absolute 전환 시 "현재 화면 위치 유지" (점프 방지)
+        const convertFixedToAbsoluteKeepPosition = () => {
             const secRect = section.getBoundingClientRect();
             const innerRect = inner.getBoundingClientRect();
             const topInSection = innerRect.top - secRect.top;
-
-            inner.style.removeProperty('position');
-            inner.style.removeProperty('top');
-            inner.style.removeProperty('left');
-            inner.style.removeProperty('transform');
 
             inner.style.position = 'absolute';
             inner.style.left = '50%';
@@ -535,97 +542,295 @@ export const Main = () => {
             inner.style.transform = 'translateX(-50%)';
             inner.style.opacity = '1';
             inner.style.pointerEvents = 'auto';
-
-            applyHeroMarginBottom(); // ✅ pinned 계산
         };
 
-        const easeInCubic = (t: number) => t * t * t;
+// ------------------------------------------------------
+// ✅ 스케줄(고정구간 길이 분배) + 트리거(absolute→fixed)
+// ------------------------------------------------------
+        type Seg =
+            | { kind: 'F_ENTRY'; len: number }
+            | { kind: 'A_TO_1'; len: number }
+            | { kind: 'F_1'; len: number }
+            | { kind: 'A_1_2'; len: number }
+            | { kind: 'F_2'; len: number }
+            | { kind: 'A_2_3'; len: number }
+            | { kind: 'F_3'; len: number };
 
-        let skipFixedOnce = false;
+        let scheduleReady = false;
+        let segs: Seg[] = [];
+        let segStarts: number[] = [];
 
-        const updateVision = () => {
+// ✅ “end 이후 한번만 풀기” 상태는 반드시 함수 밖!
+        let releasedAfterEnd = false;
+
+// ✅ absolute에서 트리거 발생 시 “해당 fixed 시작으로 스냅”
+        let forcedSegIndex: number | null = null;
+        let freezePhasePx: number | null = null;
+
+// 스크롤 방향 감지(위로 갈 때 스냅 해제 판단에 도움)
+        let prevRawP = 0;
+
+        const buildSchedule = () => {
+            if (!offsetsReady) return;
+
             const rect = section.getBoundingClientRect();
             const vh = window.innerHeight;
-
             const scrollable = rect.height - vh;
             if (scrollable <= 0) return;
 
-            const p = clamp01(-rect.top / scrollable);
+            const phase4Scrollable = scrollable * (P4_END - P4_START);
 
-            // ✅ pinned(absolute) 상태에서: 실제 top 기준으로 unpin
-            if (pinned) {
-                const targetTop = FIXED_TOP_PX();
-                const nowTop = inner.getBoundingClientRect().top;
+            // absolute 자연 스크롤(짧게)
+            const absTo1 = Math.max(1, ENTRY_Y()); // entry fixed 끝나고 free scroll로 elem1 top12까지
+            const abs12 = Math.max(1, elemOffsets[1] - elemOffsets[0]);
+            const abs23 = Math.max(1, elemOffsets[2] - elemOffsets[1]);
+            const totalAbs = absTo1 + abs12 + abs23;
 
-                const EPS = 2;
-                const shouldUnpin = nowTop >= targetTop + EPS;
+            const remain = Math.max(0, phase4Scrollable - totalAbs);
 
-                if (shouldUnpin) {
-                    pinned = false;
+            // fixed 분배(대부분 차지)
+            const fixedTotal = remain;
+            const w0 = 0.28; // entry fixed
+            const w1 = 0.24;
+            const w2 = 0.24;
+            const w3 = 0.24;
 
-                    // ✅ unpin 순간 margin을 바로 줄이지 않고 “잠깐 유지”
-                    holdMargin = true;
+            const f0 = Math.max(1, fixedTotal * w0);
+            const f1 = Math.max(1, fixedTotal * w1);
+            const f2 = Math.max(1, fixedTotal * w2);
+            const f3 = Math.max(1, fixedTotal * w3);
 
-                    inner.style.removeProperty('bottom');
-                    inner.style.removeProperty('right');
+            segs = [
+                { kind: 'F_ENTRY', len: f0 },
+                { kind: 'A_TO_1', len: absTo1 },
 
-                    inner.style.position = 'fixed';
-                    inner.style.left = '50%';
-                    inner.style.top = `${targetTop}px`;
-                    inner.style.transform = `translateX(-50%) translateY(${nowTop - targetTop}px)`;
-                    inner.style.opacity = '1';
-                    inner.style.pointerEvents = 'auto';
+                { kind: 'F_1', len: f1 },
+                { kind: 'A_1_2', len: abs12 },
 
-                    applyHeroMarginBottom(); // ✅ holdMargin이라 lastPinnedMB 유지
-                    skipFixedOnce = true;
+                { kind: 'F_2', len: f2 },
+                { kind: 'A_2_3', len: abs23 },
+
+                { kind: 'F_3', len: f3 },
+            ];
+
+            segStarts = [];
+            let acc = 0;
+            for (const s of segs) {
+                segStarts.push(acc);
+                acc += s.len;
+            }
+
+            scheduleReady = true;
+        };
+
+        const idxOf = (kind: Seg['kind']) => segs.findIndex((s) => s.kind === kind);
+
+        const setElemOpacities = (o1: number, o2: number, o3: number) => {
+            if (!offsetsReady) return;
+            visionElems[0].style.opacity = String(o1);
+            visionElems[1].style.opacity = String(o2);
+            visionElems[2].style.opacity = String(o3);
+        };
+
+// ✅ absolute 구간에서 “target elem이 top12 닿으면” fixed로 스냅
+        const triggerToFixedIfHitTop = (elemIndex: 0 | 1 | 2, fixedKind: Seg['kind']) => {
+            const el = visionElems[elemIndex];
+            const elTop = el.getBoundingClientRect().top;
+            const targetTop = FIXED_TOP_PX();
+            const EPS = 1;
+
+            if (elTop <= targetTop + EPS) {
+                // 즉시 fixed 스타일 적용(눈에 보이는 점프 방지)
+                setInnerFixedAtOffset(elemOffsets[elemIndex]);
+
+                const fi = idxOf(fixedKind);
+                if (fi >= 0) {
+                    forcedSegIndex = fi;
+                    freezePhasePx = segStarts[fi]; // localT = 0부터 시작하도록 스냅
                 }
-
-                return;
-            }
-
-            // ✅ unpin 직후 1회는 applyFixed로 덮어쓰지 않게
-            if (skipFixedOnce) {
-                skipFixedOnce = false;
-                return;
-            }
-
-            if (p < SHOW_START) {
-                applyFixed(START_PX(), 0);
-                // ✅ 이 구간은 항상 32px만
-                holdMargin = false;
-                applyHeroMarginBottom();
-                return;
-            }
-
-            const t01 = clamp01((p - SHOW_START) / (SHOW_END - SHOW_START));
-
-            // ✅ 조금만 위로 올라오면(=fixed 구간 진입) margin을 32px로 복귀
-            if (holdMargin && t01 < 0.92) {
-                holdMargin = false;
-                applyHeroMarginBottom();
-            }
-
-            const eased = easeInCubic(t01);
-            const yPx = START_PX() * (1 - eased);
-            const op = easeOutCubic(t01);
-
-            applyFixed(yPx, op);
-            if (!holdMargin) applyHeroMarginBottom(); // ✅ hold 중에는 건드리지 않음
-
-            // ✅ 내려갈 때 absolute 전환 (기존 방식 유지)
-            const reached = t01 >= 0.999 && op > 0.98;
-            if (reached) {
-                applyFixed(0, 1);
-                requestAnimationFrame(() => {
-                    pinAbsolute();
-                    // pinAbsolute 내부에서 margin 계산함
-                });
             }
         };
 
-        // 초기 1회
-        applyHeroMarginBottom();
-        updateVision();
+        const clearForceSnap = () => {
+            forcedSegIndex = null;
+            freezePhasePx = null;
+        };
+
+        const easeInOut = (x: number) =>
+            x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
+        const updatePhase4 = () => {
+            if (!offsetsReady) measureVisionElems();
+            if (!offsetsReady) return;
+
+            if (!scheduleReady) buildSchedule();
+            if (!scheduleReady) return;
+
+            const rect = section.getBoundingClientRect();
+            const vh = window.innerHeight;
+            const scrollable = rect.height - vh;
+            if (scrollable <= 0) return;
+
+            const rawP = -rect.top / scrollable;
+            const directionDown = rawP >= prevRawP;
+            prevRawP = rawP;
+
+            // ✅ phase4 이전
+            if (rawP < P4_START) {
+                releasedAfterEnd = false;
+                clearForceSnap();
+
+                setEntryFixedAtViewportY(ENTRY_Y());
+                inner.style.opacity = '0';
+                inner.style.pointerEvents = 'none';
+
+                setElemOpacities(0.2, 0, 0);
+                return;
+            }
+
+            // ✅ phase4 끝 이후: 1회만 absolute로 풀고 더 이상 건드리지 않기
+            if (rawP >= P4_END) {
+                if (!releasedAfterEnd) {
+                    releasedAfterEnd = true;
+                    clearForceSnap();
+
+                    // 현재 위치 유지하며 absolute로
+                    if (inner.style.position !== 'absolute') convertFixedToAbsoluteKeepPosition();
+                }
+                return;
+            }
+
+            // phase4 안으로 들어오면 end-release 플래그 해제(다시 내려가도 1회만 풀리게)
+            releasedAfterEnd = false;
+
+            const p = clamp01(rawP);
+            const t = clamp01((p - P4_START) / (P4_END - P4_START));
+            const phasePx = t * (scrollable * (P4_END - P4_START));
+
+            // ✅ 트리거로 스냅 중이면 phasePx를 잠깐 고정
+            const phasePxUsed = freezePhasePx != null ? freezePhasePx : phasePx;
+
+            // 현재 segment 결정
+            let idx = segs.length - 1;
+
+            if (forcedSegIndex != null) {
+                idx = forcedSegIndex;
+            } else {
+                for (let i = 0; i < segs.length; i++) {
+                    const start = segStarts[i];
+                    const end = start + segs[i].len;
+                    if (phasePxUsed >= start && phasePxUsed < end) {
+                        idx = i;
+                        break;
+                    }
+                }
+            }
+
+            const seg = segs[idx];
+            const start = segStarts[idx];
+            const localT = seg.len <= 1 ? 1 : clamp01((phasePxUsed - start) / seg.len);
+
+            switch (seg.kind) {
+                case 'F_ENTRY': {
+                    clearForceSnap();
+                    const e = easeInOut(localT);
+
+                    // ✅ 하단 등장: 위치 고정 + opacity 0 → 0.2
+                    setEntryFixedAtViewportY(ENTRY_Y());
+                    inner.style.opacity = String(0.2 * e);
+                    inner.style.pointerEvents = e > 0.98 ? 'auto' : 'none';
+
+                    setElemOpacities(0.2, 0, 0);
+                    break;
+                }
+
+                case 'A_TO_1': {
+                    // ✅ free scroll: absolute로 풀기
+                    if (inner.style.position !== 'absolute') convertFixedToAbsoluteKeepPosition();
+
+                    // 최소 가시성 유지
+                    inner.style.opacity = '0.2';
+                    inner.style.pointerEvents = 'auto';
+                    setElemOpacities(0.2, 0, 0);
+
+                    // ✅ 트리거(내려갈 때만): elem1이 top12 닿으면 F_1로 스냅
+                    if (directionDown) triggerToFixedIfHitTop(0, 'F_1');
+                    break;
+                }
+
+                case 'F_1': {
+                    // 스냅 후 첫 프레임(localT=0)에서 freeze 해제하여 자연 진행
+                    if (freezePhasePx != null && localT <= 0.001) {
+                        freezePhasePx = null;
+                        forcedSegIndex = null;
+                    }
+
+                    setInnerFixedAtOffset(elemOffsets[0]);
+
+                    const e = easeInOut(localT);
+                    const o1 = lerp(0.2, 1.0, e);
+                    setElemOpacities(o1, 0, 0);
+                    break;
+                }
+
+                case 'A_1_2': {
+                    if (inner.style.position !== 'absolute') convertFixedToAbsoluteKeepPosition();
+
+                    inner.style.opacity = '1';
+                    inner.style.pointerEvents = 'auto';
+                    setElemOpacities(1, 0, 0);
+
+                    // ✅ 트리거: elem2가 top12 닿으면 F_2로 스냅
+                    if (directionDown) triggerToFixedIfHitTop(1, 'F_2');
+                    break;
+                }
+
+                case 'F_2': {
+                    if (freezePhasePx != null && localT <= 0.001) {
+                        freezePhasePx = null;
+                        forcedSegIndex = null;
+                    }
+
+                    setInnerFixedAtOffset(elemOffsets[1]);
+
+                    const e = easeInOut(localT);
+                    setElemOpacities(1, lerp(0.0, 1.0, e), 0);
+                    break;
+                }
+
+                case 'A_2_3': {
+                    if (inner.style.position !== 'absolute') convertFixedToAbsoluteKeepPosition();
+
+                    inner.style.opacity = '1';
+                    inner.style.pointerEvents = 'auto';
+                    setElemOpacities(1, 1, 0);
+
+                    // ✅ 트리거: elem3가 top12 닿으면 F_3로 스냅
+                    if (directionDown) triggerToFixedIfHitTop(2, 'F_3');
+                    break;
+                }
+
+                case 'F_3': {
+                    if (freezePhasePx != null && localT <= 0.001) {
+                        freezePhasePx = null;
+                        forcedSegIndex = null;
+                    }
+
+                    setInnerFixedAtOffset(elemOffsets[2]);
+
+                    const e = easeInOut(localT);
+                    setElemOpacities(1, 1, lerp(0.0, 1.0, e));
+                    break;
+                }
+            }
+        };
+
+// ✅ 기존 updateVision() 대신 Phase4 호출
+        const updateVision = () => {
+            updatePhase4();
+        };
+
+
 
         // ======================================================
         // raf + events
@@ -720,7 +925,42 @@ export const Main = () => {
             </div>
 
             <div ref={visionInnerRef} className={styles.vision}>
-                <Vision />
+                <div className={`${styles.visionWrapper}`}>
+                    <div className={styles.visionContent}>
+                        <div className={styles.visionElem}>
+                            <div className={styles.visionHeader}>
+                                <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>
+                                <p className={styles.headerText}>The Vision</p>
+                            </div>
+                            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
+                                {t('vision')}
+                            </p>
+                        </div>
+                        <div className={styles.visionElem}>
+                            <div className={styles.blockHeader}>
+                                <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
+                                <p className={styles.headerText}>The Blockchain</p>
+                            </div>
+                            <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}>
+                                {t('blockchain')}
+                            </p>
+                        </div>
+                        <div className={styles.visionElem}>
+                            <div className={styles.vobHeader}>
+                                <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
+                                <p className={styles.headerText}>The Vision of Blockchain</p>
+                            </div>
+                            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
+                                {t('vob')}
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles.btnContainer}>
+                        <NavigationLink href="/about">
+                            <button className={styles.about}>{t('about')}</button>
+                        </NavigationLink>
+                    </div>
+                </div>
             </div>
         </section>
     );

@@ -21,7 +21,6 @@
     pointer-events: none;
     width: 100%;
     max-width: 1080px;
-    padding: 2rem;
     will-change: transform, opacity;
 }
 
@@ -41,3 +40,235 @@
 @media (max-width: 576px) {
     .vision { padding: 1rem; }
 }
+
+
+.visionWrapper {
+    /*margin-top: 4rem;*/
+    /*opacity: 0;*/
+}
+.visionWrapper > div {
+    position: relative;
+    margin-top: 4rem;
+}
+.visionWrapper > div:nth-child(1) {
+    margin-top: 0;
+}
+.detailText {
+    opacity: 0;
+}
+.visionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.visionHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+.visionHeader::after {
+    content : '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 75%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.visionHeader::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 75%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 1);
+    transform-origin: left center;
+    transform: scaleX(var(--vbar, 0));
+    z-index: 100;
+}
+
+
+.blockHeader {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+.blockHeader::after {
+    content : '';
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 75%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.blockHeader::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 75%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 1);
+    transform-origin: right center;
+    transform: scaleX(var(--vbar, 0));
+    z-index: 100;
+}
+.vobHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+.vobHeader::after {
+    content : '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 75%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.vobHeader::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 75%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 1);
+    transform-origin: left center;
+    transform: scaleX(var(--vbar, 0));
+    z-index: 100;
+}
+.headerText {
+    font-size: 1.5rem;
+    position: relative;
+}
+/*.headerText::before {*/
+/*    position: absolute;*/
+/*    content: '';*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: black;*/
+/*    animation:*/
+/*        typing 7s steps(40, end) infinite;*/
+
+/*}*/
+.visionElem:nth-child(1) { opacity: 0;}
+.visionElem:nth-child(2) { opacity: 0;}
+.visionElem:nth-child(3) { opacity: 0;}
+.visionPic {
+    float: left;
+    margin: 0 1rem;
+    border: 1px solid #999;
+}
+.visionImg {
+}
+.visionText {
+    margin-top: 1rem;
+    background: linear-gradient(to right, #ddd 0%, #eee 50%, #ddd 100%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text;
+    color: transparent;
+    overflow: hidden;
+}
+.blockText {
+    text-align: right;
+}
+.btnContainer {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+}
+.about {
+    font-size: 1.5rem;
+    position: relative;
+}
+.about::before {
+    transition: .5s;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #999;
+}
+.about::after {
+    transition: .5s;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: rgba(180,180,30,0.7);
+}
+.about:hover::after {
+    width: 100%;
+}
+
+.delayedAnimation {
+    animation: fadeIn .5s ease-in-out forwards;
+    animation-delay: 1s;
+}
+
+@keyframes typing {
+    0% { width: 100% }
+    25% { width: 0 }
+    100% { width: 0; }
+}
+
+@keyframes blinking {
+    from, to { border-color: transparent }
+    50% { border-color: white; }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 1400px) {
+    .visionHeader,
+    .blockHeader,
+    .vobHeader {
+        font-size: 2rem;
+    }
+    .headerText { font-size: 2rem; }
+    .about {font-size: 2rem;}
+
+
+}
+
+@media (max-width: 576px) {
+    .headerText { font-size: 1.2rem }
+
+    .visionImg { width: 24px; }
+    .blockImg { width: 24px; }
+    .vobImg { width: 16px; height: 24px; }
+
+    .vobHeader::after {
+        width: 99%;
+    }
+    .vobHeader::before {
+        width: 99%;
+    }
+}
+
