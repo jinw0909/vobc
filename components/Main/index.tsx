@@ -97,8 +97,77 @@ export const Main = () => {
             stableVh = Math.max(stableVh, window.innerHeight, vvH);
         };
 
-        const getStableVh = () => stableVh;
+        const getStableVh = () => window.visualViewport?.height ?? window.innerHeight;
 
+// ✅ Phase4 측정/스케줄 무효화
+        const invalidateMeasurements = () => {
+            scheduleReady = false;
+            offsetsReady = false;
+        };
+
+// ✅ margin-bottom 계산(레이아웃 기준)
+        const updateHeroMarginBottom = () => {
+            const s = sectionRef.current;
+            const v = visionInnerRef.current;
+            if (!s || !v) return;
+
+            const elems = v.querySelectorAll(`.${styles.visionElem}`);
+            if (elems.length < 3) return;
+
+            const third = elems[2] as HTMLElement;
+
+            // ✅ 핵심: fixed/transform 영향 안 받는 레이아웃 기준 값
+            const tailHeight = v.scrollHeight - third.offsetTop;
+
+            const vh = getStableVh();
+            const mb = tailHeight + FIXED_TOP_PX() - vh;
+
+            s.style.marginBottom = `${mb}px`;
+        };
+
+// ✅ 레이아웃 모드에서 측정(중요)
+// - inner가 fixed/transform 상태면 offsetTop/scrollHeight 측정이 흔들릴 수 있음
+        const measureInLayoutMode = () => {
+            const s = sectionRef.current;
+            const v = visionInnerRef.current;
+            if (!s || !v) return;
+
+            // 현재 스타일 백업
+            const prev = {
+                position: inner.style.position,
+                top: inner.style.top,
+                left: inner.style.left,
+                transform: inner.style.transform,
+                pointerEvents: inner.style.pointerEvents,
+                opacity: inner.style.opacity,
+            };
+
+            // ✅ 자연 레이아웃 상태로 잠깐 복귀
+            inner.style.position = 'relative';
+            inner.style.top = '0px';
+            inner.style.left = '0px';
+            inner.style.transform = 'none';
+            inner.style.pointerEvents = 'none';
+
+            // rAF 2번: 폰트/줄바꿈/레이아웃 반영 안정화
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    // offsets 다시 계산
+                    measureVisionElems();        // 여기서 offsetsReady=true 되도록
+                    // margin 다시 계산
+                    updateHeroMarginBottom();
+
+                    // 복구(phase 로직이 다음 tick/scroll에서 다시 잡아줌)
+                    Object.assign(inner.style, prev);
+                });
+            });
+        };
+
+// ✅ 한 번에 처리하는 헬퍼
+        const remeasureAll = () => {
+            invalidateMeasurements();
+            measureInLayoutMode();
+        };
         // ======================================================
         // Canvas state
         // ======================================================
@@ -473,27 +542,27 @@ export const Main = () => {
         };
 
         const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
-
-        // ✅ marginBottom 계산: address bar 영향 없는 stableVh 사용
-        const updateHeroMarginBottom = () => {
-            const s = sectionRef.current;
-            const v = visionInnerRef.current;
-            if (!s || !v) return;
-
-            const elems = v.querySelectorAll(`.${styles.visionElem}`);
-            if (elems.length < 3) return;
-
-            const thirdElem = elems[2] as HTMLElement;
-
-            const visionRect = v.getBoundingClientRect();
-            const thirdRect = thirdElem.getBoundingClientRect();
-
-            // (3번째 elem 시작 → vision bottom)
-            const tailHeight = visionRect.bottom - thirdRect.top;
-
-            const marginBottom = tailHeight + FIXED_TOP_PX() - getStableVh();
-            s.style.marginBottom = `${marginBottom}px`;
-        };
+        //
+        // // ✅ marginBottom 계산: address bar 영향 없는 stableVh 사용
+        // const updateHeroMarginBottom = () => {
+        //     const s = sectionRef.current;
+        //     const v = visionInnerRef.current;
+        //     if (!s || !v) return;
+        //
+        //     const elems = v.querySelectorAll(`.${styles.visionElem}`);
+        //     if (elems.length < 3) return;
+        //
+        //     const thirdElem = elems[2] as HTMLElement;
+        //
+        //     const visionRect = v.getBoundingClientRect();
+        //     const thirdRect = thirdElem.getBoundingClientRect();
+        //
+        //     // (3번째 elem 시작 → vision bottom)
+        //     const tailHeight = visionRect.bottom - thirdRect.top;
+        //
+        //     const marginBottom = tailHeight + FIXED_TOP_PX() - getStableVh();
+        //     s.style.marginBottom = `${marginBottom}px`;
+        // };
 
         const updatePhase4 = () => {
             if (!offsetsReady) measureVisionElems();
@@ -643,23 +712,25 @@ export const Main = () => {
         };
 
         const onResize = () => {
-            refreshStableVh();
             setCanvasSize();
             updateProgress();
-            updateHeroMarginBottom();
+
+            // ✅ 세로 줄임에서 깨지는 원인 제거
+            remeasureAll();
+
             updateVision();
             draw(animP, time, latestP);
-            scheduleReady = false;
         };
 
         const onVhResize = () => {
-            refreshStableVh();
             setCanvasSize();
             updateProgress();
-            updateHeroMarginBottom();
+
+            // ✅ 주소창/툴바 변화도 여기로 들어오므로 동일 처리
+            remeasureAll();
+
             updateVision();
             draw(animP, time, latestP);
-            scheduleReady = false;
         };
 
         const start = async () => {
@@ -668,13 +739,11 @@ export const Main = () => {
                 if (document?.fonts?.ready) await document.fonts.ready;
             } catch {}
 
-            refreshStableVh();
-
             setCanvasSize();
             updateProgress();
 
-            measureVisionElems();
-            updateHeroMarginBottom();
+            // ✅ 초기 측정도 동일 루틴으로
+            remeasureAll();
 
             animP = latestP;
             draw(animP, time, latestP);
@@ -691,6 +760,7 @@ export const Main = () => {
 
             rafId = window.requestAnimationFrame(tick);
         };
+
 
         start();
 
