@@ -23,6 +23,7 @@
     max-width: 1080px;
     will-change: transform, opacity;
     /*border: 1px solid #999;*/
+    padding: 0 2rem;
 }
 
 @media (min-width: 1400px) {

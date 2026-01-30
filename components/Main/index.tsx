@@ -28,13 +28,6 @@ export const Main = () => {
     const s4 = t('line4');
 
     useEffect(() => {
-        console.log('effect entered');
-        console.log('refs', {
-            section: !!sectionRef.current,
-            canvas: !!canvasRef.current,
-            inner: !!visionInnerRef.current,
-        });
-
         const section = sectionRef.current;
         const canvas = canvasRef.current;
         const inner = visionInnerRef.current;
@@ -50,16 +43,20 @@ export const Main = () => {
         const withVOB = 'with VOB';
 
         // ======================================================
-        // 타임라인(0~1)
+        // Timeline
         // ======================================================
         const Z1_END = 0.58;
         const WITH_START = 0.22;
-        const WITH_END = 0.6; // (유지)
+        const WITH_END = 0.6;
         const APPEAR_RATIO = 0.25;
         const PHASE3_START = WITH_START + (WITH_END - WITH_START) * APPEAR_RATIO;
 
+        // Phase4 range (draw에서 배경을 P4_START 이전에 다크로 만들기 위해 사용)
+        const P4_START = 0.5;
+        const P4_END = 1.0;
+
         // ======================================================
-        // 공통 유틸
+        // Utils
         // ======================================================
         const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
         const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
@@ -87,6 +84,20 @@ export const Main = () => {
             const fs = parseFloat(getComputedStyle(document.documentElement).fontSize || '16');
             return Number.isFinite(fs) ? fs : 16;
         };
+
+        // ======================================================
+        // ✅ Mobile address bar safe viewport (stable VH)
+        // - 주소창이 나오면 innerHeight가 줄어드는 걸 무시하고
+        // - 한 번이라도 커졌던(주소창 숨김) 높이를 기준으로 margin 계산
+        // ======================================================
+        let stableVh = window.innerHeight;
+
+        const refreshStableVh = () => {
+            const vvH = window.visualViewport?.height ?? 0;
+            stableVh = Math.max(stableVh, window.innerHeight, vvH);
+        };
+
+        const getStableVh = () => stableVh;
 
         // ======================================================
         // Canvas state
@@ -131,18 +142,10 @@ export const Main = () => {
         };
 
         // ======================================================
-        // ✅ Phase1~3: 그레이스케일 배경만
-        // - 처음(p=0)과 마지막(p=1): rgba(30,30,30,1)
-        // - Phase1: 30 -> PEAK_GRAY
-        // - Phase2: PEAK_GRAY 유지
-        // - Phase3: PEAK_GRAY -> 30
+        // ✅ Phase1~3 grayscale background only
         // ======================================================
         const PEAK_GRAY = 95;
 
-        // ✅ draw() 새 버전 (Phase1~3: grayscale only + 세로 낮을 때 겹침 방지)
-// - 배경: grayscale (start/end = 30, peak = 더 어두운 95)
-// - 텍스트 배치: fontSize 기반 최소 간격 + 세로 작을수록 살짝 압축
-// - 기존 Phase1 줌/페이드, Phase2 withVOB 등장, Phase3 확대/페이드 흐름 유지
         const draw = (p: number, _tSec: number, pReal?: number) => {
             const rect = canvas.getBoundingClientRect();
             const w = Math.max(1, rect.width);
@@ -156,9 +159,9 @@ export const Main = () => {
             const headerSize = fitFontSize(header, Math.min(22, w * 0.04), maxTextWidth, 700);
             const line1Size = fitFontSize(line1, Math.min(56, w * 0.07), maxTextWidth, 800);
 
-            // ✅ sub 라인은 세로가 낮을수록 아주 살짝 작아짐 (겹침 방지)
-            const vhTight2 = clamp01((680 - h) / 240); // 낮은 높이에서만 작동
-            const subTightK = 1 - 0.18 * vhTight2; // 최대 18% 축소
+            // sub lines: 낮은 세로일 때만 살짝 축소
+            const vhTight2 = clamp01((680 - h) / 240);
+            const subTightK = 1 - 0.18 * vhTight2;
 
             const subBaseRaw = isMobile() ? Math.min(18, w * 0.03) : Math.min(24, w * 0.022);
             const subBase = subBaseRaw * subTightK;
@@ -168,22 +171,16 @@ export const Main = () => {
             const s3Size = fitFontSize(s3, subBase, maxTextWidth, 600);
             const s4Size = fitFontSize(s4, subBase, maxTextWidth, 600);
 
-            // ---- helper: center X ----
             const cx = (text: string, size: number, weight: number) => {
                 ctx.font = `${weight} ${size}px ${FONT_FAMILY}`;
                 return (w - ctx.measureText(text).width) / 2;
             };
 
-            // ---- baseline ----
             ctx.textBaseline = 'middle';
 
-            // ======================================================
-            // ✅ Vertical spacing (겹침 방지 핵심)
-            // - h가 작아질수록 간격을 "살짝" 압축
-            // - fontSize 기반 최소 간격을 강제해서 line overlap 방지
-            // ======================================================
-            const vhTight = clamp01((700 - h) / 260); // h가 700보다 작아질수록 0->1
-            const tightK = 1 - 0.28 * vhTight; // 최대 28%까지 압축
+            // ---- spacing / anti-overlap ----
+            const vhTight = clamp01((700 - h) / 260);
+            const tightK = 1 - 0.28 * vhTight;
 
             const headerToLine1Base = (isMobile() ? h * 0.045 : h * 0.055) * tightK;
             const line1ToSubsBase = (isMobile() ? h * 0.06 : h * 0.095) * tightK;
@@ -193,17 +190,9 @@ export const Main = () => {
             const line1ToSubs = Math.max(line1Size * 0.75, line1ToSubsBase);
             const subGap = Math.max(Math.max(10, subBase * 0.55), subGapBase);
 
-            // ======================================================
-            // ✅ Anchor (세로가 너무 낮으면 전체 블록을 살짝 위로)
-            // - "간격을 늘리는" 대신, 중앙에서 살짝 위로 당겨서 안전 영역 확보
-            // ======================================================
-            const blockHeightEstimate =
-                headerToLine1 +
-                line1ToSubs +
-                (subGap * 3 + subGap * 0.6); // s3가 1.6배 gap이었으니 대충 반영
-
-            const overflow = Math.max(0, blockHeightEstimate - h * 0.62); // 62% 높이를 넘으면 위험
-            const anchorShift = Math.min(h * 0.08, overflow * 0.25); // 최대 8%만 위로
+            const blockHeightEstimate = headerToLine1 + line1ToSubs + (subGap * 3 + subGap * 0.6);
+            const overflow = Math.max(0, blockHeightEstimate - h * 0.62);
+            const anchorShift = Math.min(h * 0.08, overflow * 0.25);
 
             const line1Y = h * 0.46 - anchorShift;
             const headerY = line1Y - headerToLine1;
@@ -213,7 +202,6 @@ export const Main = () => {
             const s3Y = s2Y + subGap * 1.6;
             const s4Y = s3Y + subGap;
 
-            // ---- X positions ----
             const headerX = cx(header, headerSize, 700);
             const line1X = cx(line1, line1Size, 800);
             const s1X = cx(s1, s1Size, 400);
@@ -221,14 +209,14 @@ export const Main = () => {
             const s3X = cx(s3, s3Size, 400);
             const s4X = cx(s4, s4Size, 400);
 
-            // ---- O center for phase1 zoom anchor ----
+            // O anchor (phase1 zoom center)
             ctx.font = `800 ${line1Size}px ${FONT_FAMILY}`;
             const beforeO1 = 'Experience Em';
             const oW1 = ctx.measureText('O').width;
             const oCenterX1 = line1X + ctx.measureText(beforeO1).width + oW1 / 2;
             const oCenterY1 = line1Y;
 
-            // ---- withVOB placement based on O center ----
+            // withVOB positioning
             const withBasePx = Math.max(18, w * 0.06);
             const WITH_MAX_SCALE = 1.22;
             const withMaxSize = fitFontSize(withVOB, withBasePx * WITH_MAX_SCALE, maxTextWidth, 800);
@@ -246,14 +234,9 @@ export const Main = () => {
 
             const isPhase3 = pA >= PHASE3_START;
 
-            // ======================================================
-            // ✅ grayscale background (더 어두운 피크)
-            // ======================================================
-            const PEAK_GRAY = 95;
-
+            // ✅ grayscale bg (Phase4 시작 전에 이미 다크로)
             let bgGray = 30;
 
-            // ✅ Phase4 진입 전에는 반드시 다크 고정
             if (pR >= P4_START) {
                 bgGray = 30;
             } else if (pR < WITH_START) {
@@ -261,21 +244,13 @@ export const Main = () => {
             } else if (pR < PHASE3_START) {
                 bgGray = PEAK_GRAY;
             } else {
-                // Phase3 종료를 Phase4 시작(P4_START)에 맞춰 당김
-                bgGray = lerpInt(
-                    PEAK_GRAY,
-                    30,
-                    smoothstep(PHASE3_START, P4_START, pR)
-                );
+                bgGray = lerpInt(PEAK_GRAY, 30, smoothstep(PHASE3_START, P4_START, pR));
             }
-
 
             ctx.fillStyle = `rgba(${bgGray},${bgGray},${bgGray},1)`;
             ctx.fillRect(0, 0, w, h);
 
-            // ======================================================
-            // Phase1: group zoom + fade (기존 유지)
-            // ======================================================
+            // Phase1 zoom + fade (기존 흐름 유지)
             const z1 = clamp01(pA / Z1_END);
             const scale1 = lerp(1, getZoomMax(), getZoomEase(z1));
 
@@ -311,9 +286,7 @@ export const Main = () => {
                 ctx.globalAlpha = 1;
             }
 
-            // ======================================================
-            // Phase2: withVOB 등장
-            // ======================================================
+            // Phase2: withVOB appear
             if (pA >= WITH_START && pA < PHASE3_START) {
                 ctx.save();
                 ctx.globalAlpha = appear;
@@ -323,9 +296,7 @@ export const Main = () => {
                 ctx.restore();
             }
 
-            // ======================================================
-            // Phase3: withVOB 확대 + 페이드
-            // ======================================================
+            // Phase3: withVOB zoom + fade
             if (isPhase3) {
                 const z3A = clamp01((pA - PHASE3_START) / (1 - PHASE3_START));
                 const z3R = clamp01((pR - PHASE3_START) / (1 - PHASE3_START));
@@ -337,7 +308,6 @@ export const Main = () => {
                 const scale2 = lerp(1, getZoomMax(), accel2(zScale));
                 const textAlpha = 1 - easeInOutCubic(zFade);
 
-                // withVOB max size (same center)
                 ctx.font = `800 ${withMaxSize}px ${FONT_FAMILY}`;
                 const withWMax = ctx.measureText(withVOB).width;
                 const withXMax = oCenterX1 - withWMax / 2;
@@ -360,18 +330,15 @@ export const Main = () => {
             }
         };
 
-
         // ======================================================
-        // ✅ Phase4 (단순화 버전 + 모바일 8rem / 데스크탑 12rem)
+        // ✅ Phase4: fixed/absolute swap (mobile 8rem, desktop 12rem)
         // ======================================================
         const isMobileNow = () => window.innerWidth < 769;
+
         const FIXED_TOP_PX = () => {
             const rem = getRemPx();
             return (isMobileNow() ? 8 : 12) * rem;
         };
-
-        const P4_START = 0.5;
-        const P4_END = 1.0;
 
         let visionElems: HTMLElement[] = [];
         let elemOffsets: number[] = [];
@@ -507,6 +474,7 @@ export const Main = () => {
 
         const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
+        // ✅ marginBottom 계산: address bar 영향 없는 stableVh 사용
         const updateHeroMarginBottom = () => {
             const s = sectionRef.current;
             const v = visionInnerRef.current;
@@ -523,7 +491,7 @@ export const Main = () => {
             // (3번째 elem 시작 → vision bottom)
             const tailHeight = visionRect.bottom - thirdRect.top;
 
-            const marginBottom = tailHeight + FIXED_TOP_PX() - window.innerHeight;
+            const marginBottom = tailHeight + FIXED_TOP_PX() - getStableVh();
             s.style.marginBottom = `${marginBottom}px`;
         };
 
@@ -675,6 +643,7 @@ export const Main = () => {
         };
 
         const onResize = () => {
+            refreshStableVh();
             setCanvasSize();
             updateProgress();
             updateHeroMarginBottom();
@@ -684,6 +653,7 @@ export const Main = () => {
         };
 
         const onVhResize = () => {
+            refreshStableVh();
             setCanvasSize();
             updateProgress();
             updateHeroMarginBottom();
@@ -698,10 +668,11 @@ export const Main = () => {
                 if (document?.fonts?.ready) await document.fonts.ready;
             } catch {}
 
+            refreshStableVh();
+
             setCanvasSize();
             updateProgress();
 
-            // Phase4/마진 계산 준비
             measureVisionElems();
             updateHeroMarginBottom();
 
@@ -738,12 +709,13 @@ export const Main = () => {
 
     return (
         <section ref={sectionRef} className={styles.heroSection} style={{ background: BG }}>
-            <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
+            {/* ✅ 모바일 주소창 이슈 줄이려면 100vh 대신 100svh 추천 */}
+            <div style={{ position: 'sticky', top: 0, height: '100svh' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
 
             <div ref={visionInnerRef} className={styles.vision}>
-                <div className={`${styles.visionWrapper}`}>
+                <div className={styles.visionWrapper}>
                     <div className={styles.visionContent}>
                         <div className={styles.visionElem}>
                             <div className={styles.visionHeader}>
@@ -758,9 +730,7 @@ export const Main = () => {
                                 <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon" />
                                 <p className={styles.headerText}>The Blockchain</p>
                             </div>
-                            <p
-                                className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}
-                            >
+                            <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}>
                                 {t('blockchain')}
                             </p>
                         </div>
