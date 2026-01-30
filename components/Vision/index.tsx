@@ -38,7 +38,7 @@ export const Vision = () => {
                         {t('vision')}
                     </p>
                 </div>
-                <div className={styles.visionElem}>
+                <div className={`${styles.visionElem} ${styles.blockElem}`}>
                     <div className={styles.blockHeader}>
                         <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
                         <p className={styles.headerText}>The Blockchain</p>
@@ -47,7 +47,7 @@ export const Vision = () => {
                         {t('blockchain')}
                     </p>
                 </div>
-                <div className={styles.visionElem}>
+                <div className={`${styles.visionElem} ${styles.vobElem}`}>
                     <div className={styles.vobHeader}>
                         <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
                         <p className={styles.headerText}>The Vision of Blockchain</p>

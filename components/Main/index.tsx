@@ -8,6 +8,11 @@ import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './styles.module.css';
 import { Vision } from '@/components/Vision';
+import Image from "next/image";
+import visionPic from "@/public/vision_white.png";
+import blockPic from "@/public/blockchain_white.png";
+import vobPic from "@/public/vob_crop.png";
+import {NavigationLink} from "@/ui/NavigationLink";
 
 const BG = 'rgba(30, 30, 30, 1)';
 const FG = '#fff';
@@ -30,6 +35,7 @@ export const Main = () => {
     const sectionRef = useRef<HTMLElement | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+    const visionSlotRef = useRef<HTMLDivElement | null>(null);
     const visionInnerRef = useRef<HTMLDivElement | null>(null);
 
     const s1 = t('line1');
@@ -73,7 +79,7 @@ export const Main = () => {
         // ======================================================
         // 공통 유틸
         // ======================================================
-        const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+        // const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
         const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
 
         const isMobile = () => window.innerWidth < 769;
@@ -458,174 +464,342 @@ export const Main = () => {
         };
 
         // ======================================================
-        // ✅ Vision Phase4 — margin 관련만 “안 튀게” 개선
-        //    - pinned(absolute)일 때만 overflow 기반 marginBottom 계산
-        //    - unpin(absolute→fixed) 순간 marginBottom을 바로 줄이지 않고
-        //      이전 pinned margin을 잠깐 유지했다가(hold) 안전 구간에서 32px로 복귀
-        // ======================================================
+// ✅ Vision Phase4 — fixed에서 "현재 elem" opacity 0.2→1
+//    - pre/approach: opacity 0.2 유지
+//    - fixed: stage elem이 스크롤로 0.2→1
+//    - 1 되면 absolute(pin)로 풀고 자연 스크롤
+//    - 다음 elem이 top12 닿으면 다시 fixed
+//    - 역방향(올림)도 복귀
+// ======================================================
 
         const getRemPx = () => {
             const fs = parseFloat(getComputedStyle(document.documentElement).fontSize || '16');
             return Number.isFinite(fs) ? fs : 16;
         };
         const isMobileNow = () => window.innerWidth < 769;
+        const FIXED_TOP_PX = () => (isMobileNow() ? 8 : 12) * getRemPx();
 
-        // ✅ 모바일 8rem / PC 12rem (너 요구 반영)
-        const FIXED_TOP_PX = () => (isMobileNow() ? 0 : 0) * getRemPx();
+// "처음 아래에서 보일 때" 기본 opacity
+        const BASE_OPACITY = 0.2;
 
-        const START_VH = 70;
-        const START_PX = () => (START_VH / 100) * window.innerHeight;
-
+// 섹션 progress 기준
         const SHOW_START = 0.5;
         const SHOW_END = 1.0;
 
-        let pinned = false;
+// approach는 그냥 "위로 올라오게"만, opacity는 고정(0.2)
+        const APPROACH_PORTION = 0.18;
+        const APPROACH_END = SHOW_START + (SHOW_END - SHOW_START) * APPROACH_PORTION;
 
+        const START_VH = 80;
+        const START_PX = () => (START_VH / 100) * window.innerHeight;
+
+// pinned일 때 섹션 바닥 여유(필요시)
         const EXTRA_PX = 32;
 
-        // ✅ marginBottom 튐 방지용 상태
-        let lastPinnedMB = EXTRA_PX;
-        let holdMargin = false;
+// elems
+        const elems = Array.from(inner.querySelectorAll(`.${styles.visionElem}`)) as HTMLElement[];
+        const N = elems.length;
 
+        const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
+// 상태
+        let stage = 0;
+        let mode: 'pre' | 'approach' | 'fixed' | 'pinned' = 'pre';
+
+        let fadeAcc = 0; // fixed에서만 누적 (0..fadePx)
+        let pinned = false;
+        let pinnedStage: number | null = null;
+
+        let lastY = window.scrollY;
+        let skipOnce = false;
+
+// ------------------------------------------------------
+// stage당 fade 길이: phase4 스크롤 예산 기반 (90%를 fixed에)
+// ------------------------------------------------------
+        const FIXED_BUDGET_RATIO = 0.9;
+        const getFadePx = () => {
+            const rect = section.getBoundingClientRect();
+            const vh = window.innerHeight;
+            const scrollable = rect.height - vh;
+            if (scrollable <= 0) return 400;
+
+            // phase4는 SHOW_START~1 구간
+            const phase4ScrollPx = scrollable * (1 - SHOW_START);
+
+            const fixedBudgetPx = phase4ScrollPx * FIXED_BUDGET_RATIO;
+            const perStage = fixedBudgetPx / Math.max(1, N);
+
+            return Math.max(320, Math.round(perStage));
+        };
+
+// ------------------------------------------------------
+// pinned일 때만 marginBottom 증가
+// ------------------------------------------------------
         const applyHeroMarginBottom = () => {
             if (!pinned) {
-                // ✅ fixed(또는 pinned 아님)일 때는 margin을 0으로
                 section.style.marginBottom = `0px`;
                 return;
             }
-
-            // ✅ pinned(absolute)일 때만: (vision.bottom - section.bottom) + 32
             const secRect = section.getBoundingClientRect();
             const innerRect = inner.getBoundingClientRect();
             const overflow = Math.max(0, innerRect.bottom - secRect.bottom);
-
             section.style.marginBottom = `${Math.ceil(overflow + EXTRA_PX)}px`;
         };
 
+// ------------------------------------------------------
+// fixed에서 stage elem을 top12에 맞추기 위한 translateY 보정
+// ------------------------------------------------------
+        const getStageYOffsetFixed = (st: number) => {
+            const el = elems[st];
+            if (!el) return 0;
+            const innerRect = inner.getBoundingClientRect();
+            const elRect = el.getBoundingClientRect();
+            const offsetInInner = elRect.top - innerRect.top;
+            return -offsetInInner;
+        };
 
-        const applyFixed = (yPx: number, opacity: number) => {
+// ------------------------------------------------------
+// opacity 정책 (핵심)
+//  - i < stage : 1 유지
+//  - i == stage: BASE_OPACITY + (1-BASE)*t01
+//  - i > stage : 0
+// ------------------------------------------------------
+        const applyOpacity = (st: number, t01: number) => {
+            const curOpacity = BASE_OPACITY + (1 - BASE_OPACITY) * clamp01(t01);
+
+            for (let i = 0; i < N; i++) {
+                if (i < st) elems[i].style.opacity = '1';
+                else if (i === st) elems[i].style.opacity = String(curOpacity);
+                else elems[i].style.opacity = '0';
+            }
+        };
+
+// ------------------------------------------------------
+// fixed 적용
+// ------------------------------------------------------
+        const applyFixed = (yPx: number, opacity: number, st: number) => {
+            const stageYOffset = getStageYOffsetFixed(st);
+
             inner.style.removeProperty('bottom');
             inner.style.removeProperty('right');
 
             inner.style.position = 'fixed';
             inner.style.left = '50%';
             inner.style.top = `${FIXED_TOP_PX()}px`;
-            inner.style.transform = `translateX(-50%) translateY(${yPx}px)`;
+
+            // stageYOffset 포함(복귀 튐 방지)
+            inner.style.transform = `translateX(-50%) translateY(${yPx + stageYOffset}px)`;
+
             inner.style.opacity = String(opacity);
             inner.style.pointerEvents = opacity > 0.98 ? 'auto' : 'none';
         };
 
-        const pinAbsolute = () => {
+// ------------------------------------------------------
+// absolute pin: 현재 stage elem이 top12에 오도록 "한 번만" top 계산
+// ------------------------------------------------------
+        const pinAbsolute = (forStage: number) => {
             if (pinned) return;
+
+            const el = elems[forStage];
+            if (!el) return;
+
             pinned = true;
+            pinnedStage = forStage;
 
             const secRect = section.getBoundingClientRect();
             const innerRect = inner.getBoundingClientRect();
-            const topInSection = innerRect.top - secRect.top;
+            const elRect = el.getBoundingClientRect();
 
-            inner.style.removeProperty('position');
-            inner.style.removeProperty('top');
-            inner.style.removeProperty('left');
-            inner.style.removeProperty('transform');
+            const elOffsetInInner = elRect.top - innerRect.top;
+            const topInSection = Math.round((-secRect.top) + FIXED_TOP_PX() - elOffsetInInner);
+
+            inner.style.removeProperty('bottom');
+            inner.style.removeProperty('right');
 
             inner.style.position = 'absolute';
             inner.style.left = '50%';
-            inner.style.top = `${Math.round(topInSection)}px`;
+            inner.style.top = `${topInSection}px`;
             inner.style.transform = 'translateX(-50%)';
+
             inner.style.opacity = '1';
             inner.style.pointerEvents = 'auto';
 
-            applyHeroMarginBottom(); // ✅ pinned 계산
+            applyHeroMarginBottom();
         };
 
-        const easeInCubic = (t: number) => t * t * t;
+// ------------------------------------------------------
+// absolute -> fixed 복귀
+// ------------------------------------------------------
+        const unpinToFixed = (toStage: number) => {
+            pinned = false;
+            pinnedStage = null;
 
-        let skipFixedOnce = false;
+            inner.style.removeProperty('top');
+            inner.style.removeProperty('bottom');
+            inner.style.removeProperty('right');
 
+            applyFixed(0, 1, toStage);
+            applyHeroMarginBottom(); // pinned=false => 0
+
+            skipOnce = true;
+        };
+
+// ------------------------------------------------------
+// pinned 상태에서 다음 stage로 넘어갈 조건 체크
+//  - ↓: 다음 elem이 top12 닿으면 fixed로(다음 stage 시작)
+//  - ↑: pinnedStage elem이 top12에서 멀어지면 fixed로 복귀
+// ------------------------------------------------------
+        const checkPinnedTransitions = (dy: number) => {
+            if (!pinned || pinnedStage == null) return;
+
+            const topTarget = FIXED_TOP_PX();
+            const EPS = 2;
+
+            // ↓ 내려갈 때: 다음 elem이 top12 닿으면 다음 stage로 fixed 복귀
+            if (dy > 0) {
+                const next = pinnedStage + 1;
+                if (next < N) {
+                    const nextTop = elems[next].getBoundingClientRect().top;
+                    if (nextTop <= topTarget + EPS) {
+                        stage = next;
+                        fadeAcc = 0;
+                        mode = 'fixed';
+
+                        unpinToFixed(stage);
+                        applyOpacity(stage, 0); // 다음 stage는 0.2부터 다시 올라감
+                    }
+                }
+                return;
+            }
+
+            // ↑ 올릴 때: pinnedStage elem이 top12에서 내려오기 시작하면 fixed 복귀
+            if (dy < 0) {
+                const curTop = elems[pinnedStage].getBoundingClientRect().top;
+
+                // pinnedStage가 topTarget에서 충분히 멀어지면 fixed로 다시 잡는다
+                if (curTop >= topTarget + 18) {
+                    stage = pinnedStage;
+                    fadeAcc = getFadePx(); // 이미 완전 노출(=t01=1) 상태로 복귀
+                    mode = 'fixed';
+
+                    unpinToFixed(stage);
+                    applyOpacity(stage, 1);
+                }
+            }
+        };
+
+// ------------------------------------------------------
+// main update
+// ------------------------------------------------------
         const updateVision = () => {
+            if (skipOnce) {
+                skipOnce = false;
+                return;
+            }
+
             const rect = section.getBoundingClientRect();
             const vh = window.innerHeight;
-
             const scrollable = rect.height - vh;
             if (scrollable <= 0) return;
 
             const p = clamp01(-rect.top / scrollable);
 
-            // ✅ pinned(absolute) 상태에서: 실제 top 기준으로 unpin
-            if (pinned) {
-                const targetTop = FIXED_TOP_PX();
-                const nowTop = inner.getBoundingClientRect().top;
+            const curY = window.scrollY;
+            const dy = curY - lastY;
+            lastY = curY;
 
-                const EPS = 2;
-                const shouldUnpin = nowTop >= targetTop + EPS;
-
-                if (shouldUnpin) {
-                    pinned = false;
-
-                    // ✅ unpin 순간 margin을 바로 줄이지 않고 “잠깐 유지”
-                    holdMargin = true;
-
-                    inner.style.removeProperty('bottom');
-                    inner.style.removeProperty('right');
-
-                    inner.style.position = 'fixed';
-                    inner.style.left = '50%';
-                    inner.style.top = `${targetTop}px`;
-                    inner.style.transform = `translateX(-50%) translateY(${nowTop - targetTop}px)`;
-                    inner.style.opacity = '1';
-                    inner.style.pointerEvents = 'auto';
-
-                    applyHeroMarginBottom(); // ✅ holdMargin이라 lastPinnedMB 유지
-                    skipFixedOnce = true;
+            // 섹션 밖 처리: fixed 잔상 방지
+            if (p <= 0 || p >= 1) {
+                // fixed 상태로 섹션을 벗어날 때는 absolute로 풀어두는 게 안전
+                const isFixed = inner.style.position === 'fixed';
+                if (!pinned && isFixed) {
+                    pinAbsolute(stage);
                 }
 
+                // 섹션 밖에서는 보이지 않게
+                if (!pinned) {
+                    inner.style.opacity = '0';
+                    inner.style.pointerEvents = 'none';
+                }
+
+                applyHeroMarginBottom();
                 return;
             }
 
-            // ✅ unpin 직후 1회는 applyFixed로 덮어쓰지 않게
-            if (skipFixedOnce) {
-                skipFixedOnce = false;
+            // pinned면: 속도 불변 + 스냅 체크만
+            if (pinned) {
+                applyHeroMarginBottom();
+                checkPinnedTransitions(dy);
                 return;
             }
 
+            // ---- pre ----
             if (p < SHOW_START) {
-                applyFixed(START_PX(), 0);
-                // ✅ 이 구간은 항상 32px만
-                holdMargin = false;
+                mode = 'pre';
+                stage = 0;
+                fadeAcc = 0;
+
+                applyFixed(START_PX(), BASE_OPACITY, 0);
+                applyOpacity(0, 0);
                 applyHeroMarginBottom();
                 return;
             }
 
-            const t01 = clamp01((p - SHOW_START) / (SHOW_END - SHOW_START));
+            // ---- approach: 위치만 위로, opacity는 BASE 유지 ----
+            if (p < APPROACH_END) {
+                mode = 'approach';
+                stage = 0;
+                fadeAcc = 0;
 
-            // ✅ 조금만 위로 올라오면(=fixed 구간 진입) margin을 32px로 복귀
-            if (holdMargin && t01 < 0.92) {
-                holdMargin = false;
+                const t01 = clamp01((p - SHOW_START) / (APPROACH_END - SHOW_START));
+                applyFixed(START_PX() * (1 - t01), BASE_OPACITY, 0);
+
+                applyOpacity(0, 0);
                 applyHeroMarginBottom();
+                return;
             }
 
-            const eased = easeInCubic(t01);
-            const yPx = START_PX() * (1 - eased);
-            const op = easeOutCubic(t01);
+            // ---- fixed stage ----
+            mode = 'fixed';
+            applyFixed(0, 1, stage);
 
-            applyFixed(yPx, op);
-            if (!holdMargin) applyHeroMarginBottom(); // ✅ hold 중에는 건드리지 않음
+            // fixed에서만 fade 진행(내릴 때 + 올릴 때)
+            if (dy !== 0) {
+                fadeAcc = Math.max(0, Math.min(getFadePx(), fadeAcc + dy));
+            }
+            const t01 = clamp01(fadeAcc / getFadePx());
 
-            // ✅ 내려갈 때 absolute 전환 (기존 방식 유지)
-            const reached = t01 >= 0.999 && op > 0.98;
-            if (reached) {
-                applyFixed(0, 1);
+            // ✅ 현재 stage elem이 0.2→1로 증가
+            applyOpacity(stage, t01);
+            applyHeroMarginBottom();
+
+            // ✅ 1이 되면 absolute로 풀어준다 (마지막 stage 포함)
+            if (t01 >= 0.999) {
                 requestAnimationFrame(() => {
-                    pinAbsolute();
-                    // pinAbsolute 내부에서 margin 계산함
+                    pinAbsolute(stage);
+                    mode = 'pinned';
                 });
+                return;
+            }
+
+            // ↑ 올릴 때: t01이 0으로 내려가면 이전 stage로 복귀
+            if (dy < 0 && fadeAcc <= 0.001 && stage > 0) {
+                stage = stage - 1;
+                fadeAcc = getFadePx(); // 이전 stage는 완전 노출 상태로 시작
+                applyFixed(0, 1, stage);
+                applyOpacity(stage, 1);
             }
         };
 
-        // 초기 1회
+// 초기 실행
         applyHeroMarginBottom();
         updateVision();
+
+
+
+
+
+
 
         // ======================================================
         // raf + events
@@ -718,10 +892,45 @@ export const Main = () => {
             <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
-
             <div ref={visionInnerRef} className={styles.vision}>
-                <Vision />
-            </div>
+                    {/*<Vision />*/}
+                    <div className={`${styles.visionWrapper}`}>
+                        <div className={styles.visionContent}>
+                            <div className={styles.visionElem}>
+                                <div className={styles.visionHeader}>
+                                    <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon"></Image>
+                                    <p className={styles.headerText}>The Vision</p>
+                                </div>
+                                <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
+                                    {t('vision')}
+                                </p>
+                            </div>
+                            <div className={`${styles.visionElem} ${styles.blockElem}`}>
+                                <div className={styles.blockHeader}>
+                                    <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon"></Image>
+                                    <p className={styles.headerText}>The Blockchain</p>
+                                </div>
+                                <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}>
+                                    {t('blockchain')}
+                                </p>
+                            </div>
+                            <div className={`${styles.visionElem} ${styles.vobElem}`}>
+                                <div className={styles.vobHeader}>
+                                    <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon"></Image>
+                                    <p className={styles.headerText}>The Vision of Blockchain</p>
+                                </div>
+                                <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>
+                                    {t('vob')}
+                                </p>
+                            </div>
+                        </div>
+                        <div className={styles.btnContainer}>
+                            <NavigationLink href="/about">
+                                <button className={styles.about}>{t('about')}</button>
+                            </NavigationLink>
+                        </div>
+                    </div>
+                </div>
         </section>
     );
 };

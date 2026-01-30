@@ -18,6 +18,10 @@
     gap: 4rem;
 }
 
+.visionElem {}
+.blockElem { opacity: 0;}
+.vobElem { opacity: 0; }
+
 .visionHeader {
     display: flex;
     justify-content: flex-start;
