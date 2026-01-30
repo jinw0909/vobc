@@ -341,7 +341,6 @@ export const Main = ({locale, newsBundles} : { locale: string, newsBundles : New
             }
 
 
-
             ctx.fillStyle = `rgba(${bgGray},${bgGray},${bgGray},1)`;
             ctx.fillRect(0, 0, w, h);
 
@@ -738,29 +737,86 @@ export const Main = ({locale, newsBundles} : { locale: string, newsBundles : New
             }
         };
 
+        // ----------------------------------------------
+// ✅ Stable resize handling (mobile address bar safe)
+// - 주소창 토글(세로 높이만 변동)은 remeasure / canvas resize 안함
+// - 진짜 리사이즈(가로 변화/회전)만 remeasure + canvas resize
+// ----------------------------------------------
+        let lastW = window.innerWidth;
+        let lastH = window.innerHeight;
+
+        let lastVVW = window.visualViewport?.width ?? window.innerWidth;
+        let lastVVH = window.visualViewport?.height ?? window.innerHeight;
+
+        const WIDTH_EPS = 6;      // px
+        const HEIGHT_EPS = 160;   // "진짜 큰" 높이 변화만 (회전 등). 주소창 토글은 대부분 이보다 작음
+
+        const heavyResize = (w: number, h: number, prevW: number, prevH: number) => {
+            const dw = Math.abs(w - prevW);
+            const dh = Math.abs(h - prevH);
+
+            // ✅ 가로 변화는 무조건 heavy (회전/브레이크포인트)
+            if (dw >= WIDTH_EPS) return true;
+
+            // ✅ 세로 변화는 큰 변화만 heavy
+            if (dh >= HEIGHT_EPS) return true;
+
+            return false;
+        };
+
+        const lightUpdate = () => {
+            updateProgress();
+            updateVision();
+            draw(animP, time, latestP);
+        };
+
+        const heavyUpdate = () => {
+            setCanvasSize();
+            updateProgress();
+            remeasureAll();
+            updateVision();
+            draw(animP, time, latestP);
+        };
+
         const onResize = () => {
-            setCanvasSize();
-            updateProgress();
+            const w = window.innerWidth;
+            const h = window.innerHeight;
 
-            // ✅ 세로 줄임에서 깨지는 원인 제거
-            remeasureAll();
+            if (heavyResize(w, h, lastW, lastH)) {
+                heavyUpdate();
+            } else {
+                lightUpdate();
+            }
 
-            updateVision();
-            draw(animP, time, latestP);
+            lastW = w;
+            lastH = h;
         };
 
+// ✅ visualViewport는 "주소창 토글"이 대부분 -> light로 처리
         const onVhResize = () => {
-            setCanvasSize();
-            updateProgress();
+            const vv = window.visualViewport;
+            const w = vv?.width ?? window.innerWidth;
+            const h = vv?.height ?? window.innerHeight;
 
-            // ✅ 주소창/툴바 변화도 여기로 들어오므로 동일 처리
-            remeasureAll();
+            // visualViewport에서 가로가 변한 경우(회전/줌 등)만 heavy
+            if (heavyResize(w, h, lastVVW, lastVVH)) {
+                heavyUpdate();
+            } else {
+                // ✅ 주소창 출렁임은 remeasure/canvas resize 안함
+                lightUpdate();
+            }
 
-            updateVision();
-            draw(animP, time, latestP);
+            lastVVW = w;
+            lastVVH = h;
         };
+
 
         const start = async () => {
+            lastW = window.innerWidth;
+            lastH = window.innerHeight;
+            lastVVW = window.visualViewport?.width ?? window.innerWidth;
+            lastVVH = window.visualViewport?.height ?? window.innerHeight;
+
             try {
                 // @ts-ignore
                 if (document?.fonts?.ready) await document.fonts.ready;
@@ -782,7 +838,7 @@ export const Main = ({locale, newsBundles} : { locale: string, newsBundles : New
 
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', onVhResize);
-                window.visualViewport.addEventListener('scroll', onVhResize);
+                // window.visualViewport.addEventListener('scroll', onVhResize);
             }
 
             rafId = window.requestAnimationFrame(tick);
