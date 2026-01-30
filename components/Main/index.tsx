@@ -61,7 +61,7 @@ export const Main = () => {
         // ======================================================
         // 공통 유틸
         // ======================================================
-        // const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+        const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
         const lerp = (a: number, b: number, tt: number) => a + (b - a) * tt;
 
         const easeOutCubic = (tt: number) => 1 - Math.pow(1 - tt, 3);
@@ -402,13 +402,12 @@ export const Main = () => {
         const convertFixedToAbsoluteKeepPosition = () => {
             const secRect = section.getBoundingClientRect();
             const innerRect = inner.getBoundingClientRect();
-            const elRect = el.getBoundingClientRect();
+            const topInSection = innerRect.top - secRect.top;
 
             inner.style.position = 'absolute';
             inner.style.left = '50%';
-            inner.style.top = `${topInSection}px`;
+            inner.style.top = `${Math.round(topInSection)}px`;
             inner.style.transform = 'translateX(-50%)';
-
             inner.style.opacity = '1';
             inner.style.pointerEvents = 'auto';
         };
@@ -643,12 +642,6 @@ export const Main = () => {
             updatePhase4();
         };
 
-
-
-
-
-
-
         // ======================================================
         // raf + events
         // ======================================================
@@ -748,6 +741,7 @@ export const Main = () => {
             <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
             </div>
+
             <div ref={visionInnerRef} className={styles.vision}>
                 <div className={`${styles.visionWrapper}`}>
                     <div className={styles.visionContent}>
