@@ -12,7 +12,7 @@
 .mediaElementWrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
-    gap: 1.5rem;
+    gap: .5rem;
     margin-top: 1rem;
 }
 .mediaElementWrapper::-webkit-scrollbar {
@@ -108,7 +108,7 @@
     .mediaElementWrapper {
         display: grid;
         grid-template-columns: repeat(4, 1fr); /* 한 줄에 3개 */
-        gap: 1.5rem;
+        gap: .5rem;
         margin-top: 1rem;
     }
     /*.mediaElement { height: 300px; width: 350px; }*/

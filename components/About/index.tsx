@@ -24,9 +24,9 @@ export const About = async () => {
 
     return (
         <div>
-            <div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>
-            <div>
-                <div className={`${styles.element} ${styles.fadeInAnimation} opacity-0`}>
+            {/*<div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>*/}
+            <div className={styles.aboutInner}>
+                <div className={`${styles.element}`}>
                     <div className={`${styles.elementTitle} ${notoserifjp.className} text-left`}>{t('about.title_0')}</div>
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-right`}>
@@ -41,7 +41,7 @@ export const About = async () => {
                     </div>
                 </div>
 
-                <div className={`${styles.element} ${styles.delayedAnimation} opacity-0`}>
+                <div className={`${styles.element}`}>
                     <div className={`${styles.elementTitle} text-left`}>{t('about.title_1')}</div>
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-left`}>
@@ -56,7 +56,7 @@ export const About = async () => {
                     </div>
                 </div>
 
-                <div className={`${styles.element} ${styles.moreDelayedAnimation} opacity-0`}>
+                <div className={`${styles.element}`}>
                     <div className={`${styles.elementTitle} text-left`}>{t('about.title_2')}</div>
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-right`}>

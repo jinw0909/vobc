@@ -40,7 +40,7 @@
 }
 
 @media (max-width: 576px) {
-    .vision { padding: 1rem; }
+    .vision { padding: 0 1rem; }
 }
 
 
@@ -56,7 +56,7 @@
     margin-top: 0;
 }
 .detailText {
-    opacity: 0;
+    opacity: 1;
 }
 .visionContent {
     display: flex;
@@ -178,7 +178,7 @@
 .visionImg {
 }
 .visionText {
-    margin-top: 1rem;
+    margin: 1rem 0;
     background: linear-gradient(to right, #ddd 0%, #eee 50%, #ddd 100%);
     -webkit-background-clip: text; /* Apply gradient to text */
     -webkit-text-fill-color: transparent; /* Make text transparent */
@@ -193,10 +193,14 @@
     text-align: center;
     margin-bottom: 2rem;
     margin-top: 4rem;
+    opacity: 0;
+    pointer-events: none;
 }
 .about {
+    /*margin-top: 50rem;*/
     font-size: 1.5rem;
     position: relative;
+    margin-bottom: 4rem;
 }
 .about::before {
     transition: .5s;
@@ -225,6 +229,13 @@
 .delayedAnimation {
     animation: fadeIn .5s ease-in-out forwards;
     animation-delay: 1s;
+}
+
+.square {
+    margin-top: .5rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #999;
 }
 
 @keyframes typing {

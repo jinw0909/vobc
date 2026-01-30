@@ -97,19 +97,6 @@ export async function NewsMedia({ className, locale }: NewsMediaProps) {
 
     return (
         <div className={`${styles.mediaWrapper} ${className ?? ''}`}>
-            <div className={styles.header}>
-                <div className={`${styles.headerTitle} ${styles.fadeInAnimation}`}>
-                    <div>{t('title')}</div>
-                    <div className={`${styles.logoPlain} ${styles.delayedAnimation}`}>
-                        <LogoPlain />
-                    </div>
-                    <div className={`${notosansjp.className} ${styles.hashTags} ${styles.delayedAnimation}`}>
-                        <span>#Event</span>
-                        <span>#Interview</span>
-                        <span>#Article</span>
-                    </div>
-                </div>
-            </div>
 
             <p className={`${styles.headerDesc} ${styles.textGradient} ${styles.moreDelayedAnimation}`}>
                 {t('description')}

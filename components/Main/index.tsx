@@ -11,12 +11,22 @@ import blockPic from '@/public/blockchain_white.png';
 import vobPic from '@/public/vob_crop.png';
 import { NavigationLink } from '@/ui/NavigationLink';
 
+import { NewsAcc } from '@/ui/NewsAcc';
+import type { NewsItem } from '@/newsMapper';
+
 const BG = 'rgba(30, 30, 30, 1)';
 const FG = '#fff';
 const SUB_FG = 'rgba(255, 255, 255, 0.78)';
 const PADDING_X = 24;
 
-export const Main = () => {
+type NewsBundle = {
+    data: NewsItem[];
+    imgSrc: string[];
+    index: number;
+};
+
+
+export const Main = ({locale, newsBundles} : { locale: string, newsBundles : NewsBundle[]}) => {
     const t = useTranslations('hero');
     const sectionRef = useRef<HTMLElement | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -121,8 +131,8 @@ export const Main = () => {
 
             const vh = getStableVh();
             const mb = tailHeight + FIXED_TOP_PX() - vh;
-
-            s.style.marginBottom = `${mb}px`;
+            if (mb < 0) s.style.paddingBottom = `${mb}px`;
+            else s.style.marginBottom = `${mb}px`;
         };
 
 // ✅ 레이아웃 모드에서 측정(중요)
@@ -221,6 +231,8 @@ export const Main = () => {
             const h = Math.max(1, rect.height);
             const maxTextWidth = Math.max(1, w - PADDING_X * 2);
 
+
+
             const pA = p;
             const pR = pReal ?? p;
 
@@ -304,17 +316,31 @@ export const Main = () => {
             const isPhase3 = pA >= PHASE3_START;
 
             // ✅ grayscale bg (Phase4 시작 전에 이미 다크로)
+            // ✅ grayscale bg (Phase4에서도 한 번만 살짝 옅어졌다가 다시 30으로)
             let bgGray = 30;
 
+            const P4_LIGHT_GRAY = 55;
+            const P4_BUMP_IN = 0.18;   // 옅어지기 시작 시점 (0~1)
+            const P4_BUMP_OUT = 0.82;  // 다시 어두워져서 끝나는 시점 (0~1)
+            // Phase4에서 잠깐 옅어지는 정도 (30~95 사이에서 취향)
+
             if (pR >= P4_START) {
-                bgGray = 30;
-            } else if (pR < WITH_START) {
-                bgGray = lerpInt(30, PEAK_GRAY, smoothstep(0.02, WITH_START, pR));
-            } else if (pR < PHASE3_START) {
-                bgGray = PEAK_GRAY;
-            } else {
-                bgGray = lerpInt(PEAK_GRAY, 30, smoothstep(PHASE3_START, P4_START, pR));
+                const u = clamp01((pR - P4_START) / (P4_END - P4_START)); // 0..1
+
+                const P4_BUMP_IN = 0.18;
+                const P4_BUMP_OUT = 0.82;
+
+                // bump가 적용되는 구간만 0..1로 리맵
+                const uu = clamp01((u - P4_BUMP_IN) / (P4_BUMP_OUT - P4_BUMP_IN));
+
+                // 구간 밖에서는 0이 유지되도록(=30 유지)
+                const bump = (u < P4_BUMP_IN || u > P4_BUMP_OUT) ? 0 : Math.sin(Math.PI * uu);
+
+                const e = easeInOutCubic(bump);
+                bgGray = lerpInt(30, P4_LIGHT_GRAY, e);
             }
+
+
 
             ctx.fillStyle = `rgba(${bgGray},${bgGray},${bgGray},1)`;
             ctx.fillRect(0, 0, w, h);
@@ -403,10 +429,10 @@ export const Main = () => {
         // ✅ Phase4: fixed/absolute swap (mobile 8rem, desktop 12rem)
         // ======================================================
         const isMobileNow = () => window.innerWidth < 769;
-
+        const MIN_OPACITY = 0;
         const FIXED_TOP_PX = () => {
             const rem = getRemPx();
-            return (isMobileNow() ? 8 : 12) * rem;
+            return (isMobileNow() ? 6 : 12) * rem;
         };
 
         let visionElems: HTMLElement[] = [];
@@ -420,9 +446,9 @@ export const Main = () => {
             offsetsReady = visionElems.length === 3;
 
             if (offsetsReady) {
-                visionElems[0].style.opacity = '0';
-                visionElems[1].style.opacity = '0';
-                visionElems[2].style.opacity = '0';
+                visionElems[0].style.opacity = String(MIN_OPACITY);
+                visionElems[1].style.opacity = String(MIN_OPACITY);
+                visionElems[2].style.opacity = String(MIN_OPACITY);
             }
         };
 
@@ -591,7 +617,8 @@ export const Main = () => {
                 inner.style.opacity = '0';
                 inner.style.pointerEvents = 'none';
 
-                setElemOpacities(0, 0, 0);
+                setElemOpacities(MIN_OPACITY, MIN_OPACITY, MIN_OPACITY);
+
                 return;
             }
 
@@ -637,13 +664,13 @@ export const Main = () => {
 
                     setInnerFixedAtOffset(elemOffsets[0]);
                     const e = easeInOut(localT);
-                    setElemOpacities(lerp(0.0, 1.0, e), 0, 0);
+                    setElemOpacities(lerp(MIN_OPACITY, 1.0, e), MIN_OPACITY, MIN_OPACITY);
                     break;
                 }
 
                 case 'A_1_2': {
                     if (inner.style.position !== 'absolute') convertFixedToAbsoluteKeepPosition();
-                    setElemOpacities(1, 0, 0);
+                    setElemOpacities(1, MIN_OPACITY, MIN_OPACITY);
                     if (directionDown) triggerToFixedIfHitTop(1, 'F_2');
                     break;
                 }
@@ -653,13 +680,13 @@ export const Main = () => {
 
                     setInnerFixedAtOffset(elemOffsets[1]);
                     const e = easeInOut(localT);
-                    setElemOpacities(1, lerp(0.0, 1.0, e), 0);
+                    setElemOpacities(1, lerp(MIN_OPACITY, 1.0, e), MIN_OPACITY);
                     break;
                 }
 
                 case 'A_2_3': {
                     if (inner.style.position !== 'absolute') convertFixedToAbsoluteKeepPosition();
-                    setElemOpacities(1, 1, 0);
+                    setElemOpacities(1, 1, MIN_OPACITY);
                     if (directionDown) triggerToFixedIfHitTop(2, 'F_3');
                     break;
                 }
@@ -669,7 +696,7 @@ export const Main = () => {
 
                     setInnerFixedAtOffset(elemOffsets[2]);
                     const e = easeInOut(localT);
-                    setElemOpacities(1, 1, lerp(0.0, 1.0, e));
+                    setElemOpacities(1, 1, lerp(MIN_OPACITY, 1.0, e));
                     break;
                 }
             }
@@ -792,7 +819,17 @@ export const Main = () => {
                                 <Image className={styles.visionImg} src={visionPic} height={32} alt="vision icon" />
                                 <p className={styles.headerText}>The Vision</p>
                             </div>
-                            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>{t('vision')}</p>
+                            <p className={`${styles.visionText} ${styles.detailText}`}>{t('vision')}</p>
+                            <div>
+                                {newsBundles[0] && (
+                                    <NewsAcc
+                                        data={newsBundles[0].data}
+                                        imgSrc={newsBundles[0].imgSrc}
+                                        index={newsBundles[0].index}
+                                    />
+                                )}
+                            </div>
+                            <p className={`${styles.visionText} ${styles.detailText}`}>{t('vision_down')}</p>
                         </div>
 
                         <div className={styles.visionElem}>
@@ -800,9 +837,19 @@ export const Main = () => {
                                 <Image className={styles.blockImg} src={blockPic} height={32} alt="blockchain icon" />
                                 <p className={styles.headerText}>The Blockchain</p>
                             </div>
-                            <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText} ${styles.delayedAnimation}`}>
+                            <p className={`${styles.visionText} ${styles.detailText} ${styles.blockText}`}>
                                 {t('blockchain')}
                             </p>
+                            <div>
+                                {newsBundles[1] && (
+                                    <NewsAcc
+                                        data={newsBundles[1].data}
+                                        imgSrc={newsBundles[1].imgSrc}
+                                        index={newsBundles[1].index}
+                                    />
+                                )}
+                            </div>
+                            <p className={`${styles.visionText} ${styles.detailText}`}>{t('blockchain_down')}</p>
                         </div>
 
                         <div className={styles.visionElem}>
@@ -810,7 +857,17 @@ export const Main = () => {
                                 <Image className={styles.vobImg} src={vobPic} height={32} alt="vob icon" />
                                 <p className={styles.headerText}>The Vision of Blockchain</p>
                             </div>
-                            <p className={`${styles.visionText} ${styles.detailText} ${styles.delayedAnimation}`}>{t('vob')}</p>
+                            <p className={`${styles.visionText} ${styles.detailText}`}>{t('vob')}</p>
+                            <div>
+                                {newsBundles[2] && (
+                                    <NewsAcc
+                                        data={newsBundles[2].data}
+                                        imgSrc={newsBundles[2].imgSrc}
+                                        index={newsBundles[2].index}
+                                    />
+                                )}
+                            </div>
+                            <p className={`${styles.visionText} ${styles.detailText}`}>{t('vob_down')}</p>
                         </div>
                     </div>
 

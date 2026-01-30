@@ -35,9 +35,9 @@ export default async function news({params} : any) {
 
     return (
         <div className={styles.newsWrapper}>
-            <Suspense fallback={<Loading/>}>
-                <News locale={locale}/>
-            </Suspense>
+            {/*<Suspense fallback={<Loading/>}>*/}
+            {/*    <News locale={locale}/>*/}
+            {/*</Suspense>*/}
             <Suspense fallback={<Loading/>}>
                 <NewsMedia locale={locale}/>
             </Suspense>

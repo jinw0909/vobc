@@ -14,8 +14,8 @@
     width: 100%;
     height: 66vh;
     min-height: 420px;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
+    opacity: 1;
+    /*animation: fadeIn 2s forwards;*/
 }
 .newsContent > div {
     flex: 1;
@@ -262,9 +262,9 @@
 .middleContent {
     padding: 2rem 0;
     line-height: 1.5;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-    animation-delay: 2s;
+    opacity: 1;
+    /*animation: fadeIn 1s forwards;*/
+    /*animation-delay: 2s;*/
 }
 
 @keyframes fromUp {
@@ -328,10 +328,10 @@
     }
     .closeBtn { display: block; }
     .newsElem.even {
-        animation: 1s ease-in-out fromLeft forwards;
+        /*animation: 1s ease-in-out fromLeft forwards;*/
     }
     .newsElem.odd {
-        animation: 1s ease-in-out fromRight forwards;
+        /*animation: 1s ease-in-out fromRight forwards;*/
     }
     .newsElem img {
         object-position: top center;

@@ -3,8 +3,12 @@
     text-align: center;
     margin-top: 8rem;
     margin-bottom: 4rem;
+    opacity: 0;
+    pointer-events: none;
 }
-
+.aboutInner {
+    margin-top: 12rem;
+}
 .element {
     margin-top: 4rem;
 }
@@ -69,6 +73,10 @@
 @media (min-width: 1400px) {
     .mainTitle { font-size: 2.5rem; }
     .elementTitle { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+    .aboutInner { margin-top: 9rem; }
 }
 
 @media (max-width: 576px) {

@@ -26,8 +26,8 @@
 .hashTags { display: none; gap: .5rem; opacity: 0; }
 .hashTags span { font-size: .8rem; }
 .headerDesc {
-    margin-top: 1rem;
-    font-size: .8rem;
+    margin-top: 12rem;
+    font-size: 1rem;
     opacity: 0;
 }
 .main { opacity: 0; }
@@ -114,6 +114,7 @@
     .logoPlain { transform-origin: bottom left; transform: scale(.6); display: none;}
     .hashTags { display: none; }
     .header { top: 4rem; }
+    .headerDesc { margin-top: 9rem; font-size: .8rem; }
 }
 @media (max-width: 576px) {
     .mediaHeader { font-size: 1rem; }

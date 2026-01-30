@@ -1,85 +1,72 @@
-// import Image from "next/image";
-import styles from './styles.module.css'
-// import Link from 'next/link';
-// import { About } from "@/components/About";
-import {DevsMain} from "@/components/DevsMain";
-import {getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import {useTranslations} from "next-intl";
-import {Whitepaper} from "@/components/Whitepaper";
-import {SmartContract} from "@/components/SmartContract";
-import {Roadmap} from "@/components/Roadmap";
-import {Distribution} from "@/components/Distribution";
-// import {Partners} from "@/components/Partners";
-// import {NextIntlClientProvider} from "next-intl";
-import {Vision} from "@/components/Vision";
-// import {Wrapup} from "@/components/Wrapup";
-import {PartnersNew} from "@/components/PartnersNew";
-import {Main} from "@/components/Main";
-// import {Devs} from "@/components/Devs";
+import styles from './styles.module.css';
+import { Main } from '@/components/Main';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { mapSpringToNewsItem, type NewsItem } from '@/newsMapper';
 
+type PageResp<T> = {
+    content: T[];
+    totalElements: number;
+    totalPages: number;
+    number: number;
+    size: number;
+};
+
+type SpringArticle = {
+    id: number;
+    title: string;
+    content: string;
+    summary?: string | null;
+    author?: string | null;
+    description?: string | null;
+    thumbnail?: string | null;
+    link?: string | null;
+    publisherName?: string | null;
+    publisherIntroduction?: string | null;
+    releaseDate?: string | null;
+};
+
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
+
+async function fetchArticles(locale: string): Promise<SpringArticle[]> {
+    const res = await fetch(
+        `${API_BASE}/api/article/page?lang=${encodeURIComponent(locale)}&size=9`,
+        {
+            next: { revalidate: 60 },
+            headers: { Accept: 'application/json' },
+        }
+    );
+
+    if (!res.ok) throw new Error(`fetch failed: ${res.status}`);
+    const data: PageResp<SpringArticle> = await res.json();
+    return data.content ?? [];
+}
+
+type NewsBundle = {
+    data: NewsItem[];
+    imgSrc: string[];
+    index: number; // NewsAcc index용
+};
 
 export default async function Page({params} : any) {
-  // unstable_setRequestLocale(locale);
   const {locale} = await params;
   setRequestLocale(locale);
-  // const t = await getTranslations('main');
-  const t = await getTranslations('main');
-  // const messages = await getMessages();
+
+  const articles = await fetchArticles(locale);
+  const firstNine = articles.slice(0, 9);
+
+  const items: NewsItem[] = firstNine.map(mapSpringToNewsItem);
+  const imgs: string[] = firstNine.map((a) => a.thumbnail ?? '');
+
+  const newsBundles: NewsBundle[] = [
+      { data: items.slice(0, 3), imgSrc: imgs.slice(0, 3), index: 0 },
+      { data: items.slice(3, 6), imgSrc: imgs.slice(3, 6), index: 3 },
+      { data: items.slice(6, 9), imgSrc: imgs.slice(6, 9), index: 6 },
+  ]
 
   return (
-      <>
-          {/*<main className={styles.mainWrapper}>*/}
-          {/*    <div className={styles.mainText}>*/}
-          {/*        /!*<div className={`${styles.fadeInAnimation}`}>{intl.main.title_0}</div>*!/*/}
-          {/*        /!*<div className={`${styles.delayedAnimation} opacity-0`}>{intl.main.title_1}</div>*!/*/}
-          {/*        <div>{t('title_0')}</div>*/}
-          {/*        <div className={`${styles.fadeInAnimation} opacity-0`}>{t('title_1')}</div>*/}
-          {/*        <div className={`${styles.subText} ${styles.delayedAnimation} opacity-0`}>*/}
-          {/*            <div>{t('subtitle_0')}</div>*/}
-          {/*            <div>{t('subtitle_1')}</div>*/}
-          {/*            <div>{t('subtitle_2')}</div>*/}
-          {/*        </div>*/}
-          {/*    </div>*/}
-          {/*</main>*/}
-          <Main/>
-          {/*<div className={`${styles.subWrapper} ${styles.visionWrapper}`}>*/}
-          {/*    <Vision/>*/}
-          {/*</div>*/}
-          {/*<div className={styles.subWrapper}>*/}
-          {/*    <About/>*/}
-          {/*</div>*/}
-          {/*<div className={styles.subWrapper}>*/}
-          {/*    /!*<NextIntlClientProvider messages={messages}>*!/*/}
-          {/*    <Whitepaper/>*/}
-          {/*    /!*</NextIntlClientProvider>*!/*/}
-          {/*</div>*/}
-          <div className={styles.subWrapperPlus}>
-              <Whitepaper/>
-              <SmartContract/>
-              <DevsMain/>
-          </div>
-          {/*<div className={styles.subWrapper}>*/}
-          {/*    <SmartContract/>*/}
-          {/*</div>*/}
-          <div className={styles.subWrapper}>
-              {/*<NextIntlClientProvider messages={messages}>*/}
-              <Roadmap/>
-              {/*</NextIntlClientProvider>*/}
-          </div>
-          <div className={styles.subWrapper}>
-              {/*<NextIntlClientProvider messages={messages}>*/}
-              <Distribution/>
-              {/*</NextIntlClientProvider>*/}
-          </div>
-
-          <div className={styles.subWrapper}>
-              {/*<NextIntlClientProvider messages={messages}>*/}
-              <PartnersNew/>
-              {/*</NextIntlClientProvider>*/}
-          </div>
-          {/*<div className={styles.subWrapper}>*/}
-          {/*    <Wrapup/>*/}
-          {/*</div>*/}
+       <>
+          <Main locale={locale} newsBundles={newsBundles}/>
       </>
   );
+
 }
