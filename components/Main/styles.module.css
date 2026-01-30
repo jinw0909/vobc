@@ -2,6 +2,7 @@
     position: relative;
     height: 1080vh;
     background: rgba(30,30,30,1);
+    /*border: 1px solid #999;*/
 }
 
 .visionSlot {
@@ -22,6 +23,7 @@
     width: 100%;
     max-width: 1080px;
     will-change: transform, opacity;
+    /*border: 1px solid #999;*/
 }
 
 @media (min-width: 1400px) {
