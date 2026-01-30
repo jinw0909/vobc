@@ -1,6 +1,6 @@
 .heroSection {
     position: relative;
-    height: 2000vh;
+    /*height: 2000vh;*/
     background: rgba(30,30,30,1);
     /*border: 1px solid #999;*/
 }
@@ -13,35 +13,28 @@
 }
 
 .vision {
-    position: absolute; /* ✅ 기본값: JS가 fixed/absolute 변경 */
+    position: relative; /* ✅ 기본값: JS가 fixed/absolute 변경 */
     left: 50%;
-    top: 0;
+    margin-top: 7rem;
     transform: translateX(-50%);
-    opacity: 0;
-    pointer-events: none;
+    opacity: 1;
+    /*pointer-events: none;*/
     width: 100%;
-    max-width: 1080px;
+    /*max-width: 1080px;*/
     will-change: transform, opacity;
     /*border: 1px solid #999;*/
-    padding: 0 2rem;
+    padding: 0;
+    /*border-bottom: 1px solid white;*/
+    z-index: 50;
+}
+.canvas {
+    /*border: 1px solid white;*/
 }
 
-@media (min-width: 1400px) {
-    .visionSlot,
-    .vision {
-        max-width: 1280px;
-    }
+.visionMainText {
+    padding: 1.5rem;
 }
 
-@media (max-width: 768px) {
-    .visionSlot {
-        height: calc(70vh + 6rem);
-    }
-}
-
-@media (max-width: 576px) {
-    .vision { padding: 0 1rem; }
-}
 
 
 .visionWrapper {
@@ -167,9 +160,9 @@
 /*        typing 7s steps(40, end) infinite;*/
 
 /*}*/
-.visionElem:nth-child(1) { opacity: 0;}
-.visionElem:nth-child(2) { opacity: 0;}
-.visionElem:nth-child(3) { opacity: 0;}
+.visionElem:nth-child(1) { opacity: 1;}
+.visionElem:nth-child(2) { opacity: 1;}
+.visionElem:nth-child(3) { opacity: 1;}
 .visionPic {
     float: left;
     margin: 0 1rem;
@@ -270,6 +263,10 @@
 
 }
 
+@media (max-width: 768px) {
+    .vision { margin-top: 4rem; }
+}
+
 @media (max-width: 576px) {
     .headerText { font-size: 1.2rem }
 
@@ -285,3 +282,9 @@
     }
 }
 
+
+@media (max-width: 768px) {
+    .visionSlot {
+        height: calc(70vh + 6rem);
+    }
+}

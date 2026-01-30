@@ -1,4 +1,3 @@
-import styles from './styles.module.css';
 import { Main } from '@/components/Main';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { mapSpringToNewsItem, type NewsItem } from '@/newsMapper';
