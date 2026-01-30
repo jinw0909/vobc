@@ -2,6 +2,7 @@
     position: relative;
     height: 2000vh;
     background: rgba(30,30,30,1);
+    /*border: 1px solid #999;*/
 }
 
 .visionSlot {
@@ -20,8 +21,8 @@
     pointer-events: none;
     width: 100%;
     max-width: 1080px;
-    /*padding: 2rem;*/
     will-change: transform, opacity;
+    /*border: 1px solid #999;*/
 }
 
 @media (min-width: 1400px) {
@@ -59,13 +60,8 @@
 .visionContent {
     display: flex;
     flex-direction: column;
-    gap: 12rem;
+    gap: 4rem;
 }
-
-.visionElem {}
-.blockElem { opacity: 0;}
-.vobElem { opacity: 0; }
-
 
 .visionHeader {
     display: flex;
@@ -170,6 +166,9 @@
 /*        typing 7s steps(40, end) infinite;*/
 
 /*}*/
+.visionElem:nth-child(1) { opacity: 0;}
+.visionElem:nth-child(2) { opacity: 0;}
+.visionElem:nth-child(3) { opacity: 0;}
 .visionPic {
     float: left;
     margin: 0 1rem;
