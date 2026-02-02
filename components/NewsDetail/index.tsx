@@ -69,10 +69,10 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
                     </div>
 
                     <div className={styles.leftContentDown}>
-                        <NavigationLink href="/news/media">
+                        <NavigationLink href="/news">
                             <div className={styles.backToMain}>
                                 <Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow" />
-                                <span>To List</span>
+                                <span>Back to List</span>
                             </div>
                         </NavigationLink>
                         <label htmlFor={"mobileToggle"} className={styles.mobileButton}>
