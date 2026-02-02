@@ -128,9 +128,9 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
                             </Link>
                         </div>
                         <div className={styles.backToTop}>
-                            <NavigationLink href="/news/media">
+                            <NavigationLink href="/news">
                                 <div className={styles.backToMainMobile}>
-                                    to News List
+                                    Back to List
                                     {/*<Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow" />*/}
                                     {/*<span>To List</span>*/}
                                 </div>

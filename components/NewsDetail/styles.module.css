@@ -140,7 +140,7 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 2rem;
-    padding: 1rem;
+    padding: 1rem 0;
     opacity: 0;
     animation: .5s ease-in-out fadeIn forwards;
     animation-delay: 1.5s;
