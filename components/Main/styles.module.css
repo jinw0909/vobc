@@ -231,6 +231,83 @@
     background-color: #999;
 }
 
+.stageInner{
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    z-index: 1;
+}
+.stageInner canvas {
+    display: block;
+}
+
+.overlayLayer{
+    position: absolute;
+    width: 100%;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* top 12rem에서 고정 */
+.phase1Overlay{
+    position: absolute;
+    padding: 0 24px;
+    width: 100%;
+    margin-left: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    will-change: opacity, transform;
+
+    /* ✅ 텍스트 레이아웃 안정 */
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+/* ✅ 헤더: 크고 강하게 */
+.p1Header{
+    margin: 0;
+    color: rgba(255,255,255,0.98);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+
+    font-size: clamp(16px, 1.25vw, 20px);
+}
+
+/* ✅ 메인 라인: 확실히 크게 */
+.p1Line1{
+    margin: 0;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+
+    font-size: clamp(28px, 3.2vw, 56px);
+    line-height: 1.05;
+}
+
+/* ✅ 구분선 */
+/*.p1Divider{*/
+/*    width: 64px;*/
+/*    height: 1px;*/
+/*    background: rgba(255,255,255,0.25);*/
+/*    margin: 0.35rem 0 0.25rem;*/
+/*}*/
+
+/* ✅ 서브 라인: 작게, 톤 낮추고 간격 */
+.p1Sub{
+    margin: 0;
+    color: rgba(255,255,255,0.78);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+
+    font-size: clamp(14px, 1.55vw, 22px);
+    line-height: 1.45;
+}
+
+
 @keyframes typing {
     0% { width: 100% }
     25% { width: 0 }
