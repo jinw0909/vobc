@@ -91,7 +91,7 @@
 /* 본문 안의 html 공통 스타일 */
 .blogSection {
     flex: 2;
-    width: 0;
+    /*width: 0;*/
 }
 
 .blogContent img {
