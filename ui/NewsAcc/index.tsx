@@ -127,11 +127,12 @@ export function NewsAcc({ data, imgSrc, index }: { data: any, imgSrc: any, index
                                     </div>
 
                                     <div className={styles.newsBody}>
-                                        <div className={styles.dateMobile}>{a.date}</div>
-
-                                        <div className={styles.newsTitle}>
-                                            <h2>{a.title}</h2>
-                                            <p>{`${a.author ? `Reporter: ${a.author}` : ''}`}</p>
+                                        <div>
+                                            <div className={styles.dateMobile}>{a.date}</div>
+                                            <div className={styles.newsTitle}>
+                                                <h2>{a.title}</h2>
+                                                <p>{`${a.author ? `Reporter: ${a.author}` : ''}`}</p>
+                                            </div>
                                         </div>
 
                                         <div className={styles.newsSubtitle}>

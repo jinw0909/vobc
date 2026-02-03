@@ -189,6 +189,10 @@
     opacity: 0;
     pointer-events: none;
 }
+.aboutSection {
+    text-align: right;
+    padding-right: 2rem;
+}
 .about {
     /*margin-top: 50rem;*/
     font-size: 1.5rem;

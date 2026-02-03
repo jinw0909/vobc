@@ -268,12 +268,12 @@ export function TeamNav({
 
                                             if (leftLen <= rightLen) {
                                                 // ✅ 앞이 더 짧으면 → 뒤에 &
-                                                firstLine = `${left}${amp}`;
+                                                firstLine = `${left} ${amp}`;
                                                 secondLine = right;
                                             } else {
                                                 // ✅ 뒤가 더 짧으면 → 앞에 &
                                                 firstLine = left;
-                                                secondLine = `${amp}${right}`;
+                                                secondLine = `${amp} ${right}`;
                                             }
 
                                             return (
