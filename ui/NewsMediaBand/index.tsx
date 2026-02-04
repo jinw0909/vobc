@@ -102,6 +102,7 @@ import { NavigationLink } from '@/ui/NavigationLink'
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
+import WheelGesturesPlugin from 'embla-carousel-wheel-gestures'
 
 export function NewsMediaBand({
                                   data,
@@ -134,7 +135,12 @@ export function NewsMediaBand({
             containScroll: 'keepSnaps',
             skipSnaps: true,
         },
-        [] // plugins 없음
+        [
+            WheelGesturesPlugin({
+                forceWheelAxis: 'x',
+                wheelDraggingClass: 'is-wheel-dragging'
+            })
+        ]
     )
 
     return (

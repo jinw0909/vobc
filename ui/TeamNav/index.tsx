@@ -170,9 +170,10 @@ import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { FreeMode } from 'swiper/modules';
+import { FreeMode, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import 'swiper/css/mousewheel';
 
 type TeamApi = {
     id: number;
@@ -201,8 +202,9 @@ export function TeamNav({
             <div className={styles.container}>
                 <div className={styles.headband}>
                     <Swiper
-                        modules={[FreeMode]}
+                        modules={[FreeMode, Mousewheel]}
                         freeMode={{ enabled: true, momentum: true }}
+                        mousewheel={{ forceToAxis: true, releaseOnEdges: true, sensitivity: 1 }}
                         slidesPerView="auto"
                         watchOverflow
                         grabCursor

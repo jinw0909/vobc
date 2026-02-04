@@ -257,11 +257,12 @@ import { useTranslations } from 'next-intl';
 // ✅ Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { FreeMode } from 'swiper/modules';
+import { FreeMode, Mousewheel } from 'swiper/modules';
 
 // ✅ Swiper CSS (전역이든, 이 컴포넌트에서든 1번만 import 되면 됨)
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import 'swiper/css/mousewheel';
 
 import october from '@/public/roadmap/october.png';
 import october1 from '@/public/roadmap/october1.png';
@@ -379,9 +380,10 @@ export function Roadmap() {
                 <div className={styles.roadmapTitle}>{t('title')}</div>
 
                 <Swiper
-                    modules={[FreeMode]}
+                    modules={[FreeMode, Mousewheel]}
                     onSwiper={onSwiper}
                     freeMode={{ enabled: true, momentum: true }}
+                    mousewheel={{ forceToAxis: true, sensitivity: 1, releaseOnEdges: true }}
                     grabCursor
                     slidesPerView="auto" // ✅ 슬라이드 폭을 CSS로 고정/조절
                     spaceBetween={16}

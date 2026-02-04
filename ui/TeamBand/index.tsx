@@ -184,6 +184,7 @@ import styles from './styles.module.css';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import {WheelGesturesPlugin} from "embla-carousel-wheel-gestures";
 import fallbackImg from '@/public/teams/fallback.png';
 
 type TeamApi = {
@@ -253,7 +254,12 @@ export function TeamBand({ selected, order, registerRef, team, members }: TeamBa
         dragFree: true,
         containScroll: 'trimSnaps',
         skipSnaps: true,
-    });
+    },[
+        WheelGesturesPlugin({
+            forceWheelAxis: 'x',
+            wheelDraggingClass: 'is-wheel-dragging',
+        })
+    ]);
 
     const scrollTo = (idx: number) => {
         if (!isMobile) return;
