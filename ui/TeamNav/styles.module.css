@@ -42,11 +42,12 @@
     justify-content: center;
 }
 .headband {
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    justify-content: center;
+    /*flex: 1;*/
+    /*display: flex;*/
+    /*overflow: hidden;*/
+    /*position: relative;*/
+    /*justify-content: center;*/
+    width: 100%;
 }
 .list {
     overflow-x: scroll;
@@ -342,9 +343,15 @@
     pointer-events: none; /* ✅ 이미지가 포인터 이벤트 잡아먹으면 드래그가 끊기는 경우가 있음 */
 }
 
+
+
+
 /* styles.module.css */
 .swiperSlide {
     /*width: 4rem !important; !* 또는 원하는 고정폭 *!*/
     /* 예: width: 180px; */
     max-width: 4.5rem;
+    width: 4.5rem;
 }
+
+

@@ -207,11 +207,16 @@ export function TeamNav({
                         mousewheel={{ forceToAxis: true, releaseOnEdges: true, sensitivity: 1 }}
                         slidesPerView="auto"
                         watchOverflow
+                        centerInsufficientSlides
                         grabCursor
+                        observer
+                        observeParents
+                        updateOnWindowResize
+                        roundLengths
                         spaceBetween={12}
                         breakpoints={{
                             0: { spaceBetween: 10, slidesPerView: 5.5 },
-                            769: { spaceBetween: 12, slidesPerView: 'auto' },
+                            576: { spaceBetween: 12, slidesPerView: 'auto' },
                         }}
                         onSwiper={onSwiper}
                         className={styles.swiper}
