@@ -174,6 +174,7 @@ import { FreeMode, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/mousewheel';
+import {useState} from "react";
 
 type TeamApi = {
     id: number;
@@ -196,12 +197,14 @@ export function TeamNav({
     const isCN = locale === 'cn' || locale === 'zh' || locale === 'zh-CN';
 
     const onSwiper = (swiper: SwiperType) => {};
+    const [ready, setReady] = useState(false);
 
     return (
         <div className={styles.headbandWrapper}>
             <div className={styles.container}>
                 <div className={styles.headband}>
                     <Swiper
+                        onInit={() => setReady(true)}
                         modules={[FreeMode, Mousewheel]}
                         freeMode={{ enabled: true, momentum: true }}
                         mousewheel={{ forceToAxis: true, releaseOnEdges: true, sensitivity: 1 }}
@@ -219,7 +222,7 @@ export function TeamNav({
                             576: { spaceBetween: 12, slidesPerView: 'auto' },
                         }}
                         onSwiper={onSwiper}
-                        className={styles.swiper}
+                        className={`${styles.swiper} ${ready ? styles.ready : ''}`}
                     >
                         {teams.map((team, i) => (
                             <SwiperSlide
