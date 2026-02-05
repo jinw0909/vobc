@@ -35,6 +35,15 @@ type NewsArticle = {
     thumbnail: string;
 };
 
+type SpringRelatedArticleResponse = {
+    id: number;
+    title: string;
+    thumbnail?: string | null;
+    releaseDate?: string | null;
+    publisherName?: string | null;
+};
+
+
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
 const SITE_URL = process.env.SITE_URL ?? "https://www.vobc.io";
 
@@ -51,6 +60,25 @@ async function fetchArticleById(id: string, locale: string): Promise<SpringArtic
     if (!res.ok) throw new Error(`fetch failed: ${res.status}`);
     return (await res.json()) as SpringArticleResponse;
 }
+
+async function fetchRelatedArticles(id: string, locale: string): Promise<SpringRelatedArticleResponse[]> {
+    const res = await fetch(
+        `${API_BASE}/api/article/${encodeURIComponent(id)}/related?lang=${encodeURIComponent(locale)}`,
+        {
+            next: { revalidate: 10 },
+            headers: { Accept: "application/json" },
+        }
+    );
+
+    if (!res.ok) {
+        // related는 실패해도 상세는 떠야 하니까 빈 배열로
+        console.error("related fetch failed:", res.status);
+        return [];
+    }
+
+    return (await res.json()) as SpringRelatedArticleResponse[];
+}
+
 
 function mapSpringToNewsArticle(a: SpringArticleResponse): NewsArticle {
     return {
@@ -105,14 +133,18 @@ export default async function Page({ params }: any) {
     const { idx, locale } = await params;
     setRequestLocale(locale);
 
-    const article = await fetchArticleById(idx, locale);
+    const [article, related] = await Promise.all([
+        fetchArticleById(idx, locale),
+        fetchRelatedArticles(idx, locale)
+    ]);
+
     if (!article) notFound();
 
     const mapped = mapSpringToNewsArticle(article);
 
     return (
         <div className={styles.detailWrapper}>
-            <NewsDetail article={mapped} />
+            <NewsDetail article={mapped} related={related} locale={locale}/>
         </div>
     );
 }

@@ -344,6 +344,7 @@
 
 /* styles.module.css */
 .swiperSlide {
-    width: 4rem !important; /* 또는 원하는 고정폭 */
+    /*width: 4rem !important; !* 또는 원하는 고정폭 *!*/
     /* 예: width: 180px; */
+    max-width: 4.5rem;
 }

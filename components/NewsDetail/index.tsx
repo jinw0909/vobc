@@ -5,6 +5,7 @@ import arrowRight from '@/public/icons/right-arrow-white.png';
 import { NavigationLink } from "@/ui/NavigationLink";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
+import {RelatedArticles} from "@/ui/RelatedArticles";
 
 type NewsArticle = {
     id: string;
@@ -20,7 +21,22 @@ type NewsArticle = {
     thumbnail: string; // ✅ 추가
 };
 
-export function NewsDetail({ article }: { article: NewsArticle }) {
+type SpringRelatedArticleResponse = {
+    id: number;
+    title: string;
+    thumbnail?: string | null;
+    releaseDate?: string | null;
+    publisherName?: string | null;
+};
+
+
+type NewsDetailProps = {
+    article: NewsArticle;
+    related?: SpringRelatedArticleResponse[];
+    locale?: string;
+};
+
+export function NewsDetail({ article, related = [] }: NewsDetailProps) {
     // const contentArr = article.content ? article.content.split('\n') : [];
 
     const safeHtml = sanitizeHtml(article.content ?? "", {
@@ -54,33 +70,26 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
         <div className={styles.detailWrapper}>
             <div className={styles.detailUp}>
                 <div className={styles.left}>
-                    <input
-                        type="checkbox"
-                        id={"mobileToggle"}
-                        className={styles.mobileToggle}
-                    />
-
-                    <div className={styles.leftContent}>
-                        <div className={styles.newsDate}>{article.date}</div>
-                        <div className={styles.newsTitle}>{article.title}</div>
-                        <div className={styles.newsAuthor}>
-                            {`${article.author === '' ? article.press : `By ${article.author}, ${article.press}`}`}
-                        </div>
-                    </div>
-
-                    <div className={styles.leftContentDown}>
-                        <NavigationLink href="/news">
-                            <div className={styles.backToMain}>
-                                <Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow" />
-                                <span>Back to List</span>
+                        <div className={styles.leftContent}>
+                            <div className={styles.newsDate}>{article.date}</div>
+                            <div className={styles.newsTitle}>{article.title}</div>
+                            <div className={styles.newsAuthor}>
+                                {`${article.author === '' ? article.press : `By ${article.author}, ${article.press}`}`}
                             </div>
-                        </NavigationLink>
-                        <label htmlFor={"mobileToggle"} className={styles.mobileButton}>
-                            <Image src={arrowRight} width={12} height={12} alt="arrow to top" />
-                        </label>
-                    </div>
-                </div>
+                        </div>
 
+                        <div className={styles.leftContentDown}>
+                            <NavigationLink href="/news">
+                                <div className={styles.backToMain}>
+                                    <Image className={styles.leftArrow} src={arrowRight} width={12} height={12} alt="left arrow" />
+                                    <span>Back to List</span>
+                                </div>
+                            </NavigationLink>
+                            <label htmlFor={"mobileToggle"} className={styles.mobileButton}>
+                                <Image src={arrowRight} width={12} height={12} alt="arrow to top" />
+                            </label>
+                        </div>
+                </div>
                 <div className={styles.right}>
                     <div className={styles.imageWrapper}>
                         <Image
@@ -144,6 +153,9 @@ export function NewsDetail({ article }: { article: NewsArticle }) {
                         <hr />
                         <span>About the Press</span>
                         <p>{article.pressdesc}</p>
+                    </div>
+                    <div>
+                        <RelatedArticles items={related}/>
                     </div>
                 </div>
             </div>

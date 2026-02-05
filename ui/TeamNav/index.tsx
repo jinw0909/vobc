@@ -210,7 +210,7 @@ export function TeamNav({
                         grabCursor
                         spaceBetween={12}
                         breakpoints={{
-                            0: { spaceBetween: 10, slidesPerView: 'auto' },
+                            0: { spaceBetween: 10, slidesPerView: 5.5 },
                             769: { spaceBetween: 12, slidesPerView: 'auto' },
                         }}
                         onSwiper={onSwiper}

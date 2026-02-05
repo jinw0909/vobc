@@ -6,6 +6,7 @@
     /*padding: 2rem;*/
     margin-top: 9rem;
     gap: 8rem;
+    width: 100%;
 }
 
 /* html 컨텐츠*/
@@ -228,7 +229,7 @@
     flex-direction: column;
     padding-top: 8rem;
     gap: 2rem;
-    padding-bottom: 8rem;
+    padding-bottom: 6rem;
 }
 .downRightContent hr {
     align-self: stretch;
@@ -260,9 +261,13 @@
     .detailUp {
         flex-direction: column;
     }
-    .left { position: sticky; position: -webkit-sticky; top: 4rem;
+    .left {
+        /*position: sticky; */
+        /*position: -webkit-sticky; */
+        /*top: 4rem;*/
         z-index: 55; padding: 0; width: 100%;
-        background-color: rgba(30, 30, 30, 1); border-bottom: 1px solid #999;}
+        background-color: rgba(30, 30, 30, 1); border-bottom: 1px solid #999;
+    }
     .right { width: 100%; }
     .leftContent {
         top: 4rem;

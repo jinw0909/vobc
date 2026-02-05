@@ -239,10 +239,12 @@
     align-items: center;
     flex-direction: column;
     gap: .5rem;
+    width: 100%;
 }
 .imgContainer {
-    width: 120px;
-    height: 120px;
+    /*width: 120px;*/
+    /*height: 120px;*/
+    width: 100%;
     border-radius: 50%;
     position: relative;
     overflow: hidden;
@@ -316,7 +318,7 @@
     .teamIcon { width: 24px; height: 24px; }
     .itemBand h2 { font-size: 1.25rem; }
     .itemList { width: 100%; }
-    .item { width: 45%; max-width: 132px;}
+    /*.item { width: 45%; max-width: 132px;}*/
     .item.wide { width: 90%; min-width: 264px; max-width: 20rem;}
 }
 
@@ -421,7 +423,7 @@
     flex-grow: 0;
 
     width: 10rem;
-    max-width: 10rem;
+    /*max-width: 10rem;*/
 
     border: 1px solid #999;
     border-radius: 1rem;
@@ -457,13 +459,14 @@
 }
 
 .imgContainer {
-    width: 120px;
-    height: 120px;
+    /*width: 120px;*/
+    /*height: 120px;*/
     border-radius: 50%;
     position: relative;
     overflow: hidden;
     transition: 0.5s;
     aspect-ratio: 1 / 1;
+    width: 100%;
 }
 
 .fallback {
@@ -566,16 +569,30 @@
 }
 
 @media (max-width: 576px) {
+    .emblaContainer {
+        display: flex;
+        /*margin-left: -16px;   !* 왼쪽 여백 보정(선택) *!*/
+    }
+
+    .emblaSlide {
+        flex: 0 0 43.512%;
+        /*padding-left: 16px;   !* ✅ spacing *!*/
+        min-width: 0;
+    }
+    .item {
+        width: auto;
+    }
+
     .itemBand h2 {
         font-size: 1.25rem;
     }
 
     /* 모바일에서 카드 폭 조절 */
-    .item {
-        width: 45%;
-        min-width: 132px;
-        max-width: 10rem;
-    }
+    /*.item {*/
+    /*    width: 45%;*/
+    /*    min-width: 132px;*/
+    /*    max-width: 10rem;*/
+    /*}*/
 
     .wide {
         width: 90%;

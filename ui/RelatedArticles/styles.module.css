@@ -1,0 +1,142 @@
+/* components/RelatedArticles/styles.module.css */
+
+.section {
+    margin-top: 24px;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+.headerRow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #999;
+    padding-bottom: 12px;
+}
+
+.title {
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.swiper {
+    /*padding-bottom: 28px; !* pagination 아래 공간 *!*/
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.swiper :global(.swiper-slide) {
+    min-width: 0;
+}
+.swiper :global(.swiper-wrapper) {
+    align-items: stretch;
+}
+/* SwiperSlide 자체 높이를 카드에 맞춤 */
+.slide {
+    height: auto;
+}
+
+/* 카드 */
+.card {
+    display: block;
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    min-width: 0;
+    width: 100%;
+}
+
+/* 이미지 */
+.thumbnail {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+/* 본문 */
+.body {
+    padding: 12px;
+}
+
+.meta {
+    font-size: 12px;
+    opacity: 0.75;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+.meta span:last-child {
+    padding-right: .5rem;
+}
+
+.cardWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+}
+
+.cardTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.35;
+    display: inline;
+    position: relative;
+    max-width: 100%;
+}
+.cardTitleText {
+    display: inline;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background: rgba(255, 255, 255, 0.8);
+    transition: width 0.5s ease-in-out;
+}
+
+.cardWrapper:hover .cardTitle::after {
+    width: 90%;
+}
+
+.imgWrapper {
+    position: relative;
+    flex: 1;
+    margin: .5rem 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /*width: 100%;*/
+    /*aspect-ratio: 16 / 9;*/
+}
+
+.imgWrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (min-width: 1200px) {
+    .cardTitle { font-size: 1.2rem; }
+}
