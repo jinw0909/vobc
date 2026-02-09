@@ -410,7 +410,7 @@
 }
 
 @media (max-width: 576px) {
-    .newsContent { height: 66vh; }
+    .newsContent { height: 75vh; }
     .detailDesc {
         font-size: .8rem;
     }
