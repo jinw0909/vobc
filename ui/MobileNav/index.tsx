@@ -34,9 +34,9 @@ export const MobileNav = ({click, onClick} : {click : any, onClick : any}) => {
     return (
         <div className={`${click ? styles.clicked : ''} ${styles.mobileNav}`}>
             <ul className={styles.navWrapper}>
-                <li className={styles.navElem}>
-                    <NavigationLink href="/" onClick={onClick}>{t('home')}</NavigationLink>
-                </li>
+                {/*<li className={styles.navElem}>*/}
+                {/*    <NavigationLink href="/" onClick={onClick}>{t('home')}</NavigationLink>*/}
+                {/*</li>*/}
                 <li className={styles.navElem}>
                     <NavigationLink href="/about" onClick={onClick}>{t('about')}</NavigationLink>
                 </li>
