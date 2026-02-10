@@ -34,7 +34,8 @@
 /* ===== Card ===== */
 .roadmapElem {
     width: 100%;            /* ✅ slide 폭을 따라감 */
-    height: 300px;
+    /*height: 300px;*/
+    aspect-ratio: 2 / 3;
 
     transition: .5s;
     cursor: pointer;
@@ -135,7 +136,7 @@
 }
 
 .clicked .roadmapBodyTitle {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: white;
 }
 .clicked .roadmapElemHead {

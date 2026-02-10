@@ -96,7 +96,7 @@ export function NewsAcc({ data, imgSrc, index }: { data: any, imgSrc: any, index
                         {/* 카드 전체를 감싸는 링크 (데스크탑/확대된 모바일에서 동작) */}
                         <NavigationLink
                             href={`/news/${a.id}`}
-                            style={{ color: "white" }}
+                            className={styles.navigationLink}
                         >
                             <div className={styles.newsOverlay}>
                                 <div className={styles.overlayCenter}>
@@ -108,21 +108,6 @@ export function NewsAcc({ data, imgSrc, index }: { data: any, imgSrc: any, index
                                             <div className={styles.detailDesc}>{a.desc}</div>
                                         </div>
                                         <div className={styles.detailRight}>
-                                            {/*<div*/}
-                                            {/*    onClick={(e) => {*/}
-                                            {/*        e.stopPropagation();*/}
-                                            {/*        setIsHover(false);*/}
-                                            {/*        setCurrentIdx(-1);*/}
-                                            {/*    }}*/}
-                                            {/*    className={`*/}
-                                            {/*        ${styles.closeBtn}*/}
-                                            {/*        ${!isMobile ? styles.hide : ''} */}
-                                            {/*        ${!isHover && (currentIdx == i) ? styles.hide : ''}*/}
-                                            {/*        ${showOpen && (currentIdx == i) ? styles.showOpen : ''}*/}
-                                            {/*    `}*/}
-                                            {/*>*/}
-                                            {/*    <CloseBtn />*/}
-                                            {/*</div>*/}
                                         </div>
                                     </div>
 
@@ -158,14 +143,15 @@ export function NewsAcc({ data, imgSrc, index }: { data: any, imgSrc: any, index
                                     </div>
                                 </div>
                             </div>
-
-                            <Image
-                                src={imgSrc[i]}
-                                fill={true}
-                                style={{ objectFit: 'cover' }}
-                                alt={`news image ${i}`}
-                                unoptimized
-                            />
+                            <div className={styles.imgWrapper}>
+                                <Image
+                                    src={imgSrc[i]}
+                                    fill={true}
+                                    style={{ objectFit: 'cover' }}
+                                    alt={`news image ${i}`}
+                                    unoptimized
+                                />
+                            </div>
 
                             {`news${i}`}
                         </NavigationLink>

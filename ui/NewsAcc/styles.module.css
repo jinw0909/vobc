@@ -81,6 +81,25 @@
     height: 100%;
     position: relative;
 }
+.navigationLink {
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    margin-right: -2px
+}
+
+.imgWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.newsElem img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 .active .overlayCenter {
     justify-content: space-between;
 }
