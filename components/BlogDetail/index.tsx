@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import parse, {DOMNode, domToReact, Element} from 'html-react-parser';
 import Image from 'next/image';
 import {NavigationLink} from "@/ui/NavigationLink";
+import {RelatedPosts, type RelatedPost} from "@/ui/RelatedPosts";
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080';
@@ -33,36 +34,39 @@ interface PostResponse {
 
 interface BlogDetailProps {
     idx: string;
+    post: PostResponse;
+    relatedPosts: RelatedPost[];
+    locale: string;
 }
 
-export default async function BlogDetail({ idx }: BlogDetailProps) {
-    const locale = await getLocale();
-
-    const lang =
-        locale === 'en' ||
-        locale === 'kr' ||
-        locale === 'jp' ||
-        locale === 'cn'
-            ? locale
-            : 'en';
-
-    const res = await fetch(
-        `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
-        {
-            // cache: 'no-store',
-            next: { revalidate: 10 },
-        }
-    );
-
-    if (!res.ok) {
-        notFound();
-    }
-
-    const post = (await res.json()) as PostResponse || null;
-
-    if (!post || !post.id || post.id !== Number(idx)) {
-        notFound();
-    }
+export default async function BlogDetail({ idx, post, relatedPosts, locale }: BlogDetailProps) {
+    // const locale = await getLocale();
+    //
+    // const lang =
+    //     locale === 'en' ||
+    //     locale === 'kr' ||
+    //     locale === 'jp' ||
+    //     locale === 'cn'
+    //         ? locale
+    //         : 'en';
+    //
+    // const res = await fetch(
+    //     `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
+    //     {
+    //         // cache: 'no-store',
+    //         next: { revalidate: 10 },
+    //     }
+    // );
+    //
+    // if (!res.ok) {
+    //     notFound();
+    // }
+    //
+    // const post = (await res.json()) as PostResponse || null;
+    //
+    // if (!post || !post.id || post.id !== Number(idx)) {
+    //     notFound();
+    // }
 
     const formattedReleaseDate = post.releaseDate ?? '';
 
@@ -71,43 +75,6 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
         ? parse(post.content, {
             replace: (domNode: DOMNode) => {
                 if (domNode.type !== 'tag') return;
-
-                // 1) figure에 white-bg 붙이기
-                // if (domNode.name === 'figure') {
-                //     const el = domNode as unknown as Element;
-                //
-                //     // 기존 class 유지하면서 추가
-                //     const existing = el.attribs?.class ?? '';
-                //     const className = `${existing} ${styles.whiteBg}`.trim();
-                //
-                //     return (
-                //         <figure className={className}>
-                //             {domToReact(el.children as DOMNode[], {
-                //                 replace: (node) => {
-                //                     // figure 안의 img도 Next/Image로 바꾸고 싶으면 여기서 처리
-                //                     if (node.type === 'tag' && node.name === 'img') {
-                //                         const imgEl = node as unknown as Element;
-                //                         const { src, alt, width, height } = imgEl.attribs ?? {};
-                //                         if (!src) return node;
-                //
-                //                         const w = width ? Number(width) : 800;
-                //                         const h = height ? Number(height) : 450;
-                //
-                //                         return (
-                //                             <Image
-                //                                 src={src}
-                //                                 alt={alt || ''}
-                //                                 width={w}
-                //                                 height={h}
-                //                                 className="content-inline-image"
-                //                             />
-                //                         );
-                //                     }
-                //                 },
-                //             })}
-                //         </figure>
-                //     );
-                // }
 
                 // 2) figure 밖의 img도 치환
                 if (domNode.name === 'img') {
@@ -176,12 +143,12 @@ export default async function BlogDetail({ idx }: BlogDetailProps) {
             </header>
 
             <section className={styles.blogSection}>
-                <div
-                    className={`${styles.blogContent} content-scroll-box`}
-                >
+                <div className={`${styles.blogContent} content-scroll-box`}>
                     {parsedContent}
                 </div>
+                <RelatedPosts items={relatedPosts} locale={locale} />
             </section>
+            {/* ✅ 하단 related */}
         </article>
     );
 }

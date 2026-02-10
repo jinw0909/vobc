@@ -88,8 +88,44 @@ export async function generateMetadata(
     }
 }
 
+type RelatedPostTag = {
+    tagId: number;
+    tagName: string;
+    sortOrder: number | null;
+    postId: number;
+    primaryTag: boolean;
+};
 
+type RelatedPost = {
+    id: number;
+    title: string;
+    summary: string;
+    author: string;
+    thumbnail?: string | null;
+    releaseDate?: string | null;
+    postTags?: RelatedPostTag[];
+};
 
+interface PostTag {
+    id: number;
+    name: string;
+}
+
+interface PostResponse {
+    id: number;
+    title: string;
+    content: string;         // HTML string
+    author: string;
+    summary: string;
+    releaseDate: string | null;
+    thumbnail: string | null;
+    requestedLanguage: string | null;
+    effectiveLanguage: string | null;
+    translated: boolean;
+    createdAt: string;
+    updatedAt: string;
+    postTags: PostTag[];
+}
 
 interface PageProps {
     params: Promise<{
@@ -102,10 +138,27 @@ export default async function Page({ params }: PageProps) {
     const { idx, locale } = await params;
     setRequestLocale(locale);
 
+    const lang =
+        locale === 'en' || locale === 'kr' || locale === 'jp' || locale === 'cn'
+            ? locale
+            : 'en';
+
+    // ✅ post + related 병렬 fetch
+    const [postRes, relatedRes] = await Promise.all([
+        fetch(`${API_BASE}/api/post/query/${idx}?lang=${lang}`, { next: { revalidate: 10 } }),
+        fetch(`${API_BASE}/api/post/${idx}/related?lang=${lang}`, { next: { revalidate: 10 } }),
+    ]);
+
+    if (!postRes.ok) notFound();
+    // related는 실패해도 상세는 보여주고 싶으면 이렇게:
+    const related = relatedRes.ok ? ((await relatedRes.json()) as RelatedPost[]) : [];
+
+    const post = (await postRes.json()) as PostResponse;
+
     return (
         <div className={styles.detailWrapper}>
             <Suspense fallback={<Loading/>}>
-                <BlogDetail idx={idx} />
+                <BlogDetail idx={idx} post={post} relatedPosts={related} locale={locale} />
             </Suspense>
         </div>
     );

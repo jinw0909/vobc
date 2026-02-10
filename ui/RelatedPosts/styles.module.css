@@ -1,0 +1,135 @@
+.section {
+    margin-top: 8rem;
+    width: 100%;
+}
+
+.headerRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #999;
+    padding-bottom: 12px;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.swiper {
+    width: 100%;
+}
+
+.slide {
+    height: auto;
+}
+
+.card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cardWrapper {
+    /*border: 1px solid rgba(0,0,0,.08);*/
+    /*border-radius: 16px;*/
+    overflow: hidden;
+    /*background: #fff;*/
+}
+.cardWrapper:hover {
+
+}
+
+.cardTitle {
+    /*padding: 14px 14px 10px 14px;*/
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.cardTitle::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    transition: width 0.5s ease-in-out;
+    background-color: white;
+}
+.cardWrapper:hover .cardTitle::before {
+    width: 90%;
+}
+
+.cardTitleText {
+    margin: 0;
+    font-weight: 500;
+    /*line-height: 1.25;*/
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.imgWrapper {
+    /*height: 150px;*/
+    background-size: cover;
+    background-position: center;
+    aspect-ratio: 2 / 1;
+    margin: .5rem 0;
+}
+
+.cardDesc {
+    /*padding: 12px 14px 14px 14px;*/
+}
+
+.meta {
+    font-size: .8rem;
+    opacity: .7;
+    margin-bottom: 4px;
+}
+
+.summary {
+    margin: 0 0 4px 0;
+    font-size: .8rem;
+    opacity: .9;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tagRow {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: .8rem;
+    position: relative;
+    cursor: pointer;
+    /*padding: 4px 10px;*/
+    /*border-radius: 999px;*/
+    /*background: rgba(0,0,0,.06);*/
+}
+.tag::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    transition: width 0.5s ease-in-out;
+    background-color: white;
+}
+.tag:hover::before {
+    width: 0;
+}
+
+.primaryTag {
+    background: rgba(13,110,253,.12);
+    border: 1px solid rgba(13,110,253,.35);
+    color: rgb(13,110,253);
+    font-weight: 700;
+}
