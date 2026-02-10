@@ -57,7 +57,8 @@
     transition: .5s;
 }
 .footerElem:hover {
-    color: rgba(180,180,30);
+    /*color: rgba(180,180,30);*/
+    color: white;
 }
 .footerElem::before {
     content: "";
@@ -66,7 +67,8 @@
     width: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(180,180,30,0.7);
+    /*background-color: rgba(180,180,30,0.7);*/
+    background-color: white;
     transition: .5s;
 }
 .footerElem:hover::before {
@@ -77,7 +79,8 @@
     margin-right: 2px;
 }
 .footerElem:hover .snsIcon {
-    background-color: rgba(180,180,30);
+    /*background-color: rgba(180,180,30);*/
+    background-color: white;
 }
 
 

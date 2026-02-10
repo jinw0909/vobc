@@ -8,12 +8,12 @@ export const Nav = () => {
     return (
         <div className={styles.navbarWrapper}>
             <ul className={styles.navbar}>
-                <NavigationLink href="/" pseudo="true">{t('home')}</NavigationLink>
-                <NavigationLink href="/about" pseudo="true">{t('about')}</NavigationLink>
-                <NavigationLink href="/blog" pseudo="true">{t('blog')}</NavigationLink>
-                <NavigationLink href="/devs" pseudo="true">{t('devs')}</NavigationLink>
-                <NavigationLink href="/team" pseudo="true">{t('team')}</NavigationLink>
-                <NavigationLink href="/news" pseudo="true">{t('news')}</NavigationLink>
+                {/*<NavigationLink href="/" pseudo="true">{t('home')}</NavigationLink>*/}
+                <NavigationLink href="/about">{t('about')}</NavigationLink>
+                <NavigationLink href="/blog">{t('blog')}</NavigationLink>
+                <NavigationLink href="/devs">{t('devs')}</NavigationLink>
+                <NavigationLink href="/team">{t('team')}</NavigationLink>
+                <NavigationLink href="/news">{t('news')}</NavigationLink>
             </ul>
         </div>
 

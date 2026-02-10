@@ -217,7 +217,8 @@
     bottom: 0;
     width: 0;
     height: 1px;
-    background-color: rgba(180,180,30,0.7);
+    /*background-color: rgba(180,180,30,0.7);*/
+    background-color: white;
 }
 .about:hover::after {
     width: 100%;

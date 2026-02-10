@@ -38,8 +38,8 @@
     transform: translate(-50%, -50%);
     width: 33%;
     height: 33%;
-    /*border: 2px solid #bbb;*/
-    border: 2px solid rgba(180, 180, 30, 0.8);
+    border: 2px solid white;
+    /*border: 2px solid rgba(180, 180, 30, 0.8);*/
     border-radius: 50%;
     /*background-color: rgba(29,252,255, 0.5);*/
     transition: .5s;
@@ -71,7 +71,8 @@
     transition: .5s;
     text-align: center;
     font-size: .8rem;
-    color: rgba(180, 180, 30, 0.8);
+    /*color: rgba(180, 180, 30, 0.8);*/
+    color: white;
 }
 .contentText {
     transition: .5s;
