@@ -130,14 +130,16 @@ export function NewsAcc({ data, imgSrc, index }: { data: any, imgSrc: any, index
                                                 `}
                                                 onClick={(e) => e.stopPropagation()}
                                             >
-                                                <span className={styles.learnDetailSpan}>Learn More</span>
-                                                <Image
-                                                    className={styles.rightArrow}
-                                                    src={arrowIcon}
-                                                    width={12}
-                                                    height={12}
-                                                    alt="right arrow"
-                                                />
+                                                <div className={styles.learnMore}>
+                                                    <span className={styles.learnDetailSpan}>Learn More</span>
+                                                    <Image
+                                                        className={styles.rightArrow}
+                                                        src={arrowIcon}
+                                                        width={12}
+                                                        height={12}
+                                                        alt="right arrow"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

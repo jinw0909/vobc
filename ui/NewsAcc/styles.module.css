@@ -272,10 +272,14 @@
     opacity: 0;
     margin-top: .25rem;
     transition: .5s;
+    display: none;
 }
 .learnDetail:hover .rightArrow,
 .learnDetail.showOpen .rightArrow {
     opacity: 1;
+}
+.learnMore {
+    position: relative;
 }
 
 .middleContent {
