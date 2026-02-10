@@ -60,9 +60,9 @@ export const MobileNav = ({click, onClick} : {click : any, onClick : any}) => {
                     {
                         language ?
                         <Image className={`${styles.langArrow}`}
-                               src={triPic} width={12} height={12} alt="triangle up"/>
+                               src={triPic} width={8} height={8} alt="triangle up"/>
                         : <Image className={`${styles.langArrow}`}
-                                 src={rvtriPic} width={12} height={12} alt="triangle down"/>
+                                 src={rvtriPic} width={8} height={8} alt="triangle down"/>
                     }
                 </li>
                 <li className={`${styles.navElem} 

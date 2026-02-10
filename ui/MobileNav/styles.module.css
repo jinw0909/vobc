@@ -22,6 +22,13 @@
     justify-content: center;
     align-items: center;
 }
+.navWrapper > li {
+    border-top: 1px solid rgba(255,255,255,0.4);
+    width: 100%;
+}
+.navWrapper > li:last-child {
+    border-top: 0;
+}
 .navElem {
     text-align: center;
     padding: .5rem;
@@ -58,6 +65,7 @@
     width: 1px;
     background-color: #999;
     align-self: stretch;
+    opacity: 0;
 }
 .langArrow {
     opacity: 0.7;
