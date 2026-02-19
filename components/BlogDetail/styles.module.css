@@ -7,8 +7,9 @@
 .blogDetail {
     display: flex;
     flex-direction: row;
-    gap: 4em;
+    gap: 4rem;
     width: 100%;
+    margin-top: 9rem;
 }
 
 .blogHeader {
@@ -23,7 +24,7 @@
     flex-direction: column;
     gap: 0.5rem;
     position: sticky;
-    top: 9rem;
+    top: calc(var(--header-h, 0) + 2rem) !important;
     max-height: calc(100vh - 11rem);
     overflow-y: scroll;
     scrollbar-width: none;
@@ -165,9 +166,6 @@
     line-height: 1.7;
 }
 
-.blogDetail {
-    margin-top: 10rem;
-}
 
 .colorWhite { color: white; }
 
@@ -184,8 +182,9 @@
 
 @media (max-width: 768px) {
     .blogDetail {
-        margin-top: 7rem;
+        /*margin-top: 9rem;*/
         flex-direction: column;
+        gap: 2rem;
     }
     .blogMeta { position: static; }
     .blogTitle { font-size: 1.5rem; }
