@@ -12,6 +12,10 @@
     font-size: 1rem;
     color: #888;
     height: 3rem;
+    transition: .5s ease-in-out;
+    border-bottom: 1px solid transparent;
+}
+.navbar.open {
     border-bottom: 1px solid #555;
 }
 .navbar a {

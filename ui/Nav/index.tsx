@@ -47,7 +47,7 @@ export const Nav = () => {
             )}
 
             <div className={`${styles.navbarWrapper} ${wrapperClass}`}>
-                <ul className={styles.navbar}>
+                <ul className={`${styles.navbar} ${open ? styles.open : ''}`}>
                     <NavigationLink href="/about">{t('about')}</NavigationLink>
                     <NavigationLink href="/blog">{t('blog')}</NavigationLink>
                     <NavigationLink href="/devs">{t('devs')}</NavigationLink>
