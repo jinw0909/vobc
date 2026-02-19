@@ -8,9 +8,10 @@
 
 @media (min-width: 1200px) {
     .devsWrapper {
-        width: 80vw;
+        /*width: 80vw;*/
+        width: 100%;
         margin: auto;
-        max-width: 1280px;
+        /*max-width: 1280px;*/
     }
 }
 

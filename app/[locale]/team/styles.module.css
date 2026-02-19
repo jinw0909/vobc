@@ -33,7 +33,10 @@
 
 
 @media (min-width: 1200px) {
-    .teamWrapper { width: 80vw; margin: auto; max-width: 1280px;}
+    .teamWrapper {
+        width: 100%;
+        margin: auto;
+    }
 }
 
 @media (max-width: 768px) {

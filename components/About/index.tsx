@@ -23,7 +23,7 @@ export const About = async () => {
     const t = await getTranslations();
 
     return (
-        <div>
+        <div className={styles.aboutWrapper}>
             {/*<div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>*/}
             <div className={styles.aboutInner}>
                 <div className={`${styles.element}`}>

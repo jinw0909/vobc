@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    /*padding: 2rem;*/
     transition: .5s;
     margin: 0 auto;
     min-width: 0;
@@ -22,11 +22,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    /*padding: 2rem;*/
     transition: .5s;
     gap: 1rem;
     flex-wrap: wrap;
-    max-width: 1028px;
+    /*max-width: 1028px;*/
     margin: auto;
 }
 .subWrapperPlus > div {
@@ -105,16 +105,16 @@
         margin: auto;
         max-width: 1280px;
     }
-    .subWrapper {
-        width: 80vw;
-        margin: auto;
-        max-width: 1280px;
-    }
-    .subWrapperPlus {
-        width: 80vw;
-        margin: auto;
-        max-width: 1280px;
-    }
+    /*.subWrapper {*/
+    /*    width: 80vw;*/
+    /*    margin: auto;*/
+    /*    max-width: 1280px;*/
+    /*}*/
+    /*.subWrapperPlus {*/
+    /*    width: 80vw;*/
+    /*    margin: auto;*/
+    /*    max-width: 1280px;*/
+    /*}*/
 }
 
 @media (min-width: 1400px) {
@@ -141,8 +141,8 @@
 
 @media (max-width: 768px) {
     .mainWrapper { padding: 0; }
-    .subWrapper { padding: 1.5rem; }
-    .subWrapperPlus { padding: 1.5rem; }
+    /*.subWrapper { padding: 1.5rem; }*/
+    /*.subWrapperPlus { padding: 1.5rem; }*/
     .mainText { padding: 0 4rem;}
     .mainText > div:nth-child(1) {
         font-size: 1.5rem;
@@ -162,11 +162,11 @@
         /*min-height: 75vh;*/
     }
     .subWrapper {
-        padding: 1rem;
+        /*padding: 1rem;*/
         /*min-height: 50vh;*/
     }
     .subWrapperPlus {
-        padding: 1rem;
+        /*padding: 1rem;*/
         flex-direction: column;
     }
     .subWrapperPlus > div {

@@ -97,22 +97,14 @@
 
 import styles from './styles.module.css'
 import Image from 'next/image'
-import rightArrow from '@/public/icons/right-arrow-yellow.png'
+import rightArrow from '@/public/icons/right-arrow-white.png'
 import { NavigationLink } from '@/ui/NavigationLink'
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
 import WheelGesturesPlugin from 'embla-carousel-wheel-gestures'
 
-export function NewsMediaBand({
-                                  data,
-                                  imgSrc,
-                                  index,
-                              }: {
-    data: any
-    imgSrc: any
-    index: number
-}) {
+export function NewsMediaBand({data, imgSrc, index}: { data: any, imgSrc: any, index: number }) {
     const t = useTranslations('media')
 
     // ✅ 모바일에서만 Embla 활성화
@@ -148,12 +140,7 @@ export function NewsMediaBand({
             ref={isMobile ? emblaRef : undefined}
             className={`${styles.mediaViewport} ${isMobile ? styles.mediaEmbla : ''}`}
         >
-            <ul
-                className={`
-          ${styles.mediaElementWrapper}
-          ${isMobile ? styles.mediaContainer : ''}
-        `}
-            >
+            <ul className={`${styles.mediaElementWrapper} ${isMobile ? styles.mediaContainer : ''}`}>
                 {data.map((a: any, i: number) => {
                     let typeText = ''
                     switch (a.type) {

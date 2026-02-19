@@ -89,6 +89,7 @@ export default async function BlogPage() {
 
                         <div className={styles.leftDown}>
                             <p className={styles.blogSummary}>{firstSummary}</p>
+                            <p className={styles.horizontalLine}></p>
                             <p className={styles.blogAuthor}>By {firstAuthor}</p>
                         </div>
                     </div>
@@ -99,13 +100,13 @@ export default async function BlogPage() {
                                 <div className={styles.tagRow}>
                                     {firstTags.map((tag, index) => (
                                         <span key={index} className={styles.tag}>
-                      <NavigationLink
-                          className={styles.tagSpan}
-                          href={`/blog/tag/${tag.tagName}`}
-                      >
-                        #{tag.tagName}
-                      </NavigationLink>
-                    </span>
+                                          <NavigationLink
+                                              className={styles.tagSpan}
+                                              href={`/blog/tag/${tag.tagName}`}
+                                          >
+                                            #{tag.tagName}
+                                          </NavigationLink>
+                                        </span>
                                     ))}
                                 </div>
                             )}

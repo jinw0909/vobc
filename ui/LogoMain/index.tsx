@@ -17,16 +17,18 @@ const kaisei = Kaisei_HarunoUmi({
 
 export const LogoMain = async () => {
     return (
-        <NavigationLink href="/">
             <div className={styles.logoWrapper}>
-                   <Image
-                       alt="logoImage"
-                       src={logoPic}
-                       width={25}
-                       height={45}
-                   />
-                    <div className={`${styles.logoText} ${vollkorn.className}`}>VOB</div>
+                <NavigationLink href="/">
+                    <div className={styles.logoElem}>
+                       <Image
+                           alt="logoImage"
+                           src={logoPic}
+                           width={25}
+                           height={45}
+                       />
+                        <div className={`${styles.logoText} ${vollkorn.className}`}>VOB</div>
+                    </div>
+                </NavigationLink>
             </div>
-        </NavigationLink>
     )
 }

@@ -250,9 +250,9 @@
 }
 
 @media (min-width: 1200px) {
-    .detailWrapper {
-        width: 80vw;
-    }
+    /*.detailWrapper {*/
+    /*    width: 80vw;*/
+    /*}*/
 }
 
 @media (max-width: 768px) {

@@ -14,8 +14,8 @@ export default async function Page({ params } : any) {
         <>
             <div className={styles.aboutWrapper}>
                 <About/>
+                <Introduction/>
             </div>
-            <Introduction/>
         </>
     )
 }

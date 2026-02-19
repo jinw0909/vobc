@@ -1,17 +1,17 @@
 .aboutWrapper {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
     padding: 2rem;
     transition: .5s;
 }
 
 @media (min-width: 1200px) {
     .aboutWrapper {
-        width: 80vw;
+        width: 100%;
         margin: auto;
-        max-width: 1280px;
+        /*max-width: 1280px;*/
     }
 }
 

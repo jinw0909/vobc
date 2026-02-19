@@ -95,7 +95,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
             <Header lang={locale} />
             <MobileHeader />
-            <Breadcrumbs />
+            {/*<Breadcrumbs />*/}
             {children}
             <MobileFooter />
             <Footer />

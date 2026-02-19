@@ -30,9 +30,19 @@ body::-webkit-scrollbar-thumb:hover {
 /*body::-webkit-scrollbar-thumb:active {*/
 /*    background-color: #fff; !* color of the thumb when active *!*/
 /*}*/
+:root{
+    --header-h-measured: 0px;
+    --header-h: var(--header-h-measured);
+}
 @media (min-width: 1400px) {
     body {
         font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-h: 8rem;
     }
 }
 

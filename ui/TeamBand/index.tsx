@@ -279,7 +279,7 @@ export function TeamBand({ selected, order, registerRef, team, members }: TeamBa
         <div ref={bandRef} className={styles.itemBandWrapper}>
             <div className={styles.itemContainer}>
                 <div className={styles.itemBand}>
-                    <h2 className={selected ? styles.selectedTitle : ''}>{team.name}</h2>
+                    <h2 className={`${selected ? styles.selectedTitle : ''} ${styles.teamTitle}`}>{team.name}</h2>
 
                     <div
                         ref={isMobile ? emblaRef : undefined}

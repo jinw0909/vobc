@@ -4,6 +4,7 @@ import { LogoMobile } from "@/ui/LogoMobile";
 import { MenuBtn} from "@/ui/MenuBtn";
 import {useState, useEffect, useRef } from "react";
 import {MobileNav} from "@/ui/MobileNav";
+import {Breadcrumbs} from "@/ui/Breadcrumbs";
 
 export const MobileHeader = () => {
 
@@ -31,6 +32,7 @@ export const MobileHeader = () => {
     }, [headerRef]);
 
     return (
+        <>
         <header ref={headerRef} className={`${styles.header} ${clicked ? styles.clicked : ''}`}>
             <div className={styles.navigation}>
                <MenuBtn click={clicked} onClick={handleClick}/>
@@ -38,5 +40,9 @@ export const MobileHeader = () => {
             </div>
             <MobileNav click={clicked} onClick={closeNav}/>
         </header>
+        <div className={styles.breadCrumbWrapper}>
+            <Breadcrumbs/>
+        </div>
+        </>
     )
 }

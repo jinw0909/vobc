@@ -20,9 +20,14 @@
     position: relative;
     height: 4rem;
 }
-
+.breadCrumbWrapper {
+    display: none;
+}
 @media (max-width: 768px) {
     .header {
+        display: block;
+    }
+    .breadCrumbWrapper {
         display: block;
     }
 }

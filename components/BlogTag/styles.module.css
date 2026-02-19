@@ -116,9 +116,9 @@
 
 
 @media (min-width: 1200px) {
-    .blogTagWrapper {
-        width: 80vw;
-    }
+    /*.blogTagWrapper {*/
+    /*    width: 80vw;*/
+    /*}*/
 }
 
 @media (max-width: 768px) {

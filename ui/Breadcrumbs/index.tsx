@@ -1,92 +1,32 @@
-// 'use client';
-// import Link from 'next/link';
-// import {Noto_Sans_JP} from "next/font/google";
-// import {Noto_Serif_JP} from "next/font/google";
-// import {allowedDisplayValues} from "next/dist/compiled/@next/font/dist/constants";
-// import styles from "./styles.module.css";
-// import Image from "next/image";
-// import { NavigationLink} from "@/ui/NavigationLink";
-// import {useSelectedLayoutSegments} from "next/navigation";
-// import homePic from '@/public/icons/home-icon.png';
-// import arrowPic from '@/public/icons/right-arrow-white.png'
-// import arrowUp from '@/public/icons/arrow-up-white.png';
-// import {useTranslations} from "next-intl";
-// import {useRouter} from "@/i18n/navigation"
-//
-// const notosansjp = Noto_Sans_JP({
-//     weight: ['200', '300', '400', '500', '600', '700', '900'],
-//     style : "normal",
-//     subsets: ['latin']
-// });
-// export const Breadcrumbs = () => {
-//
-//     const segments = useSelectedLayoutSegments();
-//     console.log("segments: ", segments);
-//     const t = useTranslations('nav');
-//     const router = useRouter();
-//
-//     return (
-//         (segments.length > 0) && (
-//             // <div className={`${notosansjp.className} ${styles.breadcrumbWrapper}`}>
-//             <div className={styles.breadcrumbWrapper}>
-//                 <div className={styles.breadcrumb}>
-//                     <span className={styles.homeImg}>
-//                         <NavigationLink href="/"><Image src={homePic} width={20} height={20}
-//                                                         alt="home icon"/></NavigationLink>
-//                     </span>
-//                     {
-//                         segments.map((segment, index) => {
-//                             if (segment === '(policies)') {
-//                                 return null;
-//                             }
-//                             if (!isNaN(parseInt(segment))) {
-//                                 return null;
-//                             }
-//                             return (
-//                                 <div className={styles.breadCrumbElem} key={index}>
-//                                     <span className={styles.arrowImg}>
-//                                         <Image src={arrowPic} width={12} height={12} alt="arrow icon"/>
-//                                     </span>
-//                                     <NavigationLink
-//                                         href={`/${segment}`}
-//                                         matchMode={"exact"}
-//                                     >
-//                                         {t(segment)}
-//                                     </NavigationLink>
-//                                 </div>
-//                             )
-//                         })
-//                     }
-//                 </div>
-//                 <div className={styles.history}>
-//                     <button
-//                         type="button"
-//                         className={styles.backButton}
-//                         onClick={() => router.back()}
-//                     >
-//                         <div className={styles.imageWrapper}>
-//                             <Image className={styles.backArrow} src={arrowUp} width={24} height={24}
-//                                    alt="back history arrow"/>
-//                         </div>
-//                     </button>
-//                 </div>
-//             </div>
-//         )
-//
-//     )
-// }
-
 'use client';
-import {useRouter, useSelectedLayoutSegments} from "next/navigation";
-import {useTranslations} from "next-intl";
-import {NavigationLink} from "@/ui/NavigationLink";
-import homePic from '@/public/icons/home-icon.png';
-import arrowPic from '@/public/icons/right-arrow-white.png'
-import arrowUp from '@/public/icons/arrow-up-white.png';
-import Image from "next/image";
-import styles from "./styles.module.css";
 
-const VISIBLE_SEGMENTS = ['blog', 'news', 'media', 'about', 'team', 'devs', 'tag', 'use', 'privacy', 'cookies']; // nav에서 번역 키로 쓰는 것들만
+import React from 'react';
+import { useRouter, useSelectedLayoutSegments } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { NavigationLink } from '@/ui/NavigationLink';
+import homePic from '@/public/icons/home-icon.png';
+import arrowPic from '@/public/icons/right-arrow-white.png';
+import arrowUp from '@/public/icons/arrow-up-white.png';
+import Image from 'next/image';
+import styles from './styles.module.css';
+
+const VISIBLE_SEGMENTS = [
+    'blog',
+    'news',
+    'media',
+    'about',
+    'team',
+    'devs',
+    'tag',
+    'use',
+    'privacy',
+    'cookies',
+]; // nav에서 번역 키로 쓰는 것들만
+
+type Crumb = {
+    segment: string;
+    label: string | React.ReactNode;
+};
 
 export const Breadcrumbs = () => {
     const segments = useSelectedLayoutSegments();
@@ -95,75 +35,93 @@ export const Breadcrumbs = () => {
 
     if (segments.length === 0) return null;
 
-    // 누적 경로 만들어주기 ( /blog , /blog/tag , /blog/tag/bitcoin ... )
+    // 1) 실제로 렌더링할 breadcrumb만 먼저 추출 (null 제거)
+    const crumbs: Crumb[] = segments
+        .map((segment, index) => {
+            // 라우트 그룹은 무시
+            if (segment === '(policies)') return null;
+
+            // 숫자 id는 숨김 (blog/[idx])
+            if (!isNaN(Number(segment))) return null;
+
+            // nav에서 관리하는 "정적" 세그먼트 (blog, tag, news ...)
+            if (VISIBLE_SEGMENTS.includes(segment)) {
+                return {
+                    segment,
+                    label: t(segment),
+                } satisfies Crumb;
+            }
+
+            // 바로 앞이 'tag'인 세그먼트 = [name] (태그 이름)
+            if (index > 0 && segments[index - 1] === 'tag') {
+                // 태그 이름 그대로 보여주고 싶으면 아래 주석 해제
+                // return { segment, label: `#${decodeURIComponent(segment)}` } satisfies Crumb;
+
+                // 지금은 표시 안 함
+                return null;
+            }
+
+            // 그 외 세그먼트는 표시하지 않음
+            return null;
+        })
+        .filter(Boolean) as Crumb[];
+
+    if (crumbs.length === 0) return null;
+
+    // 2) 누적 경로 만들어주기 ( /blog , /blog/tag , /blog/tag/bitcoin ... )
     let accumulatedPath = '';
 
     return (
         <div className={styles.breadcrumbWrapper}>
             <div className={styles.breadcrumb}>
+                {/* 홈 아이콘 쓰고 싶으면 주석 해제 */}
+                {/*
                 <span className={styles.homeImg}>
-                    <NavigationLink href="/">
-                        <Image src={homePic} width={20} height={20} alt="home icon" />
-                    </NavigationLink>
+                  <NavigationLink href="/">
+                    <Image src={homePic} width={20} height={20} alt="home icon" />
+                  </NavigationLink>
                 </span>
+                */}
 
-                {segments.map((segment, index) => {
-                    // 라우트 그룹은 무시
-                    if (segment === '(policies)') return null;
-
-                    // 경로 누적
-                    accumulatedPath += `/${segment}`;
-
-                    // 1) 숫자 id는 여전히 숨김 (blog/[idx])
-                    if (!isNaN(Number(segment))) {
-                        return null;
-                    }
-
-                    // 2) nav에서 관리하는 "정적" 세그먼트 (blog, tag, news ...)
-                    let label: string | React.ReactNode;
-
-                    if (VISIBLE_SEGMENTS.includes(segment)) {
-                        label = t(segment);
-                    }
-                    // 3) 바로 앞이 'tag'인 세그먼트 = [name] (태그 이름)
-                    else if (index > 0 && segments[index - 1] === 'tag') {
-                        // 태그 이름 그대로 사용 (필요하면 # 붙이기)
-                        return null;
-                        // label = `#${decodeURIComponent(segment)}`;
-                    }
-                    // 4) 그 외 세그먼트는 표시하지 않음 (원하면 여기서도 label = segment 로 보여줄 수 있음)
-                    else {
-                        return null;
-                    }
+                {crumbs.map((crumb, index) => {
+                    accumulatedPath += `/${crumb.segment}`;
 
                     return (
-                        <div className={styles.breadCrumbElem} key={`${segment}-${index}`}>
-                            <span className={styles.arrowImg}>
-                                <Image src={arrowPic} width={12} height={12} alt="arrow icon" />
-                            </span>
-                            <NavigationLink
-                                href={accumulatedPath}
-                                matchMode="exact"
-                            >
-                                {label}
+                        <div className={styles.breadCrumbElem} key={`${crumb.segment}-${index}`}>
+                            {/* ✅ 두번째 요소부터만 arrowImg 추가 */}
+                            {index > 0 && (
+                                <span className={styles.arrowImg}>
+                                  <Image src={arrowPic} width={12} height={12} alt="arrow icon" />
+                                </span>
+                            )}
+                            <NavigationLink href={accumulatedPath} matchMode="exact">
+                                {crumb.label}
                             </NavigationLink>
                         </div>
                     );
                 })}
             </div>
 
-            <div className={styles.history}>
+            {/* history/back 버튼 쓰고 싶으면 주석 해제 */}
+            {/*
+              <div className={styles.history}>
                 <button
-                    type="button"
-                    className={styles.backButton}
-                    onClick={() => router.back()}
+                  type="button"
+                  className={styles.backButton}
+                  onClick={() => router.back()}
                 >
-                    <div className={styles.imageWrapper}>
-                        <Image className={styles.backArrow} src={arrowUp} width={24} height={24}
-                               alt="back history arrow" />
-                    </div>
+                  <div className={styles.imageWrapper}>
+                    <Image
+                      className={styles.backArrow}
+                      src={arrowUp}
+                      width={24}
+                      height={24}
+                      alt="back history arrow"
+                    />
+                  </div>
                 </button>
-            </div>
+              </div>
+             */}
         </div>
     );
 };

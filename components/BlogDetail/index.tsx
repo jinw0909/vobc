@@ -40,36 +40,8 @@ interface BlogDetailProps {
 }
 
 export default async function BlogDetail({ idx, post, relatedPosts, locale }: BlogDetailProps) {
-    // const locale = await getLocale();
-    //
-    // const lang =
-    //     locale === 'en' ||
-    //     locale === 'kr' ||
-    //     locale === 'jp' ||
-    //     locale === 'cn'
-    //         ? locale
-    //         : 'en';
-    //
-    // const res = await fetch(
-    //     `${API_BASE}/api/post/query/${idx}?lang=${lang}`,
-    //     {
-    //         // cache: 'no-store',
-    //         next: { revalidate: 10 },
-    //     }
-    // );
-    //
-    // if (!res.ok) {
-    //     notFound();
-    // }
-    //
-    // const post = (await res.json()) as PostResponse || null;
-    //
-    // if (!post || !post.id || post.id !== Number(idx)) {
-    //     notFound();
-    // }
 
     const formattedReleaseDate = post.releaseDate ?? '';
-
 
     const parsedContent = post.content
         ? parse(post.content, {

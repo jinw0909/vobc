@@ -150,7 +150,7 @@
 }
 
 .roadmapInner {
-    max-width: 1200px; /* 너 레이아웃에 맞게 */
+    /*max-width: 1200px; !* 너 레이아웃에 맞게 *!*/
     margin: 0 auto;
 }
 

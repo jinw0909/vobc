@@ -129,7 +129,7 @@
 }
 
 .itemBandWrapper {
-
+    scroll-margin-top: calc(var(--header-h, 0px) + 6rem) !important;
 }
 .itemBandWrapper h2 {
     font-size: 1.5rem;
@@ -351,12 +351,16 @@
 .itemBand h2 {
     font-size: 1.5rem;
     transition: 0.5s;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .selectedTitle {
     opacity: 1;
 }
+
+
 
 /* ===== Embla viewport (모바일에서만 실제로 중요) ===== */
 .bandViewport {

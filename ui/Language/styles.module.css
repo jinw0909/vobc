@@ -1,5 +1,5 @@
 .languageWrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 10%;
@@ -48,6 +48,7 @@
     transition: .5s;
     overflow: hidden;
     padding-right: 2rem;
+    border-top: 0;
 }
 .langElem {
     /*min-width: 3rem;*/
@@ -67,6 +68,7 @@
     max-height: 3rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
+    border-top: 1px solid #555;
 }
 .languageModal button {
     color: #888;
@@ -83,21 +85,21 @@
     color: white;
 }
 
-@media (min-width: 1200px) {
-    .languageWrapper {
-        right: 10vw;
-        transition: .5s;
-    }
-    .languageModal {
-        padding-right: 10vw;
-    }
-}
+/*@media (min-width: 1200px) {*/
+/*    .languageWrapper {*/
+/*        right: 10vw;*/
+/*        transition: .5s;*/
+/*    }*/
+/*    .languageModal {*/
+/*        padding-right: 10vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 1500px) {
-    .languageWrapper {
-        right: calc((100vw - 1200px) / 2);
-    }
-    .languageModal {
-        padding-right: calc((100vw - 1200px) / 2);
-    }
-}
+/*@media (min-width: 1500px) {*/
+/*    .languageWrapper {*/
+/*        right: calc((100vw - 1200px) / 2);*/
+/*    }*/
+/*    .languageModal {*/
+/*        padding-right: calc((100vw - 1200px) / 2);*/
+/*    }*/
+/*}*/

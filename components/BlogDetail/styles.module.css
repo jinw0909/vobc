@@ -7,7 +7,7 @@
 .blogDetail {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 4em;
     width: 100%;
 }
 
@@ -177,7 +177,7 @@
 
 @media (min-width: 1200px) {
     .blogDetail {
-        width: 80vw;
+        gap: 6rem;
     }
 }
 

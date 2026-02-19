@@ -12,7 +12,7 @@
 .mediaElementWrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
-    gap: .5rem;
+    gap: 1rem;
     margin-top: 1rem;
 }
 .mediaElementWrapper::-webkit-scrollbar {
@@ -58,8 +58,8 @@
     background-color: white;
     transition: 1s;
 }
-.mediaElemTitle:hover::after {
-    width: fit-content;
+.mediaElement:hover .mediaElemTitle::after {
+    width: 90%;
 }
 
 .mediaElemImg {
@@ -89,15 +89,17 @@
     left: 0;
     bottom: -2px;
     height: 1px;
-    background-color: rgba(180,180,30,0.7);
+    /*background-color: rgba(180,180,30,0.7);*/
+    background-color: #999;
     width: 0;
     transition: .5s;
 }
+.mediaElemView:hover::after { width: 75%; }
+
 .viewBtn { transition: .5s; transform: translateX(.5rem); }
 .arrowPic { margin-top: 2px; opacity: 0; transition: .5s; }
 .mediaElemView:hover .arrowPic { opacity: 1; }
 .mediaElemView:hover .viewBtn { transform: translateX(0); }
-.mediaElemView:hover::after { width: 100%; }
 
 .white { color: white;}
 
@@ -108,7 +110,6 @@
     .mediaElementWrapper {
         display: grid;
         grid-template-columns: repeat(4, 1fr); /* 한 줄에 3개 */
-        gap: .5rem;
         margin-top: 1rem;
     }
     /*.mediaElement { height: 300px; width: 350px; }*/
