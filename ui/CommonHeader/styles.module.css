@@ -1,0 +1,25 @@
+/* CommonHeader wrapper에 적용 */
+.commonHeader {
+    position: relative;
+    width: 100%;
+    font-size: 2rem;
+    --line: 0; /* 0~1 */
+}
+
+/* 바텀 라인 */
+.commonHeader::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: #fff;
+
+    transform-origin: left;
+    transform: scaleX(var(--line));
+}
+
+@media (max-width: 769px) {
+    .commonHeader { font-size: 1.5rem; }
+}

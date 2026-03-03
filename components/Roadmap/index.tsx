@@ -377,7 +377,7 @@ export function Roadmap() {
     return (
         <section className={styles.roadmap}>
             <div className={styles.roadmapInner}>
-                <div className={styles.roadmapTitle}>{t('title')}</div>
+                {/*<div className={styles.roadmapTitle}>{t('title')}</div>*/}
 
                 <Swiper
                     modules={[FreeMode, Mousewheel]}

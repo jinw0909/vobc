@@ -15,7 +15,7 @@
 .vision {
     position: relative; /* ✅ 기본값: JS가 fixed/absolute 변경 */
     left: 50%;
-    margin-top: 7rem;
+    margin-top: 6rem;
     transform: translateX(-50%);
     opacity: 1;
     /*pointer-events: none;*/

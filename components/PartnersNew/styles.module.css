@@ -2,6 +2,10 @@
     overflow: hidden;
     width: 100%;
 }
+.header {
+    font-size: 1.75rem;
+    border-bottom: 1px solid white;
+}
 .title {
     text-align: center;
     font-size: 2.5rem;

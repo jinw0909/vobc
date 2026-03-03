@@ -20,92 +20,126 @@
     padding: 1rem;
     position: relative;
     z-index: 10;
-    cursor: pointer;
-    /*border: 1px solid;*/
+    /*cursor: pointer;*/
+    border: 1px solid rgba(255, 255, 255, 0.2);
     /*border-image: linear-gradient(to right, white, skyblue) 1;*/
     overflow: hidden;
     /*border: 1px solid #999;*/
 }
-.whitepaperInner:active { transform: scale(0.95);}
+/*.whitepaperInner:active { transform: scale(0.95);}*/
 .whitepaperInner.show {
     /*width: 44%;*/
 }
-.whitepaperInner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-    /*background: linear-gradient(135deg, #f9f9f9, lightskyblue);*/
-    /*filter: brightness(1.1) contrast(0.9) saturate(1.1) blur(0.5px);*/
-    transition: 1s;
-    /*opacity: 1;*/
-    /*background-color: white;*/
-}
-
-/*.whitepaperInner::after {*/
+/*.whitepaperInner::before {*/
 /*    content: '';*/
 /*    position: absolute;*/
 /*    top: 0;*/
 /*    left: 0;*/
 /*    bottom: 0;*/
 /*    right: 0;*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*    background: rgba(255, 255, 255, 0.7);*/
-/*    !*background: linear-gradient(*!*/
-/*    !*        180deg,*!*/
-/*    !*        rgba(255, 255, 255),*!*/
-/*    !*        rgba(255, 255, 255, 0.7));*!*/
-/*    opacity: 0;*/
+/*    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));*/
+/*    !*background: linear-gradient(135deg, #f9f9f9, lightskyblue);*!*/
+/*    !*filter: brightness(1.1) contrast(0.9) saturate(1.1) blur(0.5px);*!*/
 /*    transition: 1s;*/
+/*    !*opacity: 1;*!*/
+/*    !*background-color: white;*!*/
 /*}*/
+/*.whitepaperInner.show::before {*/
+/*    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));*/
+/*}*/
+
+/* 기본 방향 */
+.whitepaperInner::before,
 .whitepaperInner::after {
     content: '';
     position: absolute;
     inset: 0;
-
-    /* 노란 종이 */
-    background-color: rgba(255, 247, 200, 0.95);
-
-    /* 파란 줄 */
-    background-image:
-            repeating-linear-gradient(
-                    to bottom,
-                    rgba(60, 120, 200, 0.35) 0px,
-                    rgba(60, 120, 200, 0.35) 1px,
-                    transparent 1px,
-                    transparent 22px
-            );
-
-    /* 종이 질감 살짝 */
-    filter: brightness(1.03) contrast(0.95);
-
-    opacity: 0;
-    transition: opacity 0.5s ease;
     pointer-events: none;
+    transition: opacity 0.6s ease;
 }
 
+/* 0deg */
+.whitepaperInner::before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2));
+    opacity: 1;
+}
+
+/* 180deg */
+/*.whitepaperInner::after {*/
+/*    background: linear-gradient(*/
+/*            180deg,*/
+/*            rgba(255,255,255,1),*/
+/*            rgba(255,255,255,0)*/
+/*    );*/
+/*    opacity: 0;*/
+/*}*/
+
+/* 토글 */
 .whitepaperInner.show::before {
-    /*height: 100%;*/
-    /*transition: .5s;*/
-    /*background: linear-gradient(135deg, #f9f9f9, lightskyblue);*/
-    /*opacity: 1;*/
-    opacity: 0;
+    opacity: 1;
 }
 .whitepaperInner.show::after {
-    opacity: 1;
-    height: 100%;
+    opacity: 0;
 }
+
+/*.whitepaperInner.show::after {*/
+/*    opacity: 1;*/
+/*}*/
+
+.whitepaperInner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.75);
+    /*background: linear-gradient(*/
+    /*        180deg,*/
+    /*        rgba(255, 255, 255),*/
+    /*        rgba(255, 255, 255, 0.7));*/
+    opacity: 0;
+    transition: 1s;
+}
+/*.whitepaperInner::after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    inset: 0;*/
+
+/*    !* 노란 종이 *!*/
+/*    background-color: rgba(255, 247, 200, 0.95);*/
+
+/*    !* 파란 줄 *!*/
+/*    background-image:*/
+/*            repeating-linear-gradient(*/
+/*                    to bottom,*/
+/*                    rgba(60, 120, 200, 0.35) 0px,*/
+/*                    rgba(60, 120, 200, 0.35) 1px,*/
+/*                    transparent 1px,*/
+/*                    transparent 22px*/
+/*            );*/
+
+/*    !* 종이 질감 살짝 *!*/
+/*    filter: brightness(1.03) contrast(0.95);*/
+
+/*    opacity: 0;*/
+/*    transition: opacity 0.5s ease;*/
+/*    pointer-events: none;*/
+/*}*/
+
+/*.whitepaperInner.show::after {*/
+/*    opacity: 0;*/
+/*    height: 100%;*/
+/*}*/
 /*.whitepaperInner:hover::before {*/
 /*    height: 100%;*/
 /*    opacity: 1;*/
 /*}*/
 .whitepaperInner.show .whitepaperText,
 .whitepaperInner.show .whitepaperDesc {
-    color: black;
+    color: white;
 }
 .whitepaperInner.show .whitepaperBtn {
     pointer-events: auto;
@@ -152,12 +186,12 @@
     flex-direction: column;
     transition: 1s;
     gap: 1rem;
-    color: black;
+    color: white;
     position: relative;
     z-index: 20;
 }
 .whitepaperTitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .whitepaperDesc {
     font-size: 1rem;
@@ -181,7 +215,7 @@
     z-index: 10;
     transition: .5s;
     pointer-events: none;
-    color: black;
+    color: white;
     opacity: 0;
     max-height: 0;
     padding: 0;
@@ -198,12 +232,12 @@
     bottom: 0;
     width: 0;
     height: 100%;
-    background-color: black;
+    background-color: white;
     transition: .5s;
     z-index: 1;
 }
 .whitepaperBtn:hover {
-    color: white;
+    color: black;
 }
 .whitepaperBtn:hover::after {
     width: 100%;
@@ -228,7 +262,7 @@
     padding: 1rem;
 }
 .whitepaperInner.show .whitepaperBtn {
-    border: 1px solid black;
+    border: 1px solid #999;
     opacity: 1;
     padding: .5rem 2rem;
     max-height: 3rem;
@@ -264,7 +298,7 @@
         order: 2;
     }
     .whitepaperInner {
-        position: absolute;
+        /*position: absolute;*/
         top: 0;
         left: 0;
         bottom: 0;

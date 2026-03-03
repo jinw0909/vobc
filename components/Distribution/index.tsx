@@ -19,10 +19,11 @@ export const Distribution = () => {
     }
 
     return (
-        <div className={styles.distMain}>
-            <div className={styles.title}>{t('vobtoken')}<br/>{t('model')}</div>
-            <DoughnutChart isActive={isActive} index={index} handleIdx={handleIdx} handleActive={handleActive}/>
-            <DistDetail isActive={isActive} index={index} handleIdx={handleIdx}/>
+        <div className={styles.distributionWrapper}>
+            <div className={styles.distMain}>
+                <DoughnutChart isActive={isActive} index={index} handleIdx={handleIdx} handleActive={handleActive}/>
+                <DistDetail isActive={isActive} index={index} handleIdx={handleIdx}/>
+            </div>
         </div>
     )
 }

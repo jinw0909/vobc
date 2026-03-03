@@ -78,6 +78,7 @@ export function PartnersNew() {
 
     return (
         <div className={styles.partnersNew}>
+            {/*<div className={styles.header}>Partners</div>*/}
             <div className={styles.title}>{t('title')}</div>
             <div className={styles.desc}>{t('subtitle')}</div>
             {groupedPartners.map((group, groupIndex) => (

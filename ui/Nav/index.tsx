@@ -48,11 +48,21 @@ export const Nav = () => {
 
             <div className={`${styles.navbarWrapper} ${wrapperClass}`}>
                 <ul className={`${styles.navbar} ${open ? styles.open : ''}`}>
-                    <NavigationLink href="/about">{t('about')}</NavigationLink>
-                    <NavigationLink href="/blog">{t('blog')}</NavigationLink>
-                    <NavigationLink href="/devs">{t('devs')}</NavigationLink>
-                    <NavigationLink href="/team">{t('team')}</NavigationLink>
-                    <NavigationLink href="/news">{t('news')}</NavigationLink>
+                    <li className={styles.navbarElem}>
+                        <NavigationLink href="/about">{t('about')}</NavigationLink>
+                    </li>
+                    <li className={styles.navbarElem}>
+                        <NavigationLink href="/blog">{t('blog')}</NavigationLink>
+                    </li>
+                    <li className={styles.navbarElem}>
+                        <NavigationLink href="/devs">{t('devs')}</NavigationLink>
+                    </li>
+                    <li className={styles.navbarElem}>
+                        <NavigationLink href="/team">{t('team')}</NavigationLink>
+                    </li>
+                    <li className={styles.navbarElem}>
+                        <NavigationLink href="/news">{t('news')}</NavigationLink>
+                    </li>
                 </ul>
             </div>
         </>

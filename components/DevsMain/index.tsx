@@ -102,13 +102,16 @@ export const DevsMain = () => {
                 <div className={`${styles.textWrapper}`}>
                     <div className={`text-4xl mb-4 ${styles.devsMainTitle}`}>{t('title')}</div>
                     <div className={`text-xl mb-4 ${styles.devsMainSubTitle}`}>{t('subtitle')}</div>
+                    <div>
+                        <button className={styles.checkoutBtn} onClick={handleClick}>{t('btn')}</button>
+                    </div>
                 </div>
                 <div className={styles.descWrapper}>
-                    <div className={styles.textStyle}>
+                    <div className={`${styles.textStyle} ${styles.descContent}`}>
                         {t('content')}
                     </div>
                     {/*<NavigationLink href="/devs">*/}
-                        <button className={styles.checkoutBtn} onClick={handleClick}>{t('btn')}</button>
+
                     {/*</NavigationLink>*/}
                 </div>
             </div>

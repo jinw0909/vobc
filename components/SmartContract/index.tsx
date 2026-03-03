@@ -30,7 +30,8 @@ export const SmartContract = () => {
     const t = useTranslations('whitepaper');
     return (
         <div className={styles.whitepaperWrapper}>
-            <div className={`${styles.whitepaperInner} ${styles.smartContract} ${showContract ? styles.show : ''}`}
+            {/*<div className={`${styles.whitepaperInner} ${styles.smartContract} ${showContract ? styles.show : ''}`}*/}
+            <div className={`${styles.whitepaperInner} ${styles.smartContract} ${styles.show}`}
                  onClick={()=>{ handleShowContract()} }>
                 <div className={`${styles.whitepaperText} ${styles.contractText}`}>
                     <div className={`${styles.whitepaperTitle}`}>Smart Contract</div>

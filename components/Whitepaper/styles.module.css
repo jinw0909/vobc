@@ -22,14 +22,15 @@
     padding: 1rem;
     position: relative;
     z-index: 10;
-    cursor: pointer;
+    /*cursor: pointer;*/
     /*border: 1px solid;*/
     /*border-image: linear-gradient(to right, white, skyblue) 1;*/
     overflow: hidden;
     /*background-color: black;*/
     /*border: 1px solid #999;*/
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.whitepaperInner:active { transform: scale(0.95);}
+/*.whitepaperInner:active { transform: scale(0.95);}*/
 .whitepaperInner.show {
     /*width: 44%;*/
 
@@ -45,7 +46,8 @@
     width: 100%;
     height: 100%;
     /*background: linear-gradient(135deg, #f9f9f9, lightskyblue);*/
-    background: rgba(255, 255, 255, 0.7);
+    /*background: rgba(255, 255, 255, 0.75);*/
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2));
     /*background: linear-gradient(*/
     /*    to bottom,*/
     /*    rgba(125, 125, 125, 0.6) 0%,*/
@@ -57,38 +59,38 @@
 }
 
 
-.whitepaperInner::after {
-    content: '';
-    position: absolute;
-    inset: 0;
+/*.whitepaperInner::after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    inset: 0;*/
 
-    /* 종이 느낌 */
-    background-color: rgba(255, 255, 255, 0.92);
+/*    !* 종이 느낌 *!*/
+/*    background-color: rgba(255, 255, 255, 0.92);*/
 
-    /* 신문 활자 밀집 패턴 */
-    background-image:
-            repeating-linear-gradient(
-                    to bottom,
-                    rgba(0, 0, 0, 0.05) 0px,
-                    rgba(0, 0, 0, 0.05) 1px,
-                    transparent 1px,
-                    transparent 16px
-            ),
-            repeating-linear-gradient(
-                    to right,
-                    rgba(0, 0, 0, 0.03) 0px,
-                    rgba(0, 0, 0, 0.03) 1px,
-                    transparent 1px,
-                    transparent 140px
-            );
+/*    !* 신문 활자 밀집 패턴 *!*/
+/*    background-image:*/
+/*            repeating-linear-gradient(*/
+/*                    to bottom,*/
+/*                    rgba(0, 0, 0, 0.05) 0px,*/
+/*                    rgba(0, 0, 0, 0.05) 1px,*/
+/*                    transparent 1px,*/
+/*                    transparent 16px*/
+/*            ),*/
+/*            repeating-linear-gradient(*/
+/*                    to right,*/
+/*                    rgba(0, 0, 0, 0.03) 0px,*/
+/*                    rgba(0, 0, 0, 0.03) 1px,*/
+/*                    transparent 1px,*/
+/*                    transparent 140px*/
+/*            );*/
 
-    /* 약간의 종이 질감 */
-    /*filter: brightness(1.05) contrast(0.92);*/
+/*    !* 약간의 종이 질감 *!*/
+/*    !*filter: brightness(1.05) contrast(0.92);*!*/
 
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-}
+/*    opacity: 0;*/
+/*    transition: opacity 0.5s ease;*/
+/*    pointer-events: none;*/
+/*}*/
 
 
 .whitepaperInner::before {
@@ -103,10 +105,10 @@
     /*        180deg,*/
     /*        rgba(255, 255, 255, 0) 0%,*/
     /*        rgba(255, 255, 255, 0.2) 100%);*/
-    background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.2) 100%);
+    /*background: linear-gradient(*/
+    /*        180deg,*/
+    /*        rgba(255, 255, 255, 0) 0%,*/
+    /*        rgba(255, 255, 255, 0.2) 100%);*/
     /*filter: brightness(1.1) contrast(0.9) saturate(1.1) blur(0.5px);*/
     transition: 1s;
     /*opacity: 0;*/
@@ -131,8 +133,8 @@
 
 .whitepaperInner.show .whitepaperText,
 .whitepaperInner.show .whitepaperDesc {
-    color: black;
-    /*color: white;*/
+    /*color: black;*/
+    color: white;
 }
 .whitepaperInner.show .whitepaperBtn {
     pointer-events: auto;
@@ -185,7 +187,7 @@
     z-index: 20;
 }
 .whitepaperTitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .whitepaperDesc {
     font-size: 1rem;
@@ -202,14 +204,14 @@
 .whitepaperBtn {
     font-size: 1rem;
     position: relative;
-    border: 1px solid black;
+    border: 1px solid white;
     padding: .5rem 2rem;
     border-radius: 1.5rem;
     overflow: hidden;
     z-index: 10;
     transition: .5s;
     pointer-events: none;
-    color: black;
+    color: white;
     opacity: 0;
     /*color: white;*/
     /*border: 1px solid white;*/
@@ -228,12 +230,12 @@
     bottom: 0;
     width: 0;
     height: 100%;
-    background-color: black;
+    background-color: white;
     transition: .5s;
     z-index: 1;
 }
 .whitepaperBtn:hover {
-    color: white;
+    color: black;
 }
 .whitepaperBtn:hover::after {
     width: 100%;
@@ -258,7 +260,7 @@
     padding: 1rem;
 }
 .whitepaperInner.show .whitepaperBtn {
-    border: 1px solid black;
+    border: 1px solid #999;
     /*border: 1px solid white;*/
     opacity: 1;
     padding: .5rem 2rem;
@@ -306,7 +308,7 @@
 
 @media (max-width: 576px) {
     .whitepaperInner {
-        position: absolute;
+        /*position: absolute;*/
         top: 0;
         bottom: 0;
         left: 0;

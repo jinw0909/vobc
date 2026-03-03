@@ -8,6 +8,7 @@ import tokenPic from '@/public/about_token.png';
 import {Kaisei_HarunoUmi, Vollkorn} from "next/font/google";
 import {Noto_Serif_JP} from "next/font/google";
 import {getTranslations} from "next-intl/server";
+import {CommonHeader} from "@/ui/CommonHeader";
 const notoserifjp = Noto_Serif_JP({
     weight: ['200', '300', '400', '500', '600', '700', '900'],
     style : "normal",
@@ -24,10 +25,11 @@ export const About = async () => {
 
     return (
         <div className={styles.aboutWrapper}>
-            {/*<div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>*/}
+            <div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>
             <div className={styles.aboutInner}>
                 <div className={`${styles.element}`}>
-                    <div className={`${styles.elementTitle} ${notoserifjp.className} text-left`}>{t('about.title_0')}</div>
+                    {/*<div className={`${styles.elementTitle} ${notoserifjp.className} text-left`}>{t('about.title_0')}</div>*/}
+                    <CommonHeader text={t('about.title_0')}/>
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-right`}>
                             <Image className={styles.imageStyle}
@@ -42,7 +44,8 @@ export const About = async () => {
                 </div>
 
                 <div className={`${styles.element}`}>
-                    <div className={`${styles.elementTitle} text-left`}>{t('about.title_1')}</div>
+                    {/*<div className={`${styles.elementTitle} text-left`}>{t('about.title_1')}</div>*/}
+                    <CommonHeader text={t('about.title_1')}/>
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-left`}>
                             <Image className={styles.imageStyle}
@@ -57,7 +60,8 @@ export const About = async () => {
                 </div>
 
                 <div className={`${styles.element}`}>
-                    <div className={`${styles.elementTitle} text-left`}>{t('about.title_2')}</div>
+                    {/*<div className={`${styles.elementTitle} text-left`}>{t('about.title_2')}</div>*/}
+                    <CommonHeader text={t('about.title_2')}/>
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-right`}>
                             <Image className={styles.imageStyle}

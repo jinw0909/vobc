@@ -6,16 +6,16 @@
 .mainTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-top: 8rem;
+    margin-top: 14rem;
     margin-bottom: 4rem;
-    opacity: 0;
+    /*opacity: 0;*/
     pointer-events: none;
 }
 .aboutInner {
-    margin-top: 12rem;
+    margin-top: 8rem;
 }
 .element {
-    margin-top: 4rem;
+    margin-top: 6rem;
 }
 .element:first-child {
     margin-top: 0;
@@ -24,12 +24,14 @@
     font-size: 1.5rem;
 }
 .elementContent {
-    margin-top: 1rem;
-    /*display: flex;*/
+    margin: 1rem 0;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
 }
 .elementContent:last-child {
     margin-bottom:  4rem;
@@ -39,15 +41,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 1rem;
-    transition: .5s;
-}
-.elementText {
-    flex: 3;
+    position: relative;
+    align-self: stretch;
+    transition: flex .5s;
 }
 .imageStyle {
-    /*border-radius: 8px;*/
-    border: 1px solid #bbb;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    inset: 0;
+    position: absolute;
+}
+
+.elementText {
+    flex: 3;
+    align-self: stretch;
 }
 
 .fadeInAnimation {
@@ -84,7 +92,20 @@
 }
 
 @media (max-width: 768px) {
-    .aboutInner { margin-top: 9rem; }
+    .aboutInner { margin-top: 6rem; }
+    /*.elementContent {*/
+    /*    display: grid;*/
+    /*    grid-template-rows: minmax(0, 1fr) minmax(0, 3fr); !* ✅ 세로 1:3 *!*/
+    /*    grid-template-columns: 1fr;                         !* 한 열 *!*/
+    /*}*/
+    .elementContent {
+        display: flex;
+        flex-direction: column;
+    }
+    .elementImage {
+        height: 4rem;
+        flex: 4rem 0 0;
+    }
 }
 
 @media (max-width: 576px) {
@@ -93,8 +114,5 @@
     }
     .elementTitle {
         font-size: 1.2rem;
-    }
-    .elementImage {
-        width: 33vw;
     }
 }
