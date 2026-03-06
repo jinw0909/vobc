@@ -10,12 +10,13 @@
     margin-bottom: 4rem;
     /*opacity: 0;*/
     pointer-events: none;
+    display: none;
 }
 .aboutInner {
-    margin-top: 8rem;
+    margin-top: 12rem;
 }
 .element {
-    margin-top: 6rem;
+    margin-top: 4rem;
 }
 .element:first-child {
     margin-top: 0;
@@ -92,7 +93,7 @@
 }
 
 @media (max-width: 768px) {
-    .aboutInner { margin-top: 6rem; }
+    .aboutInner { margin-top: 10rem; }
     /*.elementContent {*/
     /*    display: grid;*/
     /*    grid-template-rows: minmax(0, 1fr) minmax(0, 3fr); !* ✅ 세로 1:3 *!*/

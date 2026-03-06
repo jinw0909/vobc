@@ -2,6 +2,7 @@
 import styles from './styles.module.css';
 import Image from 'next/image';
 import paperPic from '@/public/whitepaper.png';
+import whitePaperPic from '@/public/technology/whitepaper.png';
 // import contractPic from '@/public/smartcontract.png';
 import Link from "next/link";
 import { useTranslations} from "next-intl";
@@ -44,14 +45,20 @@ export const Whitepaper = () => {
                         >{t('viewbtn')}</Link>
                     </button>
                 </div>
-                <div className={`${styles.whitepaperImg}`}>
-                    <Image
-                        src={paperPic}
-                        fill={true}
-                        style={{objectFit: "contain"}}
-                        alt="whitepaper image"/>
-                </div>
+                {/*<div className={`${styles.whitepaperImg}`}>*/}
+                {/*    <Image*/}
+                {/*        src={paperPic}*/}
+                {/*        fill={true}*/}
+                {/*        style={{objectFit: "contain"}}*/}
+                {/*        alt="whitepaper image"/>*/}
+                {/*</div>*/}
                 <span className={`${styles.borderTop} ${showPaper ? styles.show : ''}`} ></span>
+                <Image
+                    src={whitePaperPic}
+                    fill={true}
+                    style={{objectFit: "cover", objectPosition: "center"}}
+                    alt="whitepaper image"
+                />
             </div>
         </div>
     )

@@ -61,8 +61,8 @@ import {NavigationLink} from "@/ui/NavigationLink";
 import {getTranslations} from "next-intl/server";
 import {useEffect, useState} from "react";
 import {useTranslations} from "next-intl";
-import contractPic from "@/public/smartcontract.png";
 import { useRouter } from "@/i18n/navigation"
+import technologyPic from '@/public/technology/technology.png'
 export const DevsMain = () => {
 
     const t = useTranslations('devs_main');
@@ -91,14 +91,14 @@ export const DevsMain = () => {
             <div className={`${styles.devsInner} ${showDev ? styles.show : ''}`}
                  // onClick={() => {handleShowDev()}}
             >
-                <div className={styles.imgWrapper}>
-                    <Image src={techPic}
-                           fill={true}
-                           style={{objectFit: "contain"}}
-                           alt="main page devs image"
-                           className={styles.imgElem}
-                    />
-                </div>
+                {/*<div className={styles.imgWrapper}>*/}
+                {/*    <Image src={techPic}*/}
+                {/*           fill={true}*/}
+                {/*           style={{objectFit: "contain"}}*/}
+                {/*           alt="main page devs image"*/}
+                {/*           className={styles.imgElem}*/}
+                {/*    />*/}
+                {/*</div>*/}
                 <div className={`${styles.textWrapper}`}>
                     <div className={`text-4xl mb-4 ${styles.devsMainTitle}`}>{t('title')}</div>
                     <div className={`text-xl mb-4 ${styles.devsMainSubTitle}`}>{t('subtitle')}</div>
@@ -114,6 +114,13 @@ export const DevsMain = () => {
 
                     {/*</NavigationLink>*/}
                 </div>
+                <Image
+                    src={technologyPic}
+                    fill={true}
+                    style={{objectFit: "cover", objectPosition: "center"}}
+                    alt="technology image"
+                    // className={styles.imgElem}
+                />
             </div>
         </div>
     )

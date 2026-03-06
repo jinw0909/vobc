@@ -10,6 +10,18 @@
     aspect-ratio: 1 / 1;
     height: auto;
     border: 1px solid rgba(255,255,255,0.2);
+    overflow: hidden;
+    position: relative;
+}
+.devsInner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
 }
 .imgWrapper {
     flex: 1;
@@ -38,6 +50,7 @@
     align-items: center;
     flex: 1;
     transition: 1s;
+    z-index: 150;
 }
 .descWrapper {
     flex: 0;
@@ -100,9 +113,9 @@
 }
 
 @media (min-width: 1400px) {
-    /*.devsMainTitle { font-size: 3rem;}*/
-    /*.devsMainSubTitle  {font-size: 1.5rem; }*/
-    /*.checkoutBtn { font-size: 1.5rem; }*/
+    .devsMainTitle { font-size: 2.5rem;}
+    .devsMainSubTitle  {font-size: 1.2rem; }
+    .checkoutBtn { font-size: 1.2rem; }
 }
 
 @media (max-width: 768px) {

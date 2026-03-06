@@ -100,7 +100,6 @@
 .slide {
     height: auto;
     width: 100%;
-    cursor: pointer;
 }
 
 /* Swiper가 overflow hidden이라 카드 그림자 잘리는 경우가 있어서 */
@@ -177,6 +176,9 @@
     .subText {
         line-height: 1.5;
         font-size: 1rem;
+    }
+    .slide {
+        cursor: pointer;
     }
 }
 

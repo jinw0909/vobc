@@ -6,6 +6,7 @@ import contractPic from '@/public/smart_contract.png';
 import Link from "next/link";
 import { useTranslations} from "next-intl";
 import {useState} from "react";
+import smartContractPic from '@/public/technology/smartcontract.png'
 export const SmartContract = () => {
 
     const [showPaper, setShowPaper] = useState(false);
@@ -45,12 +46,18 @@ export const SmartContract = () => {
                         >{t('checkbtn')}</Link>
                     </button>
                 </div>
-                <div className={`${styles.whitepaperImg} ${styles.contractImg}`}>
-                    <Image src={contractPic}
-                           fill={true}
-                           style={{objectFit: "contain"}}
-                           alt="whitepaper image"/>
-                </div>
+                {/*<div className={`${styles.whitepaperImg} ${styles.contractImg}`}>*/}
+                {/*    <Image src={contractPic}*/}
+                {/*           fill={true}*/}
+                {/*           style={{objectFit: "contain"}}*/}
+                {/*           alt="whitepaper image"/>*/}
+                {/*</div>*/}
+                <Image
+                    src={smartContractPic}
+                    fill={true}
+                    style={{objectFit: "cover", objectPosition: "center"}}
+                    alt="smartContract image"
+                />
             </div>
             {/*<div className={styles.vtLine}></div>*/}
         </div>
