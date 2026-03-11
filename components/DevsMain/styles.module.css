@@ -138,6 +138,9 @@
         height: 100%;
         gap: 0;
         padding: 1rem;
+        border-radius: 0;
+        border: 0;
+        overflow: auto;
     }
     .devsInner {
         background: linear-gradient(90deg, rgba(125,125,125,0.4), rgba(255,255,255,0));

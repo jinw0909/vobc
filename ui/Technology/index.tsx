@@ -1,55 +1,112 @@
+'use client'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, EffectFade } from 'swiper/modules'
 import styles from './styles.module.css'
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay} from "swiper/modules";
-import {Whitepaper} from "@/components/Whitepaper";
-import {DevsMain} from "@/components/DevsMain";
-import {SmartContract} from "@/components/SmartContract";
+
+import { Whitepaper } from '@/components/Whitepaper'
+import { DevsMain } from '@/components/DevsMain'
+import { SmartContract } from '@/components/SmartContract'
+
+import 'swiper/css'
+import 'swiper/css/effect-fade'
+
+const slideContents = [
+    <Whitepaper key="whitepaper" />,
+    <DevsMain key="devs" />,
+    <SmartContract key="contract" />,
+]
 
 export function Technology() {
     return (
-        <>
+        <section className={styles.techWrapper}>
+            <div className={styles.pcOnly}>
+                <TechnologyPc />
+            </div>
+
+            <div className={styles.tabletOnly}>
+                <TechnologyTablet />
+            </div>
+
+            <div className={styles.mobileOnly}>
+                <TechnologyMobile />
+            </div>
+        </section>
+    )
+}
+
+function TechnologyPc() {
+    return (
+        <Swiper
+            slidesPerView={3}
+            spaceBetween={24}
+            allowTouchMove={false}
+            className={styles.introSwiper}
+        >
+            {slideContents.map((content, idx) => (
+                <SwiperSlide className={styles.slide} key={`pc-${idx}`}>
+                    {content}
+                </SwiperSlide>
+            ))}
+        </Swiper>
+    )
+}
+
+function TechnologyTablet() {
+    const slides = [
+        <Whitepaper key="whitepaper" />,
+        <DevsMain key="devs" />,
+        <SmartContract key="contract" />,
+    ]
+
+    return (
+        <Swiper
+            slidesPerView={2.15}
+            spaceBetween={24}
+            speed={700}
+            allowTouchMove
+            grabCursor
+            className={styles.tabletSwiper}
+        >
+            {slides.map((content, idx) => (
+                <SwiperSlide key={idx} className={styles.tabletSlide}>
+                    {content}
+                </SwiperSlide>
+            ))}
+        </Swiper>
+    )
+}
+function TechnologyMobile() {
+    return (
+        <div className={styles.mobileViewport}>
             <Swiper
-                modules={[Autoplay]}
+                modules={[Autoplay, EffectFade]}
                 loop
-                speed={1000} // autoplay 이동 시간
+                speed={1200}
+                slidesPerView={1}
+                effect="fade"
+                fadeEffect={{ crossFade: true }}
                 autoplay={{
-                    delay: 1500,                // ✅ 이 멈춤 시간 동안만 드래그 허용
+                    delay: 2200,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 }}
-                freeMode={false}              // ✅ 추천(필수는 아님). 튐/꼬임 크게 줄어듦
-                allowTouchMove={true}         // 기본은 true
-                spaceBetween={24}
-                breakpoints={{
-                    0: { slidesPerView: 1 },
-                    576: { slidesPerView: 2 },
-                    1028: { slidesPerView: 3 },
-                }}
-                onSwiper={(sw) => {
-                    // 시작 상태: 드래그 허용(=delay 구간이라고 가정)
-                    sw.allowTouchMove = true
-                }}
-
-                // ✅ autoplay가 슬라이드 "이동" 시작할 때 잠금
-                onSlideChangeTransitionStart={(sw) => {
-                    sw.allowTouchMove = false
-                }}
-
-                // ✅ 이동이 끝나면(=delay 구간) 다시 허용
-                onSlideChangeTransitionEnd={(sw) => {
-                    sw.allowTouchMove = true
-                }}
-
-                // ✅ 사용자가 눌렀는데(터치 시작) 만약 아직 잠금 상태면 바로 막기
+                allowTouchMove={true}
+                simulateTouch={true}
                 onTouchStart={(sw) => {
-                    if (!sw.allowTouchMove) return
+                    sw.autoplay?.stop()
                 }}
-                className={styles.introSwiper}
+                onTouchEnd={(sw) => {
+                    sw.autoplay?.start()
+                }}
+                className={`${styles.introSwiper} ${styles.mobileSwiper}`}
             >
-                <SwiperSlide className={styles.slide}><Whitepaper /></SwiperSlide>
-                <SwiperSlide className={styles.slide}><DevsMain /></SwiperSlide>
-                <SwiperSlide className={styles.slide}><SmartContract /></SwiperSlide>
+                {slideContents.map((content, idx) => (
+                    <SwiperSlide className={styles.slide} key={`mobile-${idx}`}>
+                        {content}
+                    </SwiperSlide>
+                ))}
             </Swiper>
-        </>
+        </div>
     )
 }
