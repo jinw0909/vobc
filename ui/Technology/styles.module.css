@@ -81,4 +81,19 @@
     .mobileSwiper .slide > * {
         height: 100%;
     }
+    .mobileSwiper :global(.swiper-slide) {
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .mobileSwiper :global(.swiper-slide-active) {
+        pointer-events: auto;
+        z-index: 2;
+    }
+
+    .mobileSwiper :global(.swiper-slide-next),
+    .mobileSwiper :global(.swiper-slide-prev) {
+        z-index: 1;
+    }
+
 }
