@@ -29,26 +29,56 @@ export function CommonHeader({
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight || document.documentElement.clientHeight;
 
-            // rect.top == vh(바닥) => progress 0
-            // rect.top == vh*fullVisibleAt(절반) => progress 1
+            // -------------------------
+            // 1) 텍스트/after 라인 progress
+            // rect.top == vh            -> 0
+            // rect.top == vh*0.5       -> 1
+            // -------------------------
             const startTop = vh;
             const endTop = vh * fullVisibleAt;
 
-            const t = (startTop - rect.top) / Math.max(1, (startTop - endTop));
+            const t = (startTop - rect.top) / Math.max(1, startTop - endTop);
             const progress = clamp01(t);
 
-            // ✅ 1) opacity
+
             el.style.opacity = progress.toFixed(4);
-
-            // ✅ 2) bottom line length (0 -> 1)
             el.style.setProperty('--line', progress.toFixed(4));
-
-            // 선택: 살짝 올라오는 느낌(원치 않으면 삭제)
             el.style.transform = `translateY(${(1 - progress) * 8}px)`;
+
+            // -------------------------
+            // 2) before 배경 높이 progress
+            // rect.top == vh*0.5       -> 0
+            // rect.top == 0            -> 1
+            // 최종 height = 50vh * progress
+            // -------------------------
+            const bgStartTop = vh * 0.5;
+            const bgEndTop = 0;
+
+            const bgT = (bgStartTop - rect.top) / Math.max(1, bgStartTop - bgEndTop);
+            const bgProgress = clamp01(bgT);
+
+            el.style.setProperty('--bg-progress', bgProgress.toFixed(4));
+            el.style.setProperty('--text-progress', bgProgress.toFixed(4));
+
+            // 3) ✅ margin-bottom progress
+            // rect.top == 50vh -> 0
+            // rect.top == 25vh -> 1
+            const marginStartTop = vh * 0.5;
+            const marginEndTop = vh * 0.25;
+
+            const marginT =
+                (marginStartTop - rect.top) /
+                Math.max(1, marginStartTop - marginEndTop);
+
+            const marginProgress = clamp01(marginT);
+
+            el.style.setProperty('--margin-progress', marginProgress.toFixed(4));
         };
 
         const onScroll = () => {
-            if (rafRef.current == null) rafRef.current = requestAnimationFrame(update);
+            if (rafRef.current == null) {
+                rafRef.current = requestAnimationFrame(update);
+            }
         };
 
         window.addEventListener('scroll', onScroll, { passive: true });
@@ -65,7 +95,7 @@ export function CommonHeader({
     return (
         <div
             ref={ref}
-            className={styles.commonHeader}
+            className={`${styles.commonHeader} ${className ?? ''}`}
             style={{
                 opacity: 0,
                 transform: 'translateY(8px)',

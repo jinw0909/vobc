@@ -27,9 +27,9 @@ export const About = async () => {
         <div className={styles.aboutWrapper}>
             <div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>
             <div className={styles.aboutInner}>
+                <CommonHeader text={"About VOB"}/>
                 <div className={`${styles.element}`}>
                     {/*<div className={`${styles.elementTitle} ${notoserifjp.className} text-left`}>{t('about.title_0')}</div>*/}
-                    <CommonHeader text={t('about.title_0')}/>
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-right`}>
                             <Image className={styles.imageStyle}
@@ -45,7 +45,7 @@ export const About = async () => {
 
                 <div className={`${styles.element}`}>
                     {/*<div className={`${styles.elementTitle} text-left`}>{t('about.title_1')}</div>*/}
-                    <CommonHeader text={t('about.title_1')}/>
+                    {/*<CommonHeader text={t('about.title_1')}/>*/}
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-left`}>
                             <Image className={styles.imageStyle}
@@ -61,7 +61,7 @@ export const About = async () => {
 
                 <div className={`${styles.element}`}>
                     {/*<div className={`${styles.elementTitle} text-left`}>{t('about.title_2')}</div>*/}
-                    <CommonHeader text={t('about.title_2')}/>
+                    {/*<CommonHeader text={t('about.title_2')}/>*/}
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-right`}>
                             <Image className={styles.imageStyle}

@@ -1,23 +1,65 @@
-/* CommonHeader wrapper에 적용 */
 .commonHeader {
     position: relative;
     width: 100%;
     font-size: 2rem;
-    --line: 0; /* 0~1 */
-}
 
+    --line: 0;
+    --bg-progress: 0;
+    --text-progress: 0;
+    --margin-progress: 0;
+
+    margin-bottom: calc(var(--margin-progress) * 2rem);
+    margin-top: calc((1 - var(--margin-progress)) * 2rem);
+
+}
 /* 바텀 라인 */
 .commonHeader::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 0;
+    top: 0;
     height: 1px;
     width: 100%;
     background: #fff;
 
     transform-origin: left;
     transform: scaleX(var(--line));
+}
+
+/* 배경 그라데이션 */
+/*.commonHeader::before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    width: 100%;*/
+/*    height: calc(75vh * var(--bg-progress));*/
+/*    z-index: -1;*/
+/*    pointer-events: none;*/
+/*    !*background: linear-gradient(*!*/
+/*    !*        to bottom,*!*/
+/*    !*        rgba(20, 40, 90, 0.45) 0%,*!*/
+/*    !*        rgba(20, 40, 90, 0.2) 45%,*!*/
+/*    !*        rgba(20, 40, 90, 0) 100%*!*/
+/*    !*);*!*/
+/*    background: linear-gradient(*/
+/*            to bottom,*/
+/*            rgba(170, 170, 170, 1) 0%,*/
+/*            rgba(90, 90, 90, 0.5) 45%,*/
+/*            rgba(30, 30, 30, 0) 100%*/
+/*    );*/
+/*    opacity: 0.25;*/
+/*}*/
+
+/* 밑줄 */
+.commonHeader::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: calc(100% * var(--line));
+    height: 2px;
+    background: currentColor;
 }
 
 @media (max-width: 769px) {

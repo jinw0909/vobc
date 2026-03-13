@@ -16,7 +16,7 @@
     margin: 0 auto;
     min-width: 0;
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
     margin-top: 4rem;
     min-height: 50vh;
 }
