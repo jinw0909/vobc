@@ -41,7 +41,7 @@
     position: relative;
     cursor: pointer;
     /*font-family: 'Nanum Myeongjo', serif;*/
-    font-family: 'Noto Serif KR', serif;
+    /*font-family: 'Noto Serif KR', serif;*/
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;
