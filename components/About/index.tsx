@@ -1,22 +1,32 @@
 import styles from './styles.module.css'
 import Image from 'next/image';
-import visionPic from '@/public/about_vision_en.png';
 import osakaPic from '@/public/about_osaka.jpg';
 import tokyoPic from '@/public/about_tokyo.jpg';
 import amaPic from '@/public/about_ama.png';
-import tokenPic from '@/public/about_token.png';
-import {Kaisei_HarunoUmi, Vollkorn} from "next/font/google";
-import {Noto_Serif_JP} from "next/font/google";
+import localFont from "next/font/local";
 import {getTranslations} from "next-intl/server";
 import {CommonHeader} from "@/ui/CommonHeader";
-const notoserifjp = Noto_Serif_JP({
-    weight: ['200', '300', '400', '500', '600', '700', '900'],
-    style : "normal",
-    subsets: ['latin']
-});
-const kaisei = Kaisei_HarunoUmi({
-    weight: ['400', '500', '700'],
-    subsets: ["latin"],
+
+const kaisei = localFont({
+    src: [
+        {
+            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Regular.ttf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Medium.ttf',
+            weight: '500',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Bold.ttf',
+            weight: '700',
+            style: 'normal',
+        },
+    ],
+    variable: '--font-kaisei',
+    display: 'swap',
 });
 
 export const About = async () => {
@@ -29,7 +39,7 @@ export const About = async () => {
             <div className={styles.aboutInner}>
                 <CommonHeader text={"About VOB"}/>
                 <div className={`${styles.element}`}>
-                    {/*<div className={`${styles.elementTitle} ${notoserifjp.className} text-left`}>{t('about.title_0')}</div>*/}
+                    {/*<div className={`${styles.elementTitle} text-left`}>{t('about.title_0')}</div>*/}
                     <div className={`${styles.elementContent} ${styles.textGradient}`}>
                         <div className={`${styles.elementImage} float-right`}>
                             <Image className={styles.imageStyle}
@@ -39,7 +49,7 @@ export const About = async () => {
                                    alt="about_page_first_image"
                             />
                         </div>
-                        <div className={`${styles.elementText} ${notoserifjp.className}`}>{t('about.content_0')}</div>
+                        <div className={`${styles.elementText}`}>{t('about.content_0')}</div>
                     </div>
                 </div>
 

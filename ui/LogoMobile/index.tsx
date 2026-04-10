@@ -1,17 +1,30 @@
 import Image from 'next/image';
 import logoPic from '@/public/vob_logo_2.png';
 import styles from './styles.module.css'
-import { Vollkorn } from 'next/font/google';
-import {Kaisei_HarunoUmi} from "next/font/google";
-// import Link from 'next/link';
+import localFont from "next/font/local";
+
 import {NavigationLink} from "@/ui/NavigationLink";
 
-const vollkorn = Vollkorn({
-    subsets: ["latin"],
-});
-const kaisei = Kaisei_HarunoUmi({
-    weight: ['400', '500', '700'],
-    subsets: ["latin-ext"]
+const vollkorn = localFont({
+    src: [
+        {
+            path: '../../public/fonts/Vollkorn/static/Vollkorn-Regular.ttf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Vollkorn/static/Vollkorn-Medium.ttf',
+            weight: '500',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Vollkorn/static/Vollkorn-Bold.ttf',
+            weight: '700',
+            style: 'normal',
+        },
+    ],
+    variable: '--font-vollkorn',
+    display: 'swap',
 });
 
 

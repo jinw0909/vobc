@@ -2,14 +2,8 @@ import styles from './styles.module.css';
 import { NewsMediaBand } from "@/ui/NewsMediaBand";
 import { getTranslations } from "next-intl/server";
 import { LogoPlain } from "@/ui/LogoPlain";
-import { Noto_Sans_JP } from "next/font/google";
 import { mapSpringToNewsItem, type NewsItem } from "@/newsMapper";
 
-const notosansjp = Noto_Sans_JP({
-    weight: ['200', '300', '400', '500', '600', '700', '900'],
-    style: "normal",
-    subsets: ['latin']
-});
 
 type NewsMediaProps = {
     className?: string;

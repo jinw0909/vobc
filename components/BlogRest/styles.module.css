@@ -256,3 +256,213 @@
         gap: 4rem;
     }
 }
+
+.countBar {
+    width: 100%;
+    overflow: hidden;
+    max-height: 72px;
+    padding: 18px 0;
+    transition:
+            max-height 0.35s ease,
+            padding 0.35s ease;
+    border-bottom: 1px solid #999;
+}
+
+.countBarExpanded {
+    max-height: 320px;
+    padding-bottom: 20px;
+}
+
+.countBarTopRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.filterLeftGroup {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.filterButton,
+.filterTab,
+.textFilterButton,
+.alphaTextButton,
+.filterArrowButton {
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1.2;
+    font: inherit;
+}
+
+.filterTab,
+.textFilterButton,
+.alphaTextButton {
+    position: relative;
+    display: inline-block;
+}
+
+.filterTab::after,
+.textFilterButton::after,
+.alphaTextButton::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.filterArrowButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filterButton,
+.filterTab {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.countRightText {
+    margin-left: auto;
+    text-align: right;
+}
+
+.countRightText p {
+    margin: 0;
+    white-space: nowrap;
+    color: #fff;
+}
+
+.filterPanelWrap {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition:
+            max-height 0.35s ease,
+            opacity 0.25s ease,
+            margin-top 0.35s ease;
+    margin-top: 0;
+}
+
+.filterPanelWrapOpen {
+    max-height: 220px;
+    opacity: 1;
+    margin-top: 16px;
+}
+
+.filterPanel {
+    min-height: 1px;
+}
+
+.optionRow {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.contributorPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.alphabetRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.alphabetRow::-webkit-scrollbar {
+    display: none;
+}
+
+.alphaTextButton {
+    flex: 0 0 auto;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0.9;
+}
+
+.publisherWrap {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition:
+            max-height 0.35s ease,
+            opacity 0.25s ease;
+}
+
+.publisherWrapOpen {
+    max-height: 120px;
+    opacity: 1;
+}
+
+.publisherRow {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding-top: 4px;
+}
+
+.textFilterButton {
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0.9;
+}
+
+.filterTabActive,
+.textButtonActive {
+    opacity: 1;
+}
+
+.filterTabActive::after,
+.textButtonActive::after {
+    transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+    .countBar {
+        max-height: 92px;
+    }
+
+    .countBarExpanded {
+        max-height: 420px;
+    }
+
+    .countBarTopRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .countRightText {
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .filterPanelWrapOpen {
+        max-height: 320px;
+    }
+
+    .publisherWrapOpen {
+        max-height: 180px;
+    }
+}

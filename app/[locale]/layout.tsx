@@ -1,6 +1,6 @@
 import "./global.css";
 import { Header } from "@/components/Header";
-import { Noto_Serif_JP, Noto_Serif_KR, Noto_Serif_SC } from "next/font/google";
+import localFont from "next/font/local";
 import { Footer } from "@/components/Footer";
 import { MobileHeader } from "@/components/MobileHeader";
 import { MobileFooter } from "@/components/MobileFooter";
@@ -13,25 +13,70 @@ import type { Metadata } from "next";
 import BottomReachedHint from "@/ui/BottomHint";
 
 
-const notoserifjp = Noto_Serif_JP({
-    weight: ['200', '300', '400', '500', '600', '700', '900'],
-    style: "normal",
-    subsets: ['latin'],
-    preload: false
+const notoserifjp = localFont({
+    src: [
+        {
+            path: '../../public/fonts/Noto_Serif_JP/static/NotoSerifJP-Regular.ttf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Noto_Serif_JP/static/NotoSerifJP-Medium.ttf',
+            weight: '500',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Noto_Serif_JP/static/NotoSerifJP-Bold.ttf',
+            weight: '700',
+            style: 'normal',
+        },
+    ],
+    variable: '--font-notoserifjp',
+    display: 'swap',
 });
 
-const notoserifsc = Noto_Serif_SC({
-    weight: ['200', '300', '400', '500', '600', '700', '900'],
-    style: "normal",
-    subsets: ['latin'],
-    preload: false
+const notoserifsc = localFont({
+    src: [
+        {
+            path: '../../public/fonts/Noto_Serif_SC/static/NotoSerifSC-Regular.ttf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Noto_Serif_SC/static/NotoSerifSC-Medium.ttf',
+            weight: '500',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Noto_Serif_SC/static/NotoSerifSC-Bold.ttf',
+            weight: '700',
+            style: 'normal',
+        },
+    ],
+    variable: '--font-notoserifsc',
+    display: 'swap',
 });
 
-const notoserifkr = Noto_Serif_KR({
-    weight: ['400','700','800'],
-    style: "normal",
-    subsets: ['latin'],
-    preload: false
+const notoserifkr = localFont({
+    src: [
+        {
+            path: '../../public/fonts/Noto_Serif_KR/static/NotoSerifKR-Regular.ttf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Noto_Serif_KR/static/NotoSerifKR-Medium.ttf',
+            weight: '500',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/Noto_Serif_KR/static/NotoSerifKR-Bold.ttf',
+            weight: '700',
+            style: 'normal',
+        },
+    ],
+    variable: '--font-notoserifkr',
+    display: 'swap',
 });
 
 const fontByLocale: Record<string, any> = {
