@@ -65,7 +65,7 @@ const DUMMY_PUBLISHERS: Record<string, string[]> = {
     Q: ["Quartz"],
     R: ["Reuters", "Rolling Stone"],
     S: ["Statista", "The Straits Times"],
-    T: ["TechCrunch", "The Verge", "The Guardian"],
+    T: ["TechCrunch", "The Verge", "The Guardian", "The VOB Foundation"],
     U: ["USA Today"],
     V: ["Variety", "VentureBeat", "VOB", "VOB Foundation"],
     W: ["WIRED", "Wall Street Journal"],
