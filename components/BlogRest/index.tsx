@@ -1,197 +1,10 @@
-// "use client";
-//
-// import { useEffect, useMemo, useState } from "react";
-// import styles from "./styles.module.css";
-// import Image from "next/image";
-// import { NavigationLink } from "@/ui/NavigationLink";
-//
-// const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
-//
-// interface PostTag {
-//     sortOrder: number;
-//     tagName: string;
-//     primaryTag: boolean;
-// }
-//
-// interface PostItem {
-//     id: number;
-//     title: string;
-//     content: string;
-//     author: string;
-//     summary: string;
-//     releaseDate: string | null;
-//     thumbnail: string | null;
-//     postTags: PostTag[];
-// }
-//
-// interface PagedResponse<T> {
-//     content: T[];
-//     number: number;
-//     size: number;
-//     totalElements: number;
-//     totalPages: number;
-// }
-//
-// type Props = {
-//     lang: string;
-//     excludeId: number | null;
-//     pageSize?: number; // default 3
-// };
-
-// export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
-//     const [items, setItems] = useState<PostItem[]>([]);
-//     const [pageToLoad, setPageToLoad] = useState(0); // 다음에 로드할 page (0-based)
-//     const [totalElements, setTotalElements] = useState<number | null>(null);
-//
-//     const [loading, setLoading] = useState(false);
-//     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-//
-//     const hasMore = useMemo(() => {
-//         if (totalElements == null) return true;
-//         return items.length < totalElements;
-//     }, [items.length, totalElements]);
-//
-//     async function load(nextPage: number) {
-//         if (loading) return;
-//         setLoading(true);
-//         setErrorMsg(null);
-//
-//         const qs = new URLSearchParams();
-//         qs.set("lang", lang);
-//         qs.set("page", String(nextPage));
-//         qs.set("size", String(pageSize));
-//         if (excludeId != null) qs.set("featuredId", String(excludeId));
-//
-//         try {
-//             const res = await fetch(`${API_BASE}/api/post/query/rest?${qs.toString()}`, {
-//                 cache: "no-store",
-//             });
-//             if (!res.ok) throw new Error(`Failed to load posts (${res.status})`);
-//
-//             const data: PagedResponse<PostItem> = await res.json();
-//             const newItems = data.content ?? [];
-//
-//             setTotalElements(data.totalElements);
-//
-//             setItems((prev) => (nextPage === 0 ? newItems : [...prev, ...newItems]));
-//             setPageToLoad(data.number + 1); // 다음 page
-//         } catch (e: any) {
-//             setErrorMsg(e?.message ?? "Failed to load posts");
-//         } finally {
-//             setLoading(false);
-//         }
-//     }
-//
-//     // 최초 로드 / lang, excludeId 바뀌면 리셋 후 0페이지 로드
-//     useEffect(() => {
-//         setItems([]);
-//         setPageToLoad(0);
-//         setTotalElements(null);
-//         setErrorMsg(null);
-//
-//         load(0);
-//         // eslint-disable-next-line react-hooks/exhaustive-deps
-//     }, [lang, excludeId, pageSize]);
-//
-//     return (
-//         <>
-//             {/* 상단 카운트 */}
-//             <div className={styles.countBar}>
-//                 {totalElements != null ? (
-//                     <p>
-//                         Showing <b>{items.length}</b> of <b>{totalElements}</b> posts
-//                     </p>
-//                 ) : (
-//                     <p>
-//                         Showing <b>{items.length}</b> posts
-//                     </p>
-//                 )}
-//             </div>
-//
-//             {items.length === 0 && !loading && !errorMsg && (
-//                 <div className={styles.blogWrapper}>
-//                     <p>No posts yet.</p>
-//                 </div>
-//             )}
-//
-//             {errorMsg && (
-//                 <div style={{ padding: 12 }}>
-//                     <p>{errorMsg}</p>
-//                     <button onClick={() => load(items.length === 0 ? 0 : pageToLoad)} disabled={loading}>
-//                         Retry
-//                     </button>
-//                 </div>
-//             )}
-//
-//             <ul className={styles.blogList}>
-//                 {items.map((post) => {
-//                     const title = post.title;
-//                     const date = post.releaseDate ?? "";
-//                     const summary = post.summary;
-//                     const author = post.author;
-//                     const tags = post.postTags ?? [];
-//
-//                     return (
-//                         <li key={post.id}>
-//                             <div className={styles.blogItemInner}>
-//                                 <NavigationLink className={styles.blogTitle} href={`/blog/${post.id}`} scroll={true}>
-//                                     <p className={styles.inline}>{title}</p>
-//                                 </NavigationLink>
-//
-//                                 <div className={styles.blogThumbnail}>
-//                                     <NavigationLink href={`/blog/${post.id}`} scroll={true}>
-//                                         <div className={styles.imageElem}>
-//                                             {post.thumbnail && (
-//                                                 <Image src={post.thumbnail} alt={title} style={{ objectFit: "cover" }} fill unoptimized/>
-//                                             )}
-//                                         </div>
-//                                     </NavigationLink>
-//                                 </div>
-//
-//                                 <p className={styles.blogSummary}>{summary}</p>
-//                                 <p className={styles.blogAuthor}>
-//                                     {author} | {date}
-//                                 </p>
-//
-//                                 {tags.length > 0 && (
-//                                     <div className={styles.tagRow}>
-//                                         {tags.map((tag, index) => (
-//                                             <span key={index} className={styles.tag}>
-//                                                 <NavigationLink className={styles.tagSpan} href={`/blog/tag/${tag.tagName}`}>
-//                                                   #{tag.tagName}
-//                                                 </NavigationLink>
-//                                             </span>
-//                                         ))}
-//                                     </div>
-//                                 )}
-//                             </div>
-//                         </li>
-//                     );
-//                 })}
-//             </ul>
-//
-//             {/* 마지막 페이지면 버튼 숨김 (No more 문구 없음) */}
-//             {hasMore && (
-//                 <div className={styles.moreButtonWrapper}>
-//                     <div className={styles.moreButton} onClick={() => load(pageToLoad)} >
-//                         <button disabled={loading}>
-//                             {loading ? "Loading..." : "Load More"}
-//                         </button>
-//                     </div>
-//                 </div>
-//             )}
-//         </>
-//     );
-// }
-
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { NavigationLink } from "@/ui/NavigationLink";
-import arrowUpWhite from "@/public/icons/arrow-up-white.png"
+import arrowUpWhite from "@/public/icons/arrow-up-white.png";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
 
@@ -254,7 +67,7 @@ const DUMMY_PUBLISHERS: Record<string, string[]> = {
     S: ["Statista", "The Straits Times"],
     T: ["TechCrunch", "The Verge", "The Guardian"],
     U: ["USA Today"],
-    V: ["Variety", "VentureBeat"],
+    V: ["Variety", "VentureBeat", "VOB", "VOB Foundation"],
     W: ["WIRED", "Wall Street Journal"],
     X: ["XDA Developers"],
     Y: ["Yahoo Finance"],
@@ -269,7 +82,6 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    // UI state
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<FilterTab>("blogType");
     const [selectedAlphabet, setSelectedAlphabet] = useState<string | null>(null);
@@ -284,6 +96,7 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
 
     async function load(nextPage: number) {
         if (loading) return;
+
         setLoading(true);
         setErrorMsg(null);
 
@@ -297,6 +110,73 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
             const res = await fetch(`${API_BASE}/api/post/query/rest?${qs.toString()}`, {
                 cache: "no-store",
             });
+
+            if (!res.ok) throw new Error(`Failed to load posts (${res.status})`);
+
+            const data: PagedResponse<PostItem> = await res.json();
+            const newItems = data.content ?? [];
+
+            setTotalElements(data.totalElements);
+            setItems((prev) => (nextPage === 0 ? newItems : [...prev, ...newItems]));
+            setPageToLoad(data.number + 1);
+        } catch (e: any) {
+            setErrorMsg(e?.message ?? "Failed to load posts");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function loadByType(type: string, nextPage: number) {
+        if (loading) return;
+
+        setLoading(true);
+        setErrorMsg(null);
+
+        const qs = new URLSearchParams();
+        qs.set("type", type.toLowerCase());
+        qs.set("lang", lang);
+        qs.set("page", String(nextPage));
+        qs.set("size", String(pageSize));
+        if (excludeId != null) qs.set("featuredId", String(excludeId));
+
+        try {
+            const res = await fetch(`${API_BASE}/api/post/query/search/type?${qs.toString()}`, {
+                cache: "no-store",
+            });
+
+            if (!res.ok) throw new Error(`Failed to load posts (${res.status})`);
+
+            const data: PagedResponse<PostItem> = await res.json();
+            const newItems = data.content ?? [];
+
+            setTotalElements(data.totalElements);
+            setItems((prev) => (nextPage === 0 ? newItems : [...prev, ...newItems]));
+            setPageToLoad(data.number + 1);
+        } catch (e: any) {
+            setErrorMsg(e?.message ?? "Failed to load posts");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function loadByAuthor(author: string, nextPage: number) {
+        if (loading) return;
+
+        setLoading(true);
+        setErrorMsg(null);
+
+        const qs = new URLSearchParams();
+        qs.set("author", author);
+        qs.set("lang", lang);
+        qs.set("page", String(nextPage));
+        qs.set("size", String(pageSize));
+        if (excludeId != null) qs.set("featuredId", String(excludeId));
+
+        try {
+            const res = await fetch(`${API_BASE}/api/post/query/search/author?${qs.toString()}`, {
+                cache: "no-store",
+            });
+
             if (!res.ok) throw new Error(`Failed to load posts (${res.status})`);
 
             const data: PagedResponse<PostItem> = await res.json();
@@ -317,6 +197,10 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
         setPageToLoad(0);
         setTotalElements(null);
         setErrorMsg(null);
+        setSelectedAlphabet(null);
+        setSelectedBlogType(null);
+        setSelectedContributor(null);
+
         load(0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lang, excludeId, pageSize]);
@@ -342,6 +226,13 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
         setSelectedAlphabet(null);
         setSelectedBlogType(null);
         setSelectedContributor(null);
+
+        setItems([]);
+        setPageToLoad(0);
+        setTotalElements(null);
+        setErrorMsg(null);
+
+        load(0);
     };
 
     const showFilterArrow = isFilterOpen;
@@ -377,7 +268,9 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
 
                         <button
                             type="button"
-                            className={`${styles.filterTab} ${activeTab === "blogType" ? styles.filterTabActive : ""}`}
+                            className={`${styles.filterTab} ${
+                                activeTab === "blogType" ? styles.filterTabActive : ""
+                            }`}
                             onClick={() => handleTabClick("blogType")}
                         >
                             Blog Type
@@ -385,7 +278,9 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
 
                         <button
                             type="button"
-                            className={`${styles.filterTab} ${activeTab === "contributor" ? styles.filterTabActive : ""}`}
+                            className={`${styles.filterTab} ${
+                                activeTab === "contributor" ? styles.filterTabActive : ""
+                            }`}
                             onClick={() => handleTabClick("contributor")}
                         >
                             Contributor
@@ -420,7 +315,18 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
                                         className={`${styles.textFilterButton} ${
                                             selectedBlogType === type ? styles.textButtonActive : ""
                                         }`}
-                                        onClick={() => setSelectedBlogType(type)}
+                                        onClick={() => {
+                                            setSelectedBlogType(type);
+                                            setSelectedContributor(null);
+                                            setSelectedAlphabet(null);
+
+                                            setItems([]);
+                                            setPageToLoad(0);
+                                            setTotalElements(null);
+                                            setErrorMsg(null);
+
+                                            loadByType(type, 0);
+                                        }}
                                     >
                                         #{type}
                                     </button>
@@ -436,7 +342,9 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
                                             key={alphabet}
                                             type="button"
                                             className={`${styles.alphaTextButton} ${
-                                                selectedAlphabet === alphabet ? styles.textButtonActive : ""
+                                                selectedAlphabet === alphabet
+                                                    ? styles.textButtonActive
+                                                    : ""
                                             }`}
                                             onClick={() => setSelectedAlphabet(alphabet)}
                                         >
@@ -452,18 +360,33 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
                                 >
                                     {selectedAlphabet && (
                                         <div className={styles.publisherRow}>
-                                            {(DUMMY_PUBLISHERS[selectedAlphabet] ?? []).map((publisher) => (
-                                                <button
-                                                    key={publisher}
-                                                    type="button"
-                                                    className={`${styles.textFilterButton} ${
-                                                        selectedContributor === publisher ? styles.textButtonActive : ""
-                                                    }`}
-                                                    onClick={() => setSelectedContributor(publisher)}
-                                                >
-                                                    {publisher}
-                                                </button>
-                                            ))}
+                                            {(DUMMY_PUBLISHERS[selectedAlphabet] ?? []).map(
+                                                (publisher) => (
+                                                    <button
+                                                        key={publisher}
+                                                        type="button"
+                                                        className={`${styles.textFilterButton} ${
+                                                            selectedContributor === publisher
+                                                                ? styles.textButtonActive
+                                                                : ""
+                                                        }`}
+                                                        onClick={() => {
+                                                            setSelectedContributor(publisher)
+                                                            setSelectedBlogType(null)
+
+                                                            // 초기화
+                                                            setItems([]);
+                                                            setPageToLoad(0);
+                                                            setTotalElements(null);
+                                                            setErrorMsg(null);
+
+                                                            loadByAuthor(publisher, 0);
+                                                        }}
+                                                    >
+                                                        {publisher}
+                                                    </button>
+                                                )
+                                            )}
                                         </div>
                                     )}
                                 </div>
@@ -475,14 +398,25 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
 
             {items.length === 0 && !loading && !errorMsg && (
                 <div className={styles.blogWrapper}>
-                    <p>No posts yet.</p>
+                    <p>No posts to show.</p>
                 </div>
             )}
 
             {errorMsg && (
                 <div style={{ padding: 12 }}>
                     <p>{errorMsg}</p>
-                    <button onClick={() => load(items.length === 0 ? 0 : pageToLoad)} disabled={loading}>
+                    <button
+                        onClick={() => {
+                            if (selectedBlogType) {
+                                loadByType(selectedBlogType, items.length === 0 ? 0 : pageToLoad);
+                            } else if (selectedContributor) {
+                                loadByAuthor(selectedContributor, items.length === 0 ? 0 : pageToLoad);
+                            } else {
+                                load(items.length === 0 ? 0 : pageToLoad);
+                            }
+                        }}
+                        disabled={loading}
+                    >
                         Retry
                     </button>
                 </div>
@@ -499,7 +433,11 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
                     return (
                         <li key={post.id}>
                             <div className={styles.blogItemInner}>
-                                <NavigationLink className={styles.blogTitle} href={`/blog/${post.id}`} scroll={true}>
+                                <NavigationLink
+                                    className={styles.blogTitle}
+                                    href={`/blog/${post.id}`}
+                                    scroll={true}
+                                >
                                     <p className={styles.inline}>{title}</p>
                                 </NavigationLink>
 
@@ -528,10 +466,13 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
                                     <div className={styles.tagRow}>
                                         {tags.map((tag, index) => (
                                             <span key={index} className={styles.tag}>
-                        <NavigationLink className={styles.tagSpan} href={`/blog/tag/${tag.tagName}`}>
-                          #{tag.tagName}
-                        </NavigationLink>
-                      </span>
+                                                <NavigationLink
+                                                    className={styles.tagSpan}
+                                                    href={`/blog/tag/${tag.tagName}`}
+                                                >
+                                                    #{tag.tagName}
+                                                </NavigationLink>
+                                            </span>
                                         ))}
                                     </div>
                                 )}
@@ -543,10 +484,19 @@ export default function BlogRest({ lang, excludeId, pageSize = 3 }: Props) {
 
             {hasMore && (
                 <div className={styles.moreButtonWrapper}>
-                    <div className={styles.moreButton} onClick={() => load(pageToLoad)}>
-                        <button disabled={loading}>
-                            {loading ? "Loading..." : "Load More"}
-                        </button>
+                    <div
+                        className={styles.moreButton}
+                        onClick={() => {
+                            if (selectedBlogType) {
+                                loadByType(selectedBlogType, pageToLoad);
+                            } else if (selectedContributor) {
+                                loadByAuthor(selectedContributor, pageToLoad);
+                            } else {
+                                load(pageToLoad);
+                            }
+                        }}
+                    >
+                        <button disabled={loading}>{loading ? "Loading..." : "Load More"}</button>
                     </div>
                 </div>
             )}

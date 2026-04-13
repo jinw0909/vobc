@@ -220,6 +220,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    color: white;
 }
 .publisher {
     margin-top: 10px;
