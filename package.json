@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reown/appkit": "^1.8.19",
+    "@reown/appkit-common": "^1.8.19",
+    "@reown/appkit-universal-connector": "^1.8.19",
     "chart.js": "^4.4.2",
     "chartjs-plugin-datalabels": "^2.2.0",
     "embla-carousel-react": "^8.6.0",
     "embla-carousel-wheel-gestures": "^8.1.0",
+    "ethers": "^6.16.0",
     "html-react-parser": "^5.2.10",
     "next": "^15.5.7",
     "next-intl": "^4.1.0",

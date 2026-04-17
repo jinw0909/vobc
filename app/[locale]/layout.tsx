@@ -14,70 +14,26 @@ import BottomReachedHint from "@/ui/BottomHint";
 
 
 const notoserifjp = localFont({
-    src: [
-        {
-            path: '../../public/fonts/Noto_Serif_JP/static/NotoSerifJP-Regular.ttf',
-            weight: '400',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Noto_Serif_JP/static/NotoSerifJP-Medium.ttf',
-            weight: '500',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Noto_Serif_JP/static/NotoSerifJP-Bold.ttf',
-            weight: '700',
-            style: 'normal',
-        },
-    ],
+    src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.ttf',
     variable: '--font-notoserifjp',
-    display: 'swap',
+    display: 'block', // 또는 optional
+    preload: true,
 });
 
 const notoserifsc = localFont({
-    src: [
-        {
-            path: '../../public/fonts/Noto_Serif_SC/static/NotoSerifSC-Regular.ttf',
-            weight: '400',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Noto_Serif_SC/static/NotoSerifSC-Medium.ttf',
-            weight: '500',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Noto_Serif_SC/static/NotoSerifSC-Bold.ttf',
-            weight: '700',
-            style: 'normal',
-        },
-    ],
+    src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.ttf',
     variable: '--font-notoserifsc',
-    display: 'swap',
+    display: 'block', // 또는 optional
+    preload: true,
 });
 
 const notoserifkr = localFont({
-    src: [
-        {
-            path: '../../public/fonts/Noto_Serif_KR/static/NotoSerifKR-Regular.ttf',
-            weight: '400',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Noto_Serif_KR/static/NotoSerifKR-Medium.ttf',
-            weight: '500',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Noto_Serif_KR/static/NotoSerifKR-Bold.ttf',
-            weight: '700',
-            style: 'normal',
-        },
-    ],
+    src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.ttf',
     variable: '--font-notoserifkr',
-    display: 'swap',
+    display: 'block', // 또는 optional
+    preload: true,
 });
+
 
 const fontByLocale: Record<string, any> = {
     en: notoserifkr,
@@ -135,7 +91,7 @@ export default async function LocaleLayout({
     const font = fontByLocale[locale];
 
     return (
-        <html lang={locale}>
+        <html lang={locale} className={font.className}>
         <body className={font.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
             <Header lang={locale} />

@@ -26,7 +26,8 @@ const kaisei = localFont({
         },
     ],
     variable: '--font-kaisei',
-    display: 'swap',
+    display: 'block',
+    preload: true
 });
 
 export const About = async () => {

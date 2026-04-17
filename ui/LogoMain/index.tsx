@@ -6,25 +6,10 @@ import {NavigationLink} from "@/ui/NavigationLink";
 
 
 const vollkorn = localFont({
-    src: [
-        {
-            path: '../../public/fonts/Vollkorn/static/Vollkorn-Regular.ttf',
-            weight: '400',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Vollkorn/static/Vollkorn-Medium.ttf',
-            weight: '500',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Vollkorn/static/Vollkorn-Bold.ttf',
-            weight: '700',
-            style: 'normal',
-        },
-    ],
+    src: '../../public/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf',
     variable: '--font-vollkorn',
-    display: 'swap',
+    display: 'block',
+    preload: true
 });
 
 export const LogoMain = async () => {
