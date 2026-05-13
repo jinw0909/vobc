@@ -1,0 +1,122 @@
+.loginRequired {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 48px 24px;
+    box-sizing: border-box;
+    text-align: center;
+
+    color: #fff;
+}
+
+.iconBox {
+    width: 72px;
+    height: 72px;
+    border-radius: 999px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    margin-bottom: 20px;
+}
+
+.icon {
+    font-size: 30px;
+    line-height: 1;
+}
+
+.title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.description {
+    margin: 12px 0 0;
+    max-width: 420px;
+
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.actionRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+.loginButton,
+.homeButton {
+    min-width: 120px;
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+    border-radius: 999px;
+    box-sizing: border-box;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loginButton {
+    border: 0;
+    background: #fff;
+    color: #050b12;
+}
+
+.homeButton {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+}
+
+.loginButton:hover {
+    background: rgba(255, 255, 255, 0.86);
+}
+
+.homeButton:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 576px) {
+    .loginRequired {
+        padding: 40px 20px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .actionRow {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .loginButton,
+    .homeButton {
+        width: 100%;
+        max-width: 280px;
+    }
+}

@@ -1,0 +1,119 @@
+.connect {
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*right: 4rem;*/
+    /*height: 4rem;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*z-index: 150;*/
+    /*font-size: 1rem;*/
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.connectModal {
+    display: none;
+}
+
+.showModal {
+    display: block;
+}
+
+.connectButtonWrapper {
+    position: fixed;
+    top: 0;
+    right: 4rem;
+    height: 4rem;
+    display: flex;
+    z-index: 150;
+    padding: 1rem 0;
+}
+
+
+.connectButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    background: #111827;
+    border: 1px solid #374151;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    font-size: 1rem;
+
+}
+
+.connectButton:hover {
+    background: #1f2937;
+    border-color: #4b5563;
+}
+
+.connectButton:active {
+    transform: translateY(1px);
+}
+
+.walletInfo,
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.walletIcon,
+.profileIcon {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+}
+
+.walletIcon {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+}
+
+.profileIcon {
+    background: #374151;
+    border: 1px solid #4b5563;
+}
+
+.fallbackIcon {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #374151;
+    border: 1px solid #4b5563;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.walletInfo span,
+.userInfo span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

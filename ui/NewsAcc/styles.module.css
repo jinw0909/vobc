@@ -6,15 +6,17 @@
     flex-direction: column;
     margin-top: 9rem;
     transition: .5s;
+    overflow-anchor: none;
 }
 .newsContent {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 66vh;
+    height: 66svh;
     min-height: 420px;
     opacity: 1;
+    overflow-anchor: none;
     /*animation: fadeIn 2s forwards;*/
 }
 .newsContent > div {
@@ -27,6 +29,8 @@
     transition: .5s;
     position: relative;
     opacity: 1;
+    min-height: 0;
+    min-width: 0;
 }
 /*.newsElem.even {*/
 /*    animation: 1s fromUp ease-in-out forwards;*/
@@ -51,7 +55,7 @@
 /*    animation: 2s fromDown ease-in-out forwards;*/
 /*}*/
 .newsContent > div.hide {
-    flex: 0;
+    flex: 0 0 0;
 }
 .newsContent > div.active {
 
@@ -112,6 +116,7 @@
     font-size: 1rem;
     position: relative;
 }
+
 .newsClick {
     position: absolute;
     top: 0;

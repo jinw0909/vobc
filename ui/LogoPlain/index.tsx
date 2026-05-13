@@ -9,7 +9,7 @@ import localFont from "next/font/local";
 // });
 
 const vollkorn = localFont({
-    src: '../../public/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf',
+    src: '../../public/fonts/Vollkorn/Vollkorn-VariableFont_wght.woff2',
     variable: '--font-vollkorn',
     display: 'block',
     preload: true

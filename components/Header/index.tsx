@@ -7,6 +7,7 @@ import { Language } from "@/ui/Language";
 import { Suspense} from "react";
 import {Breadcrumbs} from "@/ui/Breadcrumbs";
 import {HeaderMeasure} from "@/components/Header/_components";
+import Connect from "@/ui/Connect";
 
 export const Header = ({lang} : {lang: string}) => {
 

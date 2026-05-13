@@ -13,8 +13,8 @@
     width: 100%;
     /*top: 8rem;*/
     top: var(--header-h, 0px) !important;
-    /*background-color: rgba(30,30,30,1);*/
-    backdrop-filter: blur(7px);
+    background-color: rgba(30,30,30,1);
+    /*backdrop-filter: blur(7px);*/
     z-index: 70;
     border-bottom: 1px solid #777;
     opacity: 0;

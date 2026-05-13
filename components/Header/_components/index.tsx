@@ -14,7 +14,7 @@ export function HeaderMeasure({children}: {children: React.ReactNode}) {
 
         const apply = () => {
             const h = el.getBoundingClientRect().height;
-            console.log("📏 header height:", h);
+            // console.log("📏 header height:", h);
             document.documentElement.style.setProperty('--header-h-measured', `${h}px`);
         }
 

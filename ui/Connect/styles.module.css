@@ -1,0 +1,303 @@
+.connect {
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*right: 4rem;*/
+    /*height: 4rem;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*z-index: 150;*/
+    /*font-size: 1rem;*/
+    display: none;
+
+}
+.connectIcon {
+    display: none;
+    margin-top: 2px;
+    width: 1.2rem;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.connectModal {
+    opacity: 0;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.connectModal {
+    position: fixed;
+    top: 50%;
+    right: -100%;
+    transform: translateY(-50%);
+    z-index: 250;
+    /*height: 66vh;*/
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.connectModalInner {
+    border-radius: 24px 0 0 24px;
+    overflow: hidden;
+    border: 1px solid #555;
+    border-right: none;
+    /*background-color: #0b1118;*/
+    background-color: rgba(30,30,30,1);
+}
+
+.connectModalInner::-webkit-scrollbar {
+    display: none;
+}
+
+.connectModalInner {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.showModal {
+    opacity: 1;
+    pointer-events: auto;
+    right: 0;
+}
+
+.connectButtonWrapper {
+    position: fixed;
+    top: 0;
+    right: 4rem;
+    height: 4rem;
+    z-index: 200;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.connectButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /*padding: 8px 14px;*/
+    /*border-radius: 9999px;*/
+    /*background: #111827;*/
+    /*border: 1px solid #374151;*/
+    color: #fff;
+    opacity: .7;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    transition: opacity .5s;
+    font-size: .8rem;
+
+}
+
+.connectButton:hover {
+    opacity: 1;
+}
+
+.connectButton:active {
+    transform: translateY(1px);
+}
+
+.walletInfo,
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.walletInfo > img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    border: 1px solid #4b5563;
+}
+.userInfo > img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    border: 1px solid #4b5563;
+}
+
+.walletIcon,
+.profileIcon {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+}
+
+.walletIcon {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+}
+
+.profileIcon {
+    background: #374151;
+    border: 1px solid #555;
+}
+
+.fallbackIcon {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #374151;
+    border: 1px solid #4b5563;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.walletInfo span,
+.userInfo span {
+    /*font-size: 14px;*/
+    /*font-weight: 600;*/
+    /*color: #fff;*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== overlay ===== */
+.connectOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 230;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+            opacity 0.25s ease,
+            background-color 0.25s ease,
+            visibility 0.25s ease;
+}
+
+.showOverlay {
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/*close modal*/
+.closeBtnWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .75rem;
+    cursor: pointer;
+    z-index: 150;
+    transition: transform .5s;
+}
+
+.closeBtnWrapper:hover {
+    transform: rotate(90deg);
+}
+
+.closeBtn {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    opacity: 0.75;
+}
+.lineOne {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: rotate(135deg);
+    background-color: #fff;
+    height: 1px;
+    width: 100%;
+}
+.lineTwo {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: rotate(-45deg);
+    background-color: #fff;
+    height: 1px;
+    width: 100%;
+}
+.lineTwo {
+    transform: rotate(45deg);
+    background-color: #fff;
+    height: 1px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .connectButtonWrapper {
+        right: 1rem;
+        z-index: 300;
+    }
+    .userNickname {
+        display: none;
+    }
+    .walletInfo > img {
+        width: 22px;
+    }
+    .connectIcon {
+        display: block;
+    }
+    .connectText {
+        display: none;
+    }
+    .connectButton {
+        opacity: 1;
+    }
+
+}
+
+@media (max-width: 576px) {
+    .connectModal {
+        position: fixed;
+        bottom: -100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: calc(100dvh - 6rem);
+        overflow-y: auto;
+        transform: none;
+        top: auto;
+    }
+
+    .showModal {
+        bottom: 0;
+    }
+
+
+    .connectModalInner {
+        width: 100%;
+        border-radius: 24px 24px 0 0;
+        border-left: none;
+        border-bottom: none;
+    }
+}

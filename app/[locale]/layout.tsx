@@ -1,6 +1,7 @@
 import "./global.css";
 import { Header } from "@/components/Header";
 import localFont from "next/font/local";
+// import { Noto_Serif_KR, Noto_Serif_JP, Noto_Serif_SC} from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { MobileHeader } from "@/components/MobileHeader";
 import { MobileFooter } from "@/components/MobileFooter";
@@ -11,28 +12,49 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import BottomReachedHint from "@/ui/BottomHint";
+import Connect from "@/ui/Connect";
+import Settings from "@/components/Settings";
+import AppProviders from '@/providers/AppProviders'
 
 
 const notoserifjp = localFont({
-    src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.ttf',
+    src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.woff2',
     variable: '--font-notoserifjp',
-    display: 'block', // 또는 optional
+    display: 'swap', // 또는 optional
     preload: true,
 });
 
 const notoserifsc = localFont({
-    src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.ttf',
+    src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.woff2',
     variable: '--font-notoserifsc',
-    display: 'block', // 또는 optional
+    display: 'swap', // 또는 optional
     preload: true,
 });
 
 const notoserifkr = localFont({
-    src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.ttf',
+    src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.woff2',
     variable: '--font-notoserifkr',
-    display: 'block', // 또는 optional
+    display: 'swap', // 또는 optional
     preload: true,
 });
+//
+// const notoserifkr = Noto_Serif_KR({
+//     subsets: ["latin"],
+//     weight: ["400", "500", "600", "700"],
+//     display: "swap",
+// });
+//
+// const notoserifjp = Noto_Serif_JP({
+//     subsets: ["latin"],
+//     weight: ["400", "500", "600", "700"],
+//     display: "swap",
+// });
+//
+// const notoserifsc = Noto_Serif_SC({
+//     subsets: ["latin"],
+//     weight: ["400", "500", "600", "700"],
+//     display: "swap",
+// });
 
 
 const fontByLocale: Record<string, any> = {
@@ -91,17 +113,21 @@ export default async function LocaleLayout({
     const font = fontByLocale[locale];
 
     return (
-        <html lang={locale} className={font.className}>
-        <body className={font.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-            <Header lang={locale} />
-            <MobileHeader />
-            {/*<Breadcrumbs />*/}
-            {children}
-            <MobileFooter />
-            <Footer />
-            <BottomReachedHint/>
-        </NextIntlClientProvider>
+        <html lang={locale} className={font?.variable ?? ""}>
+        <body>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+                <AppProviders>
+                    <Connect />
+                    {/*<Settings/>*/}
+                    <Header lang={locale} />
+                    <MobileHeader/>
+                    {/*<Breadcrumbs />*/}
+                    {children}
+                    <MobileFooter />
+                    <Footer />
+                    <BottomReachedHint/>
+                </AppProviders>
+            </NextIntlClientProvider>
         </body>
         </html>
     );

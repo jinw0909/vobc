@@ -10,17 +10,17 @@ import {CommonHeader} from "@/ui/CommonHeader";
 const kaisei = localFont({
     src: [
         {
-            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Regular.ttf',
+            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Regular.woff2',
             weight: '400',
             style: 'normal',
         },
         {
-            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Medium.ttf',
+            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Medium.woff2',
             weight: '500',
             style: 'normal',
         },
         {
-            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Bold.ttf',
+            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Bold.woff2',
             weight: '700',
             style: 'normal',
         },

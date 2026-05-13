@@ -2,9 +2,10 @@
 import styles from './styles.module.css';
 import { LogoMobile } from "@/ui/LogoMobile";
 import { MenuBtn} from "@/ui/MenuBtn";
-import {useState, useEffect, useRef } from "react";
+import {useState, useEffect, useRef, Suspense} from "react";
 import {MobileNav} from "@/ui/MobileNav";
 import {Breadcrumbs} from "@/ui/Breadcrumbs";
+import {Language} from "@/ui/Language";
 
 export const MobileHeader = () => {
 

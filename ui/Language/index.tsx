@@ -8,6 +8,7 @@ import {useState, useRef, useEffect, Fragment} from 'react'
 import Image from 'next/image'
 import triangle   from '@/public/icons/triangle-icon-white.png'
 import rvtriangle from '@/public/icons/triangle-icon-white-rv.png'
+import languageIcon from '@/public/icons/language-icon-white.png'
 
 export const Language = ({ lang }: { lang: string }) => {
     const pathname = usePathname();
@@ -43,26 +44,8 @@ export const Language = ({ lang }: { lang: string }) => {
                         onClick={() => setShowModal((v) => !v)}
                         className={styles.languageSelect}
                     >
-                          <span>
-                            {showModal ? (
-                                <Image
-                                    src={triangle}
-                                    width={12}
-                                    height={12}
-                                    alt="▲"
-                                    className={styles.languageArrowUp}
-                                />
-                            ) : (
-                                <Image
-                                    src={rvtriangle}
-                                    width={12}
-                                    height={12}
-                                    alt="▼"
-                                    className={styles.languageArrow}
-                                />
-                            )}
-                          </span>
-                          <span>{lang.toUpperCase()}</span>
+                        { lang.toUpperCase() }
+                        {/*<Image src={languageIcon} alt={'languageIcon'} width={20} height={20}></Image>*/}
                     </div>
                 </div>
             </div>
@@ -94,11 +77,6 @@ export const Language = ({ lang }: { lang: string }) => {
                                         : '汉文'}
                             </button>
                         </Link>
-                        {/*/!* Separator, only between items *!/*/}
-                        {/*{index < array.length - 1 && (*/}
-                        {/*    // <span className={styles.langBar}></span>*/}
-                        {/*    <span className={styles.langBar}></span>*/}
-                        {/*)}*/}
                     </Fragment>
                 ))}
             </div>
