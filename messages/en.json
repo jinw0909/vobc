@@ -34,7 +34,8 @@
     "detail" : "DETAIL",
     "blog" : "BLOG",
     "tag" : "TAG",
-    "roadmap" : "ROADMAP"
+    "roadmap" : "ROADMAP",
+    "profile": "PROFILE"
   },
   "about" : {
     "main_title" : "About VOB",

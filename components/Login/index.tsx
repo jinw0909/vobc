@@ -10,7 +10,7 @@ import triangle from '@/public/icons/triangle_white.png'
 import vobLogo from '@/public/vob_white.png'
 import Image from 'next/image';
 import {NavigationLink} from "@/ui/NavigationLink";
-import {Link} from "@/i18n/navigation";
+import {usePathname, useRouter} from "@/i18n/navigation";
 import {
     useWeb3Auth,
     type Web3Provider,
@@ -63,6 +63,8 @@ type UserConnection = {
     walletAddress: string;
     profileImageUrl?: string;
     nickname?: string;
+    email?: string;
+    bio?: string;
 };
 
 type LoginProps = {
@@ -920,6 +922,20 @@ export default function Login({
         connectionType
     ])
 
+    const router = useRouter()
+    const pathname = usePathname()
+
+    const handleGoMyPage = () => {
+        onClose?.();
+
+        if (pathname === '/profile') {
+            router.refresh();
+            return;
+        }
+
+        router.push('/profile')
+    }
+
     async function resetExistingWalletConnectSession() {
         try {
             const connector = await initWalletConnect()
@@ -1158,7 +1174,6 @@ export default function Login({
 
         await connectInjectedWallet(option);
     };
-
     const closeWalletConnectModal = async () => {
         try {
             const appKit = (getConnector() as any)?.appKit
@@ -1319,13 +1334,24 @@ export default function Login({
                 return;
             }
 
-            const token = verifyData?.accessToken ?? '';
+            const token = verifyData?.accessToken ;
+
+            console.log('[verifyData]', verifyData);
+            console.log('[token]', token);
+
+            if (!token) {
+                setApiResult('Verify succeeded, but accessToken is missing.');
+                return;
+            }
+
             setAccessToken(token);
 
             const nextUserProfile: UserConnection = {
-                walletAddress: account,
+                walletAddress: normalizeOptionalString(verifyData?.walletAddress) || account,
                 profileImageUrl: normalizeOptionalString(verifyData?.profileImageUrl),
                 nickname: normalizeOptionalString(verifyData?.nickname) || shortenAddress(account),
+                email: normalizeOptionalString(verifyData?.email),
+                bio: normalizeOptionalString(verifyData?.bio),
             };
 
             setUserProfile(nextUserProfile);
@@ -1682,11 +1708,15 @@ export default function Login({
                             >
                                 Logout
                             </button>
-                            <NavigationLink href={'/profile'} className={styles.fontBlack}>
-                                <button className={styles.myPageButton}>
-                                        My Page
-                                </button>
-                            </NavigationLink>
+                            {/*<NavigationLink href={'/profile'} className={`${styles.fontBlack} ${styles.myPageButton}`}>*/}
+                            <button
+                                type="button"
+                                className={styles.myPageButton}
+                                onClick={handleGoMyPage}
+                            >
+                                    My Page
+                            </button>
+                            {/*</NavigationLink>*/}
                         </div>
 
                         {renderWalletFooter()}

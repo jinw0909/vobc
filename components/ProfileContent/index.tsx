@@ -3,6 +3,8 @@
 import {ChangeEvent, useEffect, useMemo, useState} from 'react'
 import styles from './styles.module.css'
 import { useWeb3Auth } from '@/providers/Web3AuthProvider'
+import Image from "next/image";
+import vobLogo from "@/public/vob_white.png";
 
 type ReAuthNonceResponse = {
     nonce?: string
@@ -445,7 +447,8 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         (editing ? walletFallbackNickname : displayNickname || walletFallbackNickname)
 
     const shownProfileImage =
-        profilePreviewUrl || profile.profileImageUrl || displayProfileImage
+        // profilePreviewUrl || profile.profileImageUrl || displayProfileImage
+        profilePreviewUrl || profile.profileImageUrl || connectedWallet?.icon || ''
 
     const resetProfileImage = () => {
         setProfilePreviewUrl('')
@@ -531,13 +534,32 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                             <span>{connectedWallet?.name || 'No wallet'}</span>
                             <span>{accessToken ? 'Logged in' : 'No access token'}</span>
                         </div>
+                        <div className={styles.mobileSecondary}>
+                            <button
+                                type="button"
+                                className={styles.secondaryButton}
+                                onClick={handleEditToggle}
+                            >
+                                {editing ? 'Cancel' : 'Edit Profile'}
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 
                 <div className={styles.balanceCard}>
                     <span className={styles.cardLabel}>VOB Balance</span>
-                    <strong>{vobBalance}</strong>
-                    <p>현재는 context 또는 API 연결 전 임시 값입니다.</p>
+                    <div className={styles.vobBalanceText}>
+                        <div className={styles.vobBadge}>
+                            <Image
+                                src={vobLogo}
+                                alt={"vob coin symbol"}
+                                objectFit="contain"
+                            ></Image>
+                        </div>
+                        <strong>{vobBalance}</strong>
+                    </div>
+                    {/*<p>현재는 context 또는 API 연결 전 임시 값입니다.</p>*/}
                 </div>
             </section>
 
@@ -546,7 +568,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                     <div className={styles.sectionHeader}>
                         <div>
                             <h2>Profile Settings</h2>
-                            <p>닉네임, 이메일, 자기소개를 등록하거나 수정합니다.</p>
+                            <p>Register or update nickname, email, profile image, and bio</p>
                         </div>
                     </div>
 
@@ -557,7 +579,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                                 name="nickname"
                                 value={profile.nickname}
                                 onChange={handleProfileChange}
-                                placeholder="닉네임"
+                                placeholder="nickname"
                             />
                         </label>
 
@@ -592,7 +614,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                                     onClick={resetProfileImage}
                                     disabled={imageUploading}
                                 >
-                                    Reset
+                                    Reset Image
                                 </button>
                             </div>
                         </div>
@@ -603,7 +625,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                                 name="bio"
                                 value={profile.bio}
                                 onChange={handleProfileChange}
-                                placeholder="자기소개를 입력하세요."
+                                placeholder="tell us about yourself"
                                 rows={4}
                             />
                         </label>
@@ -626,7 +648,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                 <div className={styles.sectionHeader}>
                     <div>
                         <h2>About</h2>
-                        <p>프로필에 표시되는 기본 정보입니다.</p>
+                        <p>Basic Information</p>
                     </div>
                 </div>
 
@@ -638,12 +660,12 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
 
                     <div>
                         <span>Bio</span>
-                        <strong>{profile.bio || '아직 자기소개가 없습니다.'}</strong>
+                        <strong>{profile.bio || 'Not registered'}</strong>
                     </div>
                 </div>
             </section>
 
-            <section className={styles.card}>
+            <section className={`${styles.card} ${styles.portfolio}`}>
                 <div className={styles.sectionHeader}>
                     <div>
                         <h2>Portfolio</h2>
@@ -738,12 +760,12 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                     <div className={styles.sectionHeader}>
                         <div>
                             <h2>My Posts</h2>
-                            <p>내가 작성한 글 목록입니다.</p>
+                            <p>Posts written</p>
                         </div>
                     </div>
 
                     <div className={styles.emptyBox}>
-                        아직 작성한 글 UI는 연결 전입니다.
+                        -
                     </div>
                 </div>
 
@@ -751,12 +773,12 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                     <div className={styles.sectionHeader}>
                         <div>
                             <h2>Liked Posts</h2>
-                            <p>좋아요 누른 글 목록입니다.</p>
+                            <p>Liked posts</p>
                         </div>
                     </div>
 
                     <div className={styles.emptyBox}>
-                        좋아요 목록 UI는 나중에 연결하면 됩니다.
+                        -
                     </div>
                 </div>
             </section>
@@ -765,7 +787,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                 <div className={styles.sectionHeader}>
                     <div>
                         <h2>Follow</h2>
-                        <p>팔로우/팔로잉 기능은 추후 추가 예정입니다.</p>
+                        {/*<p>팔로우/팔로잉 기능은 추후 추가 예정입니다.</p>*/}
                     </div>
                 </div>
 

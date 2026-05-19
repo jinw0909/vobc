@@ -1,8 +1,8 @@
 .profileContent {
     width: 100%;
-    max-width: 1080px;
+    /*max-width: 1080px;*/
     margin: 0 auto;
-    padding: 2rem 1rem 4rem;
+    padding: 6rem 1rem 4rem;
     color: #ffffff;
     margin-top: 4rem;
 }
@@ -18,8 +18,8 @@
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    background: #111821;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    /*background: #111821;*/
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 18px;
     padding: 1.25rem;
 }
@@ -83,18 +83,29 @@
 
 .statusRow span {
     padding: 0.4rem 0.65rem;
-    border-radius: 999px;
-    background: #1a2532;
+    border-radius: 8px;
+    /*background: #1a2532;*/
+    background: rgba(0,0,0,0.25);
     color: #c8d2df;
     font-size: 0.8rem;
+    border: 1px solid #555;
+}
+
+.portfolio {
+    display: none;
+}
+
+.debugCard {
+    display: none;
 }
 
 .balanceCard,
 .card,
 .debugCard {
-    background: #111821;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
+    /*background: #111821;*/
+    /*background: black;*/
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
 }
 
 .balanceCard {
@@ -159,7 +170,7 @@
 .sectionHeader p {
     margin: 0.35rem 0 0;
     color: #8d9aab;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 }
 
 .headerActions {
@@ -175,15 +186,44 @@
     font-size: 0.85rem;
 }
 
+.vobBalanceText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.vobBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: black;
+    color: #ffffff;
+    font-size: 0.75rem;
+    border: 1px solid #555;
+
+}
+
 .primaryButton,
 .secondaryButton {
     border: 0;
     border-radius: 10px;
     padding: 0.75rem 1rem;
-    font-weight: 700;
+    font-weight: 400;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
+
+.mobileSecondary {
+    margin-top: 1rem;
+    display: none;
+}
+
 
 .primaryButton:hover,
 .secondaryButton:hover {
@@ -198,12 +238,17 @@
 }
 
 .primaryButton {
-    background: #ffffff;
-    color: #0d1117;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    /*background: #ffffff;*/
+    /*color: #0d1117;*/
 }
 
 .secondaryButton {
-    background: #1b2430;
+    /*background: #1b2430;*/
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     color: #ffffff;
 }
 
@@ -235,7 +280,8 @@
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    background: #0c1118;
+    /*background: #0c1118;*/
+    background: rgba(0, 0, 0, 0.25);
     color: #ffffff;
     padding: 0.8rem 0.9rem;
     outline: none;
@@ -260,8 +306,9 @@
 
 .infoGrid div {
     padding: 1rem;
-    border-radius: 14px;
-    background: #0c1118;
+    border-radius: 12px;
+    /*background: #0c1118;*/
+    background: rgba(0, 0, 0, 0.25);
 }
 
 .infoGrid span {
@@ -287,7 +334,8 @@
 .portfolioSummary div {
     padding: 1rem;
     border-radius: 14px;
-    background: #0c1118;
+    /*background: #0c1118;*/
+    background: rgba(0, 0, 0, 0.25);
 }
 
 .portfolioSummary span {
@@ -385,8 +433,9 @@
     align-items: center;
     justify-content: center;
     min-height: 140px;
-    border-radius: 14px;
-    background: #0c1118;
+    border-radius: 12px;
+    /*background: #0c1118;*/
+    background: rgba(0, 0, 0, 0.25);
     color: #8d9aab;
     text-align: center;
 }
@@ -399,8 +448,9 @@
 
 .followGrid div {
     padding: 1rem;
-    border-radius: 14px;
-    background: #0c1118;
+    border-radius: 12px;
+    /*background: #0c1118;*/
+    background: rgba(0, 0, 0, 0.25);
     text-align: center;
 }
 
@@ -495,4 +545,17 @@
     .assetRatio {
         justify-self: start;
     }
+
+    .secondaryButton {
+        display: none;
+    }
+
+    .mobileSecondary {
+        display: block;
+    }
+    .mobileSecondary .secondaryButton {
+        display: block;
+    }
+
+
 }

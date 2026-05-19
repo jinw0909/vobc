@@ -34,7 +34,9 @@
     "detail": "详情",
     "blog": "博客",
     "roadmap": "路线图",
-    "tag": "标签"
+    "tag": "标签",
+    "profile": "个人资料"
+
   },
   "about": {
     "main_title": "关于VOB",

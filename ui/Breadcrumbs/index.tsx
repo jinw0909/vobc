@@ -21,6 +21,7 @@ const VISIBLE_SEGMENTS = [
     'use',
     'privacy',
     'cookies',
+    'profile'
 ]; // nav에서 번역 키로 쓰는 것들만
 
 type Crumb = {
