@@ -7,28 +7,28 @@ import localFont from "next/font/local";
 import {getTranslations} from "next-intl/server";
 import {CommonHeader} from "@/ui/CommonHeader";
 
-const kaisei = localFont({
-    src: [
-        {
-            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Regular.woff2',
-            weight: '400',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Medium.woff2',
-            weight: '500',
-            style: 'normal',
-        },
-        {
-            path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Bold.woff2',
-            weight: '700',
-            style: 'normal',
-        },
-    ],
-    variable: '--font-kaisei',
-    display: 'block',
-    preload: true
-});
+// const kaisei = localFont({
+//     src: [
+//         {
+//             path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Regular.woff2',
+//             weight: '400',
+//             style: 'normal',
+//         },
+//         {
+//             path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Medium.woff2',
+//             weight: '500',
+//             style: 'normal',
+//         },
+//         {
+//             path: '../../public/fonts/Kaisei_HarunoUmi/KaiseiHarunoUmi-Bold.woff2',
+//             weight: '700',
+//             style: 'normal',
+//         },
+//     ],
+//     variable: '--font-kaisei',
+//     display: 'block',
+//     preload: true
+// });
 
 export const About = async () => {
 
@@ -36,7 +36,8 @@ export const About = async () => {
 
     return (
         <div className={styles.aboutWrapper}>
-            <div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>
+            {/*<div className={`${kaisei.className} ${styles.mainTitle}`}>{t('about.main_title')}</div>*/}
+            <div className={`${styles.mainTitle}`}>{t('about.main_title')}</div>
             <div className={styles.aboutInner}>
                 <CommonHeader text={"About VOB"}/>
                 <div className={`${styles.element}`}>

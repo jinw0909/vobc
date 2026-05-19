@@ -11,6 +11,7 @@
     /*opacity: 0;*/
     pointer-events: none;
     /*display: none;*/
+    font-family: Kaisei_HarunoUmi, serif;
 }
 .aboutInner {
     margin-top: 12rem;

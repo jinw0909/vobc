@@ -70,7 +70,6 @@ export default function Connect() {
                             <span className={styles.connectText}>Connect</span>
                         </>
                     )}
-
                     {viewState === 'connected' && connectedWallet && (
                         <div className={styles.walletInfo}>
                             <img

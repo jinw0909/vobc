@@ -808,7 +808,7 @@
 
 @media (max-width: 576px) {
     .main {
-        max-height: none;
+        max-height: calc(100vh - 6rem);
     }
     .card {
         padding-left: 1rem;

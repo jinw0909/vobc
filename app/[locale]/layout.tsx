@@ -17,52 +17,54 @@ import Settings from "@/components/Settings";
 import AppProviders from '@/providers/AppProviders'
 
 
-const notoserifjp = localFont({
-    src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.woff2',
-    variable: '--font-notoserifjp',
-    display: 'swap', // 또는 optional
-    preload: true,
-});
-
-const notoserifsc = localFont({
-    src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.woff2',
-    variable: '--font-notoserifsc',
-    display: 'swap', // 또는 optional
-    preload: true,
-});
-
-const notoserifkr = localFont({
-    src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.woff2',
-    variable: '--font-notoserifkr',
-    display: 'swap', // 또는 optional
-    preload: true,
-});
+// const notoserifjp = localFont({
+//     src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.woff2',
+//     variable: '--font-notoserifjp',
+//     display: 'auto', // 또는 optional
+//     preload: true,
+// });
+//
+// const notoserifsc = localFont({
+//     src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.woff2',
+//     variable: '--font-notoserifsc',
+//     display: 'auto', // 또는 optional
+//     preload: true,
+// });
+//
+// const notoserifkr = localFont({
+//     src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.woff2',
+//     variable: '--font-notoserifkr',
+//     display: 'auto', // 또는 optional
+//     preload: true,
+// });
 //
 // const notoserifkr = Noto_Serif_KR({
 //     subsets: ["latin"],
-//     weight: ["400", "500", "600", "700"],
-//     display: "swap",
+//     weight: ["400", "500", "600"],
+//     // weight: ["variable"],
+//     display: "auto",
 // });
 //
 // const notoserifjp = Noto_Serif_JP({
 //     subsets: ["latin"],
-//     weight: ["400", "500", "600", "700"],
-//     display: "swap",
+//     weight: ["400", "500", "600"],
+//     // weight: ["variable"],
+//     display: "auto",
 // });
 //
 // const notoserifsc = Noto_Serif_SC({
 //     subsets: ["latin"],
-//     weight: ["400", "500", "600", "700"],
-//     display: "swap",
+//     weight: ["400", "500", "600"],
+//     display: "auto",
 // });
 
 
-const fontByLocale: Record<string, any> = {
-    en: notoserifkr,
-    jp: notoserifjp,
-    cn: notoserifsc,
-    kr: notoserifkr,
-};
+// const fontByLocale: Record<string, any> = {
+//     en: notoserifkr,
+//     jp: notoserifjp,
+//     cn: notoserifsc,
+//     kr: notoserifkr,
+// };
 
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
@@ -110,10 +112,11 @@ export default async function LocaleLayout({
     setRequestLocale(locale);
     const messages = await getMessages();
 
-    const font = fontByLocale[locale];
+    // const font = fontByLocale[locale];
 
     return (
-        <html lang={locale} className={font?.variable ?? ""}>
+        // <html lang={locale} className={font?.variable ?? ""}>
+        <html lang={locale}>
         <body>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <AppProviders>

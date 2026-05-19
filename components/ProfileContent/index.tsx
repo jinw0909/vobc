@@ -84,6 +84,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         displayProfileImage,
         fetchVobBalance,
         getActiveProvider,
+        setUserProfile,
     } = useWeb3Auth()
 
     const [loading, setLoading] = useState(false)
@@ -92,12 +93,15 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
     const [reAuthToken, setReAuthToken] = useState<string | null>(null)
     const [portfolio, setPortfolio] = useState<PortfolioResponse | null>(null)
 
-    const [profile, setProfile] = useState<ProfileForm>({
-        nickname: 'VOB User',
+    const [profile, setProfile] = useState({
+        nickname: '',
         email: '',
         bio: '',
-        profileImageUrl: '',
+        profileImageUrl: '', // 저장용 S3 URL
     })
+
+    const [profilePreviewUrl, setProfilePreviewUrl] = useState('')
+    const [imageUploading, setImageUploading] = useState(false)
 
     const displayAddress = useMemo(() => {
         if (!account) return '-'
@@ -125,17 +129,45 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         }))
     }
 
-    const handleProfileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleProfileImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0]
-
         if (!file) return
 
-        const previewUrl = URL.createObjectURL(file)
+        const blobUrl = URL.createObjectURL(file)
+        setProfilePreviewUrl(blobUrl)
 
-        setProfile((prev) => ({
-            ...prev,
-            profileImageUrl: previewUrl,
-        }))
+        try {
+            setImageUploading(true)
+
+            const token = getRequiredAccessToken()
+
+            const formData = new FormData()
+            formData.append('file', file)
+
+            const res = await fetch(`${API_BASE_URL}/web3/profile/image`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            })
+
+            const data = await res.json()
+
+            if (!res.ok || !data.imageUrl) {
+                throw new Error('이미지 업로드 실패')
+            }
+
+            setProfile((prev) => ({
+                ...prev,
+                profileImageUrl: data.imageUrl,
+            }))
+
+            // 이제 S3 URL이 있으니까 preview도 S3 URL로 교체
+            setProfilePreviewUrl(data.imageUrl)
+        } finally {
+            setImageUploading(false)
+        }
     }
 
     const saveProfile = async () => {
@@ -167,6 +199,25 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
             }
 
             const data = text ? JSON.parse(text) : null
+
+            const nextUserProfile = {
+                walletAddress: data?.walletAddress || userProfile?.walletAddress || account,
+                nickname: data?.nickname ?? null,
+                email: data?.email ?? null,
+                bio: data?.bio ?? null,
+                profileImageUrl: data?.profileImageUrl ?? null,
+            }
+
+            setUserProfile(nextUserProfile)
+
+            setProfile({
+                nickname: nextUserProfile.nickname ?? '',
+                email: nextUserProfile.email ?? '',
+                bio: nextUserProfile.bio ?? '',
+                profileImageUrl: nextUserProfile.profileImageUrl ?? '',
+            })
+
+            setProfilePreviewUrl('')
 
             addLog('프로필 수정 성공')
             addLog(JSON.stringify(data, null, 2))
@@ -362,45 +413,112 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         }
     }
 
+    // useEffect(() => {
+    //     setProfile((prev) => ({
+    //         ...prev,
+    //         nickname: userProfile?.nickname || displayNickname || prev.nickname,
+    //         email: userProfile?.email || prev.email,
+    //         bio: userProfile?.bio || prev.bio,
+    //         profileImageUrl: userProfile?.profileImageUrl || displayProfileImage || prev.profileImageUrl,
+    //     }))
+    // }, [userProfile, displayNickname, displayProfileImage])
     useEffect(() => {
         setProfile((prev) => ({
             ...prev,
-            nickname: userProfile?.nickname || displayNickname || prev.nickname,
-            email: userProfile?.email || prev.email,
-            bio: userProfile?.bio || prev.bio,
-            profileImageUrl: userProfile?.profileImageUrl || displayProfileImage || prev.profileImageUrl,
+            nickname: userProfile?.nickname ?? '',
+            email: userProfile?.email ?? '',
+            bio: userProfile?.bio ?? '',
+            profileImageUrl: userProfile?.profileImageUrl ?? '',
         }))
-    }, [userProfile, displayNickname, displayProfileImage])
+
+        setProfilePreviewUrl('')
+    }, [userProfile])
 
     const shownPortfolio = portfolio ?? mockPortfolio
     const assets = shownPortfolio.assets ?? []
+
+    const walletFallbackNickname =
+        account ? `${account.slice(0, 6)}...${account.slice(-4)}` : 'Unnamed User'
+
+    const shownNickname =
+        profile.nickname.trim() ||
+        (editing ? walletFallbackNickname : displayNickname || walletFallbackNickname)
+
+    const shownProfileImage =
+        profilePreviewUrl || profile.profileImageUrl || displayProfileImage
+
+    const resetProfileImage = () => {
+        setProfilePreviewUrl('')
+
+        setProfile((prev) => ({
+            ...prev,
+            profileImageUrl: '',
+        }))
+    }
+
+    const resetProfileForm = () => {
+        setProfile({
+            nickname: userProfile?.nickname ?? '',
+            email: userProfile?.email ?? '',
+            bio: userProfile?.bio ?? '',
+            profileImageUrl: userProfile?.profileImageUrl ?? '',
+        })
+
+        setProfilePreviewUrl('')
+    }
+
+    const handleEditToggle = () => {
+        if (editing) {
+            resetProfileForm()
+            setEditing(false)
+            return
+        }
+
+        resetProfileForm()
+        setEditing(true)
+    }
 
     return (
         <div className={styles.profileContent}>
             <section className={styles.heroSection}>
                 <div className={styles.profileMain}>
                     <div className={styles.avatarWrap}>
-                        {profile.profileImageUrl ? (
+                        {/*{profile.profileImageUrl ? (*/}
+                        {/*    <img*/}
+                        {/*        src={profilePreviewUrl || profile.profileImageUrl || displayProfileImage}*/}
+                        {/*        alt="Profile"*/}
+                        {/*        className={styles.avatarImage}*/}
+                        {/*    />*/}
+                        {/*) : (*/}
+                        {/*    <div className={styles.avatarPlaceholder}>*/}
+                        {/*        {profile.nickname.slice(0, 1).toUpperCase()}*/}
+                        {/*    </div>*/}
+                        {/*)}*/}
+                        {shownProfileImage ? (
                             <img
-                                src={profile.profileImageUrl}
+                                src={shownProfileImage}
                                 alt="Profile"
                                 className={styles.avatarImage}
                             />
                         ) : (
+                            // <div className={styles.avatarPlaceholder}>
+                            //     {(profile.nickname || 'V').slice(0, 1).toUpperCase()}
+                            // </div>
                             <div className={styles.avatarPlaceholder}>
-                                {profile.nickname.slice(0, 1).toUpperCase()}
+                                {shownNickname.slice(0, 1).toUpperCase()}
                             </div>
                         )}
                     </div>
 
                     <div className={styles.profileText}>
                         <div className={styles.profileTitleRow}>
-                            <h1>{profile.nickname || 'Unnamed User'}</h1>
+                            {/*<h1>{profile.nickname || 'Unnamed User'}</h1>*/}
+                            <h1>{shownNickname}</h1>
 
                             <button
                                 type="button"
                                 className={styles.secondaryButton}
-                                onClick={() => setEditing((prev) => !prev)}
+                                onClick={handleEditToggle}
                             >
                                 {editing ? 'Cancel' : 'Edit Profile'}
                             </button>
@@ -434,15 +552,6 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
 
                     <div className={styles.formGrid}>
                         <label className={styles.inputGroup}>
-                            <span>Profile Image</span>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleProfileImageChange}
-                            />
-                        </label>
-
-                        <label className={styles.inputGroup}>
                             <span>Nickname</span>
                             <input
                                 name="nickname"
@@ -462,6 +571,32 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                             />
                         </label>
 
+                        <div className={styles.inputGroup}>
+                            <span>Profile Image</span>
+
+                            <div className={styles.imageButtonRow}>
+                                <label className={styles.imageUploadButton}>
+                                    {imageUploading ? 'Uploading...' : 'Change Image'}
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleProfileImageChange}
+                                        className={styles.hiddenFileInput}
+                                        disabled={imageUploading}
+                                    />
+                                </label>
+
+                                <button
+                                    type="button"
+                                    className={styles.imageResetButton}
+                                    onClick={resetProfileImage}
+                                    disabled={imageUploading}
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+
                         <label className={styles.inputGroupFull}>
                             <span>Bio</span>
                             <textarea
@@ -479,9 +614,9 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                             type="button"
                             className={styles.primaryButton}
                             onClick={saveProfile}
-                            disabled={loading}
+                            disabled={loading || imageUploading}
                         >
-                            {loading ? 'Saving...' : 'Save Profile'}
+                            {imageUploading ? 'Uploading image...' : loading ? 'Saving...' : 'Save Profile'}
                         </button>
                     </div>
                 </section>

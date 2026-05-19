@@ -1,6 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+    font-family: "NotoSerifKR";
+    src: url("/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.woff2") format("woff2");
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: "NotoSerifJP";
+    src: url("/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.woff2") format("woff2");
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: "NotoSerifSC";
+    src: url("/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.woff2") format("woff2");
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: "Vollkorn";
+    src: url("/fonts/Vollkorn/Vollkorn-VariableFont_wght.woff2") format("woff2");
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: "Kaisei_HarunoUmi";
+    src: url("/fonts/Kaisei_Harunoumi/KaiseiHarunoUmi-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0;}
 html {
     scroll-behavior: smooth;
@@ -9,28 +51,24 @@ html {
 
 body {
     font-family:
-            var(--font-notoserifkr),
+            "NotoSerifKR",
             "Apple SD Gothic Neo",
             "Malgun Gothic",
-            "Noto Sans KR",
-            system-ui,
-            sans-serif;
+            serif;
 }
 
 html[lang="jp"] body {
     font-family:
-            var(--font-notoserifjp),
+            "NotoSerifJP",
             "Hiragino Mincho ProN",
             "Yu Mincho",
-            "Noto Serif JP",
             serif;
 }
 
 html[lang="cn"] body {
     font-family:
-            var(--font-notoserifsc),
+            "NotoSerifSC",
             "Songti SC",
-            "Noto Serif SC",
             serif;
 }
 

@@ -11,6 +11,8 @@
     /*background-color: rgba(0,0,0,0.4);*/
     /*backdrop-filter: blur(8px);*/
     /*border-bottom: 1px solid rgba(255,255,255,0.5);*/
+    user-select: none;
+    -webkit-user-select: none;
 }
 .mobileNav.clicked {
     max-height: 18rem;

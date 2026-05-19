@@ -416,6 +416,46 @@
     font-size: 0.85rem;
 }
 
+.hiddenFileInput {
+    display: none;
+}
+.imageButtonRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hiddenFileInput {
+    display: none;
+}
+
+.imageUploadButton,
+.imageResetButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.imageUploadButton:hover,
+.imageResetButton:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.imageResetButton:disabled,
+.imageUploadButton:has(input:disabled) {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 @media (max-width: 860px) {
     .heroSection,
     .twoColumn {

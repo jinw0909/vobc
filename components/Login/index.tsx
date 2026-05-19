@@ -1682,11 +1682,11 @@ export default function Login({
                             >
                                 Logout
                             </button>
+                            <NavigationLink href={'/profile'} className={styles.fontBlack}>
                                 <button className={styles.myPageButton}>
-                                    <NavigationLink href={'/profile'} className={styles.fontBlack} onClick={onClose}>
                                         My Page
-                                    </NavigationLink>
                                 </button>
+                            </NavigationLink>
                         </div>
 
                         {renderWalletFooter()}

@@ -8,7 +8,7 @@
     /*justify-content: center;*/
     /*z-index: 150;*/
     /*font-size: 1rem;*/
-    display: none;
+    /*display: none;*/
 
 }
 .connectIcon {
@@ -283,8 +283,8 @@
         left: 0;
         right: 0;
         width: 100%;
-        max-height: calc(100dvh - 6rem);
-        overflow-y: auto;
+        /*max-height: calc(100dvh - 6rem);*/
+        /*overflow-y: auto;*/
         transform: none;
         top: auto;
     }

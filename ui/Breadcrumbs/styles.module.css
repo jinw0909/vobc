@@ -93,7 +93,8 @@
         border-bottom: 1px solid rgba(255,255,255,0.4);
         width: 100%;
         z-index: 100;
-        backdrop-filter: blur(7px);
+        background-color: rgba(30,30,30,1);
+        /*backdrop-filter: blur(7px);*/
     }
     .breadcrumb {
         padding: 0 1rem;
