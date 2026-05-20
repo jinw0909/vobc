@@ -415,6 +415,21 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         }
     }
 
+    // const displayWalletName = useMemo(() => {
+    //     if (!connectedWallet?.name) return 'No wallet'
+    //
+    //     if (connectionType !== 'walletconnect') {
+    //         return connectedWallet.name
+    //     }
+    //
+    //     return (
+    //         connectedWallet.metadata?.name ||
+    //         connectedWallet.peerMeta?.name ||
+    //         connectedWallet.name
+    //     )
+    //
+    // }, [connectionType, connectedWallet])
+
     // useEffect(() => {
     //     setProfile((prev) => ({
     //         ...prev,

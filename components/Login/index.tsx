@@ -527,19 +527,29 @@ export default function Login({
 
             const normalizedChainId = normalizeHexChainId(currentChainId)
 
+            const peerMetadata = session?.peer?.metadata
+
+            const walletName = peerMetadata?.name || WALLETCONNECT_OPTION.name
+
+            const walletIcon = peerMetadata?.icons?.[0] || WALLETCONNECT_OPTION.icon
+
             saveWalletSession({
                 type: 'walletconnect',
                 topic: currentTopic,
-                name: WALLETCONNECT_OPTION.name,
-                icon: WALLETCONNECT_OPTION.icon,
+                // name: WALLETCONNECT_OPTION.name,
+                name: walletName,
+                // icon: WALLETCONNECT_OPTION.icon,
+                icon: walletIcon,
                 account: selectedAccount,
                 chainId: normalizedChainId,
             })
 
             const walletConn = {
                 address: selectedAccount,
-                icon: WALLETCONNECT_OPTION.icon,
-                name: WALLETCONNECT_OPTION.name,
+                // icon: WALLETCONNECT_OPTION.icon,
+                icon: walletIcon,
+                // name: WALLETCONNECT_OPTION.name,
+                name: walletName,
             }
 
             setConnectionType('walletconnect')
