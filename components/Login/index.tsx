@@ -363,7 +363,7 @@ export default function Login({
         }
 
         const origin =
-            typeof window !== 'undefined' ? window.location.origin : 'https://vobc.io'
+            typeof window !== 'undefined' ? window.location.origin : 'https://www.vobc.io'
 
         const connector = await UniversalConnector.init({
             projectId: WALLETCONNECT_PROJECT_ID,
@@ -650,7 +650,7 @@ export default function Login({
             }
 
             const connector = await initWalletConnect()
-            debugWalletConnectStorage(connector)
+            // debugWalletConnectStorage(connector)
 
             const provider = connector.provider as WCProvider | undefined
 
@@ -981,41 +981,41 @@ export default function Login({
         resetWalletConnectionStateOnly()
         setConnector(null)
     }
-    const debugWalletConnectStorage = (connector: any) => {
-        const provider = connector?.provider as any
-
-        const client =
-            provider?.client ||
-            provider?.signClient ||
-            connector?.client ||
-            connector?.signClient
-
-        console.log('[WC DEBUG provider.session]', provider?.session)
-        console.log('[WC DEBUG provider keys]', Object.keys(provider || {}))
-        console.log('[WC DEBUG connector keys]', Object.keys(connector || {}))
-        console.log('[WC DEBUG client]', client)
-        console.log('[WC DEBUG client keys]', Object.keys(client || {}))
-        console.log('[WC DEBUG client.session]', client?.session)
-
-        try {
-            const sessions = client?.session?.getAll?.()
-
-            console.log(
-                '[WC DEBUG all sessions]',
-                sessions?.map((s: any) => ({
-                    topic: s.topic,
-                    expiry: s.expiry,
-                    expiryDate: s.expiry
-                        ? new Date(s.expiry * 1000).toISOString()
-                        : null,
-                    accounts: s.namespaces?.eip155?.accounts,
-                    peer: s.peer?.metadata,
-                }))
-            )
-        } catch (error) {
-            console.warn('[WC DEBUG getAll sessions error]', error)
-        }
-    }
+    // const debugWalletConnectStorage = (connector: any) => {
+    //     const provider = connector?.provider as any
+    //
+    //     const client =
+    //         provider?.client ||
+    //         provider?.signClient ||
+    //         connector?.client ||
+    //         connector?.signClient
+    //
+    //     console.log('[WC DEBUG provider.session]', provider?.session)
+    //     console.log('[WC DEBUG provider keys]', Object.keys(provider || {}))
+    //     console.log('[WC DEBUG connector keys]', Object.keys(connector || {}))
+    //     console.log('[WC DEBUG client]', client)
+    //     console.log('[WC DEBUG client keys]', Object.keys(client || {}))
+    //     console.log('[WC DEBUG client.session]', client?.session)
+    //
+    //     try {
+    //         const sessions = client?.session?.getAll?.()
+    //
+    //         console.log(
+    //             '[WC DEBUG all sessions]',
+    //             sessions?.map((s: any) => ({
+    //                 topic: s.topic,
+    //                 expiry: s.expiry,
+    //                 expiryDate: s.expiry
+    //                     ? new Date(s.expiry * 1000).toISOString()
+    //                     : null,
+    //                 accounts: s.namespaces?.eip155?.accounts,
+    //                 peer: s.peer?.metadata,
+    //             }))
+    //         )
+    //     } catch (error) {
+    //         console.warn('[WC DEBUG getAll sessions error]', error)
+    //     }
+    // }
     const connectWalletConnect = async () => {
         try {
             resetLoginState()
@@ -1038,8 +1038,8 @@ export default function Login({
                 return
             }
 
-            debugConnector()
-            debugAppKitMethods()
+            // debugConnector()
+            // debugAppKitMethods()
 
             setTimeout(() => {
                 closeWalletConnectModal()
@@ -1055,37 +1055,37 @@ export default function Login({
         }
     }
 
-    const debugConnector = () => {
-        const connectorAny = getConnector() as any
+    // const debugConnector = () => {
+    //     const connectorAny = getConnector() as any
+    //
+    //     console.log('[connector keys]', Object.keys(connectorAny || {}))
+    //     console.log('[connector]', connectorAny)
+    //     console.log('[connector.modal]', connectorAny?.modal)
+    //     console.log('[connector.appKit]', connectorAny?.appKit)
+    //     console.log('[connector.provider]', connectorAny?.provider)
+    // }
 
-        console.log('[connector keys]', Object.keys(connectorAny || {}))
-        console.log('[connector]', connectorAny)
-        console.log('[connector.modal]', connectorAny?.modal)
-        console.log('[connector.appKit]', connectorAny?.appKit)
-        console.log('[connector.provider]', connectorAny?.provider)
-    }
-
-    const debugAppKitMethods = () => {
-        const appKit = (getConnector() as any)?.appKit
-
-        console.log('[appKit keys]', Object.keys(appKit || {}))
-        console.log(
-            '[appKit proto keys]',
-            Object.getOwnPropertyNames(Object.getPrototypeOf(appKit || {}))
-        )
-
-        const proto = Object.getPrototypeOf(appKit || {})
-
-        Object.getOwnPropertyNames(proto).forEach((key) => {
-            if (
-                key.toLowerCase().includes('open') ||
-                key.toLowerCase().includes('close') ||
-                key.toLowerCase().includes('modal')
-            ) {
-                console.log('[appKit modal-ish method]', key, typeof appKit?.[key])
-            }
-        })
-    }
+    // const debugAppKitMethods = () => {
+    //     const appKit = (getConnector() as any)?.appKit
+    //
+    //     console.log('[appKit keys]', Object.keys(appKit || {}))
+    //     console.log(
+    //         '[appKit proto keys]',
+    //         Object.getOwnPropertyNames(Object.getPrototypeOf(appKit || {}))
+    //     )
+    //
+    //     const proto = Object.getPrototypeOf(appKit || {})
+    //
+    //     Object.getOwnPropertyNames(proto).forEach((key) => {
+    //         if (
+    //             key.toLowerCase().includes('open') ||
+    //             key.toLowerCase().includes('close') ||
+    //             key.toLowerCase().includes('modal')
+    //         ) {
+    //             console.log('[appKit modal-ish method]', key, typeof appKit?.[key])
+    //         }
+    //     })
+    // }
 
     const connectInjectedWallet = async (option: WalletOption) => {
         try {

@@ -8,12 +8,13 @@
     /*justify-content: center;*/
     /*z-index: 150;*/
     /*font-size: 1rem;*/
-    display: none;
+    /*display: none;*/
 }
 .connectIcon {
     display: none;
     margin-top: 2px;
     width: 1.2rem;
+    opacity: .8;
 }
 
 .hide {
@@ -49,6 +50,7 @@
     border-right: none;
     /*background-color: #0b1118;*/
     background-color: rgba(30,30,30,1);
+    padding-top: 2rem;
 }
 
 .connectModalInner::-webkit-scrollbar {
@@ -261,7 +263,7 @@
         display: none;
     }
     .walletInfo > img {
-        width: 22px;
+        width: 24px;
     }
     .connectIcon {
         display: block;
