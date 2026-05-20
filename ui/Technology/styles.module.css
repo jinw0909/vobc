@@ -61,7 +61,7 @@
         /*height: 420px; !* 필요하면 조절 *!*/
         overflow: hidden;
         border-radius: 8px;
-        border: 1px solid #999;
+        /*border: 1px solid #999;*/
     }
 
     .mobileSwiper {

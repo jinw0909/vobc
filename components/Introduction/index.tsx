@@ -15,6 +15,7 @@ import { Autoplay, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import {Technology} from "@/ui/Technology";
 import {CommonHeader} from "@/ui/CommonHeader";
+import Highlight from "@/components/Highlight";
 
 export function Introduction() {
 
@@ -27,9 +28,15 @@ export function Introduction() {
             </div>
 
             <div className={styles.subWrapper}>
+                <CommonHeader text={"Project Highlights"}/>
+                <Highlight />
+            </div>
+
+            <div className={styles.subWrapper}>
                 <CommonHeader text={"Project Roadmap"}/>
                 <Roadmap />
             </div>
+
 
             <div className={styles.subWrapper}>
                 <CommonHeader text={"Distribution Model"}/>

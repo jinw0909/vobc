@@ -28,7 +28,7 @@
     overflow: hidden;
     /*background-color: black;*/
     /*border: 1px solid #999;*/
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /*border: 1px solid rgba(255, 255, 255, 0.2);*/
 }
 /*.whitepaperInner:active { transform: scale(0.95);}*/
 .whitepaperInner.show {

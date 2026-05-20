@@ -9,7 +9,7 @@
     gap: 1rem;
     aspect-ratio: 1 / 1;
     height: auto;
-    border: 1px solid rgba(255,255,255,0.2);
+    /*border: 1px solid rgba(255,255,255,0.2);*/
     overflow: hidden;
     position: relative;
 }
