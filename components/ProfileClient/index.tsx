@@ -5,6 +5,7 @@ import ProfileContent from '@/components/ProfileContent';
 import LoginRequired from '@/components/LoginRequired';
 import { useWeb3Auth } from '@/providers/Web3AuthProvider';
 import Image from 'next/image';
+import styles from './styles.module.css';
 
 type AuthStatus = 'checking' | 'authenticated' | 'unauthenticated';
 
@@ -102,6 +103,14 @@ export default function ProfileClient() {
         } finally {
             profileFetchInFlightRef.current = false;
         }
+        if (status === 'checking') {
+            return (
+                <div className={styles.loading}>
+                    <div>Authenticating...</div>
+                </div>
+            );
+        }
+
     }
 
     useEffect(() => {
@@ -162,10 +171,6 @@ export default function ProfileClient() {
             ignore = true;
         };
     }, [API_BASE_URL, accessToken]);
-
-    if (status === 'checking') {
-        return <div>인증 확인 중...</div>;
-    }
 
     if (status === 'authenticated' && profileToken) {
         return <ProfileContent accessToken={profileToken} />;

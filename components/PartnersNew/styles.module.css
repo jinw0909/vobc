@@ -188,9 +188,16 @@
     opacity: 1;
 }
 
+
+.vobElem > div { transform-origin: top; }
+
 @media (min-width: 1400px) {
     .desc { font-size: 1.2rem; }
-    .vobElem > div { transform: scale(1.5); }
+    .vobElem > div { transform: scale(2.5); }
+}
+
+@media (min-width: 1024px) {
+    .vobElem > div { transform: scale(2); }
 }
 
 @media (max-width: 768px) {

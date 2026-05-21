@@ -1648,92 +1648,94 @@ export default function Login({
     };
 
     return (
-        <main className={styles.main}>
-            <div className={styles.card}>
+        <>
+            <main className={styles.main}>
+                <div className={styles.card}>
 
-                <h1 className={styles.title}>Web3 Connection</h1>
+                    <h1 className={styles.title}>Web3 Connection</h1>
 
-                {/*<button*/}
-                {/*    type="button"*/}
-                {/*    onClick={clearAllWalletConnectSessionsDebug}*/}
-                {/*    className={styles.disconnectButton}*/}
-                {/*>*/}
-                {/*    Clear WC Sessions*/}
-                {/*</button>*/}
+                    {/*<button*/}
+                    {/*    type="button"*/}
+                    {/*    onClick={clearAllWalletConnectSessionsDebug}*/}
+                    {/*    className={styles.disconnectButton}*/}
+                    {/*>*/}
+                    {/*    Clear WC Sessions*/}
+                    {/*</button>*/}
 
-                {viewState === 'disconnected' && (
-                    <section className={styles.section}>
-                        <div className={styles.emptyWalletIconBox}>
-                            <span className={styles.emptyWalletIcon}>▣</span>
-                        </div>
+                    {viewState === 'disconnected' && (
+                        <section className={styles.section}>
+                            <div className={styles.emptyWalletIconBox}>
+                                <span className={styles.emptyWalletIcon}>▣</span>
+                            </div>
 
-                        <h2 className={styles.disconnectedTitle}>
-                            Select a wallet to connect
-                        </h2>
+                            <h2 className={styles.disconnectedTitle}>
+                                Select a wallet to connect
+                            </h2>
 
-                        <p className={styles.disconnectedDesc}>
-                            Connect your wallet to continue
-                        </p>
+                            <p className={styles.disconnectedDesc}>
+                                Connect your wallet to continue
+                            </p>
 
-                        {renderWalletOptionList()}
+                            {renderWalletOptionList()}
 
-                        <div className={styles.walletHelpText}>
-                            New to wallets? <span>Learn more</span>
-                        </div>
-                    </section>
-                )}
+                            <div className={styles.walletHelpText}>
+                                New to wallets? <span>Learn more</span>
+                            </div>
+                        </section>
+                    )}
 
-                {viewState === 'connected' && (
-                    <section className={styles.section}>
-                        {renderConnectedWalletInfo()}
+                    {viewState === 'connected' && (
+                        <section className={styles.section}>
+                            {renderConnectedWalletInfo()}
 
-                        <div className={styles.topActionRow}>
-                            <button
-                                onClick={openDisconnectConfirm}
-                                className={styles.disconnectButton}
-                            >
-                                Disconnect
-                            </button>
+                            <div className={styles.topActionRow}>
+                                <button
+                                    onClick={openDisconnectConfirm}
+                                    className={styles.disconnectButton}
+                                >
+                                    Disconnect
+                                </button>
 
-                            <button
-                                onClick={loginWithWeb3}
-                                className={styles.loginButton}
-                            >
-                                Login
-                            </button>
-                        </div>
+                                <button
+                                    onClick={loginWithWeb3}
+                                    className={styles.loginButton}
+                                >
+                                    Login
+                                </button>
+                            </div>
 
-                        {renderWalletFooter()}
-                    </section>
-                )}
+                            {renderWalletFooter()}
+                        </section>
+                    )}
 
-                {viewState === 'loggedIn' && (
-                    <section className={styles.section}>
-                        {renderLoggedInProfile()}
+                    {viewState === 'loggedIn' && (
+                        <section className={styles.section}>
+                            {renderLoggedInProfile()}
 
-                        <div className={styles.topActionRow}>
-                            <button
-                                onClick={openLogoutConfirm}
-                                className={styles.logoutButton}
-                            >
-                                Logout
-                            </button>
-                            {/*<NavigationLink href={'/profile'} className={`${styles.fontBlack} ${styles.myPageButton}`}>*/}
-                            <button
-                                type="button"
-                                className={styles.myPageButton}
-                                onClick={handleGoMyPage}
-                            >
-                                    My Page
-                            </button>
-                            {/*</NavigationLink>*/}
-                        </div>
+                            <div className={styles.topActionRow}>
+                                <button
+                                    onClick={openLogoutConfirm}
+                                    className={styles.logoutButton}
+                                >
+                                    Logout
+                                </button>
+                                {/*<NavigationLink href={'/profile'} className={`${styles.fontBlack} ${styles.myPageButton}`}>*/}
+                                <button
+                                    type="button"
+                                    className={styles.myPageButton}
+                                    onClick={handleGoMyPage}
+                                >
+                                        My Page
+                                </button>
+                                {/*</NavigationLink>*/}
+                            </div>
 
-                        {renderWalletFooter()}
-                    </section>
-                )}
+                            {renderWalletFooter()}
+                        </section>
+                    )}
 
-            </div>
+                </div>
+            </main>
             {confirmModal === 'disconnect' && (
                 <div className={styles.confirmOverlay}>
                     <div className={styles.confirmModal}>
@@ -1793,6 +1795,6 @@ export default function Login({
                     </div>
                 </div>
             )}
-        </main>
+        </>
     );
 }

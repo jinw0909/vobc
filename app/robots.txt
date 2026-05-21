@@ -1,2 +1,10 @@
 User-Agent: *
 Allow: /*
+
+User-agent: *
+Allow: /
+
+Disallow: /profile
+Disallow: /en/profile
+Disallow: /jp/profile
+Disallow: /cn/profile
