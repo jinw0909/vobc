@@ -1,7 +1,7 @@
 import "./global.css";
 import { Header } from "@/components/Header";
 import localFont from "next/font/local";
-// import { Noto_Serif_KR, Noto_Serif_JP, Noto_Serif_SC} from "next/font/google";
+import { Noto_Serif_KR, Noto_Serif_JP, Noto_Serif_SC} from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { MobileHeader } from "@/components/MobileHeader";
 import { MobileFooter } from "@/components/MobileFooter";
@@ -38,33 +38,33 @@ import AppProviders from '@/providers/AppProviders'
 //     preload: true,
 // });
 //
-// const notoserifkr = Noto_Serif_KR({
-//     subsets: ["latin"],
-//     weight: ["400", "500", "600"],
-//     // weight: ["variable"],
-//     display: "auto",
-// });
-//
-// const notoserifjp = Noto_Serif_JP({
-//     subsets: ["latin"],
-//     weight: ["400", "500", "600"],
-//     // weight: ["variable"],
-//     display: "auto",
-// });
-//
-// const notoserifsc = Noto_Serif_SC({
-//     subsets: ["latin"],
-//     weight: ["400", "500", "600"],
-//     display: "auto",
-// });
+const notoserifkr = Noto_Serif_KR({
+    subsets: ["latin"],
+    weight: ["400", "700"],
+    // weight: ["variable"],
+    display: "swap",
+});
+
+const notoserifjp = Noto_Serif_JP({
+    subsets: ["latin"],
+    weight: ["400", "700"],
+    // weight: ["variable"],
+    display: "swap",
+});
+
+const notoserifsc = Noto_Serif_SC({
+    subsets: ["latin"],
+    weight: ["400", "700"],
+    display: "swap",
+});
 
 
-// const fontByLocale: Record<string, any> = {
-//     en: notoserifkr,
-//     jp: notoserifjp,
-//     cn: notoserifsc,
-//     kr: notoserifkr,
-// };
+const fontByLocale: Record<string, any> = {
+    en: notoserifkr,
+    jp: notoserifjp,
+    cn: notoserifsc,
+    kr: notoserifkr,
+};
 
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
@@ -112,11 +112,11 @@ export default async function LocaleLayout({
     setRequestLocale(locale);
     const messages = await getMessages();
 
-    // const font = fontByLocale[locale];
+    const font = fontByLocale[locale];
 
     return (
         // <html lang={locale} className={font?.variable ?? ""}>
-        <html lang={locale}>
+        <html lang={locale} className={font.className}>
         <body>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <AppProviders>
