@@ -4,7 +4,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { UniversalConnector } from '@reown/appkit-universal-connector';
-import {createCoinbaseWalletSDK} from "@coinbase/wallet-sdk";
+import { createBaseAccountSDK } from '@base-org/account';
 import { defineChain } from '@reown/appkit/networks';
 import styles from './styles.module.css';
 import triangle from '@/public/icons/triangle_white.png'
@@ -135,8 +135,8 @@ const WALLETCONNECT_OPTION: WalletOption = {
 
 const COINBASE_WALLET_OPTION: WalletOption = {
     id: 'coinbase-wallet',
-    name: 'Coinbase Wallet',
-    icon: '/wallets/coinbase.svg',
+    name: 'Base',
+    icon: '/wallets/base.svg',
     type: 'coinbase-wallet',
     detected: false,
 }
@@ -190,8 +190,8 @@ function toHexUtf8(value: string): string {
 function getWalletOptions(discoveredMap: Map<string, WalletOption>): WalletOption[] {
     return [
         ...Array.from(discoveredMap.values()),
+        WALLETCONNECT_OPTION,
         COINBASE_WALLET_OPTION,
-        WALLETCONNECT_OPTION
     ];
 }
 
@@ -241,7 +241,7 @@ export default function Login({
 
     const [apiResult, setApiResult] = useState('');
 
-    const [walletOptions, setWalletOptions] = useState<WalletOption[]>([COINBASE_WALLET_OPTION, WALLETCONNECT_OPTION]);
+    const [walletOptions, setWalletOptions] = useState<WalletOption[]>([WALLETCONNECT_OPTION, COINBASE_WALLET_OPTION]);
     const [showWalletOptions, setShowWalletOptions] = useState(true);
 
     const [confirmModal, setConfirmModal] = useState<'disconnect' | 'logout' | null>(null);
@@ -1092,6 +1092,95 @@ export default function Login({
         }
     }
 
+    // const connectCoinbaseWallet = async () => {
+    //     try {
+    //         resetLoginState()
+    //         clearSavedWalletSession()
+    //         resetWalletConnectionStateOnly()
+    //
+    //         setStatus('connecting')
+    //         setMessage('Opening Coinbase Wallet...')
+    //
+    //         const origin =
+    //             typeof window !== 'undefined'
+    //                 ? window.location.origin
+    //                 : 'https://www.vobc.io'
+    //
+    //         const coinbaseWallet = createCoinbaseWalletSDK({
+    //             appName: 'VOB',
+    //             appLogoUrl: `${origin}/favicon.svg`,
+    //             appChainIds: [8453, 1, 56],
+    //             preference: {
+    //                 options: 'smartWalletOnly'
+    //             }
+    //         })
+    //
+    //         const provider = coinbaseWallet.getProvider() as unknown as Web3Provider
+    //
+    //         const accounts = (await provider.request({
+    //             method: 'eth_requestAccounts',
+    //         })) as string[]
+    //
+    //         const selectedAccount = accounts?.[0] || ''
+    //
+    //         if (!selectedAccount) {
+    //             setStatus('failed')
+    //             setMessage('No connected account found. Please try again.')
+    //             return
+    //         }
+    //
+    //         if (!isValidEvmAddress(selectedAccount)) {
+    //             setStatus('failed')
+    //             setMessage('The selected account is not an EVM account.')
+    //             return
+    //         }
+    //
+    //         const currentChainId = (await provider.request({
+    //             method: 'eth_chainId',
+    //         })) as string
+    //
+    //         const normalizedChainId = normalizeHexChainId(currentChainId)
+    //
+    //         saveWalletSession({
+    //             type: 'coinbase-wallet',
+    //             id: COINBASE_WALLET_OPTION.id,
+    //             name: COINBASE_WALLET_OPTION.name,
+    //             icon: COINBASE_WALLET_OPTION.icon,
+    //             account: selectedAccount,
+    //             chainId: normalizedChainId,
+    //         })
+    //
+    //         const walletConn = {
+    //             address: selectedAccount,
+    //             icon: COINBASE_WALLET_OPTION.icon,
+    //             name: COINBASE_WALLET_OPTION.name,
+    //         }
+    //
+    //         setActiveInjectedProvider(provider)
+    //         setConnectionType('coinbase-wallet')
+    //         setAccount(selectedAccount)
+    //         setChainId(normalizedChainId)
+    //         setAccessToken('')
+    //         setStatus('connected')
+    //         setShowWalletOptions(false)
+    //         setMessage(`Wallet: ${selectedAccount} / chain ${normalizedChainId}`)
+    //         setConnectedWallet(walletConn)
+    //
+    //         await onConnectSuccess?.(walletConn)
+    //     } catch (error: any) {
+    //         console.error('[connectCoinbaseWallet error]', error)
+    //
+    //         if (error?.code === 4001) {
+    //             setStatus('rejected')
+    //             setMessage('User rejected the request. Please try again.')
+    //             return
+    //         }
+    //
+    //         setStatus('failed')
+    //         setMessage(error?.message || 'Failed to connect Coinbase Wallet.')
+    //     }
+    // }
+
     const connectCoinbaseWallet = async () => {
         try {
             resetLoginState()
@@ -1099,20 +1188,20 @@ export default function Login({
             resetWalletConnectionStateOnly()
 
             setStatus('connecting')
-            setMessage('Opening Coinbase Wallet...')
+            setMessage('Opening Base Account...')
 
             const origin =
                 typeof window !== 'undefined'
                     ? window.location.origin
                     : 'https://www.vobc.io'
 
-            const coinbaseWallet = createCoinbaseWalletSDK({
+            const baseAccount = createBaseAccountSDK({
                 appName: 'VOB',
                 appLogoUrl: `${origin}/favicon.svg`,
-                appChainIds: [8453, 1, 56],
+                appChainIds: [8453],
             })
 
-            const provider = coinbaseWallet.getProvider() as unknown as Web3Provider
+            const provider = baseAccount.getProvider() as unknown as Web3Provider
 
             const accounts = (await provider.request({
                 method: 'eth_requestAccounts',
@@ -1165,7 +1254,7 @@ export default function Login({
 
             await onConnectSuccess?.(walletConn)
         } catch (error: any) {
-            console.error('[connectCoinbaseWallet error]', error)
+            console.error('[connectBaseAccount error]', error)
 
             if (error?.code === 4001) {
                 setStatus('rejected')
@@ -1174,9 +1263,10 @@ export default function Login({
             }
 
             setStatus('failed')
-            setMessage(error?.message || 'Failed to connect Coinbase Wallet.')
+            setMessage(error?.message || 'Failed to connect Base Account.')
         }
     }
+
     // const debugConnector = () => {
     //     const connectorAny = getConnector() as any
     //
@@ -1794,6 +1884,22 @@ export default function Login({
         );
     };
 
+    const renderWalletHelpText = () => {
+        return (
+            <div className={styles.walletHelpText}>
+                New to wallets?
+                <NavigationLink
+                    href="/web3-guide"
+                    className={styles.learnMoreLink}
+                    onClick={onClose}
+                >
+                    Learn more
+                </NavigationLink>
+            </div>
+        )
+    }
+
+
     return (
         <>
             <main className={styles.main}>
@@ -1825,14 +1931,7 @@ export default function Login({
                             </p>
 
                             {renderWalletOptionList()}
-
-                            <div className={styles.walletHelpText}>
-                                New to wallets?
-                                <NavigationLink href={"/web3-guide"} className={styles.learnMoreLink} onClick={onClose}>
-                                    Learn more
-                                </NavigationLink>
-                                {/*<span>Learn more</span>*/}
-                            </div>
+                            {renderWalletHelpText()}
                         </section>
                     )}
 
@@ -1857,6 +1956,7 @@ export default function Login({
                             </div>
 
                             {renderWalletFooter()}
+                            {renderWalletHelpText()}
                         </section>
                     )}
 
@@ -1883,6 +1983,7 @@ export default function Login({
                             </div>
 
                             {renderWalletFooter()}
+                            {renderWalletHelpText()}
                         </section>
                     )}
 
