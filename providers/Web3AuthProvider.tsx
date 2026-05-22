@@ -13,7 +13,7 @@ import {
 
 import { UniversalConnector } from '@reown/appkit-universal-connector'
 
-export type ConnectionType = 'walletconnect' | 'injected' | null
+export type ConnectionType = 'walletconnect' | 'injected' | 'coinbase-wallet' | null
 
 export type Web3Provider = {
     session?: any
@@ -146,7 +146,7 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
             return getWalletConnectProvider()
         }
 
-        if (connectionType === 'injected') {
+        if (connectionType === 'injected' || connectionType === 'coinbase-wallet') {
             return activeInjectedProvider
         }
 
@@ -158,10 +158,6 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
         const topic = provider?.session?.topic
         return typeof topic === 'string' && topic.length > 0 ? topic : ''
     }
-
-
-
-
 
     const saveWalletSession = (session: SavedWalletSession) => {
         if (typeof window === 'undefined') return

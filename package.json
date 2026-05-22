@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coinbase/wallet-sdk": "^4.3.7",
     "@reown/appkit": "^1.8.19",
     "@reown/appkit-common": "^1.8.19",
     "@reown/appkit-universal-connector": "^1.8.19",

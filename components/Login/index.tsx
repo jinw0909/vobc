@@ -4,10 +4,12 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { UniversalConnector } from '@reown/appkit-universal-connector';
+import {createCoinbaseWalletSDK} from "@coinbase/wallet-sdk";
 import { defineChain } from '@reown/appkit/networks';
 import styles from './styles.module.css';
 import triangle from '@/public/icons/triangle_white.png'
 import vobLogo from '@/public/vob_white.png'
+import vobLogoWhite from '@/public/favicon.svg'
 import Image from 'next/image';
 import {NavigationLink} from "@/ui/NavigationLink";
 import {usePathname, useRouter} from "@/i18n/navigation";
@@ -36,7 +38,7 @@ type WalletOption = {
     id: string;
     name: string;
     icon: string;
-    type: 'injected' | 'walletconnect';
+    type: 'injected' | 'walletconnect' | 'coinbase-wallet';
     provider?: InjectedProvider;
     detected?: boolean;
 };
@@ -126,10 +128,18 @@ const bscMainnet = defineChain({
 const WALLETCONNECT_OPTION: WalletOption = {
     id: 'walletconnect',
     name: 'WalletConnect',
-    icon: '/walletconnect.svg',
+    icon: '/wallets/walletconnect.svg',
     type: 'walletconnect',
     detected: false,
 };
+
+const COINBASE_WALLET_OPTION: WalletOption = {
+    id: 'coinbase-wallet',
+    name: 'Coinbase Wallet',
+    icon: '/wallets/coinbase.svg',
+    type: 'coinbase-wallet',
+    detected: false,
+}
 
 function isValidEvmAddress(value: string): boolean {
     return /^0x[a-fA-F0-9]{40}$/.test(value);
@@ -177,8 +187,12 @@ function toHexUtf8(value: string): string {
             .join('')
     );
 }
-function getWalletOptionsWithWalletConnect(discoveredMap: Map<string, WalletOption>): WalletOption[] {
-    return [...Array.from(discoveredMap.values()), WALLETCONNECT_OPTION];
+function getWalletOptions(discoveredMap: Map<string, WalletOption>): WalletOption[] {
+    return [
+        ...Array.from(discoveredMap.values()),
+        COINBASE_WALLET_OPTION,
+        WALLETCONNECT_OPTION
+    ];
 }
 
 function shortenAddress(address?: string) {
@@ -194,6 +208,14 @@ function getNetworkName(chainId?: string) {
             return 'Ethereum Mainnet';
         case '0x38':
             return 'BNB Smart Chain';
+        case '0x2105':
+            return 'Base Mainnet';
+        case '0x89':
+            return 'Polygon Mainnet';
+        case '0xa':
+            return 'Optimism';
+        case '0xa4b1':
+            return 'Arbitrum One';
         default:
             return normalized || '-';
     }
@@ -219,7 +241,7 @@ export default function Login({
 
     const [apiResult, setApiResult] = useState('');
 
-    const [walletOptions, setWalletOptions] = useState<WalletOption[]>([WALLETCONNECT_OPTION]);
+    const [walletOptions, setWalletOptions] = useState<WalletOption[]>([COINBASE_WALLET_OPTION, WALLETCONNECT_OPTION]);
     const [showWalletOptions, setShowWalletOptions] = useState(true);
 
     const [confirmModal, setConfirmModal] = useState<'disconnect' | 'logout' | null>(null);
@@ -371,7 +393,7 @@ export default function Login({
                 name: 'VOB Login Test',
                 description: 'VOB Login with WalletConnect',
                 url: origin,
-                icons: [`${origin}/icon.png`],
+                icons: [`${origin}/favicon.svg`],
             },
             networks: [
                 {
@@ -778,14 +800,14 @@ export default function Login({
                 detected: true,
             });
 
-            setWalletOptions(getWalletOptionsWithWalletConnect(discoveredWalletsRef.current));
+            setWalletOptions(getWalletOptions(discoveredWalletsRef.current));
 
             await tryRestoreInjected()
         };
 
         window.addEventListener('eip6963:announceProvider', handleAnnounceProvider as EventListener);
         window.dispatchEvent(new Event('eip6963:requestProvider'));
-        setWalletOptions(getWalletOptionsWithWalletConnect(discoveredWalletsRef.current));
+        setWalletOptions(getWalletOptions(discoveredWalletsRef.current));
 
         return () => {
             window.removeEventListener(
@@ -821,7 +843,12 @@ export default function Login({
     }, [])
 
     useEffect(() => {
-        if (!activeInjectedProvider || connectionType !== 'injected') return;
+        // if (!activeInjectedProvider || connectionType !== 'injected') return;
+
+        if (
+            !activeInjectedProvider ||
+            !['injected', 'coinbase-wallet'].includes(connectionType || '')
+        ) return;
 
         const handleAccountsChanged = async (accounts: string[]) => {
             const nextAccount = accounts?.[0] || '';
@@ -1065,6 +1092,91 @@ export default function Login({
         }
     }
 
+    const connectCoinbaseWallet = async () => {
+        try {
+            resetLoginState()
+            clearSavedWalletSession()
+            resetWalletConnectionStateOnly()
+
+            setStatus('connecting')
+            setMessage('Opening Coinbase Wallet...')
+
+            const origin =
+                typeof window !== 'undefined'
+                    ? window.location.origin
+                    : 'https://www.vobc.io'
+
+            const coinbaseWallet = createCoinbaseWalletSDK({
+                appName: 'VOB',
+                appLogoUrl: `${origin}/favicon.svg`,
+                appChainIds: [8453, 1, 56],
+            })
+
+            const provider = coinbaseWallet.getProvider() as unknown as Web3Provider
+
+            const accounts = (await provider.request({
+                method: 'eth_requestAccounts',
+            })) as string[]
+
+            const selectedAccount = accounts?.[0] || ''
+
+            if (!selectedAccount) {
+                setStatus('failed')
+                setMessage('No connected account found. Please try again.')
+                return
+            }
+
+            if (!isValidEvmAddress(selectedAccount)) {
+                setStatus('failed')
+                setMessage('The selected account is not an EVM account.')
+                return
+            }
+
+            const currentChainId = (await provider.request({
+                method: 'eth_chainId',
+            })) as string
+
+            const normalizedChainId = normalizeHexChainId(currentChainId)
+
+            saveWalletSession({
+                type: 'coinbase-wallet',
+                id: COINBASE_WALLET_OPTION.id,
+                name: COINBASE_WALLET_OPTION.name,
+                icon: COINBASE_WALLET_OPTION.icon,
+                account: selectedAccount,
+                chainId: normalizedChainId,
+            })
+
+            const walletConn = {
+                address: selectedAccount,
+                icon: COINBASE_WALLET_OPTION.icon,
+                name: COINBASE_WALLET_OPTION.name,
+            }
+
+            setActiveInjectedProvider(provider)
+            setConnectionType('coinbase-wallet')
+            setAccount(selectedAccount)
+            setChainId(normalizedChainId)
+            setAccessToken('')
+            setStatus('connected')
+            setShowWalletOptions(false)
+            setMessage(`Wallet: ${selectedAccount} / chain ${normalizedChainId}`)
+            setConnectedWallet(walletConn)
+
+            await onConnectSuccess?.(walletConn)
+        } catch (error: any) {
+            console.error('[connectCoinbaseWallet error]', error)
+
+            if (error?.code === 4001) {
+                setStatus('rejected')
+                setMessage('User rejected the request. Please try again.')
+                return
+            }
+
+            setStatus('failed')
+            setMessage(error?.message || 'Failed to connect Coinbase Wallet.')
+        }
+    }
     // const debugConnector = () => {
     //     const connectorAny = getConnector() as any
     //
@@ -1171,6 +1283,11 @@ export default function Login({
         }
     };
     const handleWalletOptionClick = async (option: WalletOption) => {
+        if (option.type === 'coinbase-wallet') {
+            await connectCoinbaseWallet();
+            return;
+        }
+
         if (option.type === 'walletconnect') {
             await connectWalletConnect();
             return;
@@ -1294,6 +1411,7 @@ export default function Login({
                 credentials: 'include',
                 body: JSON.stringify({
                     address: account,
+                    chainId: Number.parseInt(currentChainId, 16),
                 }),
             });
 
@@ -1313,12 +1431,38 @@ export default function Login({
 
             setApiResult('2) Requesting signature...');
 
+            // const signature = (await provider.request({
+            //     method: 'personal_sign',
+            //     params: [hexMessage, account, 'Sign in to VOB'],
+            // })) as string;
+
+            // const signature = (await provider.request({
+            //     method: 'personal_sign',
+            //     params: [hexMessage, account],
+            // })) as string;
+
+            let signParam: string
+
+            if (connectionType === 'coinbase-wallet') {
+                signParam = signMessage
+            } else {
+                signParam = hexMessage
+            }
+
             const signature = (await provider.request({
                 method: 'personal_sign',
-                params: [hexMessage, account, 'Sign in to VOB'],
-            })) as string;
+                params: [signParam, account],
+            })) as string
+
 
             setApiResult('3) Verifying...');
+
+            console.log('[verify request]', {
+                address: account,
+                nonce: nonceData.nonce,
+                message: signMessage,
+                signature,
+            })
 
             const verifyRes = await fetch(`${API_BASE_URL}/web3/auth/verify`, {
                 method: 'POST',
@@ -1330,8 +1474,11 @@ export default function Login({
                     address: account,
                     signature,
                     nonce: nonceData.nonce,
+                    chainId: Number.parseInt(normalizedChainId, 16),
                 }),
             });
+
+
 
             const verifyData = await verifyRes.json().catch(() => null);
 
@@ -1347,7 +1494,7 @@ export default function Login({
             const token = verifyData?.accessToken ;
 
             console.log('[verifyData]', verifyData);
-            console.log('[token]', token);
+            console.log('[token prefix]', token?.slice(0, 20));
 
             if (!token) {
                 setApiResult('Verify succeeded, but accessToken is missing.');
@@ -1665,7 +1812,8 @@ export default function Login({
                     {viewState === 'disconnected' && (
                         <section className={styles.section}>
                             <div className={styles.emptyWalletIconBox}>
-                                <span className={styles.emptyWalletIcon}>▣</span>
+                                {/*<span className={styles.emptyWalletIcon}>▣</span>*/}
+                                <Image src={vobLogoWhite} alt={"vob logo"} objectFit="contain"/>
                             </div>
 
                             <h2 className={styles.disconnectedTitle}>
@@ -1679,7 +1827,11 @@ export default function Login({
                             {renderWalletOptionList()}
 
                             <div className={styles.walletHelpText}>
-                                New to wallets? <span>Learn more</span>
+                                New to wallets?
+                                <NavigationLink href={"/web3-guide"} className={styles.learnMoreLink} onClick={onClose}>
+                                    Learn more
+                                </NavigationLink>
+                                {/*<span>Learn more</span>*/}
                             </div>
                         </section>
                     )}

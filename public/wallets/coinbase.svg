@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Coinbase Wallet icon">
+  <circle cx="32" cy="32" r="32" fill="#0052FF"></circle>
+  <path fill="#FFFFFF" d="M32 48c-8.84 0-16-7.16-16-16s7.16-16 16-16c7.35 0 13.54 4.96 15.42 11.71H38.7A7.98 7.98 0 0 0 32 24c-4.42 0-8 3.58-8 8s3.58 8 8 8a7.98 7.98 0 0 0 6.7-3.71h8.72C45.54 43.04 39.35 48 32 48Z"></path>
+</svg>

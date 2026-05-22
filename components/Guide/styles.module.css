@@ -1,0 +1,309 @@
+/*.guide {*/
+/*    !*max-width: 920px;*!*/
+/*    margin: 0 auto;*/
+/*    padding: 8rem 2rem;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.hero {*/
+/*    margin-bottom: 4rem;*/
+/*}*/
+
+/*.eyebrow {*/
+/*    margin-bottom: 1rem;*/
+/*    font-size: 0.85rem;*/
+/*    letter-spacing: 0.16em;*/
+/*    text-transform: uppercase;*/
+/*    opacity: 0.7;*/
+/*}*/
+
+/*.title {*/
+/*    !*max-width: 720px;*!*/
+/*    font-size: clamp(2.4rem, 5vw, 5rem);*/
+/*    line-height: 1.05;*/
+/*    margin-bottom: 1.5rem;*/
+/*}*/
+
+/*.description {*/
+/*    !*max-width: 680px;*!*/
+/*    font-size: 1.05rem;*/
+/*    line-height: 1.8;*/
+/*    opacity: 0.78;*/
+/*}*/
+
+/*.section {*/
+/*    padding: 2rem 0;*/
+/*    border-top: 1px solid rgba(255, 255, 255, 0.12);*/
+/*}*/
+
+/*.section h2,*/
+/*.notice h2 {*/
+/*    margin-bottom: 0.8rem;*/
+/*    font-size: 1.4rem;*/
+/*}*/
+
+/*.section p,*/
+/*.notice p {*/
+/*    !*max-width: 720px;*!*/
+/*    line-height: 1.8;*/
+/*    opacity: 0.78;*/
+/*}*/
+
+/*.list {*/
+/*    margin-top: 1rem;*/
+/*    padding-left: 1.2rem;*/
+/*    line-height: 2;*/
+/*    opacity: 0.82;*/
+/*}*/
+
+/*.notice {*/
+/*    margin-top: 3rem;*/
+/*    padding: 2rem;*/
+/*    border: 1px solid rgba(255, 255, 255, 0.14);*/
+/*    border-radius: 1.5rem;*/
+/*    background: rgba(255, 255, 255, 0.04);*/
+/*}*/
+
+.vobLogo {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: transparent;
+}
+
+/*.vobLogo::before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    inset: 2px;*/
+/*    border-radius: 50%;*/
+/*    background-color: #ddd;*/
+/*    z-index: 0;*/
+/*}*/
+
+/*.vobLogo img {*/
+/*    position: relative;*/
+/*    z-index: 1;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover;*/
+/*    display: block;*/
+/*    border-radius: 50%;*/
+/*}*/
+
+
+.guide {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 8rem 2rem;
+    color: #fff;
+}
+
+/* 배경 glow */
+.guide::before {
+    content: '';
+    position: absolute;
+    top: 4rem;
+    right: -10rem;
+    width: 28rem;
+    height: 28rem;
+    border-radius: 50%;
+    background: radial-gradient(
+            circle,
+            rgba(92, 156, 255, 0.28),
+            rgba(92, 156, 255, 0.08) 45%,
+            transparent 70%
+    );
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.guide::after {
+    content: '';
+    position: absolute;
+    top: 18rem;
+    left: -12rem;
+    width: 26rem;
+    height: 26rem;
+    border-radius: 50%;
+    background: radial-gradient(
+            circle,
+            rgba(155, 92, 255, 0.2),
+            rgba(155, 92, 255, 0.06) 45%,
+            transparent 70%
+    );
+    filter: blur(24px);
+    pointer-events: none;
+}
+
+.hero,
+.section,
+.notice {
+    position: relative;
+    z-index: 1;
+}
+
+.hero {
+    margin-bottom: 2rem;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: #7db2ff;
+    box-shadow: 0 0 14px rgba(125, 178, 255, 0.9);
+}
+
+.title {
+    font-size: clamp(2.6rem, 5vw, 5.4rem);
+    line-height: 1.02;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+    margin-top: 1rem;
+}
+
+.description {
+    /*max-width: 760px;*/
+    font-size: 1.08rem;
+    line-height: 1.9;
+    opacity: 0.78;
+}
+
+/* 섹션 카드화 */
+.section {
+    margin-top: 1rem;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    background:
+            linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.025)
+            );
+    backdrop-filter: blur(10px);
+    transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
+}
+
+.section:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
+    background:
+            linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.1),
+                    rgba(255, 255, 255, 0.035)
+            );
+}
+
+.section h2,
+.notice h2 {
+    margin-bottom: 0.8rem;
+    font-size: 1.45rem;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section p,
+.notice p {
+    /*max-width: 760px;*/
+    line-height: 1.85;
+    opacity: 0.78;
+}
+
+/* 기본 bullet 제거 */
+.list {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1.2rem;
+    padding-left: 0;
+    list-style: none;
+    opacity: 0.86;
+}
+
+.list li {
+    position: relative;
+    padding-left: 1.7rem;
+    line-height: 1.75;
+}
+
+.list li::before {
+    content: '';
+    position: absolute;
+    top: 0.75rem;
+    left: 0;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: #7db2ff;
+    box-shadow: 0 0 12px rgba(125, 178, 255, 0.8);
+}
+
+/* 하단 notice 강조 */
+.notice {
+    margin-top: 3rem;
+    padding: 2.2rem;
+    border: 1px solid rgba(125, 178, 255, 0.28);
+    border-radius: 1rem;
+    background:
+            radial-gradient(
+                    circle at top right,
+                    rgba(125, 178, 255, 0.18),
+                    transparent 38%
+            ),
+            rgba(255, 255, 255, 0.055);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+}
+
+@media (max-width: 768px) {
+    .guide { padding: 6rem 1.5rem; }
+    .title { font-size: 2.2rem; }
+    .description { font-size: 1.05rem; }
+    .section { padding: 1.5rem; }
+    .section h2, .notice h2 { font-size: 1.35rem; }
+    .section p, .notice p { font-size: 1rem; }
+    .list li { padding-left: 1.5rem; }
+    .list li::before { top: 0.65rem; }
+    .notice { padding: 1.8rem; }
+}
+
+@media (max-width: 576px) {
+    .guide { padding: 6rem 1rem; }
+    .title { font-size: 1.5rem; }
+    .description { font-size: .8rem; }
+    .section { padding: 1rem; }
+    .section h2, .notice h2 { font-size: 1rem; }
+    .section p, .notice p { font-size: 0.8rem; }
+    .list li { padding-left: 1rem; }
+    .list li::before { top: 0.5rem; }
+    .notice { padding: 1.5rem; }
+    .vobLogo { width: 1rem; height: 1rem; }
+}
