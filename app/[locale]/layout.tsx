@@ -1,7 +1,7 @@
 import "./global.css";
 import { Header } from "@/components/Header";
 import localFont from "next/font/local";
-import { Noto_Serif_KR, Noto_Serif_JP, Noto_Serif_SC} from "next/font/google";
+// import { Noto_Serif_KR, Noto_Serif_JP, Noto_Serif_SC} from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { MobileHeader } from "@/components/MobileHeader";
 import { MobileFooter } from "@/components/MobileFooter";
@@ -17,46 +17,50 @@ import Settings from "@/components/Settings";
 import AppProviders from '@/providers/AppProviders'
 
 
-// const notoserifjp = localFont({
-//     src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.woff2',
-//     variable: '--font-notoserifjp',
-//     display: 'auto', // 또는 optional
-//     preload: true,
-// });
-//
-// const notoserifsc = localFont({
-//     src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.woff2',
-//     variable: '--font-notoserifsc',
-//     display: 'auto', // 또는 optional
-//     preload: true,
-// });
-//
-// const notoserifkr = localFont({
-//     src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.woff2',
-//     variable: '--font-notoserifkr',
-//     display: 'auto', // 또는 optional
-//     preload: true,
-// });
-//
-const notoserifkr = Noto_Serif_KR({
-    subsets: ["latin"],
-    weight: ["400", "700"],
-    // weight: ["variable"],
-    display: "swap",
+const notoserifjp = localFont({
+    src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.woff2',
+    // variable: '--font-notoserifjp',
+    display: 'auto', // 또는 optional
+    preload: true,
 });
 
-const notoserifjp = Noto_Serif_JP({
-    subsets: ["latin"],
-    weight: ["400", "700"],
-    // weight: ["variable"],
-    display: "swap",
+const notoserifsc = localFont({
+    src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.woff2',
+    // variable: '--font-notoserifsc',
+    display: 'auto', // 또는 optional
+    preload: true,
 });
 
-const notoserifsc = Noto_Serif_SC({
-    subsets: ["latin"],
-    weight: ["400", "700"],
-    display: "swap",
+const notoserifkr = localFont({
+    src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.woff2',
+    // variable: '--font-notoserifkr',
+    display: 'auto', // 또는 optional
+    preload: true,
 });
+//
+// const notoserifkr = Noto_Serif_KR({
+//     subsets: ["latin"],
+//     weight: ["400"],
+//     // weight: ["400", "700"],
+//     // weight: ["variable"],
+//     display: "swap",
+// });
+//
+// const notoserifjp = Noto_Serif_JP({
+//     subsets: ["latin"],
+//     weight: ["400"],
+//     // weight: ["400", "700"],
+//     // weight: ["variable"],
+//     display: "swap",
+// });
+//
+// const notoserifsc = Noto_Serif_SC({
+//     subsets: ["latin"],
+//     weight: ["400"],
+//     // weight: ["400", "700"],
+//     // weight: ["variable"],
+//     display: "swap",
+// });
 
 
 const fontByLocale: Record<string, any> = {

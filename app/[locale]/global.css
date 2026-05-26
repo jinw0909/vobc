@@ -49,28 +49,28 @@ html {
     scrollbar-gutter: stable;
 }
 
-body {
-    font-family:
-            "NotoSerifKR",
-            "Apple SD Gothic Neo",
-            "Malgun Gothic",
-            serif;
-}
+/*body {*/
+/*    font-family:*/
+/*            "NotoSerifKR",*/
+/*            "Apple SD Gothic Neo",*/
+/*            "Malgun Gothic",*/
+/*            serif;*/
+/*}*/
 
-html[lang="jp"] body {
-    font-family:
-            "NotoSerifJP",
-            "Hiragino Mincho ProN",
-            "Yu Mincho",
-            serif;
-}
+/*html[lang="jp"] body {*/
+/*    font-family:*/
+/*            "NotoSerifJP",*/
+/*            "Hiragino Mincho ProN",*/
+/*            "Yu Mincho",*/
+/*            serif;*/
+/*}*/
 
-html[lang="cn"] body {
-    font-family:
-            "NotoSerifSC",
-            "Songti SC",
-            serif;
-}
+/*html[lang="cn"] body {*/
+/*    font-family:*/
+/*            "NotoSerifSC",*/
+/*            "Songti SC",*/
+/*            serif;*/
+/*}*/
 
 body {
     /*background-color: black;*/

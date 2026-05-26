@@ -546,7 +546,7 @@
         justify-self: start;
     }
 
-    .secondaryButton {
+    .profileTitleRow .secondaryButton {
         display: none;
     }
 

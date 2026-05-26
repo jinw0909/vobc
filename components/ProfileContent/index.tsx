@@ -566,6 +566,121 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         resetProfileForm()
         setEditing(true)
     }
+    if (editing) {
+        return (
+            <div className={styles.profileContent}>
+                <section className={styles.card}>
+                    <div className={styles.sectionHeader}>
+                        <div>
+                            <h2>Profile Settings</h2>
+                            <p>Register or update nickname, email, profile image, and bio</p>
+                        </div>
+
+                        <button
+                            type="button"
+                            className={styles.secondaryButton}
+                            onClick={handleEditToggle}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+
+                    <div className={styles.formGrid}>
+                        <label className={styles.inputGroup}>
+                            <span>Nickname</span>
+                            <input
+                                name="nickname"
+                                value={profile.nickname}
+                                onChange={handleProfileChange}
+                                placeholder="nickname"
+                            />
+                        </label>
+
+                        <label className={styles.inputGroup}>
+                            <span>Email</span>
+                            <input
+                                name="email"
+                                value={profile.email}
+                                onChange={handleProfileChange}
+                                placeholder="you@example.com"
+                            />
+                        </label>
+
+                        <div className={styles.inputGroup}>
+                            <span>Profile Image</span>
+
+                            <div className={styles.imageButtonRow}>
+                                <label className={styles.imageUploadButton}>
+                                    {imageUploading ? 'Uploading...' : 'Change Image'}
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleProfileImageChange}
+                                        className={styles.hiddenFileInput}
+                                        disabled={imageUploading}
+                                    />
+                                </label>
+
+                                <button
+                                    type="button"
+                                    className={styles.imageResetButton}
+                                    onClick={resetProfileImage}
+                                    disabled={imageUploading}
+                                >
+                                    Reset Image
+                                </button>
+                            </div>
+                        </div>
+
+                        <label className={styles.inputGroupFull}>
+                            <span>Bio</span>
+                            <textarea
+                                name="bio"
+                                value={profile.bio}
+                                onChange={handleProfileChange}
+                                placeholder="tell us about yourself"
+                                rows={4}
+                            />
+                        </label>
+                    </div>
+
+                    <div className={styles.buttonRowRight}>
+                        {/*<button*/}
+                        {/*    type="button"*/}
+                        {/*    className={styles.secondaryButton}*/}
+                        {/*    onClick={handleEditToggle}*/}
+                        {/*    disabled={loading || imageUploading}*/}
+                        {/*>*/}
+                        {/*    Cancel*/}
+                        {/*</button>*/}
+
+                        <button
+                            type="button"
+                            className={styles.primaryButton}
+                            onClick={saveProfile}
+                            disabled={loading || imageUploading}
+                        >
+                            {imageUploading
+                                ? 'Uploading image...'
+                                : loading
+                                    ? 'Saving...'
+                                    : 'Save Profile'}
+                        </button>
+                    </div>
+                </section>
+
+                {/*{logs.length > 0 && (*/}
+                {/*    <section className={styles.debugCard}>*/}
+                {/*        <h2>Debug Logs</h2>*/}
+
+                {/*        {logs.map((log, index) => (*/}
+                {/*            <p key={`${log}-${index}`}>{log}</p>*/}
+                {/*        ))}*/}
+                {/*    </section>*/}
+                {/*)}*/}
+            </div>
+        )
+    }
 
     return (
         <div className={styles.profileContent}>
@@ -645,90 +760,90 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                 </section>
             )}
 
-            {editing && (
-                <section className={styles.card}>
-                    <div className={styles.sectionHeader}>
-                        <div>
-                            <h2>Profile Settings</h2>
-                            <p>Register or update nickname, email, profile image, and bio</p>
-                        </div>
-                    </div>
+            {/*{editing && (*/}
+            {/*    <section className={styles.card}>*/}
+            {/*        <div className={styles.sectionHeader}>*/}
+            {/*            <div>*/}
+            {/*                <h2>Profile Settings</h2>*/}
+            {/*                <p>Register or update nickname, email, profile image, and bio</p>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
 
-                    <div className={styles.formGrid}>
-                        <label className={styles.inputGroup}>
-                            <span>Nickname</span>
-                            <input
-                                name="nickname"
-                                value={profile.nickname}
-                                onChange={handleProfileChange}
-                                placeholder="nickname"
-                            />
-                        </label>
+            {/*        <div className={styles.formGrid}>*/}
+            {/*            <label className={styles.inputGroup}>*/}
+            {/*                <span>Nickname</span>*/}
+            {/*                <input*/}
+            {/*                    name="nickname"*/}
+            {/*                    value={profile.nickname}*/}
+            {/*                    onChange={handleProfileChange}*/}
+            {/*                    placeholder="nickname"*/}
+            {/*                />*/}
+            {/*            </label>*/}
 
-                        <label className={styles.inputGroup}>
-                            <span>Email</span>
-                            <input
-                                name="email"
-                                value={profile.email}
-                                onChange={handleProfileChange}
-                                placeholder="you@example.com"
-                            />
-                        </label>
+            {/*            <label className={styles.inputGroup}>*/}
+            {/*                <span>Email</span>*/}
+            {/*                <input*/}
+            {/*                    name="email"*/}
+            {/*                    value={profile.email}*/}
+            {/*                    onChange={handleProfileChange}*/}
+            {/*                    placeholder="you@example.com"*/}
+            {/*                />*/}
+            {/*            </label>*/}
 
-                        <div className={styles.inputGroup}>
-                            <span>Profile Image</span>
+            {/*            <div className={styles.inputGroup}>*/}
+            {/*                <span>Profile Image</span>*/}
 
-                            <div className={styles.imageButtonRow}>
-                                <label className={styles.imageUploadButton}>
-                                    {imageUploading ? 'Uploading...' : 'Change Image'}
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={handleProfileImageChange}
-                                        className={styles.hiddenFileInput}
-                                        disabled={imageUploading}
-                                    />
-                                </label>
+            {/*                <div className={styles.imageButtonRow}>*/}
+            {/*                    <label className={styles.imageUploadButton}>*/}
+            {/*                        {imageUploading ? 'Uploading...' : 'Change Image'}*/}
+            {/*                        <input*/}
+            {/*                            type="file"*/}
+            {/*                            accept="image/*"*/}
+            {/*                            onChange={handleProfileImageChange}*/}
+            {/*                            className={styles.hiddenFileInput}*/}
+            {/*                            disabled={imageUploading}*/}
+            {/*                        />*/}
+            {/*                    </label>*/}
 
-                                <button
-                                    type="button"
-                                    className={styles.imageResetButton}
-                                    onClick={resetProfileImage}
-                                    disabled={imageUploading}
-                                >
-                                    Reset Image
-                                </button>
-                            </div>
-                        </div>
+            {/*                    <button*/}
+            {/*                        type="button"*/}
+            {/*                        className={styles.imageResetButton}*/}
+            {/*                        onClick={resetProfileImage}*/}
+            {/*                        disabled={imageUploading}*/}
+            {/*                    >*/}
+            {/*                        Reset Image*/}
+            {/*                    </button>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
 
-                        <label className={styles.inputGroupFull}>
-                            <span>Bio</span>
-                            <textarea
-                                name="bio"
-                                value={profile.bio}
-                                onChange={handleProfileChange}
-                                placeholder="tell us about yourself"
-                                rows={4}
-                            />
-                        </label>
-                    </div>
+            {/*            <label className={styles.inputGroupFull}>*/}
+            {/*                <span>Bio</span>*/}
+            {/*                <textarea*/}
+            {/*                    name="bio"*/}
+            {/*                    value={profile.bio}*/}
+            {/*                    onChange={handleProfileChange}*/}
+            {/*                    placeholder="tell us about yourself"*/}
+            {/*                    rows={4}*/}
+            {/*                />*/}
+            {/*            </label>*/}
+            {/*        </div>*/}
 
-                    <div className={styles.buttonRowRight}>
-                        <button
-                            type="button"
-                            className={styles.primaryButton}
-                            onClick={saveProfile}
-                            disabled={loading || imageUploading}
-                        >
-                            {imageUploading
-                                ? 'Uploading image...'
-                                : loading
-                                    ? 'Saving...'
-                                    : 'Save Profile'}
-                        </button>
-                    </div>
-                </section>
-            )}
+            {/*        <div className={styles.buttonRowRight}>*/}
+            {/*            <button*/}
+            {/*                type="button"*/}
+            {/*                className={styles.primaryButton}*/}
+            {/*                onClick={saveProfile}*/}
+            {/*                disabled={loading || imageUploading}*/}
+            {/*            >*/}
+            {/*                {imageUploading*/}
+            {/*                    ? 'Uploading image...'*/}
+            {/*                    : loading*/}
+            {/*                        ? 'Saving...'*/}
+            {/*                        : 'Save Profile'}*/}
+            {/*            </button>*/}
+            {/*        </div>*/}
+            {/*    </section>*/}
+            {/*)}*/}
 
             <section className={styles.card}>
                 <div className={styles.sectionHeader}>
