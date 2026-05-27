@@ -716,7 +716,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                         <p className={styles.walletAddress}>{displayAddress}</p>
 
                         <div className={styles.statusRow}>
-                            <span>{connectionType || 'Not connected'}</span>
+                            {/*<span>{connectionType || 'Not connected'}</span>*/}
                             <span>{connectedWallet?.name || 'No wallet'}</span>
                             <span>{accessToken ? 'Logged in' : 'No access token'}</span>
                         </div>

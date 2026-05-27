@@ -7,10 +7,8 @@ import vobLogoWhite from '@/public/favicon.svg'
 import Image from 'next/image'
 import { NavigationLink } from '@/ui/NavigationLink'
 import { usePathname, useRouter } from '@/i18n/navigation'
-import {
-    useWeb3Auth,
-    type WalletOption,
-} from '@/providers/Web3AuthProvider'
+import {useWeb3Auth} from '@/providers/Web3AuthProvider'
+import {WalletOption} from "@/types/web3";
 
 type Status =
     | 'idle'
@@ -136,7 +134,6 @@ export default function Login({
         setAccessToken,
         setUserProfile,
         setVobBalance,
-        setConnector,
 
         getConnector,
         getWalletConnectProvider,
@@ -151,6 +148,8 @@ export default function Login({
 
         resetWalletConnectionStateOnly,
         resetLoginState,
+
+        disconnectWallet,
 
         fetchVobBalance,
     } = useWeb3Auth()
@@ -180,22 +179,6 @@ export default function Login({
         setShowWalletOptions(true)
     }
 
-    const disconnectConnector = async (nextMessage?: string) => {
-        try {
-            const connector = getConnector() as any
-
-            await connector?.disconnect?.()
-            await connector?.appKit?.disconnect?.()
-            await connector?.appKit?.resetWcConnection?.()
-            await connector?.appKit?.resetAccount?.()
-        } catch (error) {
-            console.warn('[disconnectConnector error]', error)
-        } finally {
-            setConnector(null)
-            resetConnectionState(nextMessage, { clearSavedSession: true })
-        }
-    }
-
     const handleDisconnectClick = async () => {
         try {
             await fetch(`${API_BASE_URL}/web3/auth/logout`, {
@@ -206,7 +189,12 @@ export default function Login({
             console.error('[handleDisconnectClick error]', error)
         }
 
-        await disconnectConnector('Manually disconnected.')
+        await disconnectWallet()
+
+        setStatus('idle')
+        setMessage('Manually disconnected.')
+        setShowWalletOptions(true)
+
         await onDisconnect?.()
     }
 
