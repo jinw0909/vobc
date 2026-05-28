@@ -606,8 +606,47 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                             />
                         </label>
 
+                        {/*<div className={styles.inputGroup}>*/}
+                        {/*    <span>Profile Image</span>*/}
+
+                        {/*    <div className={styles.imageButtonRow}>*/}
+                        {/*        <label className={styles.imageUploadButton}>*/}
+                        {/*            {imageUploading ? 'Uploading...' : 'Change Image'}*/}
+                        {/*            <input*/}
+                        {/*                type="file"*/}
+                        {/*                accept="image/*"*/}
+                        {/*                onChange={handleProfileImageChange}*/}
+                        {/*                className={styles.hiddenFileInput}*/}
+                        {/*                disabled={imageUploading}*/}
+                        {/*            />*/}
+                        {/*        </label>*/}
+
+                        {/*        <button*/}
+                        {/*            type="button"*/}
+                        {/*            className={styles.imageResetButton}*/}
+                        {/*            onClick={resetProfileImage}*/}
+                        {/*            disabled={imageUploading}*/}
+                        {/*        >*/}
+                        {/*            Reset Image*/}
+                        {/*        </button>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                         <div className={styles.inputGroup}>
                             <span>Profile Image</span>
+
+                            <div className={styles.editAvatarPreview}>
+                                {shownProfileImage ? (
+                                    <img
+                                        src={shownProfileImage}
+                                        alt="Profile preview"
+                                        className={styles.editAvatarImage}
+                                    />
+                                ) : (
+                                    <div className={styles.editAvatarPlaceholder}>
+                                        {shownNickname.slice(0, 1).toUpperCase()}
+                                    </div>
+                                )}
+                            </div>
 
                             <div className={styles.imageButtonRow}>
                                 <label className={styles.imageUploadButton}>

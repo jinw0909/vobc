@@ -1,8 +1,14 @@
 'use client'
 
-import { useCallback, useRef, type Dispatch, type SetStateAction } from 'react'
+import { useCallback, type Dispatch, type SetStateAction } from 'react'
 import { UniversalConnector } from '@reown/appkit-universal-connector'
-import { defineChain } from '@reown/appkit/networks'
+
+import {
+    getUniversalConnector,
+    getCurrentUniversalConnector,
+    setUniversalConnector,
+    resetUniversalConnectorSingleton,
+} from '@/lib/walletconnect/universalConnectorClient'
 
 import type { ConnectionType, SavedWalletSession, ConnectedWallet, Web3Provider } from '@/types/web3'
 import {
@@ -24,9 +30,6 @@ type UseWalletConnectWalletParams = {
     setConnectedWallet: Dispatch<SetStateAction<ConnectedWallet | null>>
 }
 
-const WALLETCONNECT_PROJECT_ID =
-    process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || ''
-
 const WALLETCONNECT_OPTION = {
     id: 'walletconnect',
     name: 'WalletConnect',
@@ -35,51 +38,6 @@ const WALLETCONNECT_OPTION = {
     detected: false,
 }
 
-const ethereumMainnet = defineChain({
-    id: 1,
-    caipNetworkId: 'eip155:1',
-    chainNamespace: 'eip155',
-    name: 'Ethereum',
-    nativeCurrency: {
-        decimals: 18,
-        name: 'Ether',
-        symbol: 'ETH',
-    },
-    rpcUrls: {
-        default: {
-            http: ['https://cloudflare-eth.com'],
-        },
-    },
-    blockExplorers: {
-        default: {
-            name: 'Etherscan',
-            url: 'https://etherscan.io',
-        },
-    },
-})
-
-const bscMainnet = defineChain({
-    id: 56,
-    caipNetworkId: 'eip155:56',
-    chainNamespace: 'eip155',
-    name: 'BNB Smart Chain',
-    nativeCurrency: {
-        decimals: 18,
-        name: 'BNB',
-        symbol: 'BNB',
-    },
-    rpcUrls: {
-        default: {
-            http: ['https://bsc-dataseed.binance.org'],
-        },
-    },
-    blockExplorers: {
-        default: {
-            name: 'BscScan',
-            url: 'https://bscscan.com',
-        },
-    },
-})
 
 export function useWalletConnectWallet({
                                            saveWalletSession,
@@ -92,18 +50,20 @@ export function useWalletConnectWallet({
                                            setConnectionType,
                                            setConnectedWallet,
                                        }: UseWalletConnectWalletParams) {
-    const connectorRef = useRef<UniversalConnector | null>(null)
 
     const setConnector = useCallback((connector: UniversalConnector | null) => {
-        connectorRef.current = connector
+        setUniversalConnector(connector)
     }, [])
 
     const getConnector = useCallback(() => {
-        return connectorRef.current
+        return getCurrentUniversalConnector()
     }, [])
 
     const getWalletConnectProvider = useCallback((): Web3Provider | null => {
-        return (connectorRef.current?.provider as Web3Provider | undefined) ?? null
+        return (
+            (getCurrentUniversalConnector()?.provider as Web3Provider | undefined) ??
+            null
+        )
     }, [])
 
     const getActiveSessionTopic = useCallback((): string => {
@@ -113,53 +73,21 @@ export function useWalletConnectWallet({
     }, [getWalletConnectProvider])
 
     const initWalletConnect = useCallback(async () => {
-        const currentConnector = getConnector()
-
-        if (currentConnector) return currentConnector
-
-        if (!WALLETCONNECT_PROJECT_ID) {
-            throw new Error('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID not found')
-        }
-
-        const origin =
-            typeof window !== 'undefined'
-                ? window.location.origin
-                : 'https://www.vobc.io'
-
-        const connector = await UniversalConnector.init({
-            projectId: WALLETCONNECT_PROJECT_ID,
-            metadata: {
-                name: 'VOBC.IO',
-                description: 'VOB Login with WalletConnect',
-                url: origin,
-                icons: [`${origin}/favicon.svg`],
-            },
-            networks: [
-                {
-                    namespace: 'eip155',
-                    chains: [bscMainnet, ethereumMainnet],
-                    methods: [
-                        'eth_accounts',
-                        'eth_requestAccounts',
-                        'personal_sign',
-                        'eth_signTypedData',
-                        'eth_signTypedData_v4',
-                        'eth_sendTransaction',
-                        'wallet_switchEthereumChain',
-                    ],
-                    events: ['accountsChanged', 'chainChanged', 'disconnect'],
-                },
-            ],
-        })
-
+        const connector = await getUniversalConnector()
         setConnector(connector)
-
         return connector
-    }, [getConnector, setConnector])
+    }, [setConnector])
 
     const disconnectWalletConnectConnectorOnly = useCallback(
         async (targetConnector?: UniversalConnector | null) => {
             const connector = targetConnector || getConnector()
+            const provider = connector?.provider as any
+
+            try {
+                await provider?.disconnect?.()
+            } catch (error) {
+                console.warn('[wc provider disconnect error]', error)
+            }
 
             try {
                 await (connector as any)?.disconnect?.()
@@ -185,9 +113,9 @@ export function useWalletConnectWallet({
                 console.warn('[wc appKit resetAccount error]', error)
             }
 
-            setConnector(null)
+            resetUniversalConnectorSingleton()
         },
-        [getConnector, setConnector]
+        [getConnector]
     )
 
     const syncWalletConnectSession = useCallback(
@@ -219,7 +147,7 @@ export function useWalletConnectWallet({
                     method: 'eth_chainId',
                 })) as string
 
-                const selectedAccount = sessionAddress || accounts?.[0] || ''
+                const selectedAccount = accounts?.[0] || sessionAddress || ''
                 const currentChainId = requestChainId || sessionChainId || ''
                 const currentTopic = String(
                     session?.topic || provider?.session?.topic || ''
