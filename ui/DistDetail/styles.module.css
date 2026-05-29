@@ -129,11 +129,11 @@
     position: relative;
 }
 .tableWrapper.isOpen {
-    max-height: 150vh;
+    max-height: 150svh;
     margin: 2rem auto;
 }
 .checkbox:checked ~ .tableWrapper {
-    max-height: 150vh;
+    max-height: 150svh;
 }
 .table {
     width: 100%;

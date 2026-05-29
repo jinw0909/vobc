@@ -12,13 +12,13 @@
     align-items: center;
     border: 1px solid white;
     border-radius: 8px;
-    min-height: 40vh;
+    min-height: 40svh;
 }
 .right {
     flex: 1;
     display: flex;
     gap: 1rem;
-    min-height: 40vh;
+    min-height: 40svh;
  }
 .rightLeft {
     border: 1px solid white;
@@ -56,11 +56,11 @@
         flex-direction: column;
     }
     .left {
-        min-height: 33vh;
+        min-height: 33svh;
         width: 100%;
     }
     .right {
-        min-height: 33vh;
+        min-height: 33svh;
         width: 100%;
     }
 }

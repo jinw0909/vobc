@@ -25,7 +25,7 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    min-height: 90vh;
+    min-height: 90svh;
     min-width: 70vw;
     transform: translate(-50%, -50%);
     backdrop-filter: blur(12px);

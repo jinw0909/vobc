@@ -1,6 +1,6 @@
 .termsWrapper {
     padding: 2rem;
-    min-height: 100vh;
+    min-height: 100svh;
 }
 .termsTitle {
     margin-top: 12rem;
@@ -40,7 +40,7 @@
 }
 
 .loadingWrapper {
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;

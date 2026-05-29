@@ -1,5 +1,5 @@
 .teamWrapper {
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -149,7 +149,7 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    max-height: 300vh;
+    max-height: 300svh;
     transition: .5s;
     opacity: 1;
 }
@@ -342,7 +342,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    max-height: 300vh;
+    max-height: 300svh;
     transition: 0.5s;
     opacity: 1;
     overflow: hidden;

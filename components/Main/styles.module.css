@@ -367,6 +367,6 @@
 
 @media (max-width: 768px) {
     .visionSlot {
-        height: calc(70vh + 6rem);
+        height: calc(70svh + 6rem);
     }
 }

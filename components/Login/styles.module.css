@@ -15,7 +15,7 @@
 .main {
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 66vh;
+    max-height: 66svh;
     border-radius: 24px 0 0 24px;
     position: relative;
     z-index: 100;
@@ -818,7 +818,7 @@
 
 @media (max-width: 576px) {
     .main {
-        max-height: calc(100dvh - 8rem);
+        max-height: calc(100svh - 8rem);
     }
     .card {
         padding-left: 1rem;

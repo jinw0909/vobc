@@ -25,7 +25,7 @@
     gap: 0.5rem;
     position: sticky;
     top: calc(var(--header-h, 0) + 2rem) !important;
-    max-height: calc(100vh - 11rem);
+    max-height: calc(100svh - 11rem);
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;

@@ -1,5 +1,5 @@
 .newsWrapper {
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -352,7 +352,7 @@
     .newsWrapper { margin-top: 8rem;}
     .newsContent {
         flex-direction: column;
-        height: 75vh;
+        height: 75svh;
         transition: .5s;
     }
     .closeBtn { display: block; }
@@ -439,7 +439,7 @@
 }
 
 @media (max-width: 576px) {
-    .newsContent { height: 75vh; }
+    .newsContent { height: 75svh; }
     .detailDesc {
         font-size: .8rem;
     }
