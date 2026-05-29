@@ -316,8 +316,8 @@
     color: #fff;
     padding: 1rem;
     box-sizing: border-box;
-    padding-top: 30px;
-    padding-left: 30px;
+    padding-top: 2rem;
+    padding-right: .5rem;
 }
 
 .title {
@@ -451,7 +451,8 @@
     height: 86px;
     border-radius: 50%;
     object-fit: cover;
-    background: #f8e5c7;
+    border: 1px solid #555;
+    /*background: #f8e5c7;*/
 }
 
 .checkBadge {
@@ -820,6 +821,7 @@
     }
     .card {
         padding-left: 1rem;
+        padding-right: 1rem;
     }
     .confirmOverlay {
         position: absolute;

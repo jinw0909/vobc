@@ -23,7 +23,11 @@ export default function Guide() {
             <section className={styles.section}>
                 <h2>
                     <span className={styles.vobLogo}>
-                        <Image src={vobLogo} alt={"vob logo"} objectFit={"contain"}/>
+                        <Image
+                            src={vobLogo}
+                            alt={"vob logo"}
+                            style={{objectFit: "contain"}}
+                        />
                     </span>
                     What is a Web3 wallet?
                 </h2>

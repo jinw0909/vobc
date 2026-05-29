@@ -7,8 +7,14 @@ import vobLogoWhite from '@/public/favicon.svg'
 import Image from 'next/image'
 import { NavigationLink } from '@/ui/NavigationLink'
 import { usePathname, useRouter } from '@/i18n/navigation'
-import {useWeb3Auth} from '@/providers/Web3AuthProvider'
-import {WalletOption} from "@/types/web3";
+import { useWeb3Auth } from '@/providers/Web3AuthProvider'
+import { WalletOption } from '@/types/web3'
+import {
+    isValidEvmAddress,
+    shortenAddress,
+    normalizeOptionalString,
+    getNetworkName,
+} from '@/utils/web3'
 
 type Status =
     | 'idle'
@@ -42,70 +48,6 @@ type LoginProps = {
     onGoMyPage?: () => void
 }
 
-function normalizeHexChainId(chainId: string | number): string {
-    if (typeof chainId === 'number') {
-        return `0x${chainId.toString(16)}`
-    }
-
-    if (typeof chainId === 'string') {
-        if (chainId.startsWith('0x')) {
-            return chainId.toLowerCase()
-        }
-
-        const parsed = Number(chainId)
-        if (!Number.isNaN(parsed)) {
-            return `0x${parsed.toString(16)}`
-        }
-    }
-
-    return ''
-}
-
-function isValidEvmAddress(value: string): boolean {
-    return /^0x[a-fA-F0-9]{40}$/.test(value)
-}
-
-function toHexUtf8(value: string): string {
-    return (
-        '0x' +
-        Array.from(new TextEncoder().encode(value))
-            .map((b) => b.toString(16).padStart(2, '0'))
-            .join('')
-    )
-}
-
-function shortenAddress(address?: string) {
-    if (!address) return ''
-    return `${address.slice(0, 6)}...${address.slice(-4)}`
-}
-
-function normalizeOptionalString(value: unknown) {
-    return typeof value === 'string' && value.trim().length > 0
-        ? value.trim()
-        : undefined
-}
-
-function getNetworkName(chainId?: string) {
-    const normalized = normalizeHexChainId(chainId || '')
-
-    switch (normalized) {
-        case '0x1':
-            return 'Ethereum Mainnet'
-        case '0x38':
-            return 'BNB Smart Chain'
-        case '0x2105':
-            return 'Base Mainnet'
-        case '0x89':
-            return 'Polygon Mainnet'
-        case '0xa':
-            return 'Optimism'
-        case '0xa4b1':
-            return 'Arbitrum One'
-        default:
-            return normalized || '-'
-    }
-}
-
 export default function Login({
                                   onLoginSuccess,
                                   onLogout,
@@ -121,7 +63,6 @@ export default function Login({
     const {
         account,
         chainId,
-        connectionType,
         connectedWallet,
         vobBalance,
 
@@ -130,54 +71,24 @@ export default function Login({
         displayProfileImage,
         walletOptions,
 
-        setChainId,
         setAccessToken,
         setUserProfile,
         setVobBalance,
-
-        getConnector,
-        getWalletConnectProvider,
-        getActiveProvider,
-        getActiveSessionTopic,
-
-        clearSavedWalletSession,
 
         connectWalletConnect,
         connectBaseAccount,
         connectInjectedWallet,
 
-        resetWalletConnectionStateOnly,
         resetLoginState,
 
         disconnectWallet,
 
         fetchVobBalance,
+        signMessage,
     } = useWeb3Auth()
 
     const API_BASE_URL =
         process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080'
-
-    const resetConnectionState = (
-        nextMessage?: string,
-        options?: {
-            clearSavedSession?: boolean
-            clearLogin?: boolean
-        }
-    ) => {
-        if (options?.clearSavedSession) {
-            clearSavedWalletSession()
-        }
-
-        resetWalletConnectionStateOnly()
-
-        if (options?.clearLogin) {
-            resetLoginState()
-        }
-
-        setStatus('idle')
-        setMessage(nextMessage || 'Select a wallet to connect')
-        setShowWalletOptions(true)
-    }
 
     const handleDisconnectClick = async () => {
         try {
@@ -234,18 +145,6 @@ export default function Login({
         router.push('/profile')
     }
 
-    const closeWalletConnectModal = async () => {
-        try {
-            const appKit = (getConnector() as any)?.appKit
-
-            if (typeof appKit?.close === 'function') {
-                await appKit.close()
-            }
-        } catch (error) {
-            console.warn('[closeWalletConnectModal error]', error)
-        }
-    }
-
     const handleConnectWalletConnect = async () => {
         try {
             setStatus('connecting')
@@ -261,15 +160,7 @@ export default function Login({
 
             setStatus('connected')
             setShowWalletOptions(false)
-
-            setTimeout(() => {
-                void closeWalletConnectModal()
-            }, 300)
         } catch (error: any) {
-            setTimeout(() => {
-                void closeWalletConnectModal()
-            }, 300)
-
             console.error('[handleConnectWalletConnect error]', error)
             setStatus('failed')
             setMessage(error?.message || 'Failed to connect via WalletConnect')
@@ -335,64 +226,19 @@ export default function Login({
                 return
             }
 
-            const provider = getActiveProvider()
-
-            if (!provider) {
-                setApiResult('No connected provider found.')
+            if (!chainId) {
+                setApiResult('Could not detect chainId. Please reconnect your wallet.')
                 return
             }
 
-            if (connectionType === 'walletconnect') {
-                const topic = getActiveSessionTopic()
-                const wcProvider = getWalletConnectProvider()
+            const decimalChainId = Number.parseInt(chainId, 16)
 
-                if (!topic || !wcProvider?.session) {
-                    clearSavedWalletSession()
-                    resetWalletConnectionStateOnly()
-
-                    setStatus('idle')
-                    setMessage('WalletConnect session has expired or disconnected. Please reconnect.')
-                    setApiResult('WalletConnect session has expired or disconnected. Please reconnect.')
-                    return
-                }
-
-                try {
-                    const liveAccounts = (await wcProvider.request({
-                        method: 'eth_accounts',
-                    })) as string[]
-
-                    const liveAccount = liveAccounts?.[0] || ''
-
-                    if (!liveAccount || liveAccount.toLowerCase() !== account.toLowerCase()) {
-                        clearSavedWalletSession()
-                        resetWalletConnectionStateOnly()
-
-                        setStatus('idle')
-                        setMessage('WalletConnect account is no longer connected. Please reconnect.')
-                        setApiResult('WalletConnect account is no longer connected. Please reconnect.')
-                        return
-                    }
-                } catch (error) {
-                    console.warn('[WalletConnect live account check failed]', error)
-
-                    clearSavedWalletSession()
-                    resetWalletConnectionStateOnly()
-
-                    setStatus('idle')
-                    setMessage('WalletConnect disconnected. Please reconnect.')
-                    setApiResult('WalletConnect disconnected. Please reconnect.')
-                    return
-                }
+            if (Number.isNaN(decimalChainId)) {
+                setApiResult(`Invalid chainId: ${chainId}`)
+                return
             }
 
-            const currentChainId = (await provider.request({
-                method: 'eth_chainId',
-            })) as string
-
-            const normalizedChainId = normalizeHexChainId(currentChainId)
-
-            setChainId(normalizedChainId)
-            setMessage(`Wallet: ${account} / chain ${normalizedChainId}`)
+            setMessage(`Wallet: ${account} / chain ${chainId}`)
 
             if (!isValidEvmAddress(account)) {
                 setApiResult('Login is not available for non-EVM accounts.')
@@ -409,7 +255,7 @@ export default function Login({
                 credentials: 'include',
                 body: JSON.stringify({
                     address: account,
-                    chainId: Number.parseInt(currentChainId, 16),
+                    chainId: decimalChainId,
                 }),
             })
 
@@ -424,18 +270,11 @@ export default function Login({
                 return
             }
 
-            const signMessage = nonceData.message
-            const hexMessage = toHexUtf8(signMessage)
+            const messageToSign = nonceData.message
 
             setApiResult('2) Requesting signature...')
 
-            const signParam =
-                connectionType === 'coinbase-wallet' ? signMessage : hexMessage
-
-            const signature = (await provider.request({
-                method: 'personal_sign',
-                params: [signParam, account],
-            })) as string
+            const signature = await signMessage(messageToSign)
 
             setApiResult('3) Verifying...')
 
@@ -449,7 +288,7 @@ export default function Login({
                     address: account,
                     signature,
                     nonce: nonceData.nonce,
-                    chainId: Number.parseInt(normalizedChainId, 16),
+                    chainId: decimalChainId,
                 }),
             })
 
@@ -474,9 +313,12 @@ export default function Login({
             setAccessToken(token)
 
             const nextUserProfile: UserConnection = {
-                walletAddress: normalizeOptionalString(verifyData?.walletAddress) || account,
+                walletAddress:
+                    normalizeOptionalString(verifyData?.walletAddress) || account,
                 profileImageUrl: normalizeOptionalString(verifyData?.profileImageUrl),
-                nickname: normalizeOptionalString(verifyData?.nickname) || shortenAddress(account),
+                nickname:
+                    normalizeOptionalString(verifyData?.nickname) ||
+                    shortenAddress(account),
                 email: normalizeOptionalString(verifyData?.email),
                 bio: normalizeOptionalString(verifyData?.bio),
             }
@@ -490,30 +332,8 @@ export default function Login({
         } catch (error: any) {
             console.error('[loginWithWeb3 error raw]', error)
 
-            const msg = String(error?.message || '')
-
             if (error?.code === 4001) {
                 setApiResult('User rejected the signature request.')
-                return
-            }
-
-            const isWalletConnectSessionError =
-                connectionType === 'walletconnect' &&
-                (
-                    msg.includes("session topic doesn't exist") ||
-                    msg.toLowerCase().includes('session') ||
-                    msg.toLowerCase().includes('disconnected') ||
-                    msg.toLowerCase().includes('expired') ||
-                    msg.toLowerCase().includes('no matching key')
-                )
-
-            if (isWalletConnectSessionError) {
-                clearSavedWalletSession()
-                resetWalletConnectionStateOnly()
-
-                setStatus('idle')
-                setMessage('WalletConnect session lost. Please reconnect.')
-                setApiResult('WalletConnect session lost. Please reconnect and try again.')
                 return
             }
 
@@ -536,6 +356,7 @@ export default function Login({
             setAccessToken('')
             setUserProfile(null)
             setVobBalance('0')
+            resetLoginState()
             setApiResult('Logged out. Successfully removed accessToken')
 
             await onLogout?.()

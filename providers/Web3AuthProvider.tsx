@@ -11,19 +11,20 @@ import {
     type SetStateAction,
 } from 'react'
 
-import { UniversalConnector } from '@reown/appkit-universal-connector'
+import {
+    useAccount,
+    useChainId,
+    useConnect,
+    useDisconnect,
+    useSignMessage,
+} from 'wagmi'
 
 import {
     ConnectionType,
-    SavedWalletSession,
-    Web3Provider,
-    WalletOption,
     ConnectedWallet,
+    WalletOption,
+    Web3Provider,
 } from '@/types/web3'
-
-import { useWalletSessionStorage } from '@/providers/hooks/useWalletSessionStorage'
-import { useWalletConnectWallet } from '@/providers/hooks/useWalletConnectWallet'
-import { useInjectedWallet } from '@/providers/hooks/useInjectedWallet'
 
 import {
     normalizeOptionalString,
@@ -40,6 +41,8 @@ export type UserConnection = {
 
 type ViewState = 'disconnected' | 'connected' | 'loggedIn'
 
+type WalletKind = 'injected' | 'walletconnect' | 'coinbase-wallet'
+
 type Web3AuthContextValue = {
     account: string
     chainId: string
@@ -50,24 +53,12 @@ type Web3AuthContextValue = {
     userProfile: UserConnection | null
     vobBalance: string
 
-    initWalletConnect: () => Promise<UniversalConnector>
-    connectWalletConnect: () => Promise<boolean>
-    syncWalletConnectSession: (
-        connectedSession?: any,
-        options?: {
-            validateSavedSession?: boolean
-        }
-    ) => Promise<boolean>
-    disconnectWalletConnectConnectorOnly: (
-        targetConnector?: UniversalConnector | null
-    ) => Promise<void>
-    disconnectWalletConnect: () => Promise<void>
-
-    connectBaseAccount: () => Promise<boolean>
-
     walletOptions: WalletOption[]
+
+    connectWallet: (kind: WalletKind, walletId?: string) => Promise<boolean>
     connectInjectedWallet: (walletId: string) => Promise<boolean>
-    restoreInjectedConnection: () => Promise<boolean>
+    connectWalletConnect: () => Promise<boolean>
+    connectBaseAccount: () => Promise<boolean>
 
     restoreWalletConnection: () => Promise<boolean>
     connectionChecked: boolean
@@ -90,14 +81,11 @@ type Web3AuthContextValue = {
     setUserProfile: Dispatch<SetStateAction<UserConnection | null>>
     setVobBalance: Dispatch<SetStateAction<string>>
 
-    setConnector: (connector: UniversalConnector | null) => void
-    getConnector: () => UniversalConnector | null
-    getWalletConnectProvider: () => Web3Provider | null
     getActiveProvider: () => Web3Provider | null
+    getConnector: () => null
+    getWalletConnectProvider: () => null
     getActiveSessionTopic: () => string
 
-    saveWalletSession: (session: SavedWalletSession) => void
-    getSavedWalletSession: () => SavedWalletSession
     clearSavedWalletSession: () => void
 
     resetWalletConnectionStateOnly: () => void
@@ -106,8 +94,20 @@ type Web3AuthContextValue = {
 
     disconnectWallet: () => Promise<void>
 
+    signMessage: (message: string) => Promise<string>
+
     fetchVobBalance: (token?: string) => Promise<void>
     restoreLoginSession: () => Promise<boolean>
+}
+
+type Eip6963ProviderDetail = {
+    info: {
+        uuid: string
+        name: string
+        icon: string
+        rdns?: string
+    }
+    provider: Web3Provider
 }
 
 const Web3AuthContext = createContext<Web3AuthContextValue | null>(null)
@@ -115,35 +115,473 @@ const Web3AuthContext = createContext<Web3AuthContextValue | null>(null)
 const API_BASE_URL =
     process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080'
 
+const SELECTED_WALLET_STORAGE_KEY = 'vob.selected.wallet.option'
+
+const FIXED_WALLET_OPTIONS: WalletOption[] = [
+    {
+        id: 'walletconnect',
+        name: 'WalletConnect',
+        icon: '/wallets/walletconnect.svg',
+        type: 'walletconnect',
+        // detected: true,
+    },
+    // {
+    //     id: 'base',
+    //     name: 'Base Account',
+    //     icon: '/wallets/base.svg',
+    //     type: 'coinbase-wallet',
+    //     // detected: true,
+    // },
+    {
+        id: 'coinbaseWalletSDK',
+        name: 'Base Account',
+        icon: '/wallets/base.svg',
+        type: 'coinbase-wallet',
+    },
+]
+function getInjectedWalletIconFallback(name?: string, rdns?: string) {
+    const value = `${name || ''} ${rdns || ''}`.toLowerCase()
+
+    if (value.includes('metamask')) return '/wallets/metamask.png'
+    if (value.includes('phantom')) return '/wallets/phantom.png'
+    if (value.includes('rabby')) return '/wallets/rabby.png'
+    if (value.includes('okx') || value.includes('okex')) return '/wallets/okx.png'
+    if (value.includes('binance')) return '/wallets/binance.png'
+
+    return '/default-wallet.png'
+}
+
+function readSelectedWalletOption() {
+    if (typeof window === 'undefined') return null
+
+    try {
+        const raw = sessionStorage.getItem(SELECTED_WALLET_STORAGE_KEY)
+        if (!raw) return null
+
+        return JSON.parse(raw) as WalletOption
+    } catch {
+        return null
+    }
+}
+
+function saveSelectedWalletOption(option: WalletOption | null) {
+    if (typeof window === 'undefined') return
+
+    try {
+        if (!option) {
+            sessionStorage.removeItem(SELECTED_WALLET_STORAGE_KEY)
+            sessionStorage.removeItem('vob.wallet.icon')
+            return
+        }
+
+        sessionStorage.setItem(
+            SELECTED_WALLET_STORAGE_KEY,
+            JSON.stringify(option),
+        )
+
+        if (option.icon) {
+            sessionStorage.setItem('vob.wallet.icon', option.icon)
+        }
+    } catch {
+        // ignore
+    }
+}
+
+function makeInjectedWalletId(detail: Eip6963ProviderDetail) {
+    return (
+        detail.info.rdns ||
+        detail.info.uuid ||
+        detail.info.name
+    ).toLowerCase()
+}
+
+function normalizeDetectedInjectedWallet(
+    detail: Eip6963ProviderDetail,
+): WalletOption {
+    return {
+        id: makeInjectedWalletId(detail),
+        name: `${detail.info.name}`,
+        icon:
+            detail.info.icon ||
+            getInjectedWalletIconFallback(
+                detail.info.name,
+                detail.info.rdns,
+            ),
+        type: 'injected',
+        detected: true,
+    }
+}
+
+// function getFallbackInjectedWallets(): WalletOption[] {
+//     if (typeof window === 'undefined') return []
+//
+//     const ethereum = (window as any).ethereum
+//     if (!ethereum) return []
+//
+//     const providers = Array.isArray(ethereum.providers)
+//         ? ethereum.providers
+//         : [ethereum]
+//
+//     const wallets: WalletOption[] = []
+//
+//     for (const provider of providers) {
+//         if (provider?.isMetaMask) {
+//             wallets.push({
+//                 id: 'io.metamask',
+//                 name: 'MetaMask',
+//                 icon: provider.icon || '/wallets/metamask.png',
+//                 type: 'injected',
+//                 detected: true,
+//             })
+//         }
+//
+//         if (provider?.isRabby) {
+//             wallets.push({
+//                 id: 'io.rabby',
+//                 name: 'Rabby Wallet',
+//                 icon: provider.icon || '/wallets/rabby.png',
+//                 type: 'injected',
+//                 detected: true,
+//             })
+//         }
+//
+//         if (provider?.isOkxWallet || provider?.isOKExWallet) {
+//             wallets.push({
+//                 id: 'com.okex.wallet',
+//                 name: 'OKX Wallet',
+//                 icon: provider.icon || '/wallets/okx.png',
+//                 type: 'injected',
+//                 detected: true,
+//             })
+//         }
+//
+//         if (provider?.isBinance || (window as any).BinanceChain) {
+//             wallets.push({
+//                 id: 'com.binance',
+//                 name: 'Binance Wallet',
+//                 icon: provider.icon || '/wallets/binance.png',
+//                 type: 'injected',
+//                 detected: true,
+//             })
+//         }
+//
+//         if (provider?.isPhantom) {
+//             wallets.push({
+//                 id: 'app.phantom',
+//                 name: 'Phantom',
+//                 icon: provider.icon || '/wallets/phantom.png',
+//                 type: 'injected',
+//                 detected: true,
+//             })
+//         }
+//     }
+//
+//     const unique = new Map<string, WalletOption>()
+//
+//     for (const wallet of wallets) {
+//         unique.set(wallet.id, wallet)
+//     }
+//
+//     return [...unique.values()]
+// }
+
+function resolveConnectionTypeFromConnector(
+    connectorId?: string,
+    connectorName?: string,
+): ConnectionType {
+    const value = `${connectorId || ''} ${connectorName || ''}`.toLowerCase()
+
+    if (value.includes('walletconnect')) {
+        return 'walletconnect'
+    }
+
+    if (
+        value.includes('base') ||
+        value.includes('coinbase') ||
+        value.includes('coinbase wallet')
+    ) {
+        return 'coinbase-wallet'
+    }
+
+    if (connectorId || connectorName) {
+        return 'injected'
+    }
+
+    return null
+}
+
+function findFixedOptionByKind(kind: WalletKind) {
+    if (kind === 'walletconnect') {
+        return FIXED_WALLET_OPTIONS.find(
+            (option) => option.type === 'walletconnect',
+        )
+    }
+
+    if (kind === 'coinbase-wallet') {
+        return FIXED_WALLET_OPTIONS.find(
+            (option) => option.type === 'coinbase-wallet',
+        )
+    }
+
+    return null
+}
+
+function findWalletOptionById(
+    walletOptions: WalletOption[],
+    walletId?: string,
+) {
+    if (!walletId) return null
+
+    const target = walletId.toLowerCase()
+
+    return (
+        walletOptions.find((option) => {
+            const id = option.id.toLowerCase()
+            const name = option.name.toLowerCase()
+
+            return (
+                id === target ||
+                name === target ||
+                id.includes(target) ||
+                name.includes(target)
+            )
+        }) || null
+    )
+}
+
+function isConnectorMatch(
+    connector: { id: string; name: string; type?: string },
+    kind: WalletKind,
+    walletId?: string,
+) {
+    const id = connector.id.toLowerCase()
+    const name = connector.name.toLowerCase()
+    const type = connector.type?.toLowerCase() || ''
+    const target = walletId?.toLowerCase()
+
+    if (kind === 'walletconnect') {
+        return id.includes('walletconnect') || name.includes('walletconnect')
+    }
+
+    // if (kind === 'coinbase-wallet') {
+    //     return (
+    //         id === 'base' ||
+    //         id.includes('baseaccount') ||
+    //         name.includes('base account')
+    //     )
+    // }
+    // if (kind === 'coinbase-wallet') {
+    //     return (
+    //         id === 'base' ||
+    //         id.includes('baseaccount') ||
+    //         id.includes('base-account') ||
+    //         name === 'base account' ||
+    //         name.includes('base account')
+    //     )
+    // }
+    if (kind === 'coinbase-wallet') {
+        return (
+            id === 'base' ||
+            id.includes('baseaccount') ||
+            id.includes('base-account') ||
+            id.includes('coinbasewallet') ||
+            id.includes('coinbasewalletsdk') ||
+            name.includes('base account') ||
+            name.includes('coinbase wallet') ||
+            type.includes('coinbasewallet')
+        )
+    }
+
+    if (kind === 'injected') {
+        if (!target) return false
+
+        return (
+            id === target ||
+            name === target ||
+            id.includes(target) ||
+            target.includes(id) ||
+            name.includes(target) ||
+            target.includes(name) ||
+            target.includes('metamask') && name.includes('metamask') ||
+            target.includes('phantom') && name.includes('phantom') ||
+            target.includes('rabby') && name.includes('rabby') ||
+            target.includes('okx') && name.includes('okx') ||
+            target.includes('binance') && name.includes('binance')
+        )
+    }
+
+    return false
+}
+
 export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
     const {
-        saveWalletSession,
-        getSavedWalletSession,
-        clearSavedWalletSession,
-    } = useWalletSessionStorage()
+        address,
+        isConnected: wagmiIsConnected,
+        connector,
+        status,
+    } = useAccount()
 
-    const [account, setAccount] = useState('')
-    const [chainId, setChainId] = useState('')
+    const wagmiChainId = useChainId()
+    const { connectors, connectAsync } = useConnect()
+    const { disconnectAsync } = useDisconnect()
+    const { signMessageAsync } = useSignMessage()
+
     const [accessToken, setAccessToken] = useState('')
-    const [connectionType, setConnectionType] = useState<ConnectionType>(null)
-    const [activeInjectedProvider, setActiveInjectedProvider] =
-        useState<Web3Provider | null>(null)
-    const [connectedWallet, setConnectedWallet] =
-        useState<ConnectedWallet | null>(null)
-    const [userProfile, setUserProfile] =
-        useState<UserConnection | null>(null)
+    const [userProfile, setUserProfile] = useState<UserConnection | null>(null)
     const [vobBalance, setVobBalance] = useState('0')
-
-    const [connectionChecked, setConnectionChecked] = useState(false)
     const [authChecked, setAuthChecked] = useState(false)
+    const [selectedWalletOption, setSelectedWalletOption] =
+        useState<WalletOption | null>(null)
+    const [detectedInjectedWallets, setDetectedInjectedWallets] = useState<WalletOption[]>([])
+    const [walletConnectPeer, setWalletConnectPeer] = useState<{
+        name?: string
+        icon?: string
+    } | null>(null)
 
-    const resetWalletConnectionStateOnly = useCallback(() => {
-        setAccount('')
-        setChainId('')
-        setConnectionType(null)
-        setActiveInjectedProvider(null)
-        setConnectedWallet(null)
+    useEffect(() => {
+        const saved = readSelectedWalletOption()
+
+        if (saved) {
+            setSelectedWalletOption(saved)
+        }
     }, [])
+
+    // useEffect(() => {
+    //     if (typeof window === 'undefined') return
+    //
+    //     const detectedMap = new Map<string, WalletOption>()
+    //
+    //     const updateDetectedWallets = () => {
+    //         const fallbackWallets = getFallbackInjectedWallets()
+    //
+    //         for (const wallet of fallbackWallets) {
+    //             detectedMap.set(wallet.id, wallet)
+    //         }
+    //
+    //         setDetectedInjectedWallets([...detectedMap.values()])
+    //     }
+    //
+    //     const handleProviderAnnouncement = (event: Event) => {
+    //         const customEvent = event as CustomEvent<Eip6963ProviderDetail>
+    //         const detail = customEvent.detail
+    //
+    //         if (!detail?.info?.name || !detail?.provider) return
+    //
+    //         const wallet = normalizeDetectedInjectedWallet(detail)
+    //         detectedMap.set(wallet.id, wallet)
+    //
+    //         setDetectedInjectedWallets([...detectedMap.values()])
+    //     }
+    //
+    //     window.addEventListener(
+    //         'eip6963:announceProvider',
+    //         handleProviderAnnouncement,
+    //     )
+    //
+    //     window.dispatchEvent(new Event('eip6963:requestProvider'))
+    //
+    //     updateDetectedWallets()
+    //
+    //     const timer = window.setTimeout(updateDetectedWallets, 500)
+    //
+    //     return () => {
+    //         window.removeEventListener(
+    //             'eip6963:announceProvider',
+    //             handleProviderAnnouncement,
+    //         )
+    //         window.clearTimeout(timer)
+    //     }
+    // }, [])
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+
+        const detectedMap = new Map<string, WalletOption>()
+
+        const handleProviderAnnouncement = (event: Event) => {
+            const customEvent = event as CustomEvent<Eip6963ProviderDetail>
+            const detail = customEvent.detail
+
+            if (!detail?.info?.name || !detail?.provider) return
+
+            const wallet = normalizeDetectedInjectedWallet(detail)
+
+            detectedMap.set(wallet.id, wallet)
+            setDetectedInjectedWallets([...detectedMap.values()])
+        }
+
+        window.addEventListener(
+            'eip6963:announceProvider',
+            handleProviderAnnouncement,
+        )
+
+        window.dispatchEvent(new Event('eip6963:requestProvider'))
+
+        return () => {
+            window.removeEventListener(
+                'eip6963:announceProvider',
+                handleProviderAnnouncement,
+            )
+        }
+    }, [])
+
+    const account = address || ''
+    const chainId = wagmiChainId ? `0x${wagmiChainId.toString(16)}` : ''
+
+    const walletOptions = useMemo<WalletOption[]>(() => {
+        return [
+            ...detectedInjectedWallets,
+            ...FIXED_WALLET_OPTIONS,
+        ]
+    }, [detectedInjectedWallets])
+
+    const connectionType = useMemo<ConnectionType>(() => {
+        if (selectedWalletOption?.type) {
+            return selectedWalletOption.type as ConnectionType
+        }
+
+        return resolveConnectionTypeFromConnector(connector?.id, connector?.name)
+    }, [connector?.id, connector?.name, selectedWalletOption?.type])
+
+    const activeInjectedProvider: Web3Provider | null = null
+
+    const connectedWallet: ConnectedWallet | null = useMemo(() => {
+        if (!account) return null
+
+        const connectorAny = connector as any
+
+        const connectorIcon =
+            connectorAny?.icon ||
+            connectorAny?.icons?.[0] ||
+            connectorAny?.metadata?.icons?.[0] ||
+            connectorAny?.peer?.metadata?.icons?.[0] ||
+            connectorAny?.session?.peer?.metadata?.icons?.[0]
+
+        const connectorName =
+            connectorAny?.metadata?.name ||
+            connectorAny?.peer?.metadata?.name ||
+            connectorAny?.session?.peer?.metadata?.name ||
+            connector?.name
+
+        const fallbackOption =
+            selectedWalletOption ||
+            findFixedOptionByKind(connectionType as WalletKind)
+
+        return {
+            address: account,
+            name:
+                connectionType === 'walletconnect'
+                    ? walletConnectPeer?.name || connectorName || fallbackOption?.name || 'WalletConnect'
+                    : fallbackOption?.name || connectorName || 'Wallet',
+            icon:
+                connectionType === 'walletconnect'
+                    ? walletConnectPeer?.icon || connectorIcon || fallbackOption?.icon || '/wallets/walletconnect.svg'
+                    : fallbackOption?.icon || connectorIcon || '/default-wallet.png',
+        }
+    }, [account, connector, connectionType, selectedWalletOption, walletConnectPeer])
+
+    const connectionChecked =
+        status !== 'connecting' && status !== 'reconnecting'
 
     const resetLoginState = useCallback(() => {
         setAccessToken('')
@@ -151,67 +589,218 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
         setVobBalance('0')
     }, [])
 
+    const resetWalletConnectionStateOnly = useCallback(() => {
+        setSelectedWalletOption(null)
+        saveSelectedWalletOption(null)
+    }, [])
+
     const resetWeb3State = useCallback(() => {
         resetWalletConnectionStateOnly()
         resetLoginState()
     }, [resetLoginState, resetWalletConnectionStateOnly])
 
-    const walletConnect = useWalletConnectWallet({
-        saveWalletSession,
-        getSavedWalletSession,
-        clearSavedWalletSession,
-        resetLoginState,
-        resetWalletConnectionStateOnly,
-        setAccount,
-        setChainId,
-        setConnectionType,
-        setConnectedWallet,
-    })
+    const clearSavedWalletSession = useCallback(() => {
+        setSelectedWalletOption(null)
+        saveSelectedWalletOption(null)
+    }, [])
 
-    const injectedWallet = useInjectedWallet({
-        saveWalletSession,
-        getSavedWalletSession,
-        clearSavedWalletSession,
-
-        resetLoginState,
-        resetWalletConnectionStateOnly,
-
-        account,
-        connectionType,
-        activeInjectedProvider,
-        connectedWallet,
-
-        setAccount,
-        setChainId,
-        setConnectionType,
-        setActiveInjectedProvider,
-        setConnectedWallet,
-    })
-
-    const disconnectWallet = async () => {
-        if (connectionType === 'walletconnect') {
-            await walletConnect.disconnectWalletConnect()
-        } else {
-            clearSavedWalletSession()
-            resetWalletConnectionStateOnly()
+    // const connectWallet = useCallback(
+    //     async (kind: WalletKind, walletId?: string) => {
+    //         const targetConnector = connectors.find((item) =>
+    //             isConnectorMatch(item, kind, walletId),
+    //         )
+    //
+    //         if (!targetConnector) {
+    //             console.warn('[connectWallet] connector not found', {
+    //                 kind,
+    //                 walletId,
+    //                 connectors: connectors.map((item) => ({
+    //                     id: item.id,
+    //                     name: item.name,
+    //                     type: item.type,
+    //                 })),
+    //             })
+    //             return false
+    //         }
+    //
+    //         const option =
+    //             findWalletOptionById(walletOptions, walletId) ||
+    //             findFixedOptionByKind(kind)
+    //
+    //         try {
+    //             await connectAsync({
+    //                 connector: targetConnector,
+    //             })
+    //
+    //             if (option) {
+    //                 setSelectedWalletOption(option)
+    //                 saveSelectedWalletOption(option)
+    //             }
+    //
+    //             return true
+    //         } catch (error) {
+    //             console.error('[connectWallet error]', {
+    //                 kind,
+    //                 walletId,
+    //                 error,
+    //             })
+    //
+    //             return false
+    //         }
+    //     },
+    //     [connectAsync, connectors, walletOptions],
+    // )
+    useEffect(() => {
+        if (connectionType !== 'walletconnect') {
+            setWalletConnectPeer(null)
+            return
         }
 
-        resetLoginState()
-    }
-
-    const getActiveProvider = (): Web3Provider | null => {
-        if (connectionType === 'walletconnect') {
-            return walletConnect.getWalletConnectProvider()
+        if (!connector) {
+            setWalletConnectPeer(null)
+            return
         }
 
-        if (connectionType === 'injected' || connectionType === 'coinbase-wallet') {
-            return activeInjectedProvider
+        let cancelled = false
+
+        async function loadWalletConnectPeer() {
+            try {
+                const provider = await connector?.getProvider?.()
+                const providerAny = provider as any
+
+                const metadata =
+                    providerAny?.session?.peer?.metadata ||
+                    providerAny?.signer?.session?.peer?.metadata ||
+                    providerAny?.client?.session?.values?.()?.[0]?.peer?.metadata
+
+                const name = metadata?.name
+                const icon = metadata?.icons?.[0]
+
+                if (cancelled) return
+
+                if (name || icon) {
+                    setWalletConnectPeer({
+                        name,
+                        icon,
+                    })
+                } else {
+                    setWalletConnectPeer(null)
+                }
+            } catch (error) {
+                console.warn('[loadWalletConnectPeer error]', error)
+
+                if (!cancelled) {
+                    setWalletConnectPeer(null)
+                }
+            }
         }
 
+        void loadWalletConnectPeer()
+
+        return () => {
+            cancelled = true
+        }
+    }, [connectionType, connector])
+
+    const connectWallet = useCallback(
+        async (kind: WalletKind, walletId?: string) => {
+            const targetConnector = connectors.find((item) =>
+                isConnectorMatch(item, kind, walletId),
+            )
+
+            if (!targetConnector) {
+                console.warn('[connectWallet] connector not found', {
+                    kind,
+                    walletId,
+                    connectors: connectors.map((item) => ({
+                        id: item.id,
+                        name: item.name,
+                        type: item.type,
+                    })),
+                })
+                return false
+            }
+
+            const option =
+                findWalletOptionById(walletOptions, walletId) ||
+                findFixedOptionByKind(kind)
+
+            try {
+                await connectAsync({
+                    connector: targetConnector,
+                    // chainId: kind === 'coinbase-wallet' ? 8453 : undefined,
+                })
+
+                if (option) {
+                    setSelectedWalletOption(option)
+                    saveSelectedWalletOption(option)
+                }
+
+                return true
+            } catch (error) {
+                console.error('[connectWallet error]', {
+                    kind,
+                    walletId,
+                    connector: {
+                        id: targetConnector.id,
+                        name: targetConnector.name,
+                        type: targetConnector.type,
+                    },
+                    error,
+                })
+
+                return false
+            }
+        },
+        [connectAsync, connectors, walletOptions],
+    )
+
+    const connectInjectedWallet = useCallback(
+        async (walletId: string) => {
+            return connectWallet('injected', walletId)
+        },
+        [connectWallet],
+    )
+
+    const connectWalletConnect = useCallback(async () => {
+        return connectWallet('walletconnect', 'walletconnect')
+    }, [connectWallet])
+
+    const connectBaseAccount = useCallback(async () => {
+        return connectWallet('coinbase-wallet', 'base')
+    }, [connectWallet])
+
+    const disconnectWallet = useCallback(async () => {
+        try {
+            await disconnectAsync()
+        } catch (error) {
+            console.error('[disconnectWallet error]', error)
+        } finally {
+            resetWeb3State()
+        }
+    }, [disconnectAsync, resetWeb3State])
+
+    const signMessage = useCallback(
+        async (message: string) => {
+            return await signMessageAsync({
+                message,
+            })
+        },
+        [signMessageAsync],
+    )
+
+    const getActiveProvider = useCallback((): Web3Provider | null => {
         return null
-    }
+    }, [])
 
-    const isConnected = !!account && !!connectionType && !!connectedWallet
+    const getConnector = useCallback(() => null, [])
+
+    const getWalletConnectProvider = useCallback(() => null, [])
+
+    const getActiveSessionTopic = useCallback(() => '', [])
+
+    const isConnected =
+        !!account && wagmiIsConnected && !!connectionType && !!connectedWallet
 
     const isLoggedIn = !!accessToken && !!userProfile?.walletAddress
 
@@ -242,7 +831,7 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
         savedWalletIcon ||
         '/default-wallet.png'
 
-    const fetchVobBalance = async (token?: string) => {
+    const fetchVobBalance = useCallback(async (token?: string) => {
         try {
             const headers: Record<string, string> = {
                 'Content-Type': 'application/json',
@@ -267,6 +856,7 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
 
             if (contentType.includes('application/json')) {
                 const data = await res.json()
+
                 const balance =
                     data?.balance ??
                     data?.vobBalance ??
@@ -284,27 +874,13 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
             console.error('[fetchVobBalance error]', error)
             setVobBalance('0')
         }
-    }
+    }, [])
 
-    const restoreWalletConnection = async () => {
-        const saved = getSavedWalletSession()
+    const restoreWalletConnection = useCallback(async () => {
+        return !!account && wagmiIsConnected
+    }, [account, wagmiIsConnected])
 
-        if (saved.type === 'coinbase-wallet') {
-            return await injectedWallet.restoreBaseAccountConnection()
-        }
-
-        if (saved.type === 'walletconnect') {
-            return await walletConnect.restoreWalletConnectConnection()
-        }
-
-        if (saved.type === 'injected') {
-            return await injectedWallet.restoreInjectedConnection()
-        }
-
-        return false
-    }
-
-    const restoreLoginSession = async () => {
+    const restoreLoginSession = useCallback(async () => {
         try {
             const res = await fetch(`${API_BASE_URL}/web3/auth/refresh`, {
                 method: 'POST',
@@ -318,7 +894,9 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
                 return false
             }
 
-            const restoredWalletAddress = normalizeOptionalString(data?.walletAddress)
+            const restoredWalletAddress = normalizeOptionalString(
+                data?.walletAddress,
+            )
 
             if (!restoredWalletAddress) {
                 resetLoginState()
@@ -332,6 +910,7 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
                 shortenAddress(restoredWalletAddress)
 
             setAccessToken(newAccessToken)
+
             setUserProfile({
                 walletAddress: restoredWalletAddress,
                 profileImageUrl,
@@ -348,25 +927,42 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
             resetLoginState()
             return false
         }
-    }
+    }, [fetchVobBalance, resetLoginState])
 
     useEffect(() => {
         if (typeof window === 'undefined') return
 
-        async function init() {
+        async function initAuth() {
             try {
-                await Promise.allSettled([
-                    restoreWalletConnection(),
-                    restoreLoginSession(),
-                ])
+                await restoreLoginSession()
             } finally {
-                setConnectionChecked(true)
                 setAuthChecked(true)
             }
         }
 
-        void init()
-    }, [])
+        void initAuth()
+    }, [restoreLoginSession])
+
+    useEffect(() => {
+        console.log('[wagmi account changed]', {
+            status,
+            address,
+            wagmiIsConnected,
+            chainId,
+            connector: connector
+                ? {
+                    id: connector.id,
+                    name: connector.name,
+                    type: connector.type,
+                }
+                : null,
+        })
+    }, [status, address, wagmiIsConnected, chainId, connector])
+
+    const noopSetString = useCallback(() => {}, [])
+    const noopSetConnectionType = useCallback(() => {}, [])
+    const noopSetProvider = useCallback(() => {}, [])
+    const noopSetConnectedWallet = useCallback(() => {}, [])
 
     const value = useMemo<Web3AuthContextValue>(() => {
         return {
@@ -379,25 +975,14 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
             userProfile,
             vobBalance,
 
-            walletOptions: injectedWallet.walletOptions,
-            connectInjectedWallet: injectedWallet.connectInjectedWallet,
-            restoreInjectedConnection: injectedWallet.restoreInjectedConnection,
-            connectBaseAccount: injectedWallet.connectBaseAccount,
+            walletOptions,
 
-            initWalletConnect: walletConnect.initWalletConnect,
-            connectWalletConnect: walletConnect.connectWalletConnect,
-            syncWalletConnectSession: walletConnect.syncWalletConnectSession,
-            disconnectWalletConnectConnectorOnly:
-            walletConnect.disconnectWalletConnectConnectorOnly,
-            disconnectWalletConnect: walletConnect.disconnectWalletConnect,
-
-            setConnector: walletConnect.setConnector,
-            getConnector: walletConnect.getConnector,
-            getWalletConnectProvider: walletConnect.getWalletConnectProvider,
-            getActiveSessionTopic: walletConnect.getActiveSessionTopic,
+            connectWallet,
+            connectInjectedWallet,
+            connectWalletConnect,
+            connectBaseAccount,
 
             restoreWalletConnection,
-
             connectionChecked,
             authChecked,
 
@@ -409,19 +994,25 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
             displayNickname,
             displayProfileImage,
 
-            setAccount,
-            setChainId,
+            setAccount: noopSetString as Dispatch<SetStateAction<string>>,
+            setChainId: noopSetString as Dispatch<SetStateAction<string>>,
             setAccessToken,
-            setConnectionType,
-            setActiveInjectedProvider,
-            setConnectedWallet,
+            setConnectionType:
+                noopSetConnectionType as Dispatch<SetStateAction<ConnectionType>>,
+            setActiveInjectedProvider:
+                noopSetProvider as Dispatch<SetStateAction<Web3Provider | null>>,
+            setConnectedWallet:
+                noopSetConnectedWallet as Dispatch<
+                    SetStateAction<ConnectedWallet | null>
+                >,
             setUserProfile,
             setVobBalance,
 
             getActiveProvider,
+            getConnector,
+            getWalletConnectProvider,
+            getActiveSessionTopic,
 
-            saveWalletSession,
-            getSavedWalletSession,
             clearSavedWalletSession,
 
             resetWalletConnectionStateOnly,
@@ -429,6 +1020,8 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
             resetWeb3State,
 
             disconnectWallet,
+
+            signMessage,
 
             fetchVobBalance,
             restoreLoginSession,
@@ -443,21 +1036,14 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
         userProfile,
         vobBalance,
 
-        injectedWallet.walletOptions,
-        injectedWallet.connectInjectedWallet,
-        injectedWallet.restoreInjectedConnection,
-        injectedWallet.connectBaseAccount,
+        walletOptions,
 
-        walletConnect.initWalletConnect,
-        walletConnect.connectWalletConnect,
-        walletConnect.syncWalletConnectSession,
-        walletConnect.disconnectWalletConnectConnectorOnly,
-        walletConnect.disconnectWalletConnect,
-        walletConnect.setConnector,
-        walletConnect.getConnector,
-        walletConnect.getWalletConnectProvider,
-        walletConnect.getActiveSessionTopic,
+        connectWallet,
+        connectInjectedWallet,
+        connectWalletConnect,
+        connectBaseAccount,
 
+        restoreWalletConnection,
         connectionChecked,
         authChecked,
 
@@ -469,10 +1055,16 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
         displayNickname,
         displayProfileImage,
 
-        getActiveProvider,
+        noopSetString,
+        noopSetConnectionType,
+        noopSetProvider,
+        noopSetConnectedWallet,
 
-        saveWalletSession,
-        getSavedWalletSession,
+        getActiveProvider,
+        getConnector,
+        getWalletConnectProvider,
+        getActiveSessionTopic,
+
         clearSavedWalletSession,
 
         resetWalletConnectionStateOnly,
@@ -481,9 +1073,10 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
 
         disconnectWallet,
 
+        signMessage,
+
         fetchVobBalance,
         restoreLoginSession,
-        restoreWalletConnection,
     ])
 
     return (

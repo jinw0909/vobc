@@ -101,7 +101,7 @@
     position: relative;
     overflow: hidden;
     margin: 0 auto;
-    padding: 8rem 2rem;
+    padding: 8rem 2rem 4rem 2rem;
     color: #fff;
 }
 
@@ -284,7 +284,7 @@
 }
 
 @media (max-width: 768px) {
-    .guide { padding: 6rem 1.5rem; }
+    .guide { padding: 6rem 1.5rem 4rem 1.5rem; }
     .title { font-size: 2.2rem; }
     .description { font-size: 1.05rem; }
     .section { padding: 1.5rem; }
@@ -296,7 +296,7 @@
 }
 
 @media (max-width: 576px) {
-    .guide { padding: 6rem 1rem; }
+    .guide { padding: 6rem 1rem 4rem 1rem; }
     .title { font-size: 1.5rem; }
     .description { font-size: .8rem; }
     .section { padding: 1rem; }

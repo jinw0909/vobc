@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@base-org/account": "^2.5.6",
-    "@reown/appkit": "^1.8.19",
+    "@reown/appkit": "^1.8.20",
+    "@reown/appkit-adapter-wagmi": "^1.8.20",
     "@reown/appkit-common": "^1.8.19",
     "@reown/appkit-universal-connector": "^1.8.19",
+    "@tanstack/react-query": "^5.100.14",
     "chart.js": "^4.4.2",
     "chartjs-plugin-datalabels": "^2.2.0",
     "embla-carousel-react": "^8.6.0",
@@ -26,7 +28,9 @@
     "react-dom": "^19.1.0",
     "sanitize-html": "^2.17.0",
     "sharp": "^0.33.3",
-    "swiper": "^12.0.3"
+    "swiper": "^12.0.3",
+    "viem": "^2.51.3",
+    "wagmi": "^2.19.5"
   },
   "devDependencies": {
     "@swc/cli": "^0.5.0",
