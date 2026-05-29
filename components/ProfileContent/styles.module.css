@@ -85,7 +85,7 @@
     padding: 0.4rem 0.65rem;
     border-radius: 8px;
     /*background: #1a2532;*/
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.2);
     color: #c8d2df;
     font-size: 0.8rem;
     border: 1px solid #555;
@@ -126,7 +126,7 @@
 }
 
 .card {
-    padding: 1.25rem;
+    padding: 1rem;
     margin-top: 1rem;
 }
 
@@ -281,7 +281,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     /*background: #0c1118;*/
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.2);
     color: #ffffff;
     padding: 0.8rem 0.9rem;
     outline: none;
@@ -300,7 +300,7 @@
 
 .infoGrid {
     display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 1rem;
 }
 
@@ -308,7 +308,7 @@
     padding: 1rem;
     border-radius: 12px;
     /*background: #0c1118;*/
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .infoGrid span {
@@ -335,7 +335,7 @@
     padding: 1rem;
     border-radius: 14px;
     /*background: #0c1118;*/
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .portfolioSummary span {
@@ -435,7 +435,7 @@
     min-height: 140px;
     border-radius: 12px;
     /*background: #0c1118;*/
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.2);
     color: #8d9aab;
     text-align: center;
 }
@@ -450,7 +450,7 @@
     padding: 1rem;
     border-radius: 12px;
     /*background: #0c1118;*/
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 

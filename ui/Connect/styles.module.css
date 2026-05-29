@@ -1,3 +1,4 @@
+
 .connect {
     /*position: fixed;*/
     /*top: 0;*/
@@ -10,6 +11,7 @@
     /*font-size: 1rem;*/
     /*display: none;*/
 }
+
 .connectIcon {
     display: none;
     margin-top: 2px;
@@ -25,6 +27,7 @@
     display: block;
 }
 
+/* ===== modal ===== */
 .connectModal {
     opacity: 0;
     pointer-events: none;
@@ -37,10 +40,19 @@
     right: -100%;
     transform: translateY(-50%);
     z-index: 250;
-    /*height: 66vh;*/
     display: flex;
     justify-content: center;
     align-items: flex-start;
+}
+
+.showModal {
+    opacity: 1;
+    pointer-events: auto;
+    right: 0;
+}
+
+.draggingModal {
+    transition: none;
 }
 
 .connectModalInner {
@@ -48,8 +60,7 @@
     overflow: hidden;
     border: 1px solid #555;
     border-right: none;
-    /*background-color: #0b1118;*/
-    background-color: rgba(30,30,30,1);
+    background-color: rgba(30, 30, 30, 1);
     padding-top: 2rem;
 }
 
@@ -62,12 +73,19 @@
     -ms-overflow-style: none;
 }
 
-.showModal {
-    opacity: 1;
-    pointer-events: auto;
-    right: 0;
+/* ===== mobile sheet handle: desktop hidden ===== */
+.sheetHandleArea {
+    display: none;
 }
 
+.sheetHandle {
+    width: 42px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ===== connect button ===== */
 .connectButtonWrapper {
     position: fixed;
     top: 0;
@@ -80,15 +98,10 @@
     gap: 1rem;
 }
 
-
 .connectButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    /*padding: 8px 14px;*/
-    /*border-radius: 9999px;*/
-    /*background: #111827;*/
-    /*border: 1px solid #374151;*/
     color: #fff;
     opacity: .7;
     cursor: pointer;
@@ -96,7 +109,6 @@
     box-sizing: border-box;
     transition: opacity .5s;
     font-size: .8rem;
-
 }
 
 .connectButton:hover {
@@ -121,6 +133,7 @@
     border-radius: 100%;
     border: 1px solid #4b5563;
 }
+
 .userInfo > img {
     width: 1.5rem;
     height: 1.5rem;
@@ -166,9 +179,6 @@
 
 .walletInfo span,
 .userInfo span {
-    /*font-size: 14px;*/
-    /*font-weight: 600;*/
-    /*color: #fff;*/
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -203,7 +213,7 @@
     pointer-events: auto;
 }
 
-/*close modal*/
+/* ===== close modal ===== */
 .closeBtnWrapper {
     position: absolute;
     top: 0;
@@ -229,6 +239,7 @@
     position: relative;
     opacity: 0.75;
 }
+
 .lineOne {
     position: absolute;
     top: 50%;
@@ -238,67 +249,128 @@
     height: 1px;
     width: 100%;
 }
+
 .lineTwo {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: rotate(-45deg);
-    background-color: #fff;
-    height: 1px;
-    width: 100%;
-}
-.lineTwo {
     transform: rotate(45deg);
     background-color: #fff;
     height: 1px;
     width: 100%;
 }
 
+/* ===== tablet ===== */
 @media (max-width: 768px) {
     .connectButtonWrapper {
         right: 1rem;
         z-index: 300;
     }
+
     .userNickname {
         display: none;
     }
+
     .walletInfo > img {
         width: 24px;
     }
+
     .connectIcon {
         display: block;
     }
+
     .connectText {
         display: none;
     }
+
     .connectButton {
         opacity: 1;
     }
-
 }
 
+/* ===== mobile bottom sheet ===== */
 @media (max-width: 576px) {
     .connectModal {
         position: fixed;
         bottom: -100%;
         left: 0;
         right: 0;
-        width: 100%;
-        /*max-height: calc(100dvh - 6rem);*/
-        /*overflow-y: auto;*/
-        transform: none;
         top: auto;
+
+        width: 100%;
+
+        transform: translateY(var(--drag-y, 0px));
+
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+
+        will-change: transform;
+
+        transition:
+                opacity .25s ease,
+                bottom .35s cubic-bezier(0.22, 1, 0.36, 1),
+                transform .28s cubic-bezier(0.22, 1, 0.36, 1);
+
+        background-color: rgba(30, 30, 30, 1);
+        border-radius: 24px 24px 0 0;
+        border-top: 1px solid #555;
     }
 
     .showModal {
         bottom: 0;
     }
 
+    .draggingModal {
+        transition:
+                opacity .25s ease,
+                bottom .35s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0ms;
+    }
+
+    .sheetHandleArea {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 2.25rem;
+        padding-top: .5rem;
+
+        background-color: rgba(30, 30, 30, 1);
+        border-radius: 24px 24px 0 0;
+
+        cursor: grab;
+        user-select: none;
+        touch-action: none;
+    }
+
+    .sheetHandleArea:active {
+        cursor: grabbing;
+    }
 
     .connectModalInner {
         width: 100%;
-        border-radius: 24px 24px 0 0;
+
+        border-radius: 0;
         border-left: none;
+        border-right: none;
         border-bottom: none;
+        border-top: none;
+
+        max-height: calc(75svh - 2.25rem);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+
+        padding-top: 0;
+    }
+
+    .connectModalInner::-webkit-scrollbar {
+        display: none;
+    }
+
+    .closeBtnWrapper {
+        /*top: 2.25rem;*/
     }
 }

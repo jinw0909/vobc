@@ -895,12 +895,12 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                 <div className={styles.infoGrid}>
                     <div>
                         <span>Email</span>
-                        <strong>{profile.email || 'Not registered'}</strong>
+                        <p>{profile.email || 'Not registered'}</p>
                     </div>
 
                     <div>
                         <span>Bio</span>
-                        <strong>{profile.bio || 'Not registered'}</strong>
+                        <p>{profile.bio || 'Not registered'}</p>
                     </div>
                 </div>
             </section>
@@ -1011,7 +1011,7 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
                     <div className={styles.sectionHeader}>
                         <div>
                             <h2>Liked Posts</h2>
-                            <p>Liked posts</p>
+                            <p>Posts marked liked</p>
                         </div>
                     </div>
 

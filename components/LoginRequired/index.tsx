@@ -15,7 +15,7 @@ type LoginRequiredProps = {
 
 export default function LoginRequired({
                                           title = 'Login Required',
-                                          description = '이 페이지를 보려면 지갑 연결 후 로그인이 필요합니다.',
+                                          description = 'You need to connect your wallet and log in to view this page.',
                                           loginButtonText = 'Login',
                                           homeButtonText = 'Home',
                                           showHomeButton = true,
