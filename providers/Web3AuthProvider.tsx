@@ -446,52 +446,6 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
         }
     }, [])
 
-    // useEffect(() => {
-    //     if (typeof window === 'undefined') return
-    //
-    //     const detectedMap = new Map<string, WalletOption>()
-    //
-    //     const updateDetectedWallets = () => {
-    //         const fallbackWallets = getFallbackInjectedWallets()
-    //
-    //         for (const wallet of fallbackWallets) {
-    //             detectedMap.set(wallet.id, wallet)
-    //         }
-    //
-    //         setDetectedInjectedWallets([...detectedMap.values()])
-    //     }
-    //
-    //     const handleProviderAnnouncement = (event: Event) => {
-    //         const customEvent = event as CustomEvent<Eip6963ProviderDetail>
-    //         const detail = customEvent.detail
-    //
-    //         if (!detail?.info?.name || !detail?.provider) return
-    //
-    //         const wallet = normalizeDetectedInjectedWallet(detail)
-    //         detectedMap.set(wallet.id, wallet)
-    //
-    //         setDetectedInjectedWallets([...detectedMap.values()])
-    //     }
-    //
-    //     window.addEventListener(
-    //         'eip6963:announceProvider',
-    //         handleProviderAnnouncement,
-    //     )
-    //
-    //     window.dispatchEvent(new Event('eip6963:requestProvider'))
-    //
-    //     updateDetectedWallets()
-    //
-    //     const timer = window.setTimeout(updateDetectedWallets, 500)
-    //
-    //     return () => {
-    //         window.removeEventListener(
-    //             'eip6963:announceProvider',
-    //             handleProviderAnnouncement,
-    //         )
-    //         window.clearTimeout(timer)
-    //     }
-    // }, [])
 
     useEffect(() => {
         if (typeof window === 'undefined') return
@@ -604,52 +558,6 @@ export function Web3AuthProvider({ children }: { children: React.ReactNode }) {
         saveSelectedWalletOption(null)
     }, [])
 
-    // const connectWallet = useCallback(
-    //     async (kind: WalletKind, walletId?: string) => {
-    //         const targetConnector = connectors.find((item) =>
-    //             isConnectorMatch(item, kind, walletId),
-    //         )
-    //
-    //         if (!targetConnector) {
-    //             console.warn('[connectWallet] connector not found', {
-    //                 kind,
-    //                 walletId,
-    //                 connectors: connectors.map((item) => ({
-    //                     id: item.id,
-    //                     name: item.name,
-    //                     type: item.type,
-    //                 })),
-    //             })
-    //             return false
-    //         }
-    //
-    //         const option =
-    //             findWalletOptionById(walletOptions, walletId) ||
-    //             findFixedOptionByKind(kind)
-    //
-    //         try {
-    //             await connectAsync({
-    //                 connector: targetConnector,
-    //             })
-    //
-    //             if (option) {
-    //                 setSelectedWalletOption(option)
-    //                 saveSelectedWalletOption(option)
-    //             }
-    //
-    //             return true
-    //         } catch (error) {
-    //             console.error('[connectWallet error]', {
-    //                 kind,
-    //                 walletId,
-    //                 error,
-    //             })
-    //
-    //             return false
-    //         }
-    //     },
-    //     [connectAsync, connectors, walletOptions],
-    // )
     useEffect(() => {
         if (connectionType !== 'walletconnect') {
             setWalletConnectPeer(null)

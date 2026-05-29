@@ -23,10 +23,16 @@ export const config = createConfig({
         walletConnect({
             projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
             showQrModal: true,
+            metadata: {
+                name: 'VOB',
+                description: 'VOB Wallet Login',
+                url: 'https://www.vobc.io',
+                icons: ['https://www.vobc.io/favicon.svg'],
+            },
         }),
         coinbaseWallet({
             appName: 'VOB',
-            appLogoUrl: 'https://www.vobc.io/favicon.png',
+            appLogoUrl: 'https://www.vobc.io/favicon.svg',
             preference: 'smartWalletOnly',
         }),
     ],
