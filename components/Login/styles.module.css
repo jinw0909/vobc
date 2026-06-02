@@ -414,6 +414,10 @@
     font-size: 30px;
     line-height: 1;
     color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-3px);
 }
 
 .walletHelpText {
