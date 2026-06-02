@@ -360,7 +360,8 @@
 
         max-height: calc(75svh - 2.25rem);
         overflow-y: auto;
-        overscroll-behavior: contain;
+        /*overscroll-behavior: contain;*/
+        overscroll-behavior: auto;
         -webkit-overflow-scrolling: touch;
 
         padding-top: 0;
