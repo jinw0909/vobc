@@ -79,7 +79,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.8rem;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 .statusRow span {
@@ -90,6 +90,37 @@
     color: #c8d2df;
     font-size: 0.8rem;
     border: 1px solid #555;
+}
+
+.statusRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.connectionType {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.walletInfo,
+.chainInfo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.walletIcon,
+.chainIcon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.chainIcon {
+    border-radius: 0;
 }
 
 .portfolio {

@@ -106,6 +106,8 @@ export default function Login({
     const {
         account,
         chainId,
+        chainInfo,
+        connectionType,
         connectedWallet,
         vobBalance,
 
@@ -136,6 +138,12 @@ export default function Login({
 
     const router = useRouter()
     const pathname = usePathname()
+
+    const connectedProfileImage =
+        connectionType === 'walletconnect'
+            ? '/wallets/walletconnect.svg'
+            : connectedWallet?.icon ||
+            '/default-wallet.png'
 
     const handleDisconnectClick =
         async () => {
@@ -682,18 +690,26 @@ export default function Login({
                             styles.profileImageWrap
                         }
                     >
+                        {/*<img*/}
+                        {/*    src={*/}
+                        {/*        connectedWallet.icon*/}
+                        {/*    }*/}
+                        {/*    alt={*/}
+                        {/*        connectedWallet.name*/}
+                        {/*    }*/}
+                        {/*    className={*/}
+                        {/*        styles.connectedMainIcon*/}
+                        {/*    }*/}
+                        {/*/>*/}
                         <img
-                            src={
-                                connectedWallet.icon
-                            }
+                            src={connectedProfileImage}
                             alt={
-                                connectedWallet.name
+                                connectionType === 'walletconnect'
+                                    ? 'WalletConnect'
+                                    : connectedWallet.name
                             }
-                            className={
-                                styles.connectedMainIcon
-                            }
+                            className={styles.connectedMainIcon}
                         />
-
                         <span
                             className={
                                 styles.checkBadge
@@ -860,59 +876,35 @@ export default function Login({
             }
 
             return (
-                <div
-                    className={
-                        styles.walletFooter
-                    }
-                >
-                    <div
-                        className={
-                            styles.walletFooterMain
-                        }
-                    >
+                <div className={styles.walletFooter}>
+                    <div className={styles.walletFooterMain}>
                         <img
-                            src={
-                                connectedWallet.icon
-                            }
-                            alt={
-                                connectedWallet.name
-                            }
-                            className={
-                                styles.walletFooterIcon
-                            }
+                            src={connectedWallet.icon}
+                            alt={connectedWallet.name}
+                            className={styles.walletFooterIcon}
                         />
 
                         <div>
-                            <div
-                                className={
-                                    styles.walletFooterName
-                                }
-                            >
-                                {
-                                    connectedWallet.name
-                                }
+                            <div className={styles.walletFooterName}>
+                                {connectedWallet.name}
                             </div>
 
-                            <div
-                                className={
-                                    styles.walletFooterAddress
-                                }
-                            >
-                                {shortenAddress(
-                                    account,
-                                )}
+                            <div className={styles.walletFooterAddress}>
+                                {shortenAddress(account)}
                             </div>
                         </div>
                     </div>
 
-                    <div
-                        className={
-                            styles.walletFooterNetwork
-                        }
-                    >
-                        {getNetworkName(
-                            chainId,
+                    <div className={styles.walletFooterNetwork}>
+                        {chainInfo?.icon && (
+                            <img
+                                src={chainInfo.icon}
+                                alt={`${chainInfo.name} icon`}
+                                className={styles.walletFooterNetworkIcon}
+                            />
                         )}
+
+                        <span>{chainInfo?.name}</span>
                     </div>
                 </div>
             )

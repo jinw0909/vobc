@@ -29,6 +29,8 @@ import {
 import {
     normalizeOptionalString,
     shortenAddress,
+    getChainInfo,
+    type ChainInfo,
 } from '@/utils/web3'
 
 export type UserConnection = {
@@ -81,6 +83,8 @@ type Web3AuthContextValue = {
 
     displayNickname: string
     displayProfileImage: string
+
+    chainInfo: ChainInfo
 
     setAccount: Dispatch<SetStateAction<string>>
     setChainId: Dispatch<SetStateAction<string>>
@@ -421,6 +425,11 @@ export function Web3AuthProvider({
         name?: string
         icon?: string
     } | null>(null)
+
+    const chainInfo = useMemo(
+        () => getChainInfo(wagmiChainId),
+        [wagmiChainId],
+    )
 
     useEffect(() => {
         const saved = readSelectedWalletOption()
@@ -891,9 +900,19 @@ export function Web3AuthProvider({
             account,
         )
 
+    // const displayProfileImage =
+    //     userProfile?.profileImageUrl ||
+    //     connectedWallet?.icon ||
+    //     savedWalletIcon ||
+    //     '/default-wallet.png'
+
     const displayProfileImage =
         userProfile?.profileImageUrl ||
-        connectedWallet?.icon ||
+        (
+            connectionType === 'walletconnect'
+                ? '/wallets/walletconnect.svg'
+                : connectedWallet?.icon
+        ) ||
         savedWalletIcon ||
         '/default-wallet.png'
 
@@ -1176,6 +1195,7 @@ export function Web3AuthProvider({
                     connectedWallet,
                     userProfile,
                     vobBalance,
+                    chainInfo,
 
                     walletOptions,
 
@@ -1195,6 +1215,8 @@ export function Web3AuthProvider({
 
                     displayNickname,
                     displayProfileImage,
+
+
 
                     setAccount:
                         noopSetString as Dispatch<
@@ -1258,6 +1280,7 @@ export function Web3AuthProvider({
                 connectedWallet,
                 userProfile,
                 vobBalance,
+                chainInfo,
 
                 walletOptions,
 
@@ -1277,6 +1300,8 @@ export function Web3AuthProvider({
 
                 displayNickname,
                 displayProfileImage,
+
+
 
                 noopSetString,
                 noopSetConnectionType,

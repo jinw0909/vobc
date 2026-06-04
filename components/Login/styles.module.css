@@ -654,7 +654,7 @@
 .walletFooterIcon {
     width: 32px;
     height: 32px;
-    border-radius: 8px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
@@ -701,6 +701,20 @@
     font-size: 12px;
     font-weight: 500;
     text-align: center;
+}
+
+.walletFooterNetwork {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.walletFooterNetworkIcon {
+    width: 12px;
+    height: 12px;
+    /*border-radius: 50%;*/
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 .confirmOverlay {

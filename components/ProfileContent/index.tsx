@@ -81,15 +81,19 @@ function normalizeOptionalString(value: unknown) {
         : undefined
 }
 
+
+
 export default function ProfileContent({ accessToken }: { accessToken: string }) {
     const {
         account,
         chainId,
+        chainInfo,
         connectionType,
         connectedWallet,
         userProfile,
         vobBalance,
         displayNickname,
+        displayProfileImage,
         fetchVobBalance,
         getActiveProvider,
         setUserProfile,
@@ -533,8 +537,14 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         profile.nickname.trim() ||
         (editing ? walletFallbackNickname : displayNickname || walletFallbackNickname)
 
+    // const shownProfileImage =
+    //     profilePreviewUrl || profile.profileImageUrl || connectedWallet?.icon || ''
+
     const shownProfileImage =
-        profilePreviewUrl || profile.profileImageUrl || connectedWallet?.icon || ''
+        profilePreviewUrl ||
+        profile.profileImageUrl ||
+        displayProfileImage ||
+        ''
 
     const resetProfileImage = () => {
         setProfilePreviewUrl('')
@@ -566,6 +576,20 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
         resetProfileForm()
         setEditing(true)
     }
+
+    const getConnectionTypeLabel = () => {
+        switch (connectionType) {
+            case 'injected':
+                return 'Injected'
+            case 'walletconnect':
+                return 'WalletConnect'
+            case 'coinbase-wallet':
+                return 'Base Account'
+            default:
+                return connectionType || 'Unknown'
+        }
+    }
+
     if (editing) {
         return (
             <div className={styles.profileContent}>
@@ -754,10 +778,37 @@ export default function ProfileContent({ accessToken }: { accessToken: string })
 
                         <p className={styles.walletAddress}>{displayAddress}</p>
 
+                        {/*<div className={styles.statusRow}>*/}
+                        {/*    /!*<span>{connectionType || 'Not connected'}</span>*!/*/}
+                        {/*    <span>{connectedWallet?.name || 'No wallet'}</span>*/}
+                        {/*    <span>{accessToken ? 'Logged in' : 'No access token'}</span>*/}
+                        {/*</div>*/}
+
                         <div className={styles.statusRow}>
-                            {/*<span>{connectionType || 'Not connected'}</span>*/}
-                            <span>{connectedWallet?.name || 'No wallet'}</span>
-                            <span>{accessToken ? 'Logged in' : 'No access token'}</span>
+                            <span className={styles.connectionType}>
+                                {getConnectionTypeLabel()}
+                            </span>
+
+                            <span className={styles.walletInfo}>
+                                {connectedWallet?.icon && (
+                                    <img
+                                        src={connectedWallet.icon}
+                                        alt={`${connectedWallet.name || 'Wallet'} icon`}
+                                        className={styles.walletIcon}
+                                    />
+                                )}
+                                {connectedWallet?.name || 'Wallet'}
+                            </span>
+                            <span className={styles.chainInfo}>
+                                {chainInfo.icon && (
+                                    <img
+                                        src={chainInfo.icon}
+                                        alt={`${chainInfo.name} icon`}
+                                        className={styles.chainIcon}
+                                    />
+                                )}
+                                {chainInfo.name}
+                            </span>
                         </div>
 
                         <div className={styles.mobileSecondary}>

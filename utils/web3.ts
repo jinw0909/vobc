@@ -42,23 +42,96 @@ export function toHexUtf8(value: string): string {
     )
 }
 
-export function getNetworkName(chainId?: string) {
-    const normalized = normalizeHexChainId(chainId || '')
+export type ChainInfo = {
+    id: number | null
+    name: string
+    icon: string | null
+}
 
-    switch (normalized) {
-        case '0x1':
-            return 'Ethereum Mainnet'
-        case '0x38':
-            return 'BNB Smart Chain'
-        case '0x2105':
-            return 'Base Mainnet'
-        case '0x89':
-            return 'Polygon Mainnet'
-        case '0xa':
-            return 'Optimism'
-        case '0xa4b1':
-            return 'Arbitrum One'
+function normalizeChainId(
+    chainId?: string | number | null,
+): number | null {
+    if (typeof chainId === 'number') {
+        return Number.isNaN(chainId)
+            ? null
+            : chainId
+    }
+
+    if (!chainId) {
+        return null
+    }
+
+    const parsed = chainId.startsWith('0x')
+        ? Number.parseInt(chainId, 16)
+        : Number.parseInt(chainId, 10)
+
+    return Number.isNaN(parsed)
+        ? null
+        : parsed
+}
+
+export function getChainInfo(
+    chainId?: string | number | null,
+): ChainInfo {
+    const numericChainId =
+        normalizeChainId(chainId)
+
+    switch (numericChainId) {
+        case 1:
+            return {
+                id: 1,
+                name: 'Ethereum Mainnet',
+                icon: '/chains/ethereum.svg',
+            }
+
+        case 8453:
+            return {
+                id: 8453,
+                name: 'Base Mainnet',
+                icon: '/chains/base.svg',
+            }
+
+        case 56:
+            return {
+                id: 56,
+                name: 'BNB Smart Chain',
+                icon: '/chains/bsc.svg',
+            }
+
         default:
-            return normalized || '-'
+            return {
+                id: numericChainId,
+                name: numericChainId
+                    ? `Chain ${numericChainId}`
+                    : 'Unknown Chain',
+                icon: null,
+            }
     }
 }
+
+export function getNetworkName(
+    chainId?: string | number | null,
+) {
+    return getChainInfo(chainId).name
+}
+
+// export function getNetworkName(chainId?: string) {
+//     const normalized = normalizeHexChainId(chainId || '')
+//
+//     switch (normalized) {
+//         case '0x1':
+//             return 'Ethereum Mainnet'
+//         case '0x38':
+//             return 'BNB Smart Chain'
+//         case '0x2105':
+//             return 'Base Mainnet'
+//         case '0x89':
+//             return 'Polygon Mainnet'
+//         case '0xa':
+//             return 'Optimism'
+//         case '0xa4b1':
+//             return 'Arbitrum One'
+//         default:
+//             return normalized || '-'
+//     }
+// }
