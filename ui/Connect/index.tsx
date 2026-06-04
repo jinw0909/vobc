@@ -6,7 +6,8 @@ import { CSSProperties, useCallback, useEffect, useRef, useState } from 'react'
 import { useWeb3Auth } from '@/providers/Web3AuthProvider'
 import { useUi } from '@/providers/UiProvider'
 import Image from 'next/image'
-import connectIcon from '@/public/icons/power-button-white.png'
+// import connectIcon from '@/public/icons/power-button-white.png'
+import connectIcon from '@/public/logo_svg_bright.svg'
 
 export default function Connect() {
     const [dragY, setDragY] = useState(0)
