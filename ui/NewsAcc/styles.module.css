@@ -191,6 +191,7 @@
 }
 .newsBody {
     position: relative;
+    color: white;
 }
 .dateMobile {
     display: none;

@@ -1,0 +1,49 @@
+.wrapper {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    margin-top: 6rem;
+}
+
+.label {
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.writeButton {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #fff;
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: black !important;
+}
+
+.writeButton:hover {
+    opacity: 0.86;
+}
+
+.content {
+    min-height: 400px;
+}

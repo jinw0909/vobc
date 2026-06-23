@@ -114,7 +114,7 @@ type Web3AuthContextValue = {
     signMessage: (message: string) => Promise<string>
 
     fetchVobBalance: (token?: string) => Promise<void>
-    restoreLoginSession: () => Promise<boolean>
+    restoreLoginSession: () => Promise<string | null>
 }
 
 const Web3AuthContext =
@@ -366,11 +366,7 @@ function findConnector<
     return undefined
 }
 
-export function Web3AuthProvider({
-                                     children,
-                                 }: {
-    children: React.ReactNode
-}) {
+export function Web3AuthProvider({children,}: { children: React.ReactNode }) {
     const {
         address,
         isConnected: wagmiIsConnected,
@@ -1033,7 +1029,8 @@ export function Web3AuthProvider({
                     !data?.accessToken
                 ) {
                     resetLoginState()
-                    return false
+                    // return false
+                    return null
                 }
 
                 const restoredWalletAddress =
@@ -1045,7 +1042,8 @@ export function Web3AuthProvider({
                     !restoredWalletAddress
                 ) {
                     resetLoginState()
-                    return false
+                    // return false
+                    return null
                 }
 
                 const newAccessToken =
@@ -1087,7 +1085,8 @@ export function Web3AuthProvider({
                     newAccessToken,
                 )
 
-                return true
+                // return true
+                return newAccessToken
             } catch (error) {
                 console.error(
                     '[restoreLoginSession error]',
@@ -1096,7 +1095,8 @@ export function Web3AuthProvider({
 
                 resetLoginState()
 
-                return false
+                // return false
+                return null
             }
         }, [
             fetchVobBalance,
