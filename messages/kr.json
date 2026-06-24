@@ -1,0 +1,208 @@
+{
+  "main" : {
+    "title_0" : "VOB 1.0 Smart Trading",
+    "title_1" : "Experience Emotion-Free Trading with AI",
+    "subtitle_0" : "Discover secure and emotion-free trading with our advanced AI technology",
+    "subtitle_1": "Join us for global revenue opportunities",
+    "subtitle_2":"Build a thriving ecosystem with us",
+    "description": "The Vision of Blockchain foundation and the VOB token expands access to the blockchain for all and deepens the engagement between exchanges, developers, and communities."
+  },
+  "hero": {
+    "line1": "Discover emotion-free and secure trading",
+    "line2": "Powered by advanced AI technology",
+    "line3": "Unlock global revenue opportunities",
+    "line4": "And build a thriving ecosystem together",
+    "vision" : "At the VOB foundation, we are dedicated to fostering connections between global communities and new ideas. Guided by this vision, the Vision of Blockchain project seeks to expand our community through creative collaboration. Our team invites experts from diverse backgrounds and practices to participate, encouraging them to explore and interpret the essence of our community and the token economy. Through each participant’s unique perspective, we aim to enrich the ongoing global conversation about cryptocurrency in the present and the potential landscape of the future.",
+    "vision_down" : "This vision goes beyond technology, placing human creativity and shared values at the center of blockchain innovation. By creating spaces where ideas can intersect freely, we encourage dialogue that challenges conventional boundaries and assumptions. Each collaboration becomes an opportunity to redefine how communities form, grow, and sustain themselves in a decentralized world. Rather than prescribing a single narrative, we embrace multiple interpretations that reflect the diversity of our participants. Through this open and evolving process, the Vision of Blockchain continues to shape a collective future rooted in connection, trust, and imagination.",
+    "blockchain" : "Blockchain is an idea brought by Satoshi Nakamoto in part of the the Bitcoin project, a peer-to-peer electronic cash system, where the value of the currency is assured by the decentralized participants and their interactions. The VOB foundation responded to the necessity for community collaboration rooted in the philosophy of the blockchain technology by encouraging its participants to foster the blockchain’s growth. The Vision of Blockchain uses data and artificial intelligence to create the assets that bridges the online and offline worlds. ",
+    "blockchain_down": "This work often involve real-time information and social interactions to explore contemporary cryptocurrency structures. At its core, blockchain represents a shift in how trust and value are constructed within digital systems. By decentralizing authority, it empowers individuals and communities to participate directly in shaping economic and social frameworks. VOB extends this philosophy by integrating data-driven insights and AI to interpret complex, real-world dynamics. These technologies allow us to respond to changing conditions with greater transparency and adaptability. Through this approach, blockchain becomes not only a technical infrastructure, but a living system that reflects human interaction and collective intelligence.",
+    "vob": "Our dedication to the blockchain takes shape through long-term partnerships with exchanges and cryptocurrency communities across the globe. In a collaborative spirit with each partner, we create unique initiatives aimed at fostering our shared passion to explore new ways for supporting blockchain, developers, and cryptocurrency communities worldwide. As a continuously evolving network, VOB’s hybrid structure allows ideas and support to flow between regions and interests, fully embracing diversity and multiplicity.",
+    "vob_down": "These partnerships form the foundation of a resilient and interconnected ecosystem. By working closely with local and global communities, we ensure that innovation remains grounded in real-world needs. VOB’s hybrid structure enables flexible collaboration across cultural, technical, and institutional boundaries.\nThis openness allows knowledge and resources to circulate freely, strengthening the network as a whole. Through sustained cooperation and mutual trust, VOB continues to grow as a platform where global perspectives converge into shared progress.",
+    "about" : "About VOB"
+  },
+  "nav" : {
+    "home" : "HOME",
+    "about" : "ABOUT",
+    "devs" : "DEVS",
+    "team" : "TEAM",
+    "news" : "NEWS",
+    "media" : "MEDIA",
+    "cookies" : "Cookies Policy",
+    "privacy" : "Privacy Policy",
+    "use" : "Terms of Use",
+    "language": "Select Language",
+    "detail" : "DETAIL",
+    "blog" : "BLOG",
+    "tag" : "TAG",
+    "roadmap" : "ROADMAP",
+    "profile": "PROFILE"
+  },
+  "about" : {
+    "main_title" : "About VOB",
+    "title_0" : "The Future Value",
+    "content_0" : "We constantly seek algorithms that would make our value a reality. The future value of our token will surpass what you could possibly imagine. We aim to provide economic freedom to everyone and lead the AI and the blockchain industries. On our platform, participants will democratically own and contribute to our values. People from various countries are anticipating our token. We are walking towards the dream of pioneering the global AI and blockchain markets, creating a future space where everyone can engage in fair and free economic activities.",
+    "title_1" : "Future Prospects",
+    "content_1" : "VOB's vision is to expand into a global trading solution, to enhance accuracy through accumulating data from cryptocurrency exchanges and markets utilzing distributed supercomputing system. Our GOYABOT platform efficiently delivers customized AI solutions and empowers clients to achieve the trading and investing objectives. The GOYA AI is structured to evolve and reflect each individual’s unique traits and needs to its algorithim and to the ecosystem, providing customized strategy and guidelines to every single participant.",
+    "title_2" : "The Token Economy",
+    "content_2" : "The VOB Token Economy is built upon its four major pillars. The payment economy, the global community, the NFT economy and the GOYABOT AI. The participants will be generating constant profits by leveraging the token economy’s unique features which is distinct from the rest. The VOB token will play a role as the economy’s major payment currency, providing a seamless experience which will eventually lead to the constant and rapid growth of the global community."
+  },
+  "vision": {
+    "vision" : "At the VOB foundation, we are dedicated to fostering connections between global communities and new ideas. Guided by this vision, the Vision of Blockchain project seeks to expand our community through creative collaboration. Our team invites experts from diverse backgrounds and practices to participate, encouraging them to explore and interpret the essence of our community and the token economy. Through each participant’s unique perspective, we aim to enrich the ongoing global conversation about cryptocurrency in the present and the potential landscape of the future.",
+    "blockchain" : "Blockchain is an idea brought by Satoshi Nakamoto in part of the the Bitcoin project, a peer-to-peer electronic cash system, where the value of the currency is assured by the decentralized participants and their interactions. The VOB foundation responded to the necessity for community collaboration rooted in the philosophy of the blockchain technology by encouraging its participants to foster the blockchain’s growth. The Vision of Blockchain uses data and artificial intelligence to create the assets that bridges the online and offline worlds. This work often involve real-time information and social interactions to explore contemporary cryptocurrency structures.",
+    "vob": "Our dedication to the blockchain takes shape through long-term partnerships with exchanges and cryptocurrency communities across the globe. In a collaborative spirit with each partner, we create unique initiatives aimed at fostering our shared passion to explore new ways for supporting blockchain, developers, and cryptocurrency communities worldwide. As a continuously evolving network, VOB’s hybrid structure allows ideas and support to flow between regions and interests, fully embracing diversity and multiplicity.",
+    "about" : "About VOB"
+  },
+  "devs" : {
+    "devs_title" : "GOYA AI and the Big Data",
+    "devs_content": "GOYA AI by VOB is an automated computer program designed to execute specific tasks with minimal human intervention. The number of users are increasing as we send out more efficient data. Meanwhile, VOB is building an ecosystem with technically advanced policies and the VOB token. Furthermore, we will ensure a more advanced platform by providing a stable Token Economy and opportunities to generate profits.",
+    "devs_acc": {
+      "0": {
+        "title": "Improved Decision Making",
+        "content": "AI can analyze massive data from various sources. This helps traders make more informed decisions and identify opportunities that may have been overlooked when traditional methods were taken."
+      },
+      "1": {
+        "title": "Improved Risk Management",
+        "content": "AI analyze data in real time and identifies potential risks, allowing traders to take appropriate action to mitigate risks"
+      },
+      "2": {
+        "title": "Improved Efficiency",
+        "content": "AI automates certain tasks and processes, allowing traders to focus on more complex tasks that require human expertise"
+      },
+      "3": {
+        "title": "Improved Accuracy",
+        "content": "AI algorithms help reduce the risk of errors or mistakes by analyzing data and making decisions based on logic without being swayed by personal emotions or prejudices"
+      },
+      "4": {
+        "title": "Improved Personalization",
+        "content": "By analyzing the past behaviors of each trader, AI provides personalized recommendations and adjust strategies to suit their specific needs and preferences"
+      }
+    },
+    "devs_subtitle": "Security Architecture"
+  },
+  "devs_main": {
+    "title" : "Technology",
+    "subtitle" : "Security Architecture",
+    "content" : "GOYABOT is an advanced automated computer program. It operates with minimal human intervention efficiently increasing user engagement. We are committed to leveraging technology and the VOB token to construct a resilient ecosystem ensuring stable token economy and profit-generative prospects.",
+    "btn" : "View More"
+  },
+  "whitepaper" : {
+    "whitepaper": "View the VOB white paper",
+    "smartcontract" : "View the VOB smart contract account",
+    "viewbtn": "View",
+    "checkbtn": "Check"
+  },
+  "roadmap" : {
+    "title" : "Project Roadmap",
+    "0" : {
+      "date" : "February 2017",
+      "title" : "Crypto Price Prediction",
+      "content" : "Visualized projections of crypto prices based on GoyaBot's AI-driven analysis, forecasting future trends with the Goya score."
+    },
+    "1" : {
+      "date" : "June 2017",
+      "title" : "Arbitrage Trading Data Collection and Analysis",
+      "content" : "Research and compilation of six years of data on arbitrage trading and historical crypto market patterns for deeper market insights."
+    },
+    "2" : {
+      "date" : "December 2022",
+      "title" : "Listing on LBank CEX Exchange",
+      "content" : "Successfully listed on LBank, a leading centralized exchange."
+    },
+    "3" : {
+      "date" : "May 2023",
+      "title" : "GoyaBot 5.0 Launch & Global Expansion",
+      "content" : "Release of a complete automated trading bot and expanded global reach through online channels."
+    },
+    "4" : {
+      "date" : "October 2023",
+      "title" : "System Enhancements",
+      "content" : "Launch of ReTri's advanced computing system and GOYABOT's premium chart feature."
+    },
+    "5" : {
+      "date" : "October 2023",
+      "title" : "Rising X Beta Platform Launch",
+      "content" : "Initiation of the Rising X platform in beta, paving the way for future releases."
+    },
+    "6" : {
+      "date" : "Q3 2024",
+      "title" : "Full Launch of Rising X Platform",
+      "content" : "The VOB token will act as the primary payment currency, enabling global growth on the Rising X platform."
+    },
+    "7" : {
+      "date" : "Q1 2025",
+      "title" : "Launch of VOB NFT Project",
+      "content" : "Introducing the VOB NFT project to further enhance the platform's ecosystem and user engagement."
+    }
+  },
+  "distribution": {
+    "vobtoken": "VOB Token",
+    "model": "Distribution Model",
+    "EA" : "EA",
+    "opendetail": "Open Detail",
+    "closedetail": "Close Detail",
+    "total": "Total"
+  },
+  "partners": {
+    "title": "Get Started with VOB",
+    "subtitle": "Start trading now with VOB's partners that include globally verified CEX",
+    "startbtn": "Get Started",
+    "lbank": "Founded in 2015, LBank Exchange is a top cryptocurrency trading platform with licenses of NFA, MSB, and Canada MSB. LBank Exchange provides global users with secure, professional, and convenient products and services, including Cryptocurrency Trading, Derivatives, Staking, NFT, and LBK Labs investment",
+    "cointrpro": "CoinTR.com is an integrated international Cryptocurrency platform founded in 2022. Powerful founders of traditional Turkish financial institutions and experienced team members from top crypto exchanges in London & Istanbul, Turkey make us more competitive and trustworthy.",
+    "deepcoin": "Deepcoin is a global cryptocurrency derivative trading platform that supports leveraged trading through Perpetual and CFD contracts. It offers diverse investment opportunities, including spot trading, staking, and DeFi services, designed to cater to both beginner and advanced traders. With a focus on security and innovative trading tools, Deepcoin aims to provide a seamless and robust experience for cryptocurrency enthusiasts worldwid"
+  },
+  "team": {
+    "0" : {
+      "first" : "Management",
+      "second" : "& Executives",
+      "title" : "Management & Executives"
+    },
+    "1" : {
+      "first": "Business",
+      "second": "& Support",
+      "title": "Business & Support"
+    },
+    "2" : {
+      "first" : "Engineering",
+      "second" : "& Development",
+      "title" : "Engineering & Development"
+    },
+    "3" : {
+      "first" : "Global",
+      "second" : "& Strategy",
+      "title" : "Global & Strategy"
+    },
+    "4" : {
+      "first" : "Algorithm",
+      "second" : "& Trading",
+      "title" : "Algorithm & Trading"
+    },
+    "5" : {
+      "first" : "Advisors",
+      "second" : "& Consultants",
+      "title" : "Advisors & Consultants"
+    },
+    "6" : {
+      "first" : "Defense",
+      "second" : "& Law",
+      "title" : "Defense & Law"
+    }
+  },
+  "news" : {
+    "0" : "For over a decade the VOB foundation has deepend its partnerships with global cryptocurrency exchanges and business organizations, including L BANK, CoinTR pro, and multiple domestic exchanges. VOBs own token economy initiatives include the rising-X platform, a digital platform dedicated to cryptocurrency trading of the VOB community and the overall token ecosystem including the upcoming NFT project. Our collaborations and programs embrace the complexities of the cryptocurrency landscape by exploring new ideas and perspectives with individuals and organizations within and beyond the token ecosystem. The team steering these partnerships and initiatives is the VOB foundation. Our goal is to spark meaningful trading experience, cultivate the use of aritificial intelligence in trading, and facilitate NFT project that connects across boundaries by supporting the token economy that inspires us all.",
+    "1" : "We aspire to offer opportunities to reconsider the contemporary cryptocurrency landscape and envision its future by supporting the token economy and its communities. VOB foundation catalyzes its long-standing partnerships with exchanges and communities around the world. As an extension of this work, we endeavor to expand access to the cryptocurrency while fostering enriched connections amongst our community of traders, marketers, technicians, analysts, celebrities, and global audiences. With all that we do, our aim is to ignite conversation, cultivate empathy, and facilitate collaboration that transcends conventional boundaries. Our efforts extend beyond support for individual traders or marketers; we strive to engage the entire token ecosystem by building resilient networks that function like parts of a living organism.",
+    "more": "View More"
+  },
+  "media" : {
+    "title" : "The Vision of Blockchain Media",
+    "description": "The VOB foundation engaged with the theme of Public Relations as well as larger questions about the intersection of communities and the VOB foundation through the launch of Vision of Blockchain Media. The series of public materials bring together a variety of publics to engage with inspiring and impactful experiences. The media is based on the idea of exploring and examining the vast potentials of idea-technology convergence and offers a sequence of materials including conversations and talks, editorial articles, interviews, VOB related promotions and events.",
+    "type" : {
+      "editorial": "Editorial Article",
+      "interview": "Interview",
+      "event": "Event",
+      "publicity": "Public Relations"
+    },
+    "read": "Read Now",
+    "about": "About the Media",
+    "aboutDesc": "Launched in 2022, the Vision of Blockchain Media is a series of original medium that interpret the hybridity of VOB token ecosystem, each created in collaboration with contemporary cryptocurrency participants with diverse practices from around the world."
+  }
+}

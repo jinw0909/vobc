@@ -56,7 +56,7 @@ export const Language = ({ lang }: { lang: string }) => {
                 }`}
                 ref={modalRef}
             >
-                {(['en', 'jp', 'cn'] as const).map((locale, index, array) => (
+                {(['cn', 'jp', 'en'] as const).map((locale, index, array) => (
                     <Fragment key={locale}>
                         <Link
                             key={locale}
@@ -70,11 +70,10 @@ export const Language = ({ lang }: { lang: string }) => {
                                     lang === locale ? styles.current : ''
                                 }`}
                             >
-                                {locale === 'en'
-                                    ? 'English'
-                                    : locale === 'jp'
-                                        ? '日本語'
-                                        : '汉文'}
+                                {locale === 'en' ? 'English'
+                                    : locale === 'jp' ? '日本語'
+                                    : locale === 'cn' ? '中文'
+                                    : '한국어'}
                             </button>
                         </Link>
                     </Fragment>

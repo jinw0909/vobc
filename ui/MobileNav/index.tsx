@@ -69,19 +69,19 @@ export const MobileNav = ({click, onClick} : {click : any, onClick : any}) => {
                     ${styles.langElem} 
                     ${language ? styles.lang : ''}`}>
                     <span
-                        className={`${styles.langChild} ${locale == 'en' ? styles.current : ''}`}
-                        onClick={() => {setSelectedLang('en')}}
-                    >English</span>
-                    <span className={styles.langBar}></span>
+                        className={`${styles.langChild} ${locale == 'cn' ? styles.current : ''}`}
+                        onClick={() => {setSelectedLang('cn')}}
+                    >中文</span>
+                    {/*<span className={styles.langBar}></span>*/}
                     <span
                         className={`${styles.langChild} ${locale == 'jp' ? styles.current : ''}`}
                         onClick={() => {setSelectedLang('jp')}}
                     >日本語</span>
-                    <span className={styles.langBar}></span>
+                    {/*<span className={styles.langBar}></span>*/}
                     <span
-                        className={`${styles.langChild} ${locale == 'cn' ? styles.current : ''}`}
-                        onClick={() => {setSelectedLang('cn')}}
-                    >汉文</span>
+                        className={`${styles.langChild} ${locale == 'en' ? styles.current : ''}`}
+                        onClick={() => {setSelectedLang('en')}}
+                    >English</span>
                 </li>
             </ul>
         </div>

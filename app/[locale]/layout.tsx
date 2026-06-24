@@ -1,6 +1,7 @@
 import "./global.css";
 import { Header } from "@/components/Header";
 import localFont from "next/font/local";
+import { Cormorant_Garamond } from "next/font/google";
 // import { Noto_Serif_KR, Noto_Serif_JP, Noto_Serif_SC} from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { MobileHeader } from "@/components/MobileHeader";
@@ -16,27 +17,36 @@ import Connect from "@/ui/Connect";
 import Settings from "@/components/Settings";
 import AppProviders from '@/providers/AppProviders'
 
+const notoserif = localFont({
+    src: '../../public/fonts/Noto_Serif/NotoSerif-VariableFont_wdth,wght.woff2',
+    display: 'swap',
+    variable: "--font-notoserif",
+    preload: true,
+})
+
 
 const notoserifjp = localFont({
     src: '../../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.woff2',
-    // variable: '--font-notoserifjp',
+    variable: '--font-notoserifjp',
     display: 'auto', // 또는 optional
-    preload: true,
+    // preload: true,
 });
 
 const notoserifsc = localFont({
     src: '../../public/fonts/Noto_Serif_SC/NotoSerifSC-VariableFont_wght.woff2',
-    // variable: '--font-notoserifsc',
+    variable: '--font-notoserifsc',
     display: 'auto', // 또는 optional
-    preload: true,
+    // preload: true,
 });
 
 const notoserifkr = localFont({
     src: '../../public/fonts/Noto_Serif_KR/NotoSerifKR-VariableFont_wght.woff2',
-    // variable: '--font-notoserifkr',
+    variable: '--font-notoserifkr',
     display: 'auto', // 또는 optional
-    preload: true,
+    // preload: true,
 });
+
+
 //
 // const notoserifkr = Noto_Serif_KR({
 //     subsets: ["latin"],
@@ -64,11 +74,19 @@ const notoserifkr = localFont({
 
 
 const fontByLocale: Record<string, any> = {
-    en: notoserifkr,
+    en: notoserif,
     jp: notoserifjp,
     cn: notoserifsc,
     kr: notoserifkr,
 };
+
+const fontClassName = `
+  ${notoserif.variable}
+  ${notoserifkr.variable}
+  ${notoserifjp.variable}
+  ${notoserifsc.variable}
+`;
+
 
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
@@ -119,8 +137,7 @@ export default async function LocaleLayout({
     const font = fontByLocale[locale];
 
     return (
-        // <html lang={locale} className={font?.variable ?? ""}>
-        <html lang={locale} className={font.className}>
+        <html lang={locale} className={fontClassName}>
         <body>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <AppProviders>
