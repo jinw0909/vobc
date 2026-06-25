@@ -5,6 +5,7 @@ import styles from './styles.module.css'
 import vobLogo from '@/public/vob_white.png'
 import vobLogoWhite from '@/public/favicon.svg'
 import Image from 'next/image'
+import retryImage from '@/public/icons/retry-green.svg'
 import { NavigationLink } from '@/ui/NavigationLink'
 import { usePathname, useRouter } from '@/i18n/navigation'
 import { useWeb3Auth } from '@/providers/Web3AuthProvider'
@@ -98,10 +99,17 @@ export default function Login({
         new Set(),
     )
 
+    // const [
+    //     isLoginPending,
+    //     setIsLoginPending,
+    // ] = useState(false)
+
     const [
-        isLoginPending,
-        setIsLoginPending,
-    ] = useState(false)
+        loginPendingCount,
+        setLoginPendingCount,
+    ] = useState(0)
+
+    const isLoginPending = loginPendingCount > 0
 
     const {
         account,
@@ -147,22 +155,33 @@ export default function Login({
 
     const handleDisconnectClick =
         async () => {
-            try {
-                await fetch(
-                    `${API_BASE_URL}/web3/auth/logout`,
-                    {
-                        method: 'POST',
-                        credentials: 'include',
-                    },
-                )
-            } catch (error) {
-                console.error(
-                    '[handleDisconnectClick error]',
-                    error,
-                )
-            }
+            // try {
+            //     await fetch(
+            //         `${API_BASE_URL}/web3/auth/logout`,
+            //         {
+            //             method: 'POST',
+            //             credentials: 'include',
+            //         },
+            //     )
+            // } catch (error) {
+            //     console.error(
+            //         '[handleDisconnectClick error]',
+            //         error,
+            //     )
+            // }
+
+            await fetch(`${API_BASE_URL}/web3/auth/disconnect`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                credentials: 'include',
+                body: account,
+            })
 
             await disconnectWallet()
+
+            setLoginPendingCount(0)
 
             setStatus('idle')
             setMessage(
@@ -290,7 +309,8 @@ export default function Login({
     const loginWithWeb3 =
         async () => {
 
-            setIsLoginPending(true)
+            // setIsLoginPending(true)
+            setLoginPendingCount((count) => count + 1)
 
             try {
                 if (!account) {
@@ -547,7 +567,8 @@ export default function Login({
                     )}`,
                 )
             } finally {
-                setIsLoginPending(false)
+                // setIsLoginPending(false)
+                setLoginPendingCount((count) => Math.max(0, count - 1))
             }
         }
 
@@ -566,6 +587,8 @@ export default function Login({
                 setUserProfile(null)
                 setVobBalance('0')
                 resetLoginState()
+
+                setLoginPendingCount(0)
 
                 setApiResult(
                     'Logged out. Successfully removed accessToken',
@@ -937,59 +960,29 @@ export default function Login({
 
     return (
         <>
-            <main
-                className={
-                    styles.main
-                }
-            >
-                <div
-                    className={
-                        styles.card
-                    }
-                >
-                    <h1
-                        className={
-                            styles.title
-                        }
-                    >
+            <main className={styles.main}>
+                <div className={styles.card}>
+                    <h1 className={styles.title}>
                         Web3 Connection
                     </h1>
 
                     {viewState ===
                         'disconnected' && (
-                            <section
-                                className={
-                                    styles.section
-                                }
-                            >
-                                <div
-                                    className={
-                                        styles.emptyWalletIconBox
-                                    }
-                                >
+                            <section className={styles.section}>
+                                <div className={styles.emptyWalletIconBox}>
                                     <Image
-                                        src={
-                                            vobLogoWhite
-                                        }
+                                        src={vobLogoWhite}
                                         alt="vob logo"
                                         objectFit="contain"
                                     />
                                 </div>
 
-                                <h2
-                                    className={
-                                        styles.disconnectedTitle
-                                    }
-                                >
+                                <h2 className={styles.disconnectedTitle}>
                                     Select a wallet
                                     to connect
                                 </h2>
 
-                                <p
-                                    className={
-                                        styles.disconnectedDesc
-                                    }
-                                >
+                                <p className={styles.disconnectedDesc}>
                                     Connect your
                                     wallet to
                                     continue
@@ -1003,38 +996,23 @@ export default function Login({
 
                     {viewState ===
                         'connected' && (
-                            <section
-                                className={
-                                    styles.section
-                                }
-                            >
+                            <section className={styles.section}>
                                 {renderConnectedWalletInfo()}
 
-                                <div
-                                    className={
-                                        styles.topActionRow
-                                    }
-                                >
+                                <div className={styles.topActionRow}>
                                     <button
                                         type="button"
-                                        onClick={
-                                            openDisconnectConfirm
-                                        }
-                                        className={
-                                            styles.disconnectButton
-                                        }
+                                        onClick={openDisconnectConfirm}
+                                        className={styles.disconnectButton}
                                     >
                                         Disconnect
                                     </button>
 
                                     <button
                                         type="button"
-                                        onClick={() => {
-                                            void loginWithWeb3()
-                                        }}
-                                        className={
-                                            styles.loginButton
-                                        }
+                                        onClick={() => { void loginWithWeb3() }}
+                                        className={styles.loginButton}
+                                        disabled={isLoginPending}
                                     >
                                         {isLoginPending ? (
                                             <LoadingSpinner />
@@ -1042,7 +1020,32 @@ export default function Login({
                                             'Login'
                                         )}
                                     </button>
+
                                 </div>
+
+                                {isLoginPending && (
+                                    <div className={styles.loginRetryNotice}>
+                                        <span className={styles.loginRetryText}>
+                                            Has the signature request not arrived in your wallet?
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className={styles.loginRetryInlineButton}
+                                            onClick={() => {
+                                                void loginWithWeb3()
+                                            }}
+                                        >
+                                            <span>Send request once more</span>
+                                            <Image
+                                                className={styles.loginRetryInlineIcon}
+                                                src={retryImage}
+                                                alt={"retry login"}
+                                                width={16}
+                                                height={16}/>
+                                        </button>
+                                    </div>
+                                )}
+
 
                                 {renderWalletFooter()}
 
