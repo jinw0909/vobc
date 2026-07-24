@@ -28,7 +28,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080'
 
 async function fetchArticles(locale: string): Promise<SpringArticle[]> {
     const res = await fetch(
-        `${API_BASE}/api/article/page?lang=${encodeURIComponent(locale)}&size=8`,
+        `${API_BASE}/api/article/page?lang=${encodeURIComponent(locale)}&size=4`,
         {
             next: { revalidate: 60 },
             headers: { Accept: 'application/json' },
@@ -51,14 +51,14 @@ export default async function Page({params} : any) {
   setRequestLocale(locale);
 
   const articles = await fetchArticles(locale);
-  const firstNine = articles.slice(0, 9);
+  const firstFour = articles.slice(0, 4);
 
-  const items: NewsItem[] = firstNine.map(mapSpringToNewsItem);
-  const imgs: string[] = firstNine.map((a) => a.thumbnail ?? '');
+  const items: NewsItem[] = firstFour.map(mapSpringToNewsItem);
+  const imgs: string[] = firstFour.map((a) => a.thumbnail ?? '');
 
   const newsBundles: NewsBundle[] = [
       { data: items.slice(0, 4), imgSrc: imgs.slice(0, 4), index: 0 },
-      { data: items.slice(4, 8), imgSrc: imgs.slice(3, 6), index: 3 },
+      // { data: items.slice(4, 8), imgSrc: imgs.slice(3, 6), index: 3 },
       // { data: items.slice(6, 9), imgSrc: imgs.slice(6, 9), index: 6 },
   ]
 

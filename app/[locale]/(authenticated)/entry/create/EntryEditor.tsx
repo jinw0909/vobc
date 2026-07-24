@@ -45,22 +45,22 @@ type ToolbarButtonProps = {
     children: React.ReactNode
 }
 
-async function uploadImage(file: File): Promise<string> {
-    const formData = new FormData()
-    formData.append('file', file)
-
-    const response = await fetch('/api/images', {
-        method: 'POST',
-        body: formData,
-    })
-
-    if (!response.ok) {
-        throw new Error('failed to upload image.')
-    }
-
-    const data = (await response.json()) as UploadResponse
-    return data.url
-}
+// async function uploadImage(file: File): Promise<string> {
+//     const formData = new FormData()
+//     formData.append('file', file)
+//
+//     const response = await fetch('/api/images', {
+//         method: 'POST',
+//         body: formData,
+//     })
+//
+//     if (!response.ok) {
+//         throw new Error('failed to upload image.')
+//     }
+//
+//     const data = (await response.json()) as UploadResponse
+//     return data.url
+// }
 
 function isImageFile(file: File) {
     return file.type.startsWith('image/')
@@ -121,6 +121,25 @@ const CustomImage = Image.extend({
 
 export default function EntryEditor() {
     const authFetch = useAuthFetch()
+    async function uploadImage(file: File): Promise<string> {
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const API_BASE_URL =
+            process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080'
+
+        const response = await authFetch(`${API_BASE_URL}/web3/api/upload/image`, {
+            method: 'POST',
+            body: formData,
+        })
+
+        if (!response.ok) {
+            throw new Error('failed to upload image.')
+        }
+
+        const data = (await response.json()) as UploadResponse
+        return data.url
+    }
 
     const [title, setTitle] = useState('')
     const [uploadCount, setUploadCount] = useState(0)
@@ -337,6 +356,73 @@ export default function EntryEditor() {
         setCoverPreviewUrl(previewUrl)
         setError(null)
     }
+    // async function handleSubmit() {
+    //     if (!editor || submitting) {
+    //         return
+    //     }
+    //
+    //     const trimmedTitle = title.trim()
+    //
+    //     if (!trimmedTitle) {
+    //         setError('Enter title')
+    //         return
+    //     }
+    //
+    //     if (editor.isEmpty) {
+    //         setError('Enter content')
+    //         return
+    //     }
+    //
+    //     try {
+    //         setSubmitting(true)
+    //         setError(null)
+    //
+    //         let coverImageUrl: string | null = null
+    //
+    //         if (coverFile) {
+    //             coverImageUrl = await uploadImage(coverFile)
+    //         }
+    //
+    //         const contentHtml = await uploadLocalImagesAndReplaceHtml(editor.getHTML())
+    //
+    //         const payload = {
+    //             title: trimmedTitle,
+    //             content: contentHtml,
+    //             coverImageUrl,
+    //         }
+    //
+    //         const API_BASE_URL =
+    //             process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080'
+    //
+    //         const response = await authFetch(`${API_BASE_URL}/web3/api/entry/create`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(payload),
+    //         })
+    //
+    //         if (!response.ok) {
+    //             throw new Error('게시글 등록에 실패했습니다.')
+    //         }
+    //
+    //         // 성공 후 필요하면 초기화
+    //         setTitle('')
+    //         editor.commands.clearContent()
+    //
+    //         if (coverPreviewUrl) {
+    //             URL.revokeObjectURL(coverPreviewUrl)
+    //         }
+    //
+    //         setCoverFile(null)
+    //         setCoverPreviewUrl(null)
+    //     } catch (error) {
+    //         setError('게시글 등록에 실패했습니다.')
+    //     } finally {
+    //         setSubmitting(false)
+    //     }
+    // }
+
     async function handleSubmit() {
         if (!editor || submitting) {
             return
@@ -360,16 +446,37 @@ export default function EntryEditor() {
 
             let coverImageUrl: string | null = null
 
+            // coverImage는 기존처럼 단일 이미지 업로드 API 재사용
             if (coverFile) {
                 coverImageUrl = await uploadImage(coverFile)
             }
 
-            const contentHtml = await uploadLocalImagesAndReplaceHtml(editor.getHTML())
+            const formData = new FormData()
 
-            const payload = {
-                title: trimmedTitle,
-                content: contentHtml,
-                coverImageUrl,
+            const contentHtml = editor.getHTML()
+
+            const requestBlob = new Blob(
+                [
+                    JSON.stringify({
+                        title: trimmedTitle,
+                        content: contentHtml,
+                        coverImageUrl,
+                    }),
+                ],
+                { type: 'application/json' },
+            )
+
+            formData.append('request', requestBlob)
+
+            for (const [previewUrl, file] of localImageFilesRef.current.entries()) {
+                if (!contentHtml.includes(previewUrl)) {
+                    URL.revokeObjectURL(previewUrl)
+                    localImageFilesRef.current.delete(previewUrl)
+                    continue
+                }
+
+                formData.append('contentImages', file)
+                formData.append('contentImageSrcs', previewUrl)
             }
 
             const API_BASE_URL =
@@ -377,23 +484,25 @@ export default function EntryEditor() {
 
             const response = await authFetch(`${API_BASE_URL}/web3/api/entry/create`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
+                body: formData,
             })
 
             if (!response.ok) {
                 throw new Error('게시글 등록에 실패했습니다.')
             }
 
-            // 성공 후 필요하면 초기화
             setTitle('')
             editor.commands.clearContent()
 
             if (coverPreviewUrl) {
                 URL.revokeObjectURL(coverPreviewUrl)
             }
+
+            for (const previewUrl of localImageFilesRef.current.keys()) {
+                URL.revokeObjectURL(previewUrl)
+            }
+
+            localImageFilesRef.current.clear()
 
             setCoverFile(null)
             setCoverPreviewUrl(null)
@@ -404,21 +513,21 @@ export default function EntryEditor() {
         }
     }
 
-    async function uploadLocalImagesAndReplaceHtml(html: string) {
-        let replacedHtml = html
-
-        for (const [previewUrl, file] of localImageFilesRef.current.entries()) {
-            const uploadedUrl = await uploadImage(file)
-
-            replacedHtml = replacedHtml.replaceAll(previewUrl, uploadedUrl)
-
-            URL.revokeObjectURL(previewUrl)
-        }
-
-        localImageFilesRef.current.clear()
-
-        return replacedHtml
-    }
+    // async function uploadLocalImagesAndReplaceHtml(html: string) {
+    //     let replacedHtml = html
+    //
+    //     for (const [previewUrl, file] of localImageFilesRef.current.entries()) {
+    //         const uploadedUrl = await uploadImage(file)
+    //
+    //         replacedHtml = replacedHtml.replaceAll(previewUrl, uploadedUrl)
+    //
+    //         URL.revokeObjectURL(previewUrl)
+    //     }
+    //
+    //     localImageFilesRef.current.clear()
+    //
+    //     return replacedHtml
+    // }
 
 
     useEffect(() => {
