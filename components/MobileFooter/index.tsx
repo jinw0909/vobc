@@ -36,25 +36,25 @@ export const MobileFooter  = async () => {
                     </Link>
                 </div>
             </div>
-            <div className={styles.footerLevel}>
-                <div className={styles.levelLeft}></div>
-                <div className={styles.levelRight}>
-                    <div className={styles.footerElem}>
-                        <NavigationLink href="/use">{t('use')}</NavigationLink>
-                    </div>
-                </div>
-            </div>
-            <div className={styles.footerLevel}>
-                <div className={styles.levelLeft}></div>
-                <div className={styles.levelRight}>
-                    <div className={styles.footerElem}>
-                        <NavigationLink href="/privacy">{t('privacy')}</NavigationLink>
-                    </div>
-                    <div className={styles.footerElem}>
-                        <NavigationLink href="/cookies">{t('cookies')}</NavigationLink>
-                    </div>
-                </div>
-            </div>
+            {/*<div className={styles.footerLevel}>*/}
+            {/*    <div className={styles.levelLeft}></div>*/}
+            {/*    <div className={styles.levelRight}>*/}
+            {/*        <div className={styles.footerElem}>*/}
+            {/*            <NavigationLink href="/use">{t('use')}</NavigationLink>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+            {/*<div className={styles.footerLevel}>*/}
+            {/*    <div className={styles.levelLeft}></div>*/}
+            {/*    <div className={styles.levelRight}>*/}
+            {/*        <div className={styles.footerElem}>*/}
+            {/*            <NavigationLink href="/privacy">{t('privacy')}</NavigationLink>*/}
+            {/*        </div>*/}
+            {/*        <div className={styles.footerElem}>*/}
+            {/*            <NavigationLink href="/cookies">{t('cookies')}</NavigationLink>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </footer>
     )
 }

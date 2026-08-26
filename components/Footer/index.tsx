@@ -16,15 +16,15 @@ export const Footer = async () => {
             <div className={`${styles.footerWrapper}`}>
                 <div className={styles.footerLeft}>
                     <LogoSub />
-                    <div className={styles.footerElem}>
-                        <NavigationLink href="/use">{t('use')}</NavigationLink>
-                    </div>
-                    <div className={styles.footerElem}>
-                        <NavigationLink href="/privacy">{t('privacy')}</NavigationLink>
-                    </div>
-                    <div className={styles.footerElem}>
-                        <NavigationLink href="/cookies">{t('cookies')}</NavigationLink>
-                    </div>
+                    {/*<div className={styles.footerElem}>*/}
+                    {/*    <NavigationLink href="/use">{t('use')}</NavigationLink>*/}
+                    {/*</div>*/}
+                    {/*<div className={styles.footerElem}>*/}
+                    {/*    <NavigationLink href="/privacy">{t('privacy')}</NavigationLink>*/}
+                    {/*</div>*/}
+                    {/*<div className={styles.footerElem}>*/}
+                    {/*    <NavigationLink href="/cookies">{t('cookies')}</NavigationLink>*/}
+                    {/*</div>*/}
                 </div>
                 <div className="flex gap-4">
                     <Link href="https://x.com/VOBCOIN" target="_blank"
