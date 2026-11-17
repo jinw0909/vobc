@@ -9,23 +9,205 @@
     width: 100%;
 }
 
-/* html 컨텐츠*/
+/*!* html 컨텐츠*!*/
+/*.htmlContent img {*/
+/*    max-width: 100%;*/
+/*    height: auto;*/
+/*    width: 100%;*/
+/*    margin-bottom: .5rem;*/
+/*}*/
+
+/*.htmlContent a {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*.htmlContent p {*/
+/*    margin: 0 0 1em 0;*/
+/*    line-height: 1.7;*/
+/*}*/
+/*!* html 컨텐츠*!*/
+
+/* =========================
+   News Article HTML Content
+========================= */
+
+.htmlContent {
+    width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.85;
+    color: #dedede;
+    overflow-wrap: break-word;
+}
+
+/* 일반 문단 */
+.htmlContent p {
+    margin: 0 0 1.4rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.85;
+}
+
+/* 빈 문단 제거 */
+.htmlContent p:empty {
+    display: none;
+}
+
+/* 본문 대제목 */
+.htmlContent h1 {
+    margin: 3.5rem 0 1.5rem;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+    color: #fff;
+}
+
+/* 중간 제목 */
+.htmlContent h2 {
+    margin: 3rem 0 1.25rem;
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
+    font-weight: 650;
+    line-height: 1.4;
+    color: #fff;
+}
+
+/* 작은 제목 */
+.htmlContent h3 {
+    margin: 2.5rem 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #f5f5f5;
+}
+
+.htmlContent h4 {
+    margin: 2rem 0 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f0f0f0;
+}
+
+/* 제목 내부 strong */
+.htmlContent h1 strong,
+.htmlContent h2 strong,
+.htmlContent h3 strong {
+    font-weight: inherit;
+}
+
+/* 일반 강조 */
+.htmlContent strong,
+.htmlContent b {
+    font-weight: 700;
+    color: #fff;
+}
+
+/* 이미지 */
 .htmlContent img {
+    display: block;
+    width: 100%;
     max-width: 100%;
     height: auto;
-    width: 100%;
-    margin-bottom: .5rem;
+    margin: 2.5rem 0 0.75rem;
+    object-fit: contain;
 }
 
+/* 이미지 설명 (현재 기사 HTML 구조 기준) */
+.htmlContent p:has(> em > span):has(img) {
+    margin-bottom: 0;
+}
+
+.htmlContent p:has(> em > span):has(img) > em {
+    display: block;
+}
+
+/* 이미지 다음 캡션 */
+.htmlContent p:has(> em > span):not(:has(img)) {
+    margin: 0 0 2.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #999;
+}
+
+/* 캡션 강조 기울임 제거 */
+.htmlContent p:has(> em > span):not(:has(img)) em {
+    font-style: normal;
+}
+
+/* 일반 이탤릭 */
+.htmlContent em {
+    font-style: italic;
+}
+
+/* 링크 */
 .htmlContent a {
+    color: #fff;
     text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
 }
 
-.htmlContent p {
-    margin: 0 0 1em 0;
-    line-height: 1.7;
+.htmlContent a:hover {
+    color: #aaa;
 }
-/* html 컨텐츠*/
+
+/* 구분선 */
+.htmlContent hr {
+    border: 0;
+    border-top: 1px solid #444;
+    margin: 2.5rem 0;
+}
+
+/* 목록 */
+.htmlContent ul,
+.htmlContent ol {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.htmlContent li {
+    margin-bottom: 0.65rem;
+    line-height: 1.8;
+}
+
+.htmlContent span[data-small-text="true"] {
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+    .htmlContent {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+
+    .htmlContent p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 1.25rem;
+    }
+
+    .htmlContent h1 {
+        font-size: 1.5rem;
+        margin: 2.75rem 0 1.25rem;
+    }
+
+    .htmlContent h2 {
+        font-size: 1.3rem;
+        margin: 2.5rem 0 1rem;
+    }
+
+    .htmlContent h3 {
+        font-size: 1.15rem;
+    }
+
+    .htmlContent img {
+        margin-top: 2rem;
+    }
+}
+
 
 .detailUp {
     display: flex;

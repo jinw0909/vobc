@@ -46,7 +46,7 @@ export function NewsDetail({ article, related = [] }: NewsDetailProps) {
         allowedAttributes: {
             a: ["href", "name", "target", "rel"],
             img: ["src", "alt", "title", "width", "height", "loading"],
-            // "*": ["class", "style"],
+            span: ["data-small-text"],
         },
         allowedSchemes: ["http", "https", "data"],
         transformTags: {
@@ -60,7 +60,14 @@ export function NewsDetail({ article, related = [] }: NewsDetailProps) {
             }),
             // ✅ 혹시라도 남아있을 style을 확실히 제거
             p: (tagName, attribs) => ({ tagName, attribs: {} }),
-            span: (tagName, attribs) => ({ tagName, attribs: {} }),
+            span: (tagName, attribs) => ({
+                tagName,
+                attribs: {
+                    ...(attribs["data-small-text"] === "true"
+                        ? { "data-small-text": "true" }
+                        : {}),
+                },
+            }),
             div: (tagName, attribs) => ({ tagName, attribs: {} }),
         },
     });
