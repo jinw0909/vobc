@@ -28,6 +28,54 @@
     margin-bottom: 1rem;
 }
 
+.loadMoreWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+}
+
+.loadMoreButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    min-width: 160px;
+    padding: 12px 24px;
+
+    background: transparent;
+    border: 1px solid #666;
+    color: #fff;
+
+    font-size: 12px;
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.loadMoreButton:hover {
+    background: #fff;
+    color: #111;
+    border-color: #fff;
+}
+
+.loadMoreArrow {
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+
+.loadMoreButton:hover .loadMoreArrow {
+    transform: translateY(3px);
+}
+
+@media (max-width: 768px) {
+    .loadMoreWrapper {
+        display: none;
+    }
+}
+
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
