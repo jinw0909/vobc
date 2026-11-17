@@ -176,6 +176,66 @@
     line-height: 1.6;
 }
 
+
+/* =========================================
+   Article Image & Caption Spacing
+========================================= */
+
+/* 이미지가 들어 있는 문단 */
+.htmlContent p:has(img) {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+/* 이미지 자체 */
+.htmlContent p img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+/* 이미지와 캡션이 같은 p에 있는 경우 */
+.htmlContent p:has(img) > em {
+    display: block;
+    margin-top: 0.65rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    font-style: normal;
+    color: #999;
+}
+
+/* 이미지 다음 p에 캡션이 있는 경우 */
+.htmlContent p:has(img)
++ p:has(> em span[data-small-text]) {
+    margin-top: -1.85rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #999;
+}
+
+.htmlContent p:has(img)
++ p:has(> em span[data-small-text]) em {
+    font-style: normal;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+    .htmlContent p:has(img) {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .htmlContent p:has(img)
+    + p:has(> em span[data-small-text]) {
+        margin-top: -1.35rem;
+        margin-bottom: 2rem;
+    }
+}
+
+
 /* 모바일 */
 @media (max-width: 768px) {
     .htmlContent {
